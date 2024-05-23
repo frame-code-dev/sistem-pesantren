@@ -31,23 +31,27 @@
 					<h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
 						Masuk untuk melanjutkan
 					</h1>
-					<form class="space-y-4 md:space-y-6" action="#" method="POST">
-						<?php if ($this->session->flashdata('message_login_error')) : ?>
+					<form class="space-y-4 md:space-y-6" action="<?= route_to('loginPost') ?>" method="POST">
+						<?php if (session()->has('message_login_error')) : ?>
 							<div class="text-red-500 text-sm">
-								<?= $this->session->flashdata('message_login_error') ?>
+								<?= session('message_login_error') ?>
 							</div>
 						<?php endif ?>
 						<div>
 							<input type="text" id="username" name="username" value="<?= set_value('username') ?>" class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Masukkan Username" required="">
-							<div class="text-red-500 text-sm">
-								<?= form_error('username') ?>
-							</div>
+							<?php if (isset($validation) && $validation->hasError('username')) : ?>
+								<div class="text-red-500 text-sm">
+									<?= $validation->getError('username') ?>
+								</div>
+							<?php endif ?>
 						</div>
 						<div>
 							<input type="password" id="password" value="<?= set_value('password') ?>" name="password" placeholder="Masukkan Kata Sandi" class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 focus:bg-white block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
-							<div class="text-red-500 text-sm">
-								<?= form_error('password') ?>
-							</div>
+							<?php if (isset($validation) && $validation->hasError('password')) : ?>
+								<div class="text-red-500 text-sm">
+									<?= $validation->getError('password') ?>
+								</div>
+							<?php endif ?>
 						</div>
 						<div class="flex items-center justify-between">
 							<div class="flex items-start">

@@ -11,6 +11,7 @@ class Dashboard extends BaseController
 
 	public function index()
 	{
+		return view('dashboard');
 	}
 
 	// ... ada kode lain di sini ...
