@@ -12,7 +12,7 @@ $routes->get('/login', "Auth::login", ['as' => 'login']);
 $routes->post('/login', 'Auth::loginPost', ['as' => 'loginPost']);
 $routes->get('/logout', "Auth::logout");
 // dashboard 
-$routes->get('/dashboard',"Dashboard::index", ['as' => 'dashboard']);
+$routes->get('/dashboard', "Dashboard::index", ['as' => 'dashboard']);
 // user 
 $routes->get('user', "User::index");
 $routes->get('user/create', "User::create");

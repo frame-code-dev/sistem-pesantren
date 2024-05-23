@@ -21,14 +21,13 @@ class Auth_model extends Model
 
 	public function login($username, $password)
 	{
-		$query = $this->db->table($this->_table)->where("username", $username)->get();
+		$query = $this->db->table($this->_table)->where("username", $username)->get()->getRow();
 		$user = $query;
 
 		// cek apakah user sudah terdaftar?
 		if (!$user) {
 			return FALSE;
 		}
-
 		// cek apakah password-nya benar?
 		if (!password_verify($password, $user->password)) {
 			return FALSE;

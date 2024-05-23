@@ -28,15 +28,18 @@ class Auth extends BaseController
 	}
 	public function loginPost()
 	{
-		// $rules = $this->authModel->rules();
-		if ($this->validateData(["username", "password"],[
-			'username' => 'required',
-			'password' => 'required|max_length[255]'
-		]) == FALSE) {
-			return view('auth/login');
-		}
+
 		$username = $this->request->getGetPost('username');
 		$password = $this->request->getGetPost('password');
+		$valid = $this->validateData(["username" => $username, "password" => $password], [
+			'username' => 'required',
+			'password' => 'required|max_length[255]'
+		]);
+		// $rules = $this->authModel->rules();
+		if ($valid == FALSE) {
+			return view('auth/login');
+		}
+
 
 		if ($this->authModel->login($username, $password)) {
 			redirect('dashboard');
