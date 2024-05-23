@@ -9,6 +9,7 @@ class Auth_model extends Model
 	private $_table = "users";
 	const SESSION_KEY = 'user_id';
 
+
 	public function rules()
 	{
 		return [
@@ -23,7 +24,6 @@ class Auth_model extends Model
 	{
 		$query = $this->db->table($this->_table)->where("username", $username)->get()->getRow();
 		$user = $query;
-
 		// cek apakah user sudah terdaftar?
 		if (!$user) {
 			return FALSE;
@@ -34,9 +34,11 @@ class Auth_model extends Model
 		}
 
 		// bikin session
-		$this->session->set_userdata([self::SESSION_KEY => $user->id]);
+		session()->set(self::SESSION_KEY, $user->id);
+		return $user->id;
+		// $this->session->set_userdata([self::SESSION_KEY => $user->id]);
 
-		return $this->session->has_userdata(self::SESSION_KEY);
+		// return $this->session->has_userdata(self::SESSION_KEY);
 	}
 
 	public function current_user()

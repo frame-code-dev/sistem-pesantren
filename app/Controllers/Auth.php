@@ -29,8 +29,8 @@ class Auth extends BaseController
 	public function loginPost()
 	{
 
-		$username = $this->request->getGetPost('username');
-		$password = $this->request->getGetPost('password');
+		$username = $this->request->getPost('username');
+		$password = $this->request->getPost('password');
 		$valid = $this->validateData(["username" => $username, "password" => $password], [
 			'username' => 'required',
 			'password' => 'required|max_length[255]'
@@ -40,11 +40,11 @@ class Auth extends BaseController
 			return view('auth/login');
 		}
 
-
 		if ($this->authModel->login($username, $password)) {
-			redirect('dashboard');
+			return	redirect()->to("/dashboard");
 		} else {
 			session()->setFlashdata('message_login_error', 'Login Gagal, pastikan username dan password benar!');
+			return redirect()->back();
 		}
 	}
 

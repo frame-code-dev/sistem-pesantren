@@ -343,7 +343,7 @@ class Model extends BaseModel
 
         // Require non-empty primaryKey when
         // not using auto-increment feature
-        if (! $this->useAutoIncrement && ! isset($row[$this->primaryKey])) {
+        if (!$this->useAutoIncrement && !isset($row[$this->primaryKey])) {
             throw DataException::forEmptyPrimaryKey('insert');
         }
 
@@ -385,7 +385,7 @@ class Model extends BaseModel
 
         // If insertion succeeded then save the insert ID
         if ($result) {
-            $this->insertID = ! $this->useAutoIncrement ? $row[$this->primaryKey] : $this->db->insertID();
+            $this->insertID = !$this->useAutoIncrement ? $row[$this->primaryKey] : $this->db->insertID();
         }
 
         return $result;
@@ -408,7 +408,7 @@ class Model extends BaseModel
             foreach ($set as $row) {
                 // Require non-empty primaryKey when
                 // not using auto-increment feature
-                if (! $this->useAutoIncrement && ! isset($row[$this->primaryKey])) {
+                if (!$this->useAutoIncrement && !isset($row[$this->primaryKey])) {
                     throw DataException::forEmptyPrimaryKey('insertBatch');
                 }
             }
@@ -489,7 +489,7 @@ class Model extends BaseModel
             $builder = $builder->whereIn($this->primaryKey, $id);
         }
 
-        if ($this->useSoftDeletes && ! $purge) {
+        if ($this->useSoftDeletes && !$purge) {
             if ($builder->getCompiledQBWhere() === []) {
                 throw new DatabaseException(
                     'Deletes are not allowed unless they contain a "where" or "like" clause.'
@@ -626,7 +626,7 @@ class Model extends BaseModel
             $builder = clone $this->builder();
             $rows    = $builder->get($size, $offset);
 
-            if (! $rows) {
+            if (!$rows) {
                 throw DataException::forEmptyDataset('chunk');
             }
 
@@ -698,7 +698,7 @@ class Model extends BaseModel
         $table = ($table === null || $table === '') ? $this->table : $table;
 
         // Ensure we have a good db connection
-        if (! $this->db instanceof BaseConnection) {
+        if (!$this->db instanceof BaseConnection) {
             $this->db = Database::connect($this->DBGroup);
         }
 
@@ -805,7 +805,7 @@ class Model extends BaseModel
      */
     protected function doProtectFieldsForInsert(array $row): array
     {
-        if (! $this->protectFields) {
+        if (!$this->protectFields) {
             return $row;
         }
 
@@ -819,7 +819,7 @@ class Model extends BaseModel
                 continue;
             }
 
-            if (! in_array($key, $this->allowedFields, true)) {
+            if (!in_array($key, $this->allowedFields, true)) {
                 unset($row[$key]);
             }
         }
