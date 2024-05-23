@@ -7,7 +7,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-	function deleteConfirm(event){
+	function deleteConfirm(event) {
 		console.log(event);
 		Swal.fire({
 			title: 'Delete Confirmation!',
@@ -18,35 +18,40 @@
 			confirmButtonText: 'Yes Delete',
 			confirmButtonColor: 'red'
 		}).then(dialog => {
-			if(dialog.isConfirmed){
+			if (dialog.isConfirmed) {
 				window.location.assign(event);
 			}
 		});
 	}
 </script>
-
-<?php if($this->session->flashdata('message')): ?>
+<?php
+	$session = \Config\Services::session();
+	$status_error = $session->get('status_error');
+	$status_success = $session->get('status_success');
+?>
+<?php if ($status_success) : ?>
 	<script>
-		var Toast = Swal.mixin({
-			toast: true,
-			position: 'top-end',
-			showConfirmButton: false,
-			timer: 3000,
-			timerProgressBar: true,
-			didOpen: (toast) => {
-				toast.addEventListener('mouseenter', Swal.stopTimer)
-				toast.addEventListener('mouseleave', Swal.resumeTimer)
-			}
-		})
+		document.addEventListener('DOMContentLoaded', function() {
+			var Toast = Swal.mixin({
+				toast: true,
+				position: 'top-end',
+				showConfirmButton: false,
+				timer: 3000,
+				timerProgressBar: true,
+				didOpen: (toast) => {
+					toast.addEventListener('mouseenter', Swal.stopTimer)
+					toast.addEventListener('mouseleave', Swal.resumeTimer)
+				}
+			})
 
-		Toast.fire({
-			icon: 'success',
-			title: '<?= $this->session->flashdata('message') ?>'
-		})
+			Toast.fire({
+				icon: 'success',
+				title: <?= json_encode($session->getFlashdata('message')) ?>
+			})
+		});
 	</script>
-<?php endif ?>
-
-<?php if($this->session->flashdata('error')): ?>
+<?php endif; ?>
+<?php if ($status_error) : ?>
 	<script>
 		var Toast = Swal.mixin({
 			toast: true,
