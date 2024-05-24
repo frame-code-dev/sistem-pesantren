@@ -21,15 +21,16 @@ $routes->group('dashboard', function ($routes) {
     $routes->get('user/edit/(:any)', "User::edit/$1");
     $routes->post('user/update/(:any)', "User::update/$1");
     $routes->delete('user/delete/(:any)', "User::delete/$1");
+    
     // santri 
     $routes->get('santri', "Santri::index");
-    $routes->get('santri/create', "santri::create");
-    $routes->post('santri/store', "santri::store");
-    $routes->get('santri/edit/(:any)', "santri::edit/$1");
-    $routes->post('santri/update/(:any)', "santri::update/$1");
+    $routes->get('santri/create', "Santri::create");
+    $routes->post('santri/store', "Santri::store");
+    $routes->get('santri/edit/(:any)', "Santri::edit/$1");
+    $routes->post('santri/update/(:any)', "Santri::update/$1");
+    $routes->delete('santri/delete/(:any)', "Santri::delete/$1");
 });
 
-$routes->delete('santri/delete/(:any)', "santri::delete/$1");
 
 $routes->get('/404_override', function () {
     echo view("auth/user");

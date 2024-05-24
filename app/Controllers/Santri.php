@@ -2,24 +2,29 @@
 
 namespace App\Controllers;
 
-class User extends BaseController
-{
+use App\Models\Santri_model;
 
+
+class Santri extends BaseController
+{
+	protected $santriModel;
 	public function __construct()
 	{
 
 		if (!session()->get("user_id")) {
 			redirect('/');
 		}
+		$this->santriModel = new Santri_model();
 	}
 
 	public function index()
 	{
-		return view("backoffice/user/index");
+		$santri = $this->santriModel->getSantriAktif();
+		$data['santri'] = $santri->getResultArray();
+		return view("backoffice/santri/index", $data);
 	}
 	public function create()
 	{
-		return view("backoffice/user/create");
 	}
 
 	public function store()
