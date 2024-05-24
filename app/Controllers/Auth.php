@@ -38,15 +38,12 @@ class Auth extends BaseController
 			'username' => 'required',
 			'password' => 'required|max_length[255]'
 		]);
-		$user = $$this->userModel->where('username', $username)->first();
 		// $rules = $this->authModel->rules();
 		if ($valid == FALSE) {
 			return view('auth/login');
 		}
 
 		if ($this->authModel->login($username, $password)) {
-			$session->set('name', $user->name);
-			$session->set('username', $user->username);
 			return	redirect()->to("/dashboard");
 		} else {
 			session()->setFlashdata('message_login_error', 'Login Gagal, pastikan username dan password salah!');
