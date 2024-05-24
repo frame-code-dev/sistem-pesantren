@@ -10,8 +10,9 @@
 <!-- css -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.datatables.net/2.0.1/css/dataTables.tailwindcss.css">
+
 <style>
-	.justify-self-end  {
+	.justify-self-end {
 		display: flex;
 		justify-content: end !important
 	}

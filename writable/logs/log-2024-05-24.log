@@ -1,0 +1,426 @@
+CRITICAL - 2024-05-24 16:11:00 --> CodeIgniter\HTTP\Exceptions\HTTPException: The route for "auth/login" cannot be found.
+[Method: GET, Route: user]
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 64.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(64): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('auth/login')
+ 2 SYSTEMPATH\Common.php(853): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 APPPATH\Controllers\User.php(12): redirect('auth/login')
+ 4 SYSTEMPATH\CodeIgniter.php(903): App\Controllers\User->__construct()
+ 5 SYSTEMPATH\CodeIgniter.php(500): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')
+CRITICAL - 2024-05-24 16:11:09 --> CodeIgniter\HTTP\Exceptions\HTTPException: The route for "auth/login" cannot be found.
+[Method: GET, Route: user]
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 64.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(64): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('auth/login')
+ 2 SYSTEMPATH\Common.php(853): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 APPPATH\Controllers\User.php(12): redirect('auth/login')
+ 4 SYSTEMPATH\CodeIgniter.php(903): App\Controllers\User->__construct()
+ 5 SYSTEMPATH\CodeIgniter.php(500): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')
+CRITICAL - 2024-05-24 16:12:02 --> CodeIgniter\HTTP\Exceptions\HTTPException: The route for "auth/login" cannot be found.
+[Method: GET, Route: user]
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 64.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(64): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('auth/login')
+ 2 SYSTEMPATH\Common.php(853): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 APPPATH\Controllers\User.php(12): redirect('auth/login')
+ 4 SYSTEMPATH\CodeIgniter.php(903): App\Controllers\User->__construct()
+ 5 SYSTEMPATH\CodeIgniter.php(500): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')
+CRITICAL - 2024-05-24 16:12:05 --> CodeIgniter\HTTP\Exceptions\HTTPException: The route for "auth/login" cannot be found.
+[Method: GET, Route: user]
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 64.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(64): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('auth/login')
+ 2 SYSTEMPATH\Common.php(853): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 APPPATH\Controllers\User.php(12): redirect('auth/login')
+ 4 SYSTEMPATH\CodeIgniter.php(903): App\Controllers\User->__construct()
+ 5 SYSTEMPATH\CodeIgniter.php(500): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')
+CRITICAL - 2024-05-24 16:12:33 --> CodeIgniter\HTTP\Exceptions\HTTPException: The route for "auth/" cannot be found.
+[Method: GET, Route: user]
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 64.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(64): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('auth/')
+ 2 SYSTEMPATH\Common.php(853): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 APPPATH\Controllers\User.php(12): redirect('auth/')
+ 4 SYSTEMPATH\CodeIgniter.php(903): App\Controllers\User->__construct()
+ 5 SYSTEMPATH\CodeIgniter.php(500): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')
+ERROR - 2024-05-24 17:10:18 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php:186
+Stack trace:
+#0 D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php(186): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'db_cms_pesantre...', 3306, '', 0)
+#1 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(604): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\MY PROJECT\sistem-pesantren\system\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\MY PROJECT\sistem-pesantren\app\Models\VisiMisiModel.php(29): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\MY PROJECT\sistem-pesantren\app\Controllers\VisiMisi.php(33): App\Models\VisiMisiModel->store('<p><em><strong>...')
+#6 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(933): App\Controllers\VisiMisi->store()
+#7 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+#8 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\MY PROJECT\sistem-pesantren\system\Boot.php(312): CodeIgniter\CodeIgniter->run()
+#10 D:\MY PROJECT\sistem-pesantren\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 D:\MY PROJECT\sistem-pesantren\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 D:\MY PROJECT\sistem-pesantren\system\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\s...')
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(604): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\MY PROJECT\sistem-pesantren\system\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 D:\MY PROJECT\sistem-pesantren\app\Models\VisiMisiModel.php(29): CodeIgniter\Database\BaseBuilder->get()
+#4 D:\MY PROJECT\sistem-pesantren\app\Controllers\VisiMisi.php(33): App\Models\VisiMisiModel->store('<p><em><strong>...')
+#5 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(933): App\Controllers\VisiMisi->store()
+#6 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+#7 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\MY PROJECT\sistem-pesantren\system\Boot.php(312): CodeIgniter\CodeIgniter->run()
+#9 D:\MY PROJECT\sistem-pesantren\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 D:\MY PROJECT\sistem-pesantren\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 D:\MY PROJECT\sistem-pesantren\system\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\s...')
+#12 {main}
+ERROR - 2024-05-24 17:10:34 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php:186
+Stack trace:
+#0 D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php(186): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'db_cms_pesantre...', 3306, '', 0)
+#1 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(604): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\MY PROJECT\sistem-pesantren\system\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\MY PROJECT\sistem-pesantren\app\Models\VisiMisiModel.php(29): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\MY PROJECT\sistem-pesantren\app\Controllers\VisiMisi.php(33): App\Models\VisiMisiModel->store('<p><em><strong>...')
+#6 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(933): App\Controllers\VisiMisi->store()
+#7 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+#8 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\MY PROJECT\sistem-pesantren\system\Boot.php(312): CodeIgniter\CodeIgniter->run()
+#10 D:\MY PROJECT\sistem-pesantren\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 D:\MY PROJECT\sistem-pesantren\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 D:\MY PROJECT\sistem-pesantren\system\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\s...')
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(604): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\MY PROJECT\sistem-pesantren\system\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 D:\MY PROJECT\sistem-pesantren\app\Models\VisiMisiModel.php(29): CodeIgniter\Database\BaseBuilder->get()
+#4 D:\MY PROJECT\sistem-pesantren\app\Controllers\VisiMisi.php(33): App\Models\VisiMisiModel->store('<p><em><strong>...')
+#5 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(933): App\Controllers\VisiMisi->store()
+#6 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+#7 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\MY PROJECT\sistem-pesantren\system\Boot.php(312): CodeIgniter\CodeIgniter->run()
+#9 D:\MY PROJECT\sistem-pesantren\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 D:\MY PROJECT\sistem-pesantren\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 D:\MY PROJECT\sistem-pesantren\system\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\s...')
+#12 {main}
+ERROR - 2024-05-24 17:11:58 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php:186
+Stack trace:
+#0 D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php(186): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'db_cms_pesantre...', 3306, '', 0)
+#1 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(604): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\MY PROJECT\sistem-pesantren\system\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\MY PROJECT\sistem-pesantren\app\Models\VisiMisiModel.php(29): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\MY PROJECT\sistem-pesantren\app\Controllers\VisiMisi.php(33): App\Models\VisiMisiModel->store('<p>mkmk</p>')
+#6 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(933): App\Controllers\VisiMisi->store()
+#7 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+#8 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\MY PROJECT\sistem-pesantren\system\Boot.php(312): CodeIgniter\CodeIgniter->run()
+#10 D:\MY PROJECT\sistem-pesantren\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 D:\MY PROJECT\sistem-pesantren\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 D:\MY PROJECT\sistem-pesantren\system\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\s...')
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(604): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\MY PROJECT\sistem-pesantren\system\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 D:\MY PROJECT\sistem-pesantren\app\Models\VisiMisiModel.php(29): CodeIgniter\Database\BaseBuilder->get()
+#4 D:\MY PROJECT\sistem-pesantren\app\Controllers\VisiMisi.php(33): App\Models\VisiMisiModel->store('<p>mkmk</p>')
+#5 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(933): App\Controllers\VisiMisi->store()
+#6 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+#7 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\MY PROJECT\sistem-pesantren\system\Boot.php(312): CodeIgniter\CodeIgniter->run()
+#9 D:\MY PROJECT\sistem-pesantren\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 D:\MY PROJECT\sistem-pesantren\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 D:\MY PROJECT\sistem-pesantren\system\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\s...')
+#12 {main}
+CRITICAL - 2024-05-24 17:12:43 --> Error: Call to undefined function set_value()
+[Method: GET, Route: dashboard/visi-misi]
+in APPPATH\Views\backoffice\visi-misi\index.php on line 40.
+ 1 SYSTEMPATH\View\View.php(234): include()
+ 2 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('backoffice/visi-misi/index', [], true)
+ 4 APPPATH\Controllers\VisiMisi.php(24): view('backoffice/visi-misi/index', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\VisiMisi->index()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')
+CRITICAL - 2024-05-24 17:13:37 --> Error: Call to undefined function set_value()
+[Method: GET, Route: dashboard/visi-misi]
+in APPPATH\Views\backoffice\visi-misi\index.php on line 40.
+ 1 SYSTEMPATH\View\View.php(234): include()
+ 2 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('backoffice/visi-misi/index', [], true)
+ 4 APPPATH\Controllers\VisiMisi.php(24): view('backoffice/visi-misi/index', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\VisiMisi->index()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')
+CRITICAL - 2024-05-24 17:13:54 --> Error: Call to undefined function set_value()
+[Method: GET, Route: dashboard/visi-misi]
+in APPPATH\Views\backoffice\visi-misi\index.php on line 40.
+ 1 SYSTEMPATH\View\View.php(234): include()
+ 2 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('backoffice/visi-misi/index', [], true)
+ 4 APPPATH\Controllers\VisiMisi.php(24): view('backoffice/visi-misi/index', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\VisiMisi->index()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')
+ERROR - 2024-05-24 17:14:58 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php:186
+Stack trace:
+#0 D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php(186): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'db_cms_pesantre...', 3306, '', 0)
+#1 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(604): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\MY PROJECT\sistem-pesantren\system\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\MY PROJECT\sistem-pesantren\app\Models\VisiMisiModel.php(29): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\MY PROJECT\sistem-pesantren\app\Controllers\VisiMisi.php(34): App\Models\VisiMisiModel->store('<p>dsa</p>')
+#6 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(933): App\Controllers\VisiMisi->store()
+#7 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+#8 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\MY PROJECT\sistem-pesantren\system\Boot.php(312): CodeIgniter\CodeIgniter->run()
+#10 D:\MY PROJECT\sistem-pesantren\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 D:\MY PROJECT\sistem-pesantren\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 D:\MY PROJECT\sistem-pesantren\system\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\s...')
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(604): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\MY PROJECT\sistem-pesantren\system\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 D:\MY PROJECT\sistem-pesantren\app\Models\VisiMisiModel.php(29): CodeIgniter\Database\BaseBuilder->get()
+#4 D:\MY PROJECT\sistem-pesantren\app\Controllers\VisiMisi.php(34): App\Models\VisiMisiModel->store('<p>dsa</p>')
+#5 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(933): App\Controllers\VisiMisi->store()
+#6 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+#7 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\MY PROJECT\sistem-pesantren\system\Boot.php(312): CodeIgniter\CodeIgniter->run()
+#9 D:\MY PROJECT\sistem-pesantren\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 D:\MY PROJECT\sistem-pesantren\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 D:\MY PROJECT\sistem-pesantren\system\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\s...')
+#12 {main}
+ERROR - 2024-05-24 17:15:25 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php:186
+Stack trace:
+#0 D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php(186): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'db_cms_pesantre...', 3306, '', 0)
+#1 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(604): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\MY PROJECT\sistem-pesantren\system\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\MY PROJECT\sistem-pesantren\app\Models\VisiMisiModel.php(29): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\MY PROJECT\sistem-pesantren\app\Controllers\VisiMisi.php(34): App\Models\VisiMisiModel->store('<p>as</p>')
+#6 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(933): App\Controllers\VisiMisi->store()
+#7 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+#8 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\MY PROJECT\sistem-pesantren\system\Boot.php(312): CodeIgniter\CodeIgniter->run()
+#10 D:\MY PROJECT\sistem-pesantren\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 D:\MY PROJECT\sistem-pesantren\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 D:\MY PROJECT\sistem-pesantren\system\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\s...')
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(604): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\MY PROJECT\sistem-pesantren\system\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 D:\MY PROJECT\sistem-pesantren\app\Models\VisiMisiModel.php(29): CodeIgniter\Database\BaseBuilder->get()
+#4 D:\MY PROJECT\sistem-pesantren\app\Controllers\VisiMisi.php(34): App\Models\VisiMisiModel->store('<p>as</p>')
+#5 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(933): App\Controllers\VisiMisi->store()
+#6 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+#7 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\MY PROJECT\sistem-pesantren\system\Boot.php(312): CodeIgniter\CodeIgniter->run()
+#9 D:\MY PROJECT\sistem-pesantren\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 D:\MY PROJECT\sistem-pesantren\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 D:\MY PROJECT\sistem-pesantren\system\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\s...')
+#12 {main}
+ERROR - 2024-05-24 17:15:48 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php:186
+Stack trace:
+#0 D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php(186): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'db_cms_pesantre...', 3306, '', 0)
+#1 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(604): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\MY PROJECT\sistem-pesantren\system\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\MY PROJECT\sistem-pesantren\app\Models\VisiMisiModel.php(29): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\MY PROJECT\sistem-pesantren\app\Controllers\VisiMisi.php(34): App\Models\VisiMisiModel->store('<p>asdas</p>')
+#6 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(933): App\Controllers\VisiMisi->store()
+#7 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+#8 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\MY PROJECT\sistem-pesantren\system\Boot.php(312): CodeIgniter\CodeIgniter->run()
+#10 D:\MY PROJECT\sistem-pesantren\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 D:\MY PROJECT\sistem-pesantren\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 D:\MY PROJECT\sistem-pesantren\system\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\s...')
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(604): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\MY PROJECT\sistem-pesantren\system\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 D:\MY PROJECT\sistem-pesantren\app\Models\VisiMisiModel.php(29): CodeIgniter\Database\BaseBuilder->get()
+#4 D:\MY PROJECT\sistem-pesantren\app\Controllers\VisiMisi.php(34): App\Models\VisiMisiModel->store('<p>asdas</p>')
+#5 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(933): App\Controllers\VisiMisi->store()
+#6 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+#7 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\MY PROJECT\sistem-pesantren\system\Boot.php(312): CodeIgniter\CodeIgniter->run()
+#9 D:\MY PROJECT\sistem-pesantren\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 D:\MY PROJECT\sistem-pesantren\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 D:\MY PROJECT\sistem-pesantren\system\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\s...')
+#12 {main}
+ERROR - 2024-05-24 17:15:56 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php:186
+Stack trace:
+#0 D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php(186): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'db_cms_pesantre...', 3306, '', 0)
+#1 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(604): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\MY PROJECT\sistem-pesantren\system\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\MY PROJECT\sistem-pesantren\app\Models\VisiMisiModel.php(29): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\MY PROJECT\sistem-pesantren\app\Controllers\VisiMisi.php(34): App\Models\VisiMisiModel->store('<p>sa</p>')
+#6 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(933): App\Controllers\VisiMisi->store()
+#7 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+#8 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\MY PROJECT\sistem-pesantren\system\Boot.php(312): CodeIgniter\CodeIgniter->run()
+#10 D:\MY PROJECT\sistem-pesantren\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 D:\MY PROJECT\sistem-pesantren\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 D:\MY PROJECT\sistem-pesantren\system\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\s...')
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(604): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\MY PROJECT\sistem-pesantren\system\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 D:\MY PROJECT\sistem-pesantren\app\Models\VisiMisiModel.php(29): CodeIgniter\Database\BaseBuilder->get()
+#4 D:\MY PROJECT\sistem-pesantren\app\Controllers\VisiMisi.php(34): App\Models\VisiMisiModel->store('<p>sa</p>')
+#5 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(933): App\Controllers\VisiMisi->store()
+#6 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+#7 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\MY PROJECT\sistem-pesantren\system\Boot.php(312): CodeIgniter\CodeIgniter->run()
+#9 D:\MY PROJECT\sistem-pesantren\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 D:\MY PROJECT\sistem-pesantren\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 D:\MY PROJECT\sistem-pesantren\system\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\s...')
+#12 {main}
+ERROR - 2024-05-24 17:16:07 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php:186
+Stack trace:
+#0 D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php(186): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'db_cms_pesantre...', 3306, '', 0)
+#1 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(604): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\MY PROJECT\sistem-pesantren\system\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\MY PROJECT\sistem-pesantren\app\Models\VisiMisiModel.php(29): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\MY PROJECT\sistem-pesantren\app\Controllers\VisiMisi.php(34): App\Models\VisiMisiModel->store('<p>sa</p>')
+#6 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(933): App\Controllers\VisiMisi->store()
+#7 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+#8 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\MY PROJECT\sistem-pesantren\system\Boot.php(312): CodeIgniter\CodeIgniter->run()
+#10 D:\MY PROJECT\sistem-pesantren\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 D:\MY PROJECT\sistem-pesantren\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 D:\MY PROJECT\sistem-pesantren\system\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\s...')
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(604): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\MY PROJECT\sistem-pesantren\system\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 D:\MY PROJECT\sistem-pesantren\app\Models\VisiMisiModel.php(29): CodeIgniter\Database\BaseBuilder->get()
+#4 D:\MY PROJECT\sistem-pesantren\app\Controllers\VisiMisi.php(34): App\Models\VisiMisiModel->store('<p>sa</p>')
+#5 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(933): App\Controllers\VisiMisi->store()
+#6 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+#7 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\MY PROJECT\sistem-pesantren\system\Boot.php(312): CodeIgniter\CodeIgniter->run()
+#9 D:\MY PROJECT\sistem-pesantren\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 D:\MY PROJECT\sistem-pesantren\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 D:\MY PROJECT\sistem-pesantren\system\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\s...')
+#12 {main}
+CRITICAL - 2024-05-24 17:19:54 --> ErrorException: Undefined property: stdClass::$konten
+[Method: GET, Route: dashboard/visi-misi]
+in APPPATH\Controllers\VisiMisi.php on line 25.
+ 1 APPPATH\Controllers\VisiMisi.php(25): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$konten', 'D:\\MY PROJECT\\sistem-pesantren\\app\\Controllers\\VisiMisi.php', 25)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\VisiMisi->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')
+CRITICAL - 2024-05-24 17:21:28 --> ErrorException: Attempt to read property "text" on null
+[Method: GET, Route: dashboard/visi-misi]
+in APPPATH\Controllers\VisiMisi.php on line 25.
+ 1 APPPATH\Controllers\VisiMisi.php(25): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "text" on null', 'D:\\MY PROJECT\\sistem-pesantren\\app\\Controllers\\VisiMisi.php', 25)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\VisiMisi->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')
+CRITICAL - 2024-05-24 17:21:31 --> ErrorException: Attempt to read property "text" on null
+[Method: GET, Route: dashboard/visi-misi]
+in APPPATH\Controllers\VisiMisi.php on line 25.
+ 1 APPPATH\Controllers\VisiMisi.php(25): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "text" on null', 'D:\\MY PROJECT\\sistem-pesantren\\app\\Controllers\\VisiMisi.php', 25)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\VisiMisi->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')
+CRITICAL - 2024-05-24 17:22:21 --> ErrorException: Attempt to read property "text" on null
+[Method: GET, Route: dashboard/visi-misi]
+in APPPATH\Views\backoffice\visi-misi\index.php on line 40.
+ 1 APPPATH\Views\backoffice\visi-misi\index.php(40): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "text" on null', 'D:\\MY PROJECT\\sistem-pesantren\\app\\Views\\backoffice\\visi-misi\\index.php', 40)
+ 2 SYSTEMPATH\View\View.php(234): include('D:\\MY PROJECT\\sistem-pesantren\\app\\Views\\backoffice\\visi-misi\\index.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('backoffice/visi-misi/index', [], true)
+ 5 APPPATH\Controllers\VisiMisi.php(26): view('backoffice/visi-misi/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\VisiMisi->index()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')
+CRITICAL - 2024-05-24 17:24:09 --> ErrorException: Attempt to read property "text" on null
+[Method: GET, Route: dashboard/visi-misi]
+in APPPATH\Views\backoffice\visi-misi\index.php on line 34.
+ 1 APPPATH\Views\backoffice\visi-misi\index.php(34): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "text" on null', 'D:\\MY PROJECT\\sistem-pesantren\\app\\Views\\backoffice\\visi-misi\\index.php', 34)
+ 2 SYSTEMPATH\View\View.php(234): include('D:\\MY PROJECT\\sistem-pesantren\\app\\Views\\backoffice\\visi-misi\\index.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('backoffice/visi-misi/index', [], true)
+ 5 APPPATH\Controllers\VisiMisi.php(26): view('backoffice/visi-misi/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\VisiMisi->index()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\VisiMisi))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')

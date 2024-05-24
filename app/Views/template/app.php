@@ -8,7 +8,7 @@
 <body class=" text-gray-900">
 	<?php include(APPPATH . 'Views/template/_partials/topbar.php'); ?>
 	<?php include(APPPATH . 'Views/template/_partials/sidebar.php'); ?>
-	<div class="p-4 sm:ml-64">
+	<div class="p-4 sm:ml-64"> `
 
 		<?= $this->renderSection('content') ?>
 

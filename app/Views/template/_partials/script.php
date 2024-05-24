@@ -6,6 +6,29 @@
 <script src="https://cdn.datatables.net/2.0.1/js/dataTables.tailwindcss.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- <script src="editor/js/tinymce/tinymce.min.js"></script> -->
+<script src="<?= base_url('editor/js/tinymce/tinymce.min.js') ?>"></script>
+
+<!-- text editor code -->
+<script>
+	tinymce.init({
+		selector: 'textarea#editor',
+		height: 500,
+		plugins: [
+			'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+			'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+			'insertdatetime', 'media', 'table', 'help', 'wordcount'
+		],
+		toolbar: 'undo redo | blocks | ' +
+			'bold italic backcolor | alignleft aligncenter ' +
+			'alignright alignjustify | bullist numlist outdent indent | ' +
+			'removeformat | help',
+		content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+	});
+	setTimeout(() => {
+		$(".tox-promotion").hide();
+	}, 300);
+</script>
 <script>
 	function deleteConfirm(event) {
 		console.log(event);
@@ -25,9 +48,9 @@
 	}
 </script>
 <?php
-	$session = \Config\Services::session();
-	$status_error = $session->get('status_error');
-	$status_success = $session->get('status_success');
+$session = \Config\Services::session();
+$status_error = $session->get('status_error');
+$status_success = $session->get('status_success');
 ?>
 <?php if ($status_success) : ?>
 	<script>
