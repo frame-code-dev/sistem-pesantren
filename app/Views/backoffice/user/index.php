@@ -1,6 +1,8 @@
 <?php $this->extend('template/app') ?>
 
+
 <?= $this->section('content') ?>
+
 <div class="p-4 mt-14">
 	<section class="p-5 overflow-y-auto mt-5">
 		<div class="head lg:flex grid grid-cols-1 justify-between w-full">

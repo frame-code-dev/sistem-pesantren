@@ -9,7 +9,7 @@ class User extends BaseController
 	{
 
 		if (!session()->get("user_id")) {
-			redirect('/');
+			redirect('auth/login');
 		}
 	}
 
