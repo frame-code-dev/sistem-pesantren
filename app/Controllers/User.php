@@ -15,6 +15,7 @@ class User extends BaseController
 
 	public function index()
 	{
+		return view("backoffice/user/index");
 	}
 	public function create()
 	{
