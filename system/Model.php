@@ -96,7 +96,6 @@ class Model extends BaseModel
      * @var string
      */
     protected $table;
-
     /**
      * The table's primary key.
      *
@@ -168,6 +167,7 @@ class Model extends BaseModel
      */
     public function setTable(string $table)
     {
+
         $this->table = $table;
 
         return $this;

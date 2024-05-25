@@ -21,7 +21,6 @@ class VisiMisi extends BaseController
 	public function index()
 	{
 
-		$data["error"] = session()->getFlashdata('message_visiMisi_error');
 		$data["data"] = $this->visiMisi->getData();
 		return view("backoffice/visi-misi/index", $data);
 	}
