@@ -91,6 +91,9 @@ class BeritaModel extends Model
 
 	public function deleteData($id)
 	{
+
+
+		unlink("assets/" . $this->find($id)->image);
 		return  $this->delete($id);
 	}
 }

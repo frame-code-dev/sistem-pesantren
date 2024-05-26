@@ -82,7 +82,7 @@
 					</div>
 					<div style=" grid-column: span 4/span 4">
 						<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Keterangan<span class="me-2 text-red-500">*</span></label>
-						<textarea required name="keterangan" id="editor"><?= set_value("keterangan") ?></textarea>
+						<textarea name="keterangan" id="editor"><?= set_value("keterangan") ?></textarea>
 
 						<?php if (session("validation.keterangan")) : ?>
 							<div class="text-red-500 text-sm">
