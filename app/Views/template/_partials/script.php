@@ -90,7 +90,7 @@ $status_success = $session->get('status_success');
 
 		Toast.fire({
 			icon: 'error',
-			title: '<?= $this->session->flashdata('error') ?>'
+			title: '<?= $session->getFlashdata('error') ?>'
 		})
 	</script>
 <?php endif ?>
