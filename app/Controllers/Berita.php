@@ -107,15 +107,24 @@ class berita extends BaseController
 	}
 	public function delete($id = null)
 	{
+		try {
 
-		if ($this->berita->delete($id)) {
-			session()->setFlashdata("status_success", true);
-			session()->setFlashdata('message', 'Berita berhasil dihapus');
-			return redirect()->to('dashboard/berita');
-		} else {
-			session()->setFlashdata("status_error", true);
-			session()->setFlashdata('error', 'berita gagal dihapus');
-			return redirect()->back();
+			if ($this->berita->delete($id)) {
+				session()->setFlashdata("status_success", true);
+				session()->setFlashdata('message', 'Berita berhasil dihapus');
+				return redirect()->to('dashboard/berita');
+			} else {
+				session()->setFlashdata("status_error", true);
+				session()->setFlashdata('error', 'berita gagal dihapus');
+				return redirect()->back();
+			}
+		} catch (\Throwable $th) {
+			//handle error contrain table
+			if ($th->getCode() == 1451) {
+				session()->setFlashdata("status_error", true);
+				session()->setFlashdata('error', 'Kategori gagal dihapus, Data sedang digunakan di bagian lain sistem');
+				return redirect()->to('dashboard/kategori');
+			}
 		}
 	}
 

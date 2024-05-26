@@ -25,7 +25,9 @@ class BeritaModel extends Model
 
 	public function getAll()
 	{
-		return  $this->orderBy("id", "desc")->findAll();
+		return  $this->select("berita_acara.id,ketegori_berita.nama as kategori , judul,keterangan,image")
+			->join("ketegori_berita", "berita_acara.kategori_id = ketegori_berita.id", "array")
+			->orderBy("id", "desc")->findAll();
 	}
 	public function getById($id)
 	{
@@ -61,11 +63,6 @@ class BeritaModel extends Model
 
 	public function deleteData($id)
 	{
-		try {
-			return  $this->where("id", $id)->delete();
-			return true;
-		} catch (\Throwable $th) {
-			return false;
-		}
+		return  $this->where("id", $id)->delete();
 	}
 }
