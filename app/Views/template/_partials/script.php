@@ -30,6 +30,29 @@
 	}, 500);
 </script>
 <script>
+	// validasi telepon
+	document.getElementById('telepon').addEventListener('input', function(e) {
+		this.value = this.value.replace(/\D/g, '');
+
+		// Limit the length to 13 digits
+		if (this.value.length > 13) {
+			this.value = this.value.slice(0, 13);
+		}
+	});
+
+	document.getElementById('telepon').addEventListener('keydown', function(e) {
+		// Allow control keys such as backspace, delete, arrow keys, etc.
+		const controlKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab', 'Escape'];
+		if (controlKeys.includes(e.key)) {
+			return;
+		}
+
+		// Prevent default action if the key is not a digit or if the length exceeds 13
+		if (!/^\d$/.test(e.key) || this.value.length >= 13) {
+			e.preventDefault();
+		}
+	});
+
 	function deleteConfirm(event) {
 		console.log(event);
 		Swal.fire({
