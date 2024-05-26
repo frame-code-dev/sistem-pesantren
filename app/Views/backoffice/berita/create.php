@@ -50,10 +50,24 @@
 				<div class="grid grid-cols-4 gap-3">
 					<div class="col-span-2">
 						<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Judul Berita<span class="me-2 text-red-500">*</span></label>
-						<input type="text" placeholder="Masukkan Judul Berita" name="judul" id="nama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-						<?php if (session("validation.nama")) : ?>
+						<input type="text" value="<?= set_value("judul") ?>" placeholder="Masukkan Judul Berita" name="judul" id="nama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+						<?php if (session("validation.judul")) : ?>
 							<div class="text-red-500 text-sm">
-								<?= session("validation.nama") ?>
+								<?= session("validation.judul") ?>
+							</div>
+						<?php endif ?>
+					</div>
+					<div class="col-span-2">
+						<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Kategori<span class="me-2 text-red-500">*</span></label>
+						<select id="countries" name="kategori" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+							<option selected value="">Pilih Kategori</option>
+							<?php foreach ($kategori as $kt) : ?>
+								<option <?= set_value("kategori") == $kt["id"] ? "selected" : "" ?> value="<?= $kt["id"] ?>"><?= $kt["nama"] ?></option>
+							<?php endforeach ?>
+						</select>
+						<?php if (session("validation.kategori")) : ?>
+							<div class="text-red-500 text-sm">
+								<?= session("validation.kategori") ?>
 							</div>
 						<?php endif ?>
 					</div>
@@ -68,7 +82,7 @@
 					</div>
 					<div style=" grid-column: span 4/span 4">
 						<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Keterangan<span class="me-2 text-red-500">*</span></label>
-						<textarea name="keterangan" id="editor"></textarea>
+						<textarea name="keterangan" id="editor"><?= set_value("keterangan") ?></textarea>
 
 						<?php if (session("validation.keterangan")) : ?>
 							<div class="text-red-500 text-sm">

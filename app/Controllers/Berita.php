@@ -3,15 +3,18 @@
 namespace App\Controllers;
 
 use App\Models\BeritaModel;
+use App\Models\KategoriModel;
 
 class berita extends BaseController
 {
 	protected $helpers = ['form'];
 	protected $berita;
+	protected $kategori;
 	protected $validation;
 	public function __construct()
 	{
 		$this->berita = new BeritaModel();
+		$this->kategori = new KategoriModel();
 		$this->validation = \Config\Services::validation();
 
 		if (!session()->get("user_id")) {
@@ -28,24 +31,29 @@ class berita extends BaseController
 	{
 		$data["title"] = "Tambah Berita";
 		$data["current_page"] = "Berita";
+		$data["kategori"] = $this->kategori->getAll();;
 
 		return view("backoffice/berita/create", $data);
 	}
 
 	public function store()
 	{
-		$nama = $this->request->getPost("nama");
-
-		$this->validation->setRules([
-			'nama' => 'required',
-		]);
-		if (!$this->validation->run($this->berita->rules())) {
+		$judul = $this->request->getPost("judul");
+		$kategori = $this->request->getPost("kategori");
+		$gambar = $this->request->getFile("gambar");
+		$keterangan = $this->request->getPost("keterangan");
+		$data = [
+			"judul" => $judul,
+			"kategori" => $kategori,
+			"gambar" => $this->storeImage($gambar),
+			"keterangan" => $keterangan,
+		];
+		$valid = $this->validateData($data, $this->berita->rules());
+		if (!$valid) {
 			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
 		}
 
-		$data = [
-			"nama" => $nama
-		];
+
 		if ($this->berita->store($data)) {
 			session()->setFlashdata("status_success", true);
 			session()->setFlashdata('message', 'Berita berhasil ditambahkan');
@@ -62,27 +70,30 @@ class berita extends BaseController
 		$data["title"] = "Ubah Berita";
 		$data["current_page"] = "Berita";
 		$data["data"] = $this->berita->getById($id);
-		// var_dump($data);
-		// dd();
+		$data["kategori"] = $this->kategori->getAll();;
+
 		return view("backoffice/berita/edit", $data);
 	}
 
 	public function update($id = null)
 	{
-		$nama = $this->request->getPost("nama");
-		$valid = $this->validateData(["nama" => $nama], [
-			'nama' => 'required',
-		]);
-		$this->validation->setRules([
-			'nama' => 'required',
-		]);
-		if (!$this->validation->run($this->berita->rules())) {
+		$judul = $this->request->getPost("judul");
+		$kategori = $this->request->getPost("kategori");
+		$gambar = $this->request->getFile("gambar");
+		$keterangan = $this->request->getPost("keterangan");
+		$data = [
+			"judul" => $judul,
+			"kategori" => $kategori,
+			"gambar" => $gambar,
+			"keterangan" => $keterangan,
+		];
+		$valid = $this->validateData($data, $this->berita->rules());
+
+		if (!$valid) {
 			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
 		}
 
-		$data = [
-			"nama" => $nama
-		];
+
 		if ($this->berita->update($id, $data)) {
 			session()->setFlashdata("status_success", true);
 			session()->setFlashdata('message', 'Berita berhasil diubah');
@@ -106,5 +117,11 @@ class berita extends BaseController
 			session()->setFlashdata('error', 'berita gagal dihapus');
 			return redirect()->back();
 		}
+	}
+
+
+	public function storeImage($image)
+	{
+		return "das";
 	}
 }

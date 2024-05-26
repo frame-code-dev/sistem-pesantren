@@ -15,12 +15,10 @@ class BeritaModel extends Model
 	public function rules()
 	{
 		return [
-			[
-				'judul' => 'required',
-				'kategori_id' => 'required',
-				'keterangan' => 'required',
-				'image' => 'required|uploaded[image]|max_size[image,2048]|is_image[image]',
-			],
+			'judul' => 'required',
+			'kategori' => 'required',
+			'keterangan' => 'required',
+			'gambar' => 'required',
 		];
 	}
 
@@ -36,6 +34,10 @@ class BeritaModel extends Model
 
 	public function store($data)
 	{
+		$data["kategori_id"] = $data["kategori"];
+		$data["image"] = $data["gambar"];
+		unset($data["kategori"]);
+		unset($data["image"]);
 		try {
 			return  $this->insert($data);
 			return true;
@@ -45,6 +47,10 @@ class BeritaModel extends Model
 	}
 	public function updateData($id, $data)
 	{
+		$data["kategori_id"] = $data["kategori"];
+		$data["image"] = $data["gambar"];
+		unset($data["kategori"]);
+		unset($data["image"]);
 		try {
 			return  $this->where("id", $id)->update($data);
 			return true;
