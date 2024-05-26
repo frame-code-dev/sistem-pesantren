@@ -35,13 +35,8 @@ class Kategori extends BaseController
 	public function store()
 	{
 		$nama = $this->request->getPost("nama");
-		$valid = $this->validateData(["nama" => $nama], [
-			'nama' => 'required',
-		]);
-		$this->validation->setRules([
-			'nama' => 'required',
-		]);
-		if (!$this->validation->run($this->kategori->rules())) {
+		$valid = $this->validateData(["nama" => $nama], $this->kategori->rules());
+		if (!$valid) {
 			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
 		}
 
@@ -72,21 +67,15 @@ class Kategori extends BaseController
 	public function update($id = null)
 	{
 		$nama = $this->request->getPost("nama");
-		$valid = $this->validateData(["nama" => $nama], [
-			'nama' => 'required',
-		]);
-		$this->validation->setRules([
-			'nama' => 'required',
-		]);
-		$data = [
-			"nama" => $nama
-		];
-		if (!$this->validation->run($this->kategori->rules())) {
+		$valid = $this->validateData(["nama" => $nama], $this->kategori->rules());
+		if (!$valid) {
 			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
 		}
 
-
-		if ($this->kategori->update($id, $data)) {
+		$data = [
+			"nama" => $nama
+		];
+		if ($this->kategori->updateData($id, $data)) {
 			session()->setFlashdata("status_success", true);
 			session()->setFlashdata('message', 'Kategori berhasil diubah');
 			return redirect()->to('dashboard/kategori');
@@ -99,15 +88,23 @@ class Kategori extends BaseController
 	}
 	public function delete($id = null)
 	{
-
-		if ($this->kategori->delete($id)) {
-			session()->setFlashdata("status_success", true);
-			session()->setFlashdata('message', 'Kategori berhasil dihapus');
-			return redirect()->to('dashboard/kategori');
-		} else {
-			session()->setFlashdata("status_error", true);
-			session()->setFlashdata('error', 'Kategori gagal dihapus');
-			return redirect()->back();
+		try {
+			if ($this->kategori->deleteData($id)) {
+				session()->setFlashdata("status_success", true);
+				session()->setFlashdata('message', 'Kategori berhasil dihapus');
+				return redirect()->to('dashboard/kategori');
+			} else {
+				session()->setFlashdata("status_error", true);
+				session()->setFlashdata('error', 'Kategori gagal dihapus');
+				return redirect()->back();
+			}
+		} catch (\Throwable $th) {
+			//handle error contrain table
+			if ($th->getCode() == 1451) {
+				session()->setFlashdata("status_error", true);
+				session()->setFlashdata('error', 'Kategori gagal dihapus, Data sedang digunakan di bagian lain sistem');
+				return redirect()->to('dashboard/kategori');
+			}
 		}
 	}
 }

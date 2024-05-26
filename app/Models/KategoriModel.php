@@ -15,9 +15,7 @@ class KategoriModel extends Model
 	public function rules()
 	{
 		return [
-			[
-				'nama' => 'required',
-			],
+			'nama' => 'required',
 		];
 	}
 
@@ -52,11 +50,6 @@ class KategoriModel extends Model
 
 	public function deleteData($id)
 	{
-		try {
-			return  $this->where("id", $id)->delete();
-			return true;
-		} catch (\Throwable $th) {
-			return false;
-		}
+		return  $this->where("id", $id)->delete();
 	}
 }
