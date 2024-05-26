@@ -33,7 +33,6 @@ class KategoriModel extends Model
 	{
 		try {
 			return  $this->insert($data);
-			return true;
 		} catch (\Throwable $th) {
 			return false;
 		}
@@ -41,8 +40,7 @@ class KategoriModel extends Model
 	public function updateData($id, $data)
 	{
 		try {
-			return  $this->where("id", $id)->update($data);
-			return true;
+			return  $this->update($id, $data);
 		} catch (\Throwable $th) {
 			return false;
 		}
@@ -50,6 +48,6 @@ class KategoriModel extends Model
 
 	public function deleteData($id)
 	{
-		return  $this->where("id", $id)->delete();
+		return  $this->delete($id);
 	}
 }
