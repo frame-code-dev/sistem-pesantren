@@ -2,16 +2,16 @@
 
 namespace App\Controllers;
 
-use App\Models\KategoriModel;
+use App\Models\BeritaModel;
 
-class Kategori extends BaseController
+class berita extends BaseController
 {
 	protected $helpers = ['form'];
-	protected $kategori;
+	protected $berita;
 	protected $validation;
 	public function __construct()
 	{
-		$this->kategori = new KategoriModel();
+		$this->berita = new BeritaModel();
 		$this->validation = \Config\Services::validation();
 
 		if (!session()->get("user_id")) {
@@ -21,52 +21,50 @@ class Kategori extends BaseController
 
 	public function index()
 	{
-		$data["data"] = $this->kategori->getAll();
-		return view("backoffice/kategori/index", $data);
+		$data["data"] = $this->berita->getAll();
+		return view("backoffice/berita/index", $data);
 	}
 	public function create()
 	{
-		$data["title"] = "Tambah Kategori";
-		$data["current_page"] = "Kategori";
+		$data["title"] = "Tambah Berita";
+		$data["current_page"] = "Berita";
 
-		return view("backoffice/kategori/create", $data);
+		return view("backoffice/berita/create", $data);
 	}
 
 	public function store()
 	{
 		$nama = $this->request->getPost("nama");
-		$valid = $this->validateData(["nama" => $nama], [
-			'nama' => 'required',
-		]);
+
 		$this->validation->setRules([
 			'nama' => 'required',
 		]);
-		if (!$this->validation->run($this->kategori->rules())) {
+		if (!$this->validation->run($this->berita->rules())) {
 			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
 		}
 
 		$data = [
 			"nama" => $nama
 		];
-		if ($this->kategori->store($data)) {
+		if ($this->berita->store($data)) {
 			session()->setFlashdata("status_success", true);
-			session()->setFlashdata('message', 'Kategori berhasil ditambahkan');
-			return redirect()->to('dashboard/kategori');
+			session()->setFlashdata('message', 'Berita berhasil ditambahkan');
+			return redirect()->to('dashboard/berita');
 		} else {
 			session()->setFlashdata("status_error", true);
-			session()->setFlashdata('error', 'Kategori gagal ditambahkan');
+			session()->setFlashdata('error', 'Berita gagal ditambahkan');
 			return redirect()->back();
 		}
 	}
 
 	public function edit($id = null)
 	{
-		$data["title"] = "Ubah Kategori";
-		$data["current_page"] = "Kategori";
-		$data["data"] = $this->kategori->getById($id);
+		$data["title"] = "Ubah Berita";
+		$data["current_page"] = "Berita";
+		$data["data"] = $this->berita->getById($id);
 		// var_dump($data);
 		// dd();
-		return view("backoffice/kategori/edit", $data);
+		return view("backoffice/berita/edit", $data);
 	}
 
 	public function update($id = null)
@@ -78,35 +76,34 @@ class Kategori extends BaseController
 		$this->validation->setRules([
 			'nama' => 'required',
 		]);
-		$data = [
-			"nama" => $nama
-		];
-		if (!$this->validation->run($this->kategori->rules())) {
+		if (!$this->validation->run($this->berita->rules())) {
 			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
 		}
 
-
-		if ($this->kategori->update($id, $data)) {
+		$data = [
+			"nama" => $nama
+		];
+		if ($this->berita->update($id, $data)) {
 			session()->setFlashdata("status_success", true);
-			session()->setFlashdata('message', 'Kategori berhasil diubah');
-			return redirect()->to('dashboard/kategori');
+			session()->setFlashdata('message', 'Berita berhasil diubah');
+			return redirect()->to('dashboard/berita');
 		} else {
 
 			session()->setFlashdata("status_error", true);
-			session()->setFlashdata('error', 'Kategori gagal diubah');
+			session()->setFlashdata('error', 'Berita gagal diubah');
 			return redirect()->back();
 		}
 	}
 	public function delete($id = null)
 	{
 
-		if ($this->kategori->delete($id)) {
+		if ($this->berita->delete($id)) {
 			session()->setFlashdata("status_success", true);
-			session()->setFlashdata('message', 'Kategori berhasil dihapus');
-			return redirect()->to('dashboard/kategori');
+			session()->setFlashdata('message', 'Berita berhasil dihapus');
+			return redirect()->to('dashboard/berita');
 		} else {
 			session()->setFlashdata("status_error", true);
-			session()->setFlashdata('error', 'Kategori gagal dihapus');
+			session()->setFlashdata('error', 'berita gagal dihapus');
 			return redirect()->back();
 		}
 	}

@@ -46,16 +46,33 @@
 			</div>
 		</div>
 		<div class="card bg-white p-5 mt-4 border rounded-md w-full relative">
-			<form action="<?= base_url('dashboard/kategori/store') ?>" method="POST" class="w-full mx-auto space-y-4" enctype="multipart/form-data">
+			<form action="<?= base_url('dashboard/berita/store') ?>" method="POST" class="w-full mx-auto space-y-4" enctype="multipart/form-data">
 				<div class="grid grid-cols-4 gap-3">
 					<div class="col-span-2">
-						<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nama<span class="me-2 text-red-500">*</span></label>
-						<input type="text" placeholder="Masukkan Nama" name="nama" id="nama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-
-
+						<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Judul Berita<span class="me-2 text-red-500">*</span></label>
+						<input type="text" placeholder="Masukkan Judul Berita" name="judul" id="nama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
 						<?php if (session("validation.nama")) : ?>
 							<div class="text-red-500 text-sm">
 								<?= session("validation.nama") ?>
+							</div>
+						<?php endif ?>
+					</div>
+					<div class="col-span-2">
+						<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Gambar</label>
+						<input name="gambar" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+						<?php if (session("validation.gambar")) : ?>
+							<div class="text-red-500 text-sm">
+								<?= session("validation.gambar") ?>
+							</div>
+						<?php endif ?>
+					</div>
+					<div style=" grid-column: span 4/span 4">
+						<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Keterangan<span class="me-2 text-red-500">*</span></label>
+						<textarea name="keterangan" id="editor"></textarea>
+
+						<?php if (session("validation.keterangan")) : ?>
+							<div class="text-red-500 text-sm">
+								<?= session("validation.keterangan") ?>
 							</div>
 						<?php endif ?>
 					</div>

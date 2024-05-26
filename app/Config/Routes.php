@@ -29,6 +29,14 @@ $routes->post('dashboard/kategori/update/(:any)', "Kategori::update/$1");
 $routes->get('dashboard/kategori/delete/(:any)', "Kategori::delete/$1");
 
 
+$routes->get('dashboard/berita', "Berita::index");
+$routes->get('dashboard/berita/create', "Berita::create");
+$routes->post('dashboard/berita/store', "Berita::store");
+$routes->get('dashboard/berita/edit/(:any)', "Berita::edit/$1");
+$routes->post('dashboard/berita/update/(:any)', "Berita::update/$1");
+$routes->get('dashboard/berita/delete/(:any)', "Berita::delete/$1");
+
+
 $routes->get('dashboard/visi-misi', "VisiMisi::index");
 $routes->post('dashboard/visi-misi', "VisiMisi::store");
 
