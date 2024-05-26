@@ -8,9 +8,11 @@ class Kategori extends BaseController
 {
 	protected $helpers = ['form'];
 	protected $kategori;
+	protected $validation;
 	public function __construct()
 	{
 		$this->kategori = new KategoriModel();
+		$this->validation = \Config\Services::validation();
 
 		if (!session()->get("user_id")) {
 			redirect('/');
@@ -36,17 +38,22 @@ class Kategori extends BaseController
 		$valid = $this->validateData(["nama" => $nama], [
 			'nama' => 'required',
 		]);
-		if (!$valid) {
-			return redirect()->back()->withInput();
+		$this->validation->setRules([
+			'nama' => 'required',
+		]);
+		if (!$this->validation->run(["nama" => "required"])) {
+			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
 		}
 
 		$data = [
 			"nama" => $nama
 		];
 		if ($this->kategori->store($data)) {
-			session()->setFlashdata('success', 'Kategori berhasil ditambahkan');
+			session()->setFlashdata("status_success", true);
+			session()->setFlashdata('message', 'Kategori berhasil ditambahkan');
 			return redirect()->to('dashboard/kategori');
 		} else {
+			session()->setFlashdata("status_error", true);
 			session()->setFlashdata('error', 'Kategori gagal ditambahkan');
 			return redirect()->back();
 		}
@@ -68,17 +75,23 @@ class Kategori extends BaseController
 		$valid = $this->validateData(["nama" => $nama], [
 			'nama' => 'required',
 		]);
-		if (!$valid) {
-			return redirect()->back()->withInput();
+		$this->validation->setRules([
+			'nama' => 'required',
+		]);
+		if (!$this->validation->run(["nama" => "required"])) {
+			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
 		}
 
 		$data = [
 			"nama" => $nama
 		];
 		if ($this->kategori->update($id, $data)) {
-			session()->setFlashdata('success', 'Kategori berhasil diubah');
+			session()->setFlashdata("status_success", true);
+			session()->setFlashdata('message', 'Kategori berhasil diubah');
 			return redirect()->to('dashboard/kategori');
 		} else {
+
+			session()->setFlashdata("status_error", true);
 			session()->setFlashdata('error', 'Kategori gagal diubah');
 			return redirect()->back();
 		}
@@ -87,9 +100,11 @@ class Kategori extends BaseController
 	{
 
 		if ($this->kategori->delete($id)) {
-			session()->setFlashdata('success', 'Kategori berhasil dihapus');
+			session()->setFlashdata("status_success", true);
+			session()->setFlashdata('message', 'Kategori berhasil dihapus');
 			return redirect()->to('dashboard/kategori');
 		} else {
+			session()->setFlashdata("status_error", true);
 			session()->setFlashdata('error', 'Kategori gagal dihapus');
 			return redirect()->back();
 		}

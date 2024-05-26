@@ -26,7 +26,7 @@ $routes->get('dashboard/kategori/create', "Kategori::create");
 $routes->post('dashboard/kategori/store', "Kategori::store");
 $routes->get('dashboard/kategori/edit/(:any)', "Kategori::edit/$1");
 $routes->post('dashboard/kategori/update/(:any)', "Kategori::update/$1");
-$routes->delete('dashboard/kategori/delete/(:any)', "Kategori::delete/$1");
+$routes->get('dashboard/kategori/delete/(:any)', "Kategori::delete/$1");
 
 
 $routes->get('dashboard/visi-misi', "VisiMisi::index");
