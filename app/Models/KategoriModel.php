@@ -15,9 +15,7 @@ class KategoriModel extends Model
 	public function rules()
 	{
 		return [
-			[
-				'nama' => 'required',
-			],
+			'nama' => 'required',
 		];
 	}
 

@@ -35,13 +35,8 @@ class Kategori extends BaseController
 	public function store()
 	{
 		$nama = $this->request->getPost("nama");
-		$valid = $this->validateData(["nama" => $nama], [
-			'nama' => 'required',
-		]);
-		$this->validation->setRules([
-			'nama' => 'required',
-		]);
-		if (!$this->validation->run(["nama" => "required"])) {
+		$valid = $this->validateData(["nama" => $nama], $this->kategori->rules());
+		if (!$valid) {
 			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
 		}
 
@@ -72,13 +67,8 @@ class Kategori extends BaseController
 	public function update($id = null)
 	{
 		$nama = $this->request->getPost("nama");
-		$valid = $this->validateData(["nama" => $nama], [
-			'nama' => 'required',
-		]);
-		$this->validation->setRules([
-			'nama' => 'required',
-		]);
-		if (!$this->validation->run(["nama" => "required"])) {
+		$valid = $this->validateData(["nama" => $nama], $this->kategori->rules());
+		if (!$valid) {
 			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
 		}
 
