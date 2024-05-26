@@ -38,6 +38,8 @@ class berita extends BaseController
 
 	public function store()
 	{
+		$valid = $this->validate($this->berita->rulesInsert());
+
 		$judul = $this->request->getPost("judul");
 		$kategori = $this->request->getPost("kategori");
 		$gambar = $this->request->getFile("gambar");
