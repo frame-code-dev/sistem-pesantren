@@ -15,7 +15,6 @@ class Santri extends BaseController
 	{
 		$this->validation = \Config\Services::validation();
 		$this->santriModel = new Santri_model();
-
 		if (!session()->get("user_id")) {
 			redirect('/');
 		}
@@ -171,6 +170,68 @@ class Santri extends BaseController
 			session()->setFlashdata("status_error", true);
 			session()->setFlashdata('error', 'Data santri gagal dihapus, <br>' . $e->getMessage());
 			return redirect()->to('dashboard/santri');
+		}
+	}
+
+	public function alumni(){
+		$alumni = $this->santriModel->getSantriAlumni();
+		$santri = $this->santriModel->getSantriAktif();
+		$data['alumni'] = $alumni->getResultArray();
+		$data['santri'] = $santri->getResultArray();
+		return view("backoffice/alumni/index", $data);
+	}
+
+	public function addAlumni(){
+		$id_santri = $this->request->getPost("santri");
+		$tanggal_keluar = $this->request->getPost("tanggal_keluar");
+		$validation = $this->validateData([
+			"santri" => $id_santri,
+			"tanggal_keluar" => $tanggal_keluar,
+		], $this->santriModel->rulesAlumni());
+		if (!$validation) {
+			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
+		}
+		try {
+			$data = [
+				"tanggal_keluar" => $tanggal_keluar,
+				"status_santri" => 'alumni',
+				"updated_at" => date("Y-m-d H:i:s"),
+			];
+			$this->santriModel->updateData($id_santri, $data);
+			session()->setFlashdata("status_success", true);
+			session()->setFlashdata('message', 'Data alumni berhasil ditambah.');
+			return redirect()->to('dashboard/alumni');
+		} catch (\Throwable $th) {
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'Data alumni berhasil ditambah, <br>' . $th->getMessage());
+			return redirect()->back();
+		} catch (\Exception $e) {
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'Data alumni berhasil ditambah, <br>' . $e->getMessage());
+			return redirect()->back();
+		}
+	}
+
+	public function updateAktif($id = null)
+	{
+		try {
+			$data = [
+				"tanggal_keluar" => null,
+				"status_santri" => 'aktif',
+				"updated_at" => date("Y-m-d H:i:s"),
+			];
+			$this->santriModel->updateData($id, $data);
+			session()->setFlashdata("status_success", true);
+			session()->setFlashdata('message', 'santri berhasil diaktifkan kembali');
+			return redirect()->to('dashboard/alumni');
+		} catch (\Throwable $th) {	
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'Data santri diaktifkan kembali, <br>' . $th->getMessage());
+			return redirect()->to('dashboard/alumni');
+		} catch (\Exception $e) {
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'Data santri diaktifkan kembali, <br>' . $e->getMessage());
+			return redirect()->to('dashboard/alumni');
 		}
 	}
 }

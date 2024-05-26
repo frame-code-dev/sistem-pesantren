@@ -10,6 +10,8 @@
 	<?php include(APPPATH . 'Views/template/_partials/sidebar.php'); ?>
 	<div class="p-4 sm:ml-64"> `
 
+		<?= $this->renderSection('modal') ?>
+		
 		<?= $this->renderSection('content') ?>
 
 	</div>

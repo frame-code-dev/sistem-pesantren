@@ -100,3 +100,83 @@ ORDER BY `id` DESC', [], false)
 13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
 14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
 15 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')
+ERROR - 2024-05-26 14:16:04 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'admin'@'localhost' (using password: YES) in D:\Coding\sistem-pesantren\system\Database\MySQLi\Connection.php:187
+Stack trace:
+#0 D:\Coding\sistem-pesantren\system\Database\MySQLi\Connection.php(187): mysqli->real_connect('localhost', 'admin', '101010', 'db_pesantren', 3306, '', 0)
+#1 D:\Coding\sistem-pesantren\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 D:\Coding\sistem-pesantren\system\Database\BaseConnection.php(604): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\Coding\sistem-pesantren\system\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\Coding\sistem-pesantren\app\Models\Santri_model.php(33): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\Coding\sistem-pesantren\app\Controllers\Santri.php(27): App\Models\Santri_model->getSantriAktif()
+#6 D:\Coding\sistem-pesantren\system\CodeIgniter.php(933): App\Controllers\Santri->index()
+#7 D:\Coding\sistem-pesantren\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Santri))
+#8 D:\Coding\sistem-pesantren\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\Coding\sistem-pesantren\system\Boot.php(312): CodeIgniter\CodeIgniter->run()
+#10 D:\Coding\sistem-pesantren\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 D:\Coding\sistem-pesantren\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 D:\Coding\sistem-pesantren\system\Commands\Server\rewrite.php(49): require_once('D:\\Coding\\siste...')
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in D:\Coding\sistem-pesantren\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 D:\Coding\sistem-pesantren\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 D:\Coding\sistem-pesantren\system\Database\BaseConnection.php(604): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\Coding\sistem-pesantren\system\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 D:\Coding\sistem-pesantren\app\Models\Santri_model.php(33): CodeIgniter\Database\BaseBuilder->get()
+#4 D:\Coding\sistem-pesantren\app\Controllers\Santri.php(27): App\Models\Santri_model->getSantriAktif()
+#5 D:\Coding\sistem-pesantren\system\CodeIgniter.php(933): App\Controllers\Santri->index()
+#6 D:\Coding\sistem-pesantren\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Santri))
+#7 D:\Coding\sistem-pesantren\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\Coding\sistem-pesantren\system\Boot.php(312): CodeIgniter\CodeIgniter->run()
+#9 D:\Coding\sistem-pesantren\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 D:\Coding\sistem-pesantren\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 D:\Coding\sistem-pesantren\system\Commands\Server\rewrite.php(49): require_once('D:\\Coding\\siste...')
+#12 {main}
+CRITICAL - 2024-05-26 14:16:04 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+[Method: GET, Route: dashboard/santri]
+in SYSTEMPATH\Database\BaseConnection.php on line 457.
+ 1 SYSTEMPATH\Database\BaseConnection.php(604): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `santri`
+WHERE `status_santri` = :status_santri:', [...], false)
+ 3 APPPATH\Models\Santri_model.php(33): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH\Controllers\Santri.php(27): App\Models\Santri_model->getSantriAktif()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Santri->index()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Santri))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\Coding\\sistem-pesantren\\public\\index.php')
+CRITICAL - 2024-05-26 14:59:26 --> ErrorException: include(D:\Coding\sistem-pesantren\app\Views/backoffice/alumni/modal.php): Failed to open stream: No such file or directory
+[Method: GET, Route: dashboard/alumni]
+in APPPATH\Views\backoffice\alumni\index.php on line 3.
+ 1 APPPATH\Views\backoffice\alumni\index.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(D:\\Coding\\sistem-pesantren\\app\\Views/backoffice/alumni/modal.php): Failed to open stream: No such file or directory', 'D:\\Coding\\sistem-pesantren\\app\\Views\\backoffice\\alumni\\index.php', 3)
+ 2 APPPATH\Views\backoffice\alumni\index.php(3): include()
+ 3 SYSTEMPATH\View\View.php(234): include('D:\\Coding\\sistem-pesantren\\app\\Views\\backoffice\\alumni\\index.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('backoffice/alumni/index', [], true)
+ 6 APPPATH\Controllers\Santri.php(181): view('backoffice/alumni/index', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Santri->alumni()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Santri))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\Coding\\sistem-pesantren\\public\\index.php')
+CRITICAL - 2024-05-26 15:01:17 --> ErrorException: Attempt to read property "nis" on string
+[Method: GET, Route: dashboard/alumni]
+in APPPATH\Views\backoffice\alumni\index.php on line 103.
+ 1 APPPATH\Views\backoffice\alumni\index.php(103): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nis" on string', 'D:\\Coding\\sistem-pesantren\\app\\Views\\backoffice\\alumni\\index.php', 103)
+ 2 SYSTEMPATH\View\View.php(234): include('D:\\Coding\\sistem-pesantren\\app\\Views\\backoffice\\alumni\\index.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('backoffice/alumni/index', [], true)
+ 5 APPPATH\Controllers\Santri.php(181): view('backoffice/alumni/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Santri->alumni()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Santri))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\Coding\\sistem-pesantren\\public\\index.php')

@@ -22,6 +22,13 @@ class Santri_model extends Model
             'tanggal_masuk' => 'required',
         ];
     }
+    public function rulesAlumni()
+    {
+        return [
+            'santri' => 'required',
+            'tanggal_keluar' => 'required',
+        ];
+    }
 
     public function getAll()
     {
