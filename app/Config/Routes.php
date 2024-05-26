@@ -29,6 +29,14 @@ $routes->post('dashboard/kategori/update/(:any)', "Kategori::update/$1");
 $routes->get('dashboard/kategori/delete/(:any)', "Kategori::delete/$1");
 
 
+$routes->get('dashboard/jenis-transaksi', "JenisTransaksi::index");
+$routes->get('dashboard/jenis-transaksi/create', "JenisTransaksi::create");
+$routes->post('dashboard/jenis-transaksi/store', "JenisTransaksi::store");
+$routes->get('dashboard/jenis-transaksi/edit/(:any)', "JenisTransaksi::edit/$1");
+$routes->post('dashboard/jenis-transaksi/update/(:any)', "JenisTransaksi::update/$1");
+$routes->get('dashboard/jenis-transaksi/delete/(:any)', "JenisTransaksi::delete/$1");
+
+
 $routes->get('dashboard/berita', "Berita::index");
 $routes->get('dashboard/berita/create', "Berita::create");
 $routes->post('dashboard/berita/store', "Berita::store");
