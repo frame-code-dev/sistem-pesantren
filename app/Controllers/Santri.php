@@ -76,15 +76,10 @@ class Santri extends BaseController
 				"status_santri" => $status,
 				"created_at" => date("Y-m-d H:i:s"),
 			];
-			if ($this->santriModel->saveData($data)) {
-				session()->setFlashdata("status_success", true);
-				session()->setFlashdata('message', 'Data santri berhasil ditambahkan.');
-				return redirect()->to('dashboard/santri');
-			} else {
-				session()->setFlashdata("status_error", true);
-				session()->setFlashdata('error', 'Data santri gagal ditambahkan.');
-				return redirect()->back();
-			}
+			$this->santriModel->saveData($data);
+			session()->setFlashdata("status_success", true);
+			session()->setFlashdata('message', 'Data santri berhasil ditambahkan.');
+			return redirect()->to('dashboard/santri');
 		} catch (\Throwable $th) {
 			session()->setFlashdata("status_error", true);
 			session()->setFlashdata('error', 'Data santri gagal ditambahkan, <br>'.$th->getMessage());
@@ -127,7 +122,7 @@ class Santri extends BaseController
 		}
 
 		try {
-			$nisExist = $this->santriModel->getByNis($nis);
+			$nisExist = $this->santriModel->getByNisUpdate($id, $nis);
 			if ($nisExist) {
 				session()->setFlashdata("status_error", true);
 				session()->setFlashdata('error', 'Data santri gagal ditambahkan, Nis sudah terdaftar.');
@@ -145,43 +140,37 @@ class Santri extends BaseController
 				"status_santri" => $status,
 				"created_at" => date("Y-m-d H:i:s"),
 			];
-			if ($this->santriModel->saveData($data)) {
-				session()->setFlashdata("status_success", true);
-				session()->setFlashdata('message', 'Data santri berhasil ditambahkan.');
-				return redirect()->to('dashboard/santri');
-			} else {
-				session()->setFlashdata("status_error", true);
-				session()->setFlashdata('error', 'Data santri gagal ditambahkan.');
-				return redirect()->back();
-			}
+			$this->santriModel->updateData($id, $data);
+			session()->setFlashdata("status_success", true);
+			session()->setFlashdata('message', 'Data santri berhasil diubah.');
+			return redirect()->to('dashboard/santri');
 		} catch (\Throwable $th) {
 			session()->setFlashdata("status_error", true);
-			session()->setFlashdata('error', 'Data santri gagal ditambahkan, <br>' . $th->getMessage());
+			session()->setFlashdata('error', 'Data santri gagal diubah, <br>' . $th->getMessage());
 			return redirect()->back();
 		} catch (\Exception $e) {
 			session()->setFlashdata("status_error", true);
-			session()->setFlashdata('error', 'Data santri gagal ditambahkan, <br>' . $e->getMessage());
+			session()->setFlashdata('error', 'Data santri gagal diubah, <br>' . $e->getMessage());
 			return redirect()->back();
 		}
 	}
 	public function delete($id = null)
 	{
 		try {
-			if ($this->santriModel->deleteData($id)) {
-				session()->setFlashdata("status_success", true);
-				session()->setFlashdata('message', 'santri berhasil dihapus');
-				return redirect()->to('dashboard/santri');
-			} else {
-				session()->setFlashdata("status_error", true);
-				session()->setFlashdata('error', 'santri gagal dihapus');
-				return redirect()->back();
-			}
+			$this->santriModel->deleteData($id);
+			session()->setFlashdata("status_success", true);
+			session()->setFlashdata('message', 'santri berhasil dihapus');
+			return redirect()->to('dashboard/santri');
 		} catch (\Throwable $th) {
 			if ($th->getCode() == 1451) { // cek jika data ini digunakan di tabel lain
 				session()->setFlashdata("status_error", true);
 				session()->setFlashdata('error', 'Data santri gagal dihapus, Data ini sudah digunakan.');
 				return redirect()->to('dashboard/santri');
 			}
+		} catch (\Exception $e) {
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'Data santri gagal dihapus, <br>' . $e->getMessage());
+			return redirect()->to('dashboard/santri');
 		}
 	}
 }

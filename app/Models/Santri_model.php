@@ -47,6 +47,11 @@ class Santri_model extends Model
         return  $this->db->table($this->_table)->where("nis", $nis)->get()->getRow();
     }
 
+    public function getByNisUpdate($id, $nis)
+    {
+        return  $this->db->table($this->_table)->where('id', '!=', $id)->where("nis", $nis)->get()->getRow();
+    }
+
     public function saveData($data)
     {
         return  $this->db->table($this->_table)->insert($data);

@@ -38,45 +38,36 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if (!empty($santri) && is_array($santri)) : ?>
-                        <?php $no = 1;
-                        foreach ($santri as $row) : ?>
-                        <?php 
-                            $gender = $row['gender'];
-                            if ($gender == 'l') {
-                                $jenis_kelamin = "Laki-Laki";
-                            } else {
-                                $jenis_kelamin = "Perempuan";
-                            }
+                    <?php $no = 1;
+                    foreach ($santri as $row) : ?>
+                        <?php
+                        $gender = $row['gender'];
+                        if ($gender == 'l') {
+                            $jenis_kelamin = "Laki-Laki";
+                        } else {
+                            $jenis_kelamin = "Perempuan";
+                        }
                         ?>
-                            <tr>
-                                <td class="px-4 py-3"><?= $no++ ?></td>
-                                <td class="px-4 py-3"><?= esc($row['nis']) ?></td>
-                                <td class="px-4 py-3"><?= esc($row['nama']) ?></td>
-                                <td class="px-4 py-3"><?= $jenis_kelamin ?></td>
-                                <td class="px-4 py-3"><?= esc($row['telepon']) ?></td>
-                                <td class="px-4 py-3"><?= esc($row['status_santri']) ?></td>
-                                <td class="px-4 py-3"><?= esc($row['tanggal_masuk']) ?></td>
-                                <td class="px-4 py-3">
-                                    <div class="flex justify-end">
-                                        <button>Edit</button>
-                                        <button>Hapus</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php else : ?>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td class="px-4 py-3">Data santri kosong.</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td class="px-4 py-3"><?= $no++ ?></td>
+                            <td class="px-4 py-3"><?= esc($row['nis']) ?></td>
+                            <td class="px-4 py-3"><?= esc($row['nama']) ?></td>
+                            <td class="px-4 py-3"><?= $jenis_kelamin ?></td>
+                            <td class="px-4 py-3"><?= esc($row['telepon']) ?></td>
+                            <td class="px-4 py-3"><?= esc($row['status_santri']) ?></td>
+                            <td class="px-4 py-3"><?= esc($row['tanggal_masuk']) ?></td>
+                            <td class="px-4 py-3">
+                                <div class="flex gap-2">
+                                    <a class="block text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" href="<?= base_url('dashboard/santri/edit/' . $row['id']) ?>">
+                                        Ubah
+                                    </a>
+                                    <button data-id="<?= $row["id"] ?>" data-modal-target="hapus default-modal" data-modal-toggle="default-modal" class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" onclick="deleteConfirm('santri/delete/<?= $row['id'] ?>')" type="button">
+                                        Hapus
+                                    </button>
+                                </div>
+                            </td>
                         </tr>
-                    <?php endif; ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
