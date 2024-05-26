@@ -42,17 +42,20 @@ class berita extends BaseController
 		$kategori = $this->request->getPost("kategori");
 		$gambar = $this->request->getFile("gambar");
 		$keterangan = $this->request->getPost("keterangan");
+
 		$data = [
 			"judul" => $judul,
 			"kategori" => $kategori,
-			"gambar" => $this->storeImage($gambar),
+			"gambar" => $gambar,
 			"keterangan" => $keterangan,
 		];
-		$valid = $this->validateData($data, $this->berita->rules());
 		if (!$valid) {
 			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
 		}
 
+
+
+		$data["gambar"] = $this->storeImage($gambar);
 
 		if ($this->berita->store($data)) {
 			session()->setFlashdata("status_success", true);
@@ -77,24 +80,29 @@ class berita extends BaseController
 
 	public function update($id = null)
 	{
+		$valid = $this->validate($this->berita->rulesUpdate());
+
 		$judul = $this->request->getPost("judul");
 		$kategori = $this->request->getPost("kategori");
 		$gambar = $this->request->getFile("gambar");
 		$keterangan = $this->request->getPost("keterangan");
+
 		$data = [
 			"judul" => $judul,
 			"kategori" => $kategori,
 			"gambar" => $gambar,
 			"keterangan" => $keterangan,
 		];
-		$valid = $this->validateData($data, $this->berita->rules());
+
 
 		if (!$valid) {
 			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
 		}
+		if ($gambar) {
+			$data["gambar"] = $this->storeImage($gambar);
+		}
 
-
-		if ($this->berita->update($id, $data)) {
+		if ($this->berita->updateData($id, $data)) {
 			session()->setFlashdata("status_success", true);
 			session()->setFlashdata('message', 'Berita berhasil diubah');
 			return redirect()->to('dashboard/berita');
@@ -131,6 +139,12 @@ class berita extends BaseController
 
 	public function storeImage($image)
 	{
-		return "das";
+		if ($image->isValid() && !$image->hasMoved()) {
+
+			$nama = $image->getRandomName();
+			$image->move("../public/assets", $nama);
+
+			return $nama;
+		}
 	}
 }

@@ -9,7 +9,7 @@ class KategoriModel extends Model
 	protected $table = "ketegori_berita";
 	protected $primaryKey = "id";
 	protected $useAutoIncrement = true;
-	protected $allowedFields = ['nama',];
+	protected $allowedFields = ['nama'];
 
 
 	public function rules()

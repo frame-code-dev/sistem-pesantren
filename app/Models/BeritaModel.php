@@ -9,16 +9,41 @@ class BeritaModel extends Model
 	protected $table = "berita_acara";
 	protected $primaryKey = "id";
 	protected $useAutoIncrement = true;
-	protected $allowedFields = ["judul", "kategori_id", "keterangan", "image"];
+	protected $allowedFields = ["judul", "keterangan", "kategori_id", "image"];
 
 
-	public function rules()
+	public function rulesInsert()
 	{
 		return [
 			'judul' => 'required',
 			'kategori' => 'required',
 			'keterangan' => 'required',
-			'gambar' => 'required',
+			'gambar' => [
+				'rules' => 'max_size[gambar,2048]|is_image[gambar]|mime_in[gambar,image/jpg,image/jpeg,image/png,image/gif]',
+				'errors' => [
+					'required' => 'Gambar harus diisi.',
+					'max_size' => 'Ukuran gambar maksimal 2MB.',
+					'is_image' => 'File yang diunggah harus berupa gambar.',
+					'mime_in' => 'Format gambar yang diizinkan adalah JPG, JPEG, PNG, dan GIF.'
+				]
+			],
+		];
+	}
+
+	public function rulesUpdate()
+	{
+		return [
+			'judul' => 'required',
+			'kategori' => 'required',
+			'keterangan' => 'required',
+			// 'gambar' => [
+			// 	'rules' => 'max_size[gambar,2048]|is_image[gambar]|mime_in[gambar,image/jpg,image/jpeg,image/png,image/gif]',
+			// 	'errors' => [
+			// 		'max_size' => 'Ukuran gambar maksimal 2MB.',
+			// 		'is_image' => 'File yang diunggah harus berupa gambar.',
+			// 		'mime_in' => 'Format gambar yang diizinkan adalah JPG, JPEG, PNG, dan GIF.'
+			// 	]
+			// ],
 		];
 	}
 
@@ -39,7 +64,7 @@ class BeritaModel extends Model
 		$data["kategori_id"] = $data["kategori"];
 		$data["image"] = $data["gambar"];
 		unset($data["kategori"]);
-		unset($data["image"]);
+		unset($data["gambar"]);
 		try {
 			return  $this->insert($data);
 			return true;
@@ -50,11 +75,14 @@ class BeritaModel extends Model
 	public function updateData($id, $data)
 	{
 		$data["kategori_id"] = $data["kategori"];
-		$data["image"] = $data["gambar"];
+		if ($data["gambar"]) {
+			$data["image"] = $data["gambar"];
+		}
 		unset($data["kategori"]);
-		unset($data["image"]);
+		unset($data["gambar"]);
+
 		try {
-			return  $this->where("id", $id)->update($data);
+			return  $this->update($id, $data);
 			return true;
 		} catch (\Throwable $th) {
 			return false;
@@ -63,6 +91,6 @@ class BeritaModel extends Model
 
 	public function deleteData($id)
 	{
-		return  $this->where("id", $id)->delete();
+		return  $this->delete($id);
 	}
 }

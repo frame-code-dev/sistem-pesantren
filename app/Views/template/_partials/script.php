@@ -27,7 +27,7 @@
 	});
 	setTimeout(() => {
 		$(".tox-promotion").hide();
-	}, 300);
+	}, 500);
 </script>
 <script>
 	function deleteConfirm(event) {

@@ -45,7 +45,7 @@
 					<?php foreach ($data as $d) : ?>
 						<tr>
 							<td scope="row"><?= $i++ ?></td>
-							<td><?= $d["image"] ?></td>
+							<td><img src="<?= base_url("assets/") . $d["image"] ?>" class="rounded-md w-24" alt=""></td>
 							<td><?= $d["judul"] ?></td>
 							<td><?= $d["keterangan"] ?></td>
 							<td><?= $d["kategori"] ?></td>
