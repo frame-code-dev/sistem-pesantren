@@ -32,10 +32,12 @@ class VisiMisi extends BaseController
 	{
 		$konten = $this->request->getPost("konten");
 		if ($this->visiMisi->store($konten)) {
-			session()->setFlashdata('message_visiMisi_success', 'Berhasil menyimpan visi misi');
+			session()->setFlashdata("status_success", true);
+			session()->setFlashdata('message', 'Berhasil menyimpan visi misi.');
 			return redirect()->to("/dashboard/visi-misi");
 		}
-		session()->setFlashdata('message_visiMisi_error', 'Gagal menyimpan visi misi');
+		session()->setFlashdata("status_error", true);
+		session()->setFlashdata('error', 'Gagal menyimpan visi misi.');
 		return redirect()->back();
 	}
 

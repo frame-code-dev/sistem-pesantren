@@ -63,6 +63,10 @@ $routes->group('dashboard', function ($routes) {
     //visi-misi
     $routes->get('visi-misi', "VisiMisi::index");
     $routes->post('visi-misi', "VisiMisi::store");
+
+    //peraturan
+    $routes->get('peraturan', "Peraturan::index");
+    $routes->post('peraturan/store', "Peraturan::store");
 });
 
 

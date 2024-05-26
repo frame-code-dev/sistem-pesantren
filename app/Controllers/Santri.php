@@ -203,11 +203,11 @@ class Santri extends BaseController
 			return redirect()->to('dashboard/alumni');
 		} catch (\Throwable $th) {
 			session()->setFlashdata("status_error", true);
-			session()->setFlashdata('error', 'Data alumni berhasil ditambah, <br>' . $th->getMessage());
+			session()->setFlashdata('error', 'Data alumni berhasil gagal ditambah, <br>' . $th->getMessage());
 			return redirect()->back();
 		} catch (\Exception $e) {
 			session()->setFlashdata("status_error", true);
-			session()->setFlashdata('error', 'Data alumni berhasil ditambah, <br>' . $e->getMessage());
+			session()->setFlashdata('error', 'Data alumni berhasil gagal ditambah, <br>' . $e->getMessage());
 			return redirect()->back();
 		}
 	}
@@ -226,11 +226,11 @@ class Santri extends BaseController
 			return redirect()->to('dashboard/alumni');
 		} catch (\Throwable $th) {	
 			session()->setFlashdata("status_error", true);
-			session()->setFlashdata('error', 'Data santri diaktifkan kembali, <br>' . $th->getMessage());
+			session()->setFlashdata('error', 'Data santri gagal diaktifkan kembali, <br>' . $th->getMessage());
 			return redirect()->to('dashboard/alumni');
 		} catch (\Exception $e) {
 			session()->setFlashdata("status_error", true);
-			session()->setFlashdata('error', 'Data santri diaktifkan kembali, <br>' . $e->getMessage());
+			session()->setFlashdata('error', 'Data santri gagal diaktifkan kembali, <br>' . $e->getMessage());
 			return redirect()->to('dashboard/alumni');
 		}
 	}
