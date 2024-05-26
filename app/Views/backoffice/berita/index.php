@@ -47,7 +47,7 @@
 							<td scope="row"><?= $i++ ?></td>
 							<td><img src="<?= base_url("assets/") . $d["image"] ?>" class="rounded-md w-24" alt=""></td>
 							<td><?= $d["judul"] ?></td>
-							<td><?= $d["keterangan"] ?></td>
+							<td><?= substr($d["keterangan"], 0, 100) ?></td>
 							<td><?= $d["kategori"] ?></td>
 							<td>
 								<div class="flex gap-2">

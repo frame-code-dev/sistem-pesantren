@@ -76,6 +76,7 @@ class BeritaModel extends Model
 	{
 		$data["kategori_id"] = $data["kategori"];
 		if ($data["gambar"]) {
+			unlink("../public/assets/" . $this->find($id)["image"]);
 			$data["image"] = $data["gambar"];
 		}
 		unset($data["kategori"]);
@@ -91,9 +92,7 @@ class BeritaModel extends Model
 
 	public function deleteData($id)
 	{
-
-
-		unlink("assets/" . $this->find($id)->image);
+		unlink("../public/assets/" . $this->find($id)["image"]);
 		return  $this->delete($id);
 	}
 }

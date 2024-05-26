@@ -119,22 +119,23 @@ class berita extends BaseController
 	{
 		try {
 
-			if ($this->berita->delete($id)) {
+			if ($this->berita->deleteData($id)) {
 				session()->setFlashdata("status_success", true);
 				session()->setFlashdata('message', 'Berita berhasil dihapus');
 				return redirect()->to('dashboard/berita');
 			} else {
 				session()->setFlashdata("status_error", true);
-				session()->setFlashdata('error', 'berita gagal dihapus');
+				session()->setFlashdata('error', 'Berita gagal dihapus');
 				return redirect()->back();
 			}
 		} catch (\Throwable $th) {
-			//handle error contrain table
+			session()->setFlashdata("status_error", true);
 			if ($th->getCode() == 1451) {
-				session()->setFlashdata("status_error", true);
-				session()->setFlashdata('error', 'Kategori gagal dihapus, Data sedang digunakan di bagian lain sistem');
-				return redirect()->to('dashboard/kategori');
+				session()->setFlashdata('error', 'Berita gagal dihapus, Data sedang digunakan di bagian lain sistem');
+				return redirect()->to('dashboard/berita');
 			}
+			session()->setFlashdata('error', 'Berita gagal dihapus');
+			return redirect()->to('dashboard/berita');
 		}
 	}
 
