@@ -7,6 +7,29 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+	// validasi telepon
+	document.getElementById('telepon').addEventListener('input', function(e) {
+		this.value = this.value.replace(/\D/g, '');
+
+		// Limit the length to 13 digits
+		if (this.value.length > 13) {
+			this.value = this.value.slice(0, 13);
+		}
+	});
+
+	document.getElementById('telepon').addEventListener('keydown', function(e) {
+		// Allow control keys such as backspace, delete, arrow keys, etc.
+		const controlKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab', 'Escape'];
+		if (controlKeys.includes(e.key)) {
+			return;
+		}
+
+		// Prevent default action if the key is not a digit or if the length exceeds 13
+		if (!/^\d$/.test(e.key) || this.value.length >= 13) {
+			e.preventDefault();
+		}
+	});
+
 	function deleteConfirm(event) {
 		console.log(event);
 		Swal.fire({
@@ -25,9 +48,9 @@
 	}
 </script>
 <?php
-	$session = \Config\Services::session();
-	$status_error = $session->get('status_error');
-	$status_success = $session->get('status_success');
+$session = \Config\Services::session();
+$status_error = $session->get('status_error');
+$status_success = $session->get('status_success');
 ?>
 <?php if ($status_success) : ?>
 	<script>
@@ -67,7 +90,7 @@
 
 		Toast.fire({
 			icon: 'error',
-			title: '<?= $this->session->flashdata('error') ?>'
+			title: '<?= $session->getFlashdata('error') ?>'
 		})
 	</script>
 <?php endif ?>
