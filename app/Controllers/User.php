@@ -9,7 +9,7 @@ class User extends BaseController
 	{
 
 		if (!session()->get("user_id")) {
-			redirect('auth/login');
+			redirect('/');
 		}
 	}
 
@@ -19,6 +19,7 @@ class User extends BaseController
 	}
 	public function create()
 	{
+		return view("backoffice/user/create");
 	}
 
 	public function store()

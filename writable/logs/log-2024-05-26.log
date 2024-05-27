@@ -1,0 +1,182 @@
+CRITICAL - 2024-05-26 00:08:26 --> Error: Class "App\Models\BeritaModel" not found
+[Method: GET, Route: dashboard/berita]
+in APPPATH\Controllers\Berita.php on line 14.
+ 1 SYSTEMPATH\CodeIgniter.php(903): App\Controllers\berita->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(500): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')
+CRITICAL - 2024-05-26 00:08:56 --> Error: Class "App\Models\BeritaModel" not found
+[Method: GET, Route: dashboard/berita]
+in APPPATH\Controllers\Berita.php on line 14.
+ 1 SYSTEMPATH\CodeIgniter.php(903): App\Controllers\berita->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(500): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')
+ERROR - 2024-05-26 00:09:14 --> mysqli_sql_exception: Table 'db_pesantren.berita' doesn't exist in D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php:308
+Stack trace:
+#0 D:\MY PROJECT\sistem-pesantren\system\Database\MySQLi\Connection.php(308): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(722): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\MY PROJECT\sistem-pesantren\system\Database\BaseConnection.php(636): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\MY PROJECT\sistem-pesantren\system\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\MY PROJECT\sistem-pesantren\system\Model.php(275): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\MY PROJECT\sistem-pesantren\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\MY PROJECT\sistem-pesantren\app\Models\BeritaModel.php(27): CodeIgniter\BaseModel->findAll()
+#7 D:\MY PROJECT\sistem-pesantren\app\Controllers\Berita.php(24): App\Models\BeritaModel->getAll()
+#8 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(933): App\Controllers\berita->index()
+#9 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\berita))
+#10 D:\MY PROJECT\sistem-pesantren\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\MY PROJECT\sistem-pesantren\system\Boot.php(312): CodeIgniter\CodeIgniter->run()
+#12 D:\MY PROJECT\sistem-pesantren\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\MY PROJECT\sistem-pesantren\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 D:\MY PROJECT\sistem-pesantren\system\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\s...')
+#15 {main}
+CRITICAL - 2024-05-26 00:09:14 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'db_pesantren.berita' doesn't exist
+[Method: GET, Route: dashboard/berita]
+in SYSTEMPATH\Database\BaseConnection.php on line 676.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `berita`
+ORDER BY `id` DESC', [], false)
+ 2 SYSTEMPATH\Model.php(275): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\BeritaModel.php(27): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\Berita.php(24): App\Models\BeritaModel->getAll()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\berita->index()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\berita))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')
+CRITICAL - 2024-05-26 00:09:14 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'db_pesantren.berita' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 313.
+ 1 SYSTEMPATH\Database\BaseConnection.php(722): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `berita`
+ORDER BY `id` DESC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(636): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `berita`
+ORDER BY `id` DESC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `berita`
+ORDER BY `id` DESC', [], false)
+ 4 SYSTEMPATH\Model.php(275): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\BeritaModel.php(27): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\Berita.php(24): App\Models\BeritaModel->getAll()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\berita->index()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\berita))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')
+CRITICAL - 2024-05-26 00:09:14 --> [Caused by] mysqli_sql_exception: Table 'db_pesantren.berita' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 308.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(308): mysqli->query('SELECT *
+FROM `berita`
+ORDER BY `id` DESC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(722): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `berita`
+ORDER BY `id` DESC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(636): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `berita`
+ORDER BY `id` DESC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `berita`
+ORDER BY `id` DESC', [], false)
+ 5 SYSTEMPATH\Model.php(275): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\BeritaModel.php(27): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\Berita.php(24): App\Models\BeritaModel->getAll()
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\berita->index()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\berita))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')
+ERROR - 2024-05-26 14:16:04 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'admin'@'localhost' (using password: YES) in D:\Coding\sistem-pesantren\system\Database\MySQLi\Connection.php:187
+Stack trace:
+#0 D:\Coding\sistem-pesantren\system\Database\MySQLi\Connection.php(187): mysqli->real_connect('localhost', 'admin', '101010', 'db_pesantren', 3306, '', 0)
+#1 D:\Coding\sistem-pesantren\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 D:\Coding\sistem-pesantren\system\Database\BaseConnection.php(604): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\Coding\sistem-pesantren\system\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\Coding\sistem-pesantren\app\Models\Santri_model.php(33): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\Coding\sistem-pesantren\app\Controllers\Santri.php(27): App\Models\Santri_model->getSantriAktif()
+#6 D:\Coding\sistem-pesantren\system\CodeIgniter.php(933): App\Controllers\Santri->index()
+#7 D:\Coding\sistem-pesantren\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Santri))
+#8 D:\Coding\sistem-pesantren\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\Coding\sistem-pesantren\system\Boot.php(312): CodeIgniter\CodeIgniter->run()
+#10 D:\Coding\sistem-pesantren\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 D:\Coding\sistem-pesantren\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 D:\Coding\sistem-pesantren\system\Commands\Server\rewrite.php(49): require_once('D:\\Coding\\siste...')
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in D:\Coding\sistem-pesantren\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 D:\Coding\sistem-pesantren\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 D:\Coding\sistem-pesantren\system\Database\BaseConnection.php(604): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\Coding\sistem-pesantren\system\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 D:\Coding\sistem-pesantren\app\Models\Santri_model.php(33): CodeIgniter\Database\BaseBuilder->get()
+#4 D:\Coding\sistem-pesantren\app\Controllers\Santri.php(27): App\Models\Santri_model->getSantriAktif()
+#5 D:\Coding\sistem-pesantren\system\CodeIgniter.php(933): App\Controllers\Santri->index()
+#6 D:\Coding\sistem-pesantren\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Santri))
+#7 D:\Coding\sistem-pesantren\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\Coding\sistem-pesantren\system\Boot.php(312): CodeIgniter\CodeIgniter->run()
+#9 D:\Coding\sistem-pesantren\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 D:\Coding\sistem-pesantren\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 D:\Coding\sistem-pesantren\system\Commands\Server\rewrite.php(49): require_once('D:\\Coding\\siste...')
+#12 {main}
+CRITICAL - 2024-05-26 14:16:04 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+[Method: GET, Route: dashboard/santri]
+in SYSTEMPATH\Database\BaseConnection.php on line 457.
+ 1 SYSTEMPATH\Database\BaseConnection.php(604): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1629): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `santri`
+WHERE `status_santri` = :status_santri:', [...], false)
+ 3 APPPATH\Models\Santri_model.php(33): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH\Controllers\Santri.php(27): App\Models\Santri_model->getSantriAktif()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Santri->index()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Santri))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\Coding\\sistem-pesantren\\public\\index.php')
+CRITICAL - 2024-05-26 14:59:26 --> ErrorException: include(D:\Coding\sistem-pesantren\app\Views/backoffice/alumni/modal.php): Failed to open stream: No such file or directory
+[Method: GET, Route: dashboard/alumni]
+in APPPATH\Views\backoffice\alumni\index.php on line 3.
+ 1 APPPATH\Views\backoffice\alumni\index.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(D:\\Coding\\sistem-pesantren\\app\\Views/backoffice/alumni/modal.php): Failed to open stream: No such file or directory', 'D:\\Coding\\sistem-pesantren\\app\\Views\\backoffice\\alumni\\index.php', 3)
+ 2 APPPATH\Views\backoffice\alumni\index.php(3): include()
+ 3 SYSTEMPATH\View\View.php(234): include('D:\\Coding\\sistem-pesantren\\app\\Views\\backoffice\\alumni\\index.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('backoffice/alumni/index', [], true)
+ 6 APPPATH\Controllers\Santri.php(181): view('backoffice/alumni/index', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Santri->alumni()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Santri))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\Coding\\sistem-pesantren\\public\\index.php')
+CRITICAL - 2024-05-26 15:01:17 --> ErrorException: Attempt to read property "nis" on string
+[Method: GET, Route: dashboard/alumni]
+in APPPATH\Views\backoffice\alumni\index.php on line 103.
+ 1 APPPATH\Views\backoffice\alumni\index.php(103): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "nis" on string', 'D:\\Coding\\sistem-pesantren\\app\\Views\\backoffice\\alumni\\index.php', 103)
+ 2 SYSTEMPATH\View\View.php(234): include('D:\\Coding\\sistem-pesantren\\app\\Views\\backoffice\\alumni\\index.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('backoffice/alumni/index', [], true)
+ 5 APPPATH\Controllers\Santri.php(181): view('backoffice/alumni/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Santri->alumni()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Santri))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\Coding\\sistem-pesantren\\public\\index.php')

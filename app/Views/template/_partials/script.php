@@ -6,16 +6,83 @@
 <script src="https://cdn.datatables.net/2.0.1/js/dataTables.tailwindcss.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- select 2 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<!-- <script src="editor/js/tinymce/tinymce.min.js"></script> -->
+<script src="<?= base_url('editor/js/tinymce/tinymce.min.js') ?>"></script>
+
+<!-- text editor code -->
 <script>
+	tinymce.init({
+		selector: 'textarea#editor',
+		height: 500,
+		plugins: [
+			'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+			'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+			'insertdatetime', 'media', 'table', 'help', 'wordcount'
+		],
+		toolbar: 'undo redo | blocks | ' +
+			'bold italic backcolor | alignleft aligncenter ' +
+			'alignright alignjustify | bullist numlist outdent indent | ' +
+			'removeformat | help',
+		content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+	});
+	setTimeout(() => {
+		$(".tox-promotion").hide();
+	}, 500);
+</script>
+<script>
+	$(document).ready(function() {
+		$('.select2').select2();
+	});
+	// validasi telepon
+	document.getElementById('telepon').addEventListener('input', function(e) {
+		this.value = this.value.replace(/\D/g, '');
+
+		// Limit the length to 13 digits
+		if (this.value.length > 13) {
+			this.value = this.value.slice(0, 13);
+		}
+	});
+
+	document.getElementById('telepon').addEventListener('keydown', function(e) {
+		// Allow control keys such as backspace, delete, arrow keys, etc.
+		const controlKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab', 'Escape'];
+		if (controlKeys.includes(e.key)) {
+			return;
+		}
+
+		// Prevent default action if the key is not a digit or if the length exceeds 13
+		if (!/^\d$/.test(e.key) || this.value.length >= 13) {
+			e.preventDefault();
+		}
+	});
+
 	function deleteConfirm(event) {
 		console.log(event);
 		Swal.fire({
-			title: 'Delete Confirmation!',
-			text: 'Are you sure to delete the item?',
+			title: 'Konfirmasi hapus data!',
+			text: 'Apakah anda yakin ingin menghapus data ini?',
 			icon: 'warning',
 			showCancelButton: true,
-			cancelButtonText: 'No',
-			confirmButtonText: 'Yes Delete',
+			cancelButtonText: 'Batal',
+			confirmButtonText: 'Hapus',
+			confirmButtonColor: 'red'
+		}).then(dialog => {
+			if (dialog.isConfirmed) {
+				window.location.assign(event);
+			}
+		});
+	}
+	function updateAlumni(event) {
+		console.log(event);
+		Swal.fire({
+			title: 'Konfirmasi aktifkan santri!',
+			text: 'Apakah anda yakin mengaktifkan santri ini?',
+			icon: 'warning',
+			showCancelButton: true,
+			cancelButtonText: 'Batal',
+			confirmButtonText: 'Aktifkan',
 			confirmButtonColor: 'red'
 		}).then(dialog => {
 			if (dialog.isConfirmed) {
@@ -25,9 +92,9 @@
 	}
 </script>
 <?php
-	$session = \Config\Services::session();
-	$status_error = $session->get('status_error');
-	$status_success = $session->get('status_success');
+$session = \Config\Services::session();
+$status_error = $session->get('status_error');
+$status_success = $session->get('status_success');
 ?>
 <?php if ($status_success) : ?>
 	<script>
@@ -67,7 +134,7 @@
 
 		Toast.fire({
 			icon: 'error',
-			title: '<?= $this->session->flashdata('error') ?>'
+			title: '<?= $session->getFlashdata('error') ?>'
 		})
 	</script>
 <?php endif ?>
