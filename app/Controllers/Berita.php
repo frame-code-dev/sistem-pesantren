@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Models\BeritaModel;
 use App\Models\KategoriModel;
 
-class berita extends BaseController
+class Berita extends BaseController
 {
 	protected $helpers = ['form'];
 	protected $berita;
@@ -57,7 +57,6 @@ class berita extends BaseController
 
 
 
-		$data["gambar"] = $this->storeImage($gambar);
 
 		if ($this->berita->store($data)) {
 			session()->setFlashdata("status_success", true);
@@ -66,7 +65,7 @@ class berita extends BaseController
 		} else {
 			session()->setFlashdata("status_error", true);
 			session()->setFlashdata('error', 'Berita gagal ditambahkan');
-			return redirect()->back();
+			return redirect()->back()->withInput();
 		}
 	}
 
@@ -100,9 +99,7 @@ class berita extends BaseController
 		if (!$valid) {
 			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
 		}
-		if ($gambar) {
-			$data["gambar"] = $this->storeImage($gambar);
-		}
+
 
 		if ($this->berita->updateData($id, $data)) {
 			session()->setFlashdata("status_success", true);
@@ -112,7 +109,7 @@ class berita extends BaseController
 
 			session()->setFlashdata("status_error", true);
 			session()->setFlashdata('error', 'Berita gagal diubah');
-			return redirect()->back();
+			return redirect()->back()->withInput();
 		}
 	}
 	public function delete($id = null)
@@ -136,18 +133,6 @@ class berita extends BaseController
 			}
 			session()->setFlashdata('error', 'Berita gagal dihapus');
 			return redirect()->to('dashboard/berita');
-		}
-	}
-
-
-	public function storeImage($image)
-	{
-		if ($image->isValid() && !$image->hasMoved()) {
-
-			$nama = $image->getRandomName();
-			$image->move("../public/assets", $nama);
-
-			return $nama;
 		}
 	}
 }

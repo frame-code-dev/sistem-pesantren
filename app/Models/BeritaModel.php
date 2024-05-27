@@ -4,6 +4,8 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
+use function PHPUnit\Framework\fileExists;
+
 class BeritaModel extends Model
 {
 	protected $table = "berita_acara";
@@ -62,13 +64,17 @@ class BeritaModel extends Model
 	public function store($data)
 	{
 		$data["kategori_id"] = $data["kategori"];
-		$data["image"] = $data["gambar"];
+		$nameFile = $data["gambar"]->getRandomName();
+		$data["image"] = $nameFile;
+		$imageFile  = $data["gambar"];
 		unset($data["kategori"]);
 		unset($data["gambar"]);
 		try {
-			return  $this->insert($data);
+			$id = $this->insert($data);
+			$this->storeImage($id, $nameFile, $imageFile);
 			return true;
 		} catch (\Throwable $th) {
+
 			return false;
 		}
 	}
@@ -76,8 +82,13 @@ class BeritaModel extends Model
 	{
 		$data["kategori_id"] = $data["kategori"];
 		if ($data["gambar"]) {
-			unlink("../public/assets/" . $this->find($id)["image"]);
-			$data["image"] = $data["gambar"];
+			$path = "../public/upload/$id/" . $this->find($id)["image"];
+			if (file_exists($path)) {
+				unlink($path);
+			}
+			$nameFile = $data["gambar"]->getRandomName();
+			$data["image"] = $nameFile;
+			$this->storeImage($id, $nameFile, $data["gambar"]);
 		}
 		unset($data["kategori"]);
 		unset($data["gambar"]);
@@ -92,7 +103,15 @@ class BeritaModel extends Model
 
 	public function deleteData($id)
 	{
-		unlink("../public/assets/" . $this->find($id)["image"]);
+		$path = "../public/upload/$id/" . $this->find($id)["image"];
+		if (file_exists($path)) {
+			unlink($path);
+		}
 		return  $this->delete($id);
+	}
+
+	public function storeImage($id, $name, $image)
+	{
+		$image->move("../public/upload/$id/", $name);
 	}
 }

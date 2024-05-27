@@ -34,7 +34,22 @@
 <script>
 	$(document).ready(function() {
 		$('.select2').select2();
+
+		$('.limit-size-2').on('change', function() {
+			var size = (this.files[0].size / 1024 / 1024).toFixed(2)
+			if (size > 2) {
+				errorImage('Ukuran maksimal berkas adalah 2 MB');
+			}
+		})
+
+		$(".only-image").on('change', function() {
+			if (!this.files[0].type.includes('image')) {
+				errorImage('Hanya boleh memilih file berupa gambar(.jpg, .jpeg, .png, .webp)');
+			}
+		})
 	});
+
+
 	// validasi telepon
 	document.getElementById('telepon').addEventListener('input', function(e) {
 		this.value = this.value.replace(/\D/g, '');
@@ -74,6 +89,7 @@
 			}
 		});
 	}
+
 	function updateAlumni(event) {
 		console.log(event);
 		Swal.fire({
@@ -89,6 +105,25 @@
 				window.location.assign(event);
 			}
 		});
+	}
+
+	function errorImage(message) {
+		var Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		Toast.fire({
+			icon: 'error',
+			title: message
+		})
 	}
 </script>
 <?php

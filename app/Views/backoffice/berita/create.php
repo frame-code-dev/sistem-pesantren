@@ -73,7 +73,8 @@
 					</div>
 					<div class="col-span-2">
 						<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Gambar</label>
-						<input required name="gambar" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+
+						<input accept="image/png, image/jpeg, image/jpg, image/webp" required name="gambar" class="block w-full text-sm text-gray-900 border only-image limit-size-2 border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
 						<?php if (session("validation.gambar")) : ?>
 							<div class="text-red-500 text-sm">
 								<?= session("validation.gambar") ?>
@@ -105,4 +106,8 @@
 		</div>
 	</section>
 </div>
+
+
+
+
 <?= $this->endsection() ?>
