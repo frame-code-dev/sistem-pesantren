@@ -61,7 +61,7 @@ $routes->group('dashboard', function ($routes) {
     $routes->get('berita/delete/(:any)', "Berita::delete/$1");
     
     //pendaftaran
-    $routes->get('berita', "Berita::index");
+    $routes->get('pendaftaran', "Transaksi::index");
 
     //visi-misi
     $routes->get('visi-misi', "VisiMisi::index");

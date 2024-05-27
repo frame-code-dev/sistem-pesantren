@@ -104,7 +104,7 @@
 				</button>
 				<ul id="keuangan" class=" py-2 space-y-2 bg-gray-100 rounded mt-3 hidden">
 					<li class="">
-						<a href="<?= base_url('dashboard/user') ?>" class="text-sm flex items-center w-full p-2 text-gray-900 transition duration-75 pl-4 group hover:bg-gray-200 dark:text-gray-900 dark:hover:bg-gray-700">
+						<a href="<?= base_url('dashboard/pendaftaran') ?>" class="text-sm flex items-center w-full p-2 text-gray-900 transition duration-75 pl-4 group hover:bg-gray-200 dark:text-gray-900 dark:hover:bg-gray-700">
 							<svg class="w-4 h-4 text-gray-900 dark:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
 								<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m10 16 4-4-4-4" />
 							</svg>
