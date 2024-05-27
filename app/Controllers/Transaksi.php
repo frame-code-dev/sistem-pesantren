@@ -19,7 +19,8 @@ class Transaksi extends BaseController
 		}
 	}
 
-	public function replaceRupiah($rupiah) {
+	public function replaceRupiah($rupiah)
+	{
 		$nominal = str_replace(['Rp.', '.', ' '], '', $rupiah);
 		return $nominal;
 	}

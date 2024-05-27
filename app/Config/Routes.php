@@ -30,7 +30,7 @@ $routes->group('dashboard', function ($routes) {
     $routes->get('santri/edit/(:any)', "Santri::edit/$1");
     $routes->post('santri/update/(:any)', "Santri::update/$1");
     $routes->get('santri/delete/(:any)', "Santri::delete/$1");
-    
+
     // alumni
     $routes->get('alumni', "Santri::alumni");
     $routes->post('alumni/add', "Santri::addAlumni");
@@ -59,7 +59,7 @@ $routes->group('dashboard', function ($routes) {
     $routes->get('berita/edit/(:any)', "Berita::edit/$1");
     $routes->post('berita/update/(:any)', "Berita::update/$1");
     $routes->get('berita/delete/(:any)', "Berita::delete/$1");
-    
+
     //pendaftaran
     $routes->get('pendaftaran', "Transaksi::index");
 

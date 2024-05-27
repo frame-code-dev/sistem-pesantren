@@ -82,7 +82,7 @@ class Berita extends BaseController
 	public function update($id = null)
 	{
 		$valid = $this->validate($this->berita->rulesUpdate());
-
+		$this->validateCSRF();
 		$judul = $this->request->getPost("judul");
 		$kategori = $this->request->getPost("kategori");
 		$gambar = $this->request->getFile("gambar");
@@ -131,6 +131,7 @@ class Berita extends BaseController
 				session()->setFlashdata('error', 'Berita gagal dihapus, Data sedang digunakan di bagian lain sistem');
 				return redirect()->to('dashboard/berita');
 			}
+
 			session()->setFlashdata('error', 'Berita gagal dihapus');
 			return redirect()->to('dashboard/berita');
 		}

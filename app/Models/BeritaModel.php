@@ -82,9 +82,12 @@ class BeritaModel extends Model
 	{
 		$data["kategori_id"] = $data["kategori"];
 		if ($data["gambar"]) {
-			$path = "../public/upload/$id/" . $this->find($id)["image"];
-			if (file_exists($path)) {
-				unlink($path);
+			$pathDir = "../public/upload/$id/";
+			$pathFile = "../public/upload/$id/" . $this->find($id)["image"];
+			if (file_exists($pathFile)) {
+				unlink($pathDir . "index.html");
+				unlink($pathFile);
+				rmdir($pathDir);
 			}
 			$nameFile = $data["gambar"]->getRandomName();
 			$data["image"] = $nameFile;
@@ -103,9 +106,12 @@ class BeritaModel extends Model
 
 	public function deleteData($id)
 	{
-		$path = "../public/upload/$id/" . $this->find($id)["image"];
-		if (file_exists($path)) {
-			unlink($path);
+		$pathDir = "../public/upload/$id/";
+		$pathFile = "../public/upload/$id/" . $this->find($id)["image"];
+		if (file_exists($pathFile)) {
+			unlink($pathFile);
+			unlink($pathDir . "index.html");
+			rmdir($pathDir);
 		}
 		return  $this->delete($id);
 	}
