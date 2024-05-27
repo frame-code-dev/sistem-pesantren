@@ -59,6 +59,9 @@ $routes->group('dashboard', function ($routes) {
     $routes->get('berita/edit/(:any)', "Berita::edit/$1");
     $routes->post('berita/update/(:any)', "Berita::update/$1");
     $routes->get('berita/delete/(:any)', "Berita::delete/$1");
+    
+    //pendaftaran
+    $routes->get('berita', "Berita::index");
 
     //visi-misi
     $routes->get('visi-misi', "VisiMisi::index");
