@@ -2,16 +2,16 @@
 
 namespace App\Controllers;
 
-use App\Models\KategoriModel;
+use App\Models\TransaksiModel;
 
 class Transaksi extends BaseController
 {
 	protected $helpers = ['form'];
-	protected $kategori;
+	protected $transaksi;
 	protected $validation;
 	public function __construct()
 	{
-		$this->kategori = new KategoriModel();
+		$this->transaksi = new TransaksiModel();
 		$this->validation = \Config\Services::validation();
 
 		if (!session()->get("user_id")) {
@@ -19,17 +19,24 @@ class Transaksi extends BaseController
 		}
 	}
 
+	public function replaceRupiah($rupiah) {
+		$nominal = str_replace(['Rp.', '.', ' '], '', $rupiah);
+		return $nominal;
+	}
+
 	public function index()
 	{
-		$data["data"] = $this->kategori->getAll();
-		return view("backoffice/kategori/index", $data);
+		$data["tittle"] = "Pemasukan";
+		$data["curennt_page"] = "Pendaftaran";
+		$data["data"] = $this->transaksi->getPendaftaran();
+		return view("backoffice/pendaftaran/index", $data);
 	}
 	public function create()
 	{
-		$data["title"] = "Tambah Kategori";
-		$data["current_page"] = "Kategori";
+		$data["title"] = "Tambah Pendaftaran";
+		$data["current_page"] = "Pendaftaran";
 
-		return view("backoffice/kategori/create", $data);
+		return view("backoffice/pendafataran/create", $data);
 	}
 
 	public function store()
