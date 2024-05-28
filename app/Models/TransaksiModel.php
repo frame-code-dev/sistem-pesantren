@@ -6,11 +6,27 @@ use CodeIgniter\Model;
 
 class TransaksiModel extends Model
 {
-	protected $table = "transaksi";
-	protected $primaryKey = "id";
-	protected $useAutoIncrement = true;
-	protected $allowedFields = [];
+	protected $table = 'transaksi';
+	protected $allowedFields = [
+				'kategori',
+				'santri_id', 
+				'nominal', 
+				'no_transaksi',
+				'jenis_id', 
+				'tanggal_bayar', 
+				'bulan', 
+				'tahun', 
+				'user_id', 
+				'created_at', 
+				'updated_at'
+			];
 
+	public function rulesPendaftaran(){
+		return [
+			'tanggal_bayar' => 'required',
+			'nominal' => 'required',
+		];
+	}
 
 	public function getPendaftaran()
 	{
@@ -19,13 +35,18 @@ class TransaksiModel extends Model
 			->join("santri", "transaksi.santri_id = santri.id", "array")
 			->where("transaksi.jenis_id", 1)
 			->where("transaksi.kategori", "pemasukan")
-			->findAll();
+			->get();
 	}
+
+	public function storePendaftaran($data){
+		return  $this->insert($data);
+	}
+
 	public function detailTransaksi($id)
 	{
-		return  $this->where("id", $id)->first();
+		return  $this->where("id", $id)->get()->getRow();
 	}
-	private function generateKode()
+	public function generateKode()
 	{
 		$prefix = 'KT';
 		$date = date('dmy');

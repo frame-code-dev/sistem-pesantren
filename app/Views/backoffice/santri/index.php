@@ -47,6 +47,8 @@
                         } else {
                             $jenis_kelamin = "Perempuan";
                         }
+                        $statusSantri = str_replace('_', ' ', $row['status_santri']); 
+                        $statusSantri = ucwords($statusSantri);
                         ?>
                         <tr>
                             <td class="px-4 py-3"><?= $no++ ?></td>
@@ -54,7 +56,7 @@
                             <td class="px-4 py-3"><?= esc($row['nama']) ?></td>
                             <td class="px-4 py-3"><?= $jenis_kelamin ?></td>
                             <td class="px-4 py-3"><?= esc($row['telepon']) ?></td>
-                            <td class="px-4 py-3"><?= esc($row['status_santri']) ?></td>
+                            <td class="px-4 py-3"><?= esc($statusSantri) ?></td>
                             <td class="px-4 py-3"><?= esc($row['tanggal_masuk']) ?></td>
                             <td class="px-4 py-3">
                                 <div class="flex gap-2">

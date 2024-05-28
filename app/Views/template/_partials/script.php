@@ -33,6 +33,10 @@
 </script>
 <script>
 	$(document).ready(function() {
+		$('form').on('submit', function(event) {
+			$('#loading-modal').removeClass('hidden');
+		});
+
 		$('.select2').select2();
 
 		$('.limit-size-2').on('change', function() {
