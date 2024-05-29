@@ -44,9 +44,18 @@ class Transaksi extends BaseController
 	}
 	public function create()
 	{
+		$status_santri = 'belum_registrasi';
+		$countsantri = $this->santri->countSantri($status_santri);
+		if ($countsantri == 0) {
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'Tidak ada santri yang belum membayar registrasi, Silahkan tambahkan santri terlebih dahulu.');
+			return redirect()->to('dashboard/pendaftaran');
+		}
+
 		$data["title"] = "Pemasukan";
 		$data["current_page"] = "Pendaftaran";
 		$data["santri"] = $this->santri->getSantriRegistrasi()->getResultArray();
+
 
 		return view("backoffice/pendaftaran/create", $data);
 	}
@@ -97,12 +106,12 @@ class Transaksi extends BaseController
 			$this->db->transRollback();
 			session()->setFlashdata("status_error", true);
 			session()->setFlashdata('error', 'Pendaftaran gagal, <br>' . $th->getMessage());
-			return redirect()->back();
+			return redirect()->to('dashboard/pendaftaran');
 		} catch (\Exception $e) {
 			$this->db->transRollback();
 			session()->setFlashdata("status_error", true);
 			session()->setFlashdata('error', 'Pendaftaran gagal, <br>' . $e->getMessage());
-			return redirect()->back();
+			return redirect()->to('dashboard/pendaftaran');
 		}
 	}
 
@@ -115,6 +124,13 @@ class Transaksi extends BaseController
 	}
 	public function pendaftaranUlangCreate()
 	{
+		$status_santri = 'belum_registrasi_ulang';
+		$countsantri = $this->santri->countSantri($status_santri);
+		if ($countsantri == 0) {
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'Tidak ada santri yang belum membayar registrasi ulang, Silahkan tambahkan santri terlebih dahulu.');
+			return redirect()->to('dashboard/pendaftaran-ulang');
+		}
 		$data["title"] = "Pemasukan";
 		$data["current_page"] = "Pendaftaran Ulang";
 		$data["santri"] = $this->santri->getSantriRegistrasiUlang()->getResultArray();
@@ -162,17 +178,17 @@ class Transaksi extends BaseController
 
 			session()->setFlashdata("status_success", true);
 			session()->setFlashdata('message', 'Pendaftaran ulang santri berhasil.');
-			return redirect()->to('dashboard/pendaftaran');
+			return redirect()->to('dashboard/pendaftaran-ulang');
 		} catch (\Throwable $th) {
 			$this->db->transRollback();
 			session()->setFlashdata("status_error", true);
 			session()->setFlashdata('error', 'Pendaftaran ulang gagal, <br>' . $th->getMessage());
-			return redirect()->back();
+			return redirect()->to('dashboard/pendaftaran-ulang');
 		} catch (\Exception $e) {
 			$this->db->transRollback();
 			session()->setFlashdata("status_error", true);
 			session()->setFlashdata('error', 'Pendaftaran ulang gagal, <br>' . $e->getMessage());
-			return redirect()->back();
+			return redirect()->to('dashboard/pendaftaran-ulang');
 		}
 	}
 

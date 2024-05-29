@@ -29,14 +29,6 @@ class TransaksiModel extends Model
 			'nominal' => 'required',
 		];
 	}
-	public function rulesPendaftaranUlang()
-	{
-		return [
-			'santri' => 'required',
-			'tanggal_bayar' => 'required',
-			'nominal' => 'required',
-		];
-	}
 	public function rulesBulanan()
 	{
 		return [

@@ -60,6 +60,10 @@ class Santri_model extends Model
         return  $this->db->table($this->_table)->where('status_santri', 'alumni')->get();
     }
 
+    public function countSantri($status){
+        return $this->db->table($this->_table)->where('status_santri', $status)->countAllResults();
+    }
+
     // detail santri by id
     public function getById($id)
     {
