@@ -55,9 +55,6 @@ class Berita extends BaseController
 			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
 		}
 
-
-
-
 		if ($this->berita->store($data)) {
 			session()->setFlashdata("status_success", true);
 			session()->setFlashdata('message', 'Berita berhasil ditambahkan');
@@ -81,8 +78,8 @@ class Berita extends BaseController
 
 	public function update($id = null)
 	{
+
 		$valid = $this->validate($this->berita->rulesUpdate());
-		$this->validateCSRF();
 		$judul = $this->request->getPost("judul");
 		$kategori = $this->request->getPost("kategori");
 		$gambar = $this->request->getFile("gambar");

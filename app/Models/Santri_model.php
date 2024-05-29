@@ -47,7 +47,7 @@ class Santri_model extends Model
     {
         return  $this->db->table($this->_table)->where('status_santri', 'belum_registrasi_ulang')->get();
     }
-    
+
     // semua santri kecuali alumni
     public function getSantriAktif()
     {
@@ -79,11 +79,12 @@ class Santri_model extends Model
     }
 
     // update status santri
-    public function updateStatus($id, $status){
+    public function updateStatus($id, $status)
+    {
         return $this->db->table($this->_table)->where('id', $id)->update([
             'status_santri' => $status
         ]);
-    } 
+    }
 
     public function saveData($data)
     {

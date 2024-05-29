@@ -8,23 +8,33 @@ class TransaksiModel extends Model
 {
 	protected $table = 'transaksi';
 	protected $allowedFields = [
-				'kategori',
-				'santri_id', 
-				'nominal', 
-				'no_transaksi',
-				'jenis_id', 
-				'tanggal_bayar', 
-				'bulan', 
-				'tahun', 
-				'user_id', 
-				'created_at', 
-				'updated_at'
-			];
+		'kategori',
+		'santri_id',
+		'nominal',
+		'no_transaksi',
+		'jenis_id',
+		'tanggal_bayar',
+		'bulan',
+		'tahun',
+		'user_id',
+		'created_at',
+		'updated_at'
+	];
 
-	public function rulesPendaftaran(){
+	public function rulesPendaftaran()
+	{
 		return [
 			'tanggal_bayar' => 'required',
 			'nominal' => 'required',
+		];
+	}
+	public function rulesBulanan()
+	{
+		return [
+			'santri' => 'required',
+			'nominal' => 'required',
+			'bulan' => 'required',
+			'tahun' => 'required',
 		];
 	}
 
@@ -38,13 +48,30 @@ class TransaksiModel extends Model
 			->get();
 	}
 
-	public function storePendaftaran($data){
+	public function storePendaftaran($data)
+	{
 		return  $this->insert($data);
 	}
 
 	public function detailTransaksi($id)
 	{
 		return  $this->where("id", $id)->get()->getRow();
+	}
+
+	public function getBulanan()
+	{
+		return  $this->select("transaksi.*, jenis_transaksi.nama as jenis, santri.nama as santri, santri.nis as nis")
+			->join("jenis_transaksi", "transaksi.jenis_id = jenis_transaksi.id", "array")
+			->join("santri", "transaksi.santri_id = santri.id", "array")
+			->where("transaksi.jenis_id", 3)
+			->where("transaksi.kategori", "pemasukan")
+			->get();
+	}
+
+
+	public function storeBulanan($data)
+	{
+		return  $this->insert($data);
 	}
 	public function generateKode()
 	{
