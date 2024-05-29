@@ -78,7 +78,7 @@ class TransaksiModel extends Model
 		$prefix = 'KT';
 		$date = date('dmy');
 		$kode = $prefix . $date;
-		$countData = $this->like("no_transaksi", "%$kode%")->countAll();
+		$countData = $this->like("no_transaksi", "%$kode%")->countAllResults();
 		$counter = sprintf('%03d', $countData + 1);
 		return $prefix . $date . $counter;
 	}

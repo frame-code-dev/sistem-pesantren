@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Helpers\Helpers;
 use App\Models\Santri_model;
 use App\Models\TransaksiModel;
 
@@ -116,20 +117,18 @@ class Transaksi extends BaseController
 	{
 		$data["title"] = "Tambah Bulanan";
 		$data["current_page"] = "Bulanan";
-		$data["santri"] = $this->santri->getSantriAktif()->getResultArray();
+		$data["santri"] = $this->santri->getSantriAktifAlumni()->getResultArray();
 		return view("backoffice/bulanan/create", $data);
 	}
 
 	public function storeBulanan()
 	{
-		$request = $this->request->getPost();
 		$santriId = $this->request->getPost('santri');
 		$nominal = $this->replaceRupiah($this->request->getPost("nominal"));
 		$bulan = $this->request->getPost("bulan");
 		$tahun = $this->request->getPost("tahun");
 		$userId = session()->get("user_id");
 		$userId = 1;
-		var_dump($nominal);
 		$validasi = [
 			"santri" => $santriId,
 			"bulan" => $bulan,
@@ -139,6 +138,34 @@ class Transaksi extends BaseController
 		$valid = $this->validateData($validasi, $this->transaksi->rulesBulanan());
 		if (!$valid) {
 			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
+		}
+
+
+		//kondisi duplikat data transaksi
+		$santri = $this->transaksi
+			->where("month(tanggal_bayar)", $bulan)
+			->where("year(tanggal_bayar)", $tahun)
+			->where("santri_id", $santriId)
+			->first();
+		if ($santri) {
+			$namaSantri = $santri["nama"];
+			session()->setFlashdata("status_error", true);
+			$bulan = Helpers::getMontName($bulan);
+			session()->setFlashdata('error', "Transaksi bulanan pada bulan $bulan  dan tahun $tahun untuk santri $namaSantri sudah ada");
+			return redirect()->back()->withInput();
+		}
+
+		//kondisi tanggal keluar alumni
+		$santri = $this->transaksi
+
+			->where("santri_id", $santriId)
+			->first();
+		if ($santri) {
+			$namaSantri = $santri["nama"];
+			session()->setFlashdata("status_error", true);
+			$bulan = Helpers::getMontName($bulan);
+			session()->setFlashdata('error', "Transaksi bulanan  untuk santri $namaSantri tidak boleh lebih dari  bulan $bulan   $tahun");
+			return redirect()->back()->withInput();
 		}
 
 		try {

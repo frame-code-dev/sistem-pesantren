@@ -15,7 +15,9 @@ $bulan = array(
 	"November",
 	"Desember"
 );
-$year = date("Y"); ?>
+$year = date("Y");
+$month = date("m");
+?>
 <div class="p-4 mt-14">
 	<section class="p-5 overflow-y-auto">
 		<div class="head lg:flex grid grid-cols-1 justify-between w-full">
@@ -82,7 +84,7 @@ $year = date("Y"); ?>
 						<select id="bulan" name="bulan" class="select2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 							<option disabled hidden selected value=""> == Pilih Bulan == </option>
 							<?php for ($i = 1; $i <= 12; $i++) : ?>
-								<option <?= $i == set_value("bulan") ? "selected" : "" ?> value="<?= $i ?>"> <?= $bulan[$i - 1] ?></option>
+								<option <?= $i == set_value("bulan", $month) ? "selected" : "" ?> <?= $i == set_value("bulan") ? "selected" : "" ?> value="<?= $i ?>"> <?= $bulan[$i - 1] ?></option>
 							<?php endfor; ?>
 						</select>
 						<div class="text-red-500 text-xs italic font-semibold">

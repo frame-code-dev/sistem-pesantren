@@ -53,6 +53,11 @@ class Santri_model extends Model
     {
         return  $this->db->table($this->_table)->where('status_santri', 'aktif')->orWhere('status_santri', 'belum_registrasi')->orWhere('status_santri', 'belum_registrasi_ulang')->get();
     }
+    // semua santri aktiv dan alumni
+    public function getSantriAktifAlumni()
+    {
+        return  $this->db->table($this->_table)->where('status_santri', 'aktif')->orWhere('status_santri', 'alumni')->get();
+    }
 
     // santri alumni
     public function getSantriAlumni()
