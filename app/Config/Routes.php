@@ -21,7 +21,7 @@ $routes->group('dashboard', function ($routes) {
     $routes->post('user/store', "User::store");
     $routes->get('user/edit/(:any)', "User::edit/$1");
     $routes->post('user/update/(:any)', "User::update/$1");
-    $routes->delete('user/delete/(:any)', "User::delete/$1");
+    $routes->get('user/delete/(:any)', "User::delete/$1");
 
     // santri 
     $routes->get('santri', "Santri::index");

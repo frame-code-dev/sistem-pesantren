@@ -23,54 +23,24 @@ class User_model extends Model
     public function rules()
     {
         return [
-            [
-                'field' => 'nama',
-                'label' => 'Nama',
-                'rules' => 'required'
-            ],
-            [
-                'field' => 'username',
-                'label' => 'Username',
-                'rules' => 'required'
-            ],
-            [
-                'field' => 'role',
-                'label' => 'Role',
-                'rules' => 'required'
-            ],
-            [
-                'field' => 'password',
-                'label' => 'Password',
-                'rules' => 'required'
-            ],
+            'nama' => 'required',
+            'username' => 'required',
+            'role' => 'required',
+            'password' => 'required'
         ];
     }
-
     public function rules_edit()
     {
         return [
-            [
-                'field' => 'nama',
-                'label' => 'Nama',
-                'rules' => 'required'
-            ],
-            [
-                'field' => 'username',
-                'label' => 'Username',
-                'rules' => 'required'
-            ],
-            [
-                'field' => 'role',
-                'label' => 'Role',
-                'rules' => 'required'
-            ],
-
+            'nama' => 'required',
+            'username' => 'required',
+            'role' => 'required',
         ];
     }
 
     public function getAll()
     {
-        return $this->db->table($this->_table)->get();
+        return $this->db->table($this->_table)->orderBy("created_at", "desc")->get();
     }
 
     public function getById($id)
@@ -89,7 +59,7 @@ class User_model extends Model
     {
         return $this->db->table($this->_table)->insert($data);
     }
-    
+
     public function updateData($id, $data)
     {
         return $this->db->table($this->_table)->where('id', $id)->update($data);

@@ -44,7 +44,7 @@
 			</div>
 		</div>
 		<div class="card bg-white p-5 mt-4 border rounded-md w-full relative">
-			<form action="<?= base_url('dashboard/user/store') ?>" method="POST" class="w-full mx-auto space-y-4" enctype="multipart/form-data">
+			<form action="<?= base_url('dashboard/user/update/' . $data->id) ?>" method="POST" class="w-full mx-auto space-y-4" enctype="multipart/form-data">
 				<div class="grid grid-cols-4 gap-3">
 					<div class="col-span-2">
 						<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nama<span class="me-2 text-red-500">*</span></label>

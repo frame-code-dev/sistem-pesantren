@@ -97,7 +97,7 @@ class User extends BaseController
 				"username" => $username,
 				"role" => $role,
 			];
-			$this->userModel->updateData($id,$data);
+			$this->userModel->updateData($id, $data);
 			session()->setFlashdata("status_success", true);
 			session()->setFlashdata('message', 'Data user berhasil diubah.');
 			return redirect()->to('dashboard/user');
@@ -116,7 +116,7 @@ class User extends BaseController
 		try {
 			$this->userModel->deleteData($id);
 			session()->setFlashdata("status_success", true);
-			session()->setFlashdata('message', 'user berhasil dihapus');
+			session()->setFlashdata('message', 'Data user berhasil dihapus');
 			return redirect()->to('dashboard/user');
 		} catch (\Throwable $th) {
 			if ($th->getCode() == 1451) { // cek jika data ini digunakan di tabel lain
