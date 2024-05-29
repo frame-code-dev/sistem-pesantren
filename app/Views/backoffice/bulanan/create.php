@@ -97,7 +97,7 @@ $year = date("Y"); ?>
 						<label for="tahun" class="block mb-2 text-sm font-semibold text-gray-900">Tahun<span class="me-2 text-red-500">*</span></label>
 						<select id="tahun" name="tahun" class="select2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 							<option disabled hidden selected value=""> == Pilih Tahun == </option>
-							<?php for ($i = $year + 10; $i >= $year - 10; $i--) : ?>
+							<?php for ($i = $year + 3; $i >= $year - 3; $i--) : ?>
 								<option <?= $i == set_value("tahun", $year) ? "selected" : "" ?> value="<?= $i  ?>"><?= $i ?></option>
 							<?php endfor; ?>
 						</select>
