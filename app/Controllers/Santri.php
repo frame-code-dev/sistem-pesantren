@@ -40,7 +40,7 @@ class Santri extends BaseController
 		$telepon = $this->request->getPost("telepon");
 		$tanggal_lahir = $this->request->getPost("tanggal_lahir");
 		$alamat = $this->request->getPost("alamat");
-		$status = 'aktif';
+		$status = 'belum_registrasi';
 		$tanggal_masuk = $this->request->getPost("tanggal_masuk");
 
 		$validation = $this->validateData([
