@@ -40,7 +40,6 @@ class Santri extends BaseController
 		$telepon = $this->request->getPost("telepon");
 		$tanggal_lahir = $this->request->getPost("tanggal_lahir");
 		$alamat = $this->request->getPost("alamat");
-		$status = 'belum_registrasi';
 		$tanggal_masuk = $this->request->getPost("tanggal_masuk");
 
 		$validation = $this->validateData([
@@ -72,7 +71,6 @@ class Santri extends BaseController
 				"tanggal_masuk" => $tanggal_masuk,
 				"tanggal_lahir" => $tanggal_lahir,
 				"alamat" => $alamat,
-				"status_santri" => $status,
 				"created_at" => date("Y-m-d H:i:s"),
 			];
 			$this->santriModel->saveData($data);
