@@ -48,7 +48,7 @@
                 <div class="grid grid-cols-4 gap-3">
                     <div class="col-span-2">
                         <label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nis<span class="me-2 text-red-500">*</span></label>
-                        <input type="text" value="<?= set_value("nama", $data->nis) ?>" placeholder="Masukkan Nis" name="nis" id="nis" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" maxlength="10">
+                        <input type="text" value="<?= set_value("nis", $data->nis) ?>" placeholder="Masukkan Nis" name="nis" id="nis" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" maxlength="10">
                         <div class="text-red-500 text-xs italic font-semibold">
                             <?php if (session("validation.nis")) : ?>
                                 <div class="text-red-500 text-sm">
@@ -61,9 +61,9 @@
                         <label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nama<span class="me-2 text-red-500">*</span></label>
                         <input type="text" value="<?= set_value("nama", $data->nama) ?>" placeholder="Masukkan Nama" name="nama" id="nama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         <div class="text-red-500 text-xs italic font-semibold">
-                            <?php if (session("validation.nis")) : ?>
+                            <?php if (session("validation.nama")) : ?>
                                 <div class="text-red-500 text-sm">
-                                    <?= session("validation.nis") ?>
+                                    <?= session("validation.nama") ?>
                                 </div>
                             <?php endif ?>
                         </div>

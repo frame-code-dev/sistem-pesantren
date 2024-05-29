@@ -11,12 +11,13 @@ class Transaksi extends BaseController
 	protected $transaksi;
 	protected $santri;
 	protected $validation;
+	protected $db;
 	public function __construct()
 	{
 		$this->transaksi = new TransaksiModel();
 		$this->santri = new Santri_model();
 		$this->validation = \Config\Services::validation();
-
+		$this->db = \Config\Database::connect();
 
 		if (!session()->get("user_id")) {
 			redirect('/');
@@ -52,13 +53,13 @@ class Transaksi extends BaseController
 
 	public function store()
 	{
-		$santri_id = $this->request->getPost("santri_id");
+		$santri_id = $this->request->getPost("santri");
 		$tanggal_bayar = $this->request->getPost("tanggal_bayar");
 
-		$pembayaran = $this->request->getPost("nominal");
-		$this->replaceRupiah($pembayaran);
-		$nominal = $pembayaran;
+		$nominal = $this->replaceRupiah($this->request->getPost("nominal"));
 
+		$userId = session()->get("user_id");
+		$userId = 1;
 
 		$valid = $this->validateData([
 			"santri" => $santri_id,
@@ -69,8 +70,8 @@ class Transaksi extends BaseController
 			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
 		}
 
+		$this->db->transBegin();
 		try {
-
 			$data = [
 				"kategori" => "pemasukan",
 				"santri_id" => $santri_id,
@@ -78,26 +79,99 @@ class Transaksi extends BaseController
 				"no_transaksi" => $this->transaksi->generateKode(),
 				"jenis_id" => 1,
 				"tanggal_bayar" => $tanggal_bayar,
-				"bulan" => null,
-				"tahun" => null,
-				"user_id" =>  1,
-				"created_at" => date("Y-m-d H:i:s"),
+				"user_id" => $userId,
 			];
-			$status = "belum_registrasi_ulang";
 
-			$this->santri->updateStatus($santri_id, $status);
+			$status_santri = 'belum_registrasi_ulang';
+
+			$this->santri->updateStatus($santri_id, $status_santri);
+			$this->db->transCommit();
+			
 			$this->transaksi->storePendaftaran($data);
+			$this->db->transCommit();
 
 			session()->setFlashdata("status_success", true);
 			session()->setFlashdata('message', 'Pendaftaran santri berhasil.');
 			return redirect()->to('dashboard/pendaftaran');
 		} catch (\Throwable $th) {
+			$this->db->transRollback();
 			session()->setFlashdata("status_error", true);
 			session()->setFlashdata('error', 'Pendaftaran gagal, <br>' . $th->getMessage());
 			return redirect()->back();
 		} catch (\Exception $e) {
+			$this->db->transRollback();
 			session()->setFlashdata("status_error", true);
 			session()->setFlashdata('error', 'Pendaftaran gagal, <br>' . $e->getMessage());
+			return redirect()->back();
+		}
+	}
+
+	public function pendaftaranUlang()
+	{
+		$data["tittle"] = "Pemasukan";
+		$data["curennt_page"] = "Pendaftaran Ulang";
+		$data["data"] = $this->transaksi->getPendaftaranUlang()->getResultArray();
+		return view("backoffice/pendaftaran-ulang/index", $data);
+	}
+	public function pendaftaranUlangCreate()
+	{
+		$data["title"] = "Pemasukan";
+		$data["current_page"] = "Pendaftaran Ulang";
+		$data["santri"] = $this->santri->getSantriRegistrasiUlang()->getResultArray();
+
+		return view("backoffice/pendaftaran-ulang/create", $data);
+	}
+
+	public function pendaftaranUlangStore()
+	{
+		$santri_id = $this->request->getPost("santri");
+		$tanggal_bayar = $this->request->getPost("tanggal_bayar");
+
+		$nominal = $this->replaceRupiah($this->request->getPost("nominal"));
+
+		$userId = session()->get("user_id");
+		$userId = 1;
+
+		$valid = $this->validateData([
+			"santri" => $santri_id,
+			"tanggal_bayar" => $tanggal_bayar,
+			"nominal" => $nominal
+		], $this->transaksi->rulesPendaftaran());
+		if (!$valid) {
+			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
+		}
+
+		$this->db->transBegin();
+		try {
+			$data = [
+				"kategori" => "pemasukan",
+				"santri_id" => $santri_id,
+				"nominal" => $nominal,
+				"no_transaksi" => $this->transaksi->generateKode(),
+				"jenis_id" => 2,
+				"tanggal_bayar" => $tanggal_bayar,
+				"user_id" => $userId,
+			];
+			$status_santri = 'aktif';
+
+			$this->santri->updateStatus($santri_id, $status_santri);
+			$this->db->transCommit();
+			
+			$this->transaksi->storePendaftaran($data);
+			$this->db->transCommit();
+
+			session()->setFlashdata("status_success", true);
+			session()->setFlashdata('message', 'Pendaftaran ulang santri berhasil.');
+			return redirect()->to('dashboard/pendaftaran');
+		} catch (\Throwable $th) {
+			$this->db->transRollback();
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'Pendaftaran ulang gagal, <br>' . $th->getMessage());
+			return redirect()->back();
+		} catch (\Exception $e) {
+			$this->db->transRollback();
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'Pendaftaran ulang gagal, <br>' . $e->getMessage());
 			return redirect()->back();
 		}
 	}
@@ -129,7 +203,6 @@ class Transaksi extends BaseController
 		$tahun = $this->request->getPost("tahun");
 		$userId = session()->get("user_id");
 		$userId = 1;
-		var_dump($nominal);
 		$validasi = [
 			"santri" => $santriId,
 			"bulan" => $bulan,
