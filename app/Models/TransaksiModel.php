@@ -76,6 +76,7 @@ class TransaksiModel extends Model
 			->join("santri", "transaksi.santri_id = santri.id", "array")
 			->where("transaksi.jenis_id", 3)
 			->where("transaksi.kategori", "pemasukan")
+			->orderBy("tanggal_bayar", "desc")
 			->get();
 	}
 

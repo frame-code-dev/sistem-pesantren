@@ -96,7 +96,7 @@ class Transaksi extends BaseController
 
 			$this->santri->updateStatus($santri_id, $status_santri);
 			$this->db->transCommit();
-			
+
 			$this->transaksi->storePendaftaran($data);
 			$this->db->transCommit();
 
@@ -173,7 +173,7 @@ class Transaksi extends BaseController
 
 			$this->santri->updateStatus($santri_id, $status_santri);
 			$this->db->transCommit();
-			
+
 			$this->transaksi->storePendaftaran($data);
 			$this->db->transCommit();
 
@@ -233,32 +233,39 @@ class Transaksi extends BaseController
 
 		//kondisi duplikat data transaksi
 		$santri = $this->transaksi
-			->where("month(tanggal_bayar)", $bulan)
-			->where("year(tanggal_bayar)", $tahun)
+			->join("santri", "transaksi.santri_id = santri.id")
+			->where("bulan", $bulan)
+			->where("tahun", $tahun)
 			->where("santri_id", $santriId)
 			->first();
 		if ($santri) {
 			$namaSantri = $santri["nama"];
 			session()->setFlashdata("status_error", true);
-			$bulan = Helpers::getMontName($bulan);
+			$bulan = Helpers::getMontName($bulan - 1);
 			session()->setFlashdata('error', "Transaksi bulanan pada bulan $bulan  dan tahun $tahun untuk santri $namaSantri sudah ada");
 			return redirect()->back()->withInput();
 		}
 
 		//kondisi tanggal keluar alumni
-		$santri = $this->transaksi
-
-			->where("santri_id", $santriId)
+		$santri = $this->santri->select("month(tanggal_keluar) as bulan,year(tanggal_keluar) as tahun,nama")
+			->where("status_santri", "alumni")
+			->where("id", $santriId)
 			->first();
 		if ($santri) {
-			$namaSantri = $santri["nama"];
-			session()->setFlashdata("status_error", true);
-			$bulan = Helpers::getMontName($bulan);
-			session()->setFlashdata('error', "Transaksi bulanan  untuk santri $namaSantri tidak boleh lebih dari  bulan $bulan   $tahun");
-			return redirect()->back()->withInput();
+			if (
+				$santri["tahun"] < $tahun || ($santri["tahun"] == $tahun && $santri["bulan"] < $bulan)
+			) {
+				$namaSantri = $santri["nama"];
+				session()->setFlashdata("status_error", true);
+				$bulan = Helpers::getMontName($santri["bulan"] - 1);
+				$tahun = $santri["tahun"];
+				session()->setFlashdata('error', "Transaksi bulanan  untuk santri $namaSantri tidak boleh lebih dari  bulan $bulan   $tahun");
+				return redirect()->back()->withInput();
+			}
 		}
 
 		try {
+			$this->db->transBegin();
 			$data = [
 				"kategori" => "pemasukan",
 				"santri_id" => $santriId,
@@ -273,15 +280,18 @@ class Transaksi extends BaseController
 
 			if ($this->transaksi->storeBulanan($data)) {
 				session()->setFlashdata("status_success", true);
+				$this->db->transCommit();
 				session()->setFlashdata('message', 'Transaksi berhasil ditambahkan');
 				return redirect()->to('dashboard/bulanan');
 			} else {
 				session()->setFlashdata("status_error", true);
+				$this->db->transRollback();
 				session()->setFlashdata('error', 'Transaksi gagal ditambahkan');
 				return redirect()->back()->withInput();
 			}
 		} catch (\Throwable $th) {
 			session()->setFlashdata("status_error", true);
+			$this->db->transRollback();
 			session()->setFlashdata('error', 'Transaksi gagal ditambahkan');
 			return redirect()->back()->withInput();
 		}

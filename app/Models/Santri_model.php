@@ -8,6 +8,7 @@ use Exception;
 class Santri_model extends Model
 {
     private $_table = 'santri';
+    protected $table = 'santri';
 
 
     public function rules()
@@ -65,7 +66,8 @@ class Santri_model extends Model
         return  $this->db->table($this->_table)->where('status_santri', 'alumni')->get();
     }
 
-    public function countSantri($status){
+    public function countSantri($status)
+    {
         return $this->db->table($this->_table)->where('status_santri', $status)->countAllResults();
     }
 
