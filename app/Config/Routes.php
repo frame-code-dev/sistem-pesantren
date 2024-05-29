@@ -65,6 +65,11 @@ $routes->group('dashboard', function ($routes) {
     $routes->get('pendaftaran-add', "Transaksi::create");
     $routes->post('pendaftaran-post', "Transaksi::store");
 
+    //pendaftaran ulang
+    $routes->get('pendaftaran-ulang', "Transaksi::pendaftaranUlang");
+    $routes->get('pendaftaran-ulang-add', "Transaksi::pendaftaranUlangCreate");
+    $routes->post('pendaftaran-ulang-post', "Transaksi::pendaftaranUlangStore");
+
     //bulanan
     $routes->get('bulanan', "Transaksi::indexBulanan");
     $routes->get('bulanan-add', "Transaksi::createBulanan");

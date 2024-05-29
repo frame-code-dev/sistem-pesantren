@@ -44,7 +44,7 @@
 			</div>
 		</div>
 		<div class="card bg-white p-5 mt-4 border rounded-md w-full relative">
-			<form action="<?= base_url('dashboard/pendaftaran-post') ?>" method="POST" class="w-full mx-auto space-y-4" enctype="multipart/form-data">
+			<form action="<?= base_url('dashboard/pendaftaran-ulang-post') ?>" method="POST" class="w-full mx-auto space-y-4" enctype="multipart/form-data">
 				<div class="grid grid-cols-4 gap-3">
 					<div class="col-span-2">
 						<label for="santri" class="block mb-2 text-sm font-semibold text-gray-900">Santri<span class="me-2 text-red-500">*</span></label>

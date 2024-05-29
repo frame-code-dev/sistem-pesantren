@@ -25,87 +25,6 @@
 					</div>
 				</div>
 			</div>
-			<div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-2 w-full mt-4">
-				<div class="card p-5 w-full border bg-white h-[127px] relative">
-					<div class="flex gap-5">
-						<div>
-							<button class="w-20 h-20 p-5 rounded-full bg-blue-100 flex align-middle items-center content-center mx-auto">
-								<svg class="text-3xl mt-1 text-blue-500 items-center content-center mx-auto" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-									<path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M16 19h4a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-2m-2.236-4a3 3 0 1 0 0-4M3 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-								</svg>
-							</button>
-						</div>
-						<div class="mt-3">
-							<h2 class="text-theme-text text-3xl font-bold tracking-tighter">
-							</h2>
-							<p class="text-gray-500 text-sm tracking-tighter">
-								Pengguna Dokter
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="card p-5 w-full border bg-white h-[127px] relative">
-					<div class="flex gap-5 justify-between">
-						<div class="flex gap-5">
-							<div>
-								<button class="w-20 h-20 p-5 rounded-full bg-green-100 flex align-middle items-center content-center mx-auto">
-									<svg class="text-3xl mt-1 text-green-500 items-center content-center mx-auto" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-										<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-6 7 2 2 4-4m-5-9v4h4V3h-4Z" />
-									</svg>
-								</button>
-							</div>
-							<div class="mt-3">
-								<h2 class="text-theme-text text-3xl font-bold tracking-tighter">
-								</h2>
-								<p class="text-gray-500 text-sm tracking-tighter">
-									Pengguna Perawat
-								</p>
-							</div>
-						</div>
-
-					</div>
-				</div>
-				<div class="card p-5 w-full border bg-white h-[127px] relative">
-					<div class="flex gap-5 justify-between">
-						<div class="flex gap-5">
-							<div>
-								<button class="w-20 h-20 p-5 rounded-full bg-purple-100 flex align-middle items-center content-center mx-auto">
-									<svg class="text-3xl mt-1 text-purple-500 items-center content-center mx-auto" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-										<path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M4.5 17H4a1 1 0 0 1-1-1 3 3 0 0 1 3-3h1m0-3.05A2.5 2.5 0 1 1 9 5.5M19.5 17h.5a1 1 0 0 0 1-1 3 3 0 0 0-3-3h-1m0-3.05a2.5 2.5 0 1 0-2-4.45m.5 13.5h-7a1 1 0 0 1-1-1 3 3 0 0 1 3-3h3a3 3 0 0 1 3 3 1 1 0 0 1-1 1Zm-1-9.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z" />
-									</svg>
-								</button>
-							</div>
-							<div class="mt-3">
-								<h2 class="text-theme-text text-3xl font-bold tracking-tighter">
-								</h2>
-								<p class="text-gray-500 text-sm tracking-tighter">
-									Pengguna Admin
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="card p-5 w-full border bg-white h-[127px] relative">
-					<div class="flex gap-5 justify-between">
-						<div class="flex gap-5">
-							<div>
-								<button class="w-20 h-20 p-5 rounded-full bg-purple-100 flex align-middle items-center content-center mx-auto">
-									<svg class="text-3xl mt-1 text-purple-500 items-center content-center mx-auto" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-										<path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M4.5 17H4a1 1 0 0 1-1-1 3 3 0 0 1 3-3h1m0-3.05A2.5 2.5 0 1 1 9 5.5M19.5 17h.5a1 1 0 0 0 1-1 3 3 0 0 0-3-3h-1m0-3.05a2.5 2.5 0 1 0-2-4.45m.5 13.5h-7a1 1 0 0 1-1-1 3 3 0 0 1 3-3h3a3 3 0 0 1 3 3 1 1 0 0 1-1 1Zm-1-9.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z" />
-									</svg>
-								</button>
-							</div>
-							<div class="mt-3">
-								<h2 class="text-theme-text text-3xl font-bold tracking-tighter">
-								</h2>
-								<p class="text-gray-500 text-sm tracking-tighter">
-									Pengguna RM
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
 
 			<div class="card bg-white p-5 mt-4 border rounded-md w-full relative overflow-x-auto">
 				<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" id="datatable">
@@ -114,13 +33,36 @@
 							<th class="px-4 py-3">No</th>
 							<th scope="col" class="px-4 py-3">Nama</th>
 							<th scope="col" class="px-4 py-3">Username</th>
-							<th scope="col" class="px-4 py-3">HakAkses</th>
+							<th scope="col" class="px-4 py-3">Hak Akses</th>
 							<th scope="col" class="px-4 py-3">
 								<span class="sr-only">Actions</span>
 							</th>
 						</tr>
 					</thead>
 					<tbody>
+						<?php $no = 1;
+						foreach ($data as $row) : ?>
+							<?php
+							$hak_akses = str_replace('_', ' ', $row['role']);
+							$hak_akses = ucwords($hak_akses);
+							?>
+							<tr>
+								<td class="px-4 py-3"><?= $no++ ?></td>
+								<td class="px-4 py-3"><?= esc($row['nama']) ?></td>
+								<td class="px-4 py-3"><?= esc($row['username']) ?></td>
+								<td class="px-4 py-3"><?= esc($hak_akses) ?></td>
+								<td class="px-4 py-3">
+									<div class="flex gap-2">
+										<a class="block text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" href="<?= base_url('dashboard/user/edit/' . $row['id']) ?>">
+											Ubah
+										</a>
+										<button data-id="<?= $row["id"] ?>" data-modal-target="hapus default-modal" data-modal-toggle="default-modal" class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" onclick="deleteConfirm('user/delete/<?= $row['id'] ?>')" type="button">
+											Hapus
+										</button>
+									</div>
+								</td>
+							</tr>
+						<?php endforeach; ?>
 					</tbody>
 				</table>
 			</div>
