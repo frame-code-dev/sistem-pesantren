@@ -26,6 +26,9 @@ class Auth extends BaseController
 
 	public function login()
 	{
+		if ($this->authModel->current_user()) {
+			return	redirect()->to("/dashboard");
+		}
 		$data['message_login_error'] = session()->getFlashdata('message_login_error');
 		return view('auth/login', $data);
 	}
@@ -53,5 +56,12 @@ class Auth extends BaseController
 
 	public function logout()
 	{
+		// Memulai session
+		$session = session();
+		
+		// Menghapus semua data session
+		$session->destroy();
+		
+		return redirect()->to('login');
 	}
 }

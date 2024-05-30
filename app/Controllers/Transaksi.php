@@ -21,7 +21,7 @@ class Transaksi extends BaseController
 		$this->db = \Config\Database::connect();
 
 		if (!session()->get("user_id")) {
-			redirect('/login');
+			redirect('/');
 		}
 	}
 

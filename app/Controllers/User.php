@@ -14,7 +14,7 @@ class User extends BaseController
 		$this->validation = \Config\Services::validation();
 		$this->userModel = new User_model();
 		if (!session()->get("user_id")) {
-			redirect('/login');
+			redirect('/');
 		}
 	}
 

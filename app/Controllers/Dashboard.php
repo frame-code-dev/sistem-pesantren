@@ -3,14 +3,13 @@
 
 namespace App\Controllers;
 
+use App\Models\Auth_model;
+
 class Dashboard extends BaseController
 {
-	public function __construct()
-	{
-	}
-
 	public function index()
 	{
+		
 		return view('dashboard');
 	}
 

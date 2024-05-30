@@ -14,7 +14,7 @@ class VisiMisi extends BaseController
 		$this->visiMisi = new VisiMisiModel();
 
 		if (!session()->get("user_id")) {
-			redirect('/login');
+			redirect('/');
 		}
 	}
 

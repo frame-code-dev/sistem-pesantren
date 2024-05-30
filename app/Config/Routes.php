@@ -9,6 +9,8 @@ use CodeIgniter\Router\RouteCollection;
 
 // LANDING PAGE 
 $routes->get('/', [WelcomeController::class,'index']);
+
+
 $routes->get('/login', 'Auth::login');
 // $routes->get('default_controller') = 'auth/login';
 $routes->get('/login', "Auth::login", ['as' => 'login']);
