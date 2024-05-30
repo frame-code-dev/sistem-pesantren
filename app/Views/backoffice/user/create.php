@@ -9,7 +9,7 @@
 					Master Data
 				</p>
 				<h2 class="font-bold tracking-tighter text-2xl text-theme-text">
-					
+					Data User
 				</h2>
 			</div>
 			<div class="layout lg:flex grid grid-cols-1 lg:mt-0 mt-5 justify-end gap-5">
@@ -28,7 +28,7 @@
 								<svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
 									<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
 								</svg>
-								<a href="<?= base_url('dashboard/user') ?>" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">User</a>
+								<a href="<?= base_url('dashboard/user') ?>" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Data User</a>
 							</div>
 						</li>
 						<li aria-current="page">
@@ -44,41 +44,55 @@
 			</div>
 		</div>
 		<div class="card bg-white p-5 mt-4 border rounded-md w-full relative">
-			<form action="<?= base_url('user/store') ?>" method="POST" class="w-full mx-auto space-y-4" enctype="multipart/form-data">
+			<form action="<?= base_url('dashboard/user/store') ?>" method="POST" class="w-full mx-auto space-y-4" enctype="multipart/form-data">
 				<div class="grid grid-cols-4 gap-3">
 					<div class="col-span-2">
 						<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nama<span class="me-2 text-red-500">*</span></label>
-						<input type="text" placeholder="Masukkan Nama" name="nama" id="nama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+						<input type="text" placeholder="Masukkan Nama" name="nama" id="nama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="<?= set_value("nama") ?>">
 						<div class="text-red-500 text-xs italic font-semibold">
-							
+							<?php if (session("validation.nama")) : ?>
+								<div class="text-red-500 text-sm">
+									<?= session("validation.nama") ?>
+								</div>
+							<?php endif ?>
 						</div>
 					</div>
 					<div class="col-span-2">
 						<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Username<span class="me-2 text-red-500">*</span></label>
-						<input type="text" placeholder="Masukkan Username" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+						<input type="text" placeholder="Masukkan Username" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="<?= set_value("username") ?>">
 						<div class="text-red-500 text-xs italic font-semibold">
-							
+							<?php if (session("validation.username")) : ?>
+								<div class="text-red-500 text-sm">
+									<?= session("validation.username") ?>
+								</div>
+							<?php endif ?>
 						</div>
 					</div>
 					<div class="col-span-2">
 						<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Password<span class="me-2 text-red-500">*</span></label>
-						<input type="text" placeholder="Masukkan Password" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+						<input type="text" placeholder="Masukkan Password" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="<?= set_value("password") ?>">
 						<div class="text-red-500 text-xs italic font-semibold">
-							
+							<?php if (session("validation.password")) : ?>
+								<div class="text-red-500 text-sm">
+									<?= session("validation.password") ?>
+								</div>
+							<?php endif ?>
 						</div>
 					</div>
 					<div class="col-span-2">
-						<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Role<span class="me-2 text-red-500">*</span></label>
-						<select id="role" name="role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-							<option value="">Pilih Jenis Role</option>
-							<option value="rm">Rekam Medis</option>
-							<option value="dokter">Dokter</option>
-							<option value="admin">Admin</option>
-							<option value="perawat">Perawat</option>
-							<option value="kepala">Kepala Puskesmas</option>
+						<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Hak Akses<span class="me-2 text-red-500">*</span></label>
+						<select id="role" name="role" class="select2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+							<option disabled hidden selected value=""> == Pilih Hak Akses ==</option>
+							<option <?= 'super_admin' == set_value("super_admin") ? "selected" : "" ?> value="super_admin">Super Admin</option>
+							<option <?= 'admin_keuangan' == set_value("admin_keuangan") ? "selected" : "" ?> value="admin_keuangan">admin Keuangan</option>
+							<option <?= 'admin_santri' == set_value("admin_santri") ? "selected" : "" ?> value="admin_santri">admin Santri</option>
 						</select>
 						<div class="text-red-500 text-xs italic font-semibold">
-							
+							<?php if (session("validation.role")) : ?>
+								<div class="text-red-500 text-sm">
+									<?= session("validation.role") ?>
+								</div>
+							<?php endif ?>
 						</div>
 					</div>
 				</div>

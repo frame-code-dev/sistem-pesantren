@@ -73,7 +73,8 @@
 					</div>
 					<div class="col-span-2">
 						<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Gambar</label>
-						<input required name="gambar" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+
+						<input accept="image/png, image/jpeg, image/jpg, image/webp" required name="gambar" class="block w-full text-sm text-gray-900 border only-image limit-size-2 border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
 						<?php if (session("validation.gambar")) : ?>
 							<div class="text-red-500 text-sm">
 								<?= session("validation.gambar") ?>
@@ -94,7 +95,7 @@
 				</div>
 				<div class="flex justify-end align-middle content-center bg-gray-100 p-3 rounded-md">
 					<div>
-						<button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">Simpan</button>
+						<button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit" id="btn_submit">Simpan</button>
 					</div>
 					<div>
 						<button class="bg-white text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" type="reset">Batal</button>
@@ -105,4 +106,8 @@
 		</div>
 	</section>
 </div>
+
+
+
+
 <?= $this->endsection() ?>

@@ -33,8 +33,54 @@
 </script>
 <script>
 	$(document).ready(function() {
+		$('form').on('submit', function(event) {
+			$('#loading-modal').removeClass('hidden');
+		});
+
 		$('.select2').select2();
+
+		$('.limit-size-2').on('change', function() {
+			var size = (this.files[0].size / 1024 / 1024).toFixed(2)
+			if (size > 2) {
+				errorImage('Ukuran maksimal berkas adalah 2 MB');
+			}
+		})
+
+		$(".only-image").on('change', function() {
+			if (!this.files[0].type.includes('image')) {
+				errorImage('Hanya boleh memilih file berupa gambar(.jpg, .jpeg, .png, .webp)');
+			}
+		})
 	});
+
+	var rupiahs = document.querySelectorAll('.rupiah');
+
+	rupiahs.forEach(function(rupiah) {
+		rupiah.addEventListener('keyup', function(e) {
+			// tambahkan 'Rp.' pada saat form di ketik
+			// gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+			this.value = formatRupiah(this.value, 'Rp. ');
+		});
+	});
+
+	/* Fungsi formatRupiah */
+	function formatRupiah(angka, prefix) {
+		var number_string = angka.replace(/[^,\d]/g, '').toString(),
+			split = number_string.split(','),
+			sisa = split[0].length % 3,
+			rupiah = split[0].substr(0, sisa),
+			ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+		// tambahkan titik jika yang di input sudah menjadi angka ribuan
+		if (ribuan) {
+			separator = sisa ? '.' : '';
+			rupiah += separator + ribuan.join('.');
+		}
+
+		rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+		return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+	}
+
 	// validasi telepon
 	document.getElementById('telepon').addEventListener('input', function(e) {
 		this.value = this.value.replace(/\D/g, '');
@@ -74,6 +120,7 @@
 			}
 		});
 	}
+
 	function updateAlumni(event) {
 		console.log(event);
 		Swal.fire({
@@ -89,6 +136,25 @@
 				window.location.assign(event);
 			}
 		});
+	}
+
+	function errorImage(message) {
+		var Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		Toast.fire({
+			icon: 'error',
+			title: message
+		})
 	}
 </script>
 <?php

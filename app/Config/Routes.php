@@ -21,7 +21,7 @@ $routes->group('dashboard', function ($routes) {
     $routes->post('user/store', "User::store");
     $routes->get('user/edit/(:any)', "User::edit/$1");
     $routes->post('user/update/(:any)', "User::update/$1");
-    $routes->delete('user/delete/(:any)', "User::delete/$1");
+    $routes->get('user/delete/(:any)', "User::delete/$1");
 
     // santri 
     $routes->get('santri', "Santri::index");
@@ -30,7 +30,7 @@ $routes->group('dashboard', function ($routes) {
     $routes->get('santri/edit/(:any)', "Santri::edit/$1");
     $routes->post('santri/update/(:any)', "Santri::update/$1");
     $routes->get('santri/delete/(:any)', "Santri::delete/$1");
-    
+
     // alumni
     $routes->get('alumni', "Santri::alumni");
     $routes->post('alumni/add', "Santri::addAlumni");
@@ -59,6 +59,22 @@ $routes->group('dashboard', function ($routes) {
     $routes->get('berita/edit/(:any)', "Berita::edit/$1");
     $routes->post('berita/update/(:any)', "Berita::update/$1");
     $routes->get('berita/delete/(:any)', "Berita::delete/$1");
+
+    //pendaftaran
+    $routes->get('pendaftaran', "Transaksi::index");
+    $routes->get('pendaftaran-add', "Transaksi::create");
+    $routes->post('pendaftaran-post', "Transaksi::store");
+
+    //pendaftaran ulang
+    $routes->get('pendaftaran-ulang', "Transaksi::pendaftaranUlang");
+    $routes->get('pendaftaran-ulang-add', "Transaksi::pendaftaranUlangCreate");
+    $routes->post('pendaftaran-ulang-post', "Transaksi::pendaftaranUlangStore");
+
+    //bulanan
+    $routes->get('bulanan', "Transaksi::indexBulanan");
+    $routes->get('bulanan-add', "Transaksi::createBulanan");
+    $routes->post('bulanan-post', "Transaksi::storeBulanan");
+    $routes->get('bulananSantri/(:any)/(:any)/(:any)', "Transaksi::cekBulananSantri/$1/$2/$3");
 
     //visi-misi
     $routes->get('visi-misi', "VisiMisi::index");

@@ -15,10 +15,11 @@ class Santri extends BaseController
 	{
 		$this->validation = \Config\Services::validation();
 		$this->santriModel = new Santri_model();
+		// var_dump(session()->get("user_id"));
+		// dd(session()->get("user_id"));
 		if (!session()->get("user_id")) {
 			redirect('/');
 		}
-		
 	}
 
 	public function index()
@@ -40,7 +41,6 @@ class Santri extends BaseController
 		$telepon = $this->request->getPost("telepon");
 		$tanggal_lahir = $this->request->getPost("tanggal_lahir");
 		$alamat = $this->request->getPost("alamat");
-		$status = 'aktif';
 		$tanggal_masuk = $this->request->getPost("tanggal_masuk");
 
 		$validation = $this->validateData([
@@ -63,7 +63,7 @@ class Santri extends BaseController
 				session()->setFlashdata('error', 'Data santri gagal ditambahkan, Nis sudah terdaftar.');
 				return redirect()->back();
 			}
-	
+
 			$data = [
 				"nis" => $nis,
 				"nama" => $nama,
@@ -72,7 +72,6 @@ class Santri extends BaseController
 				"tanggal_masuk" => $tanggal_masuk,
 				"tanggal_lahir" => $tanggal_lahir,
 				"alamat" => $alamat,
-				"status_santri" => $status,
 				"created_at" => date("Y-m-d H:i:s"),
 			];
 			$this->santriModel->saveData($data);
@@ -81,11 +80,11 @@ class Santri extends BaseController
 			return redirect()->to('dashboard/santri');
 		} catch (\Throwable $th) {
 			session()->setFlashdata("status_error", true);
-			session()->setFlashdata('error', 'Data santri gagal ditambahkan, <br>'.$th->getMessage());
+			session()->setFlashdata('error', 'Data santri gagal ditambahkan, <br>' . $th->getMessage());
 			return redirect()->back();
 		} catch (\Exception $e) {
 			session()->setFlashdata("status_error", true);
-			session()->setFlashdata('error', 'Data santri gagal ditambahkan, <br>'.$e->getMessage());
+			session()->setFlashdata('error', 'Data santri gagal ditambahkan, <br>' . $e->getMessage());
 			return redirect()->back();
 		}
 	}
@@ -173,7 +172,8 @@ class Santri extends BaseController
 		}
 	}
 
-	public function alumni(){
+	public function alumni()
+	{
 		$alumni = $this->santriModel->getSantriAlumni();
 		$santri = $this->santriModel->getSantriAktif();
 		$data['alumni'] = $alumni->getResultArray();
@@ -181,7 +181,8 @@ class Santri extends BaseController
 		return view("backoffice/alumni/index", $data);
 	}
 
-	public function addAlumni(){
+	public function addAlumni()
+	{
 		$id_santri = $this->request->getPost("santri");
 		$tanggal_keluar = $this->request->getPost("tanggal_keluar");
 		$validation = $this->validateData([
@@ -224,7 +225,7 @@ class Santri extends BaseController
 			session()->setFlashdata("status_success", true);
 			session()->setFlashdata('message', 'santri berhasil diaktifkan kembali');
 			return redirect()->to('dashboard/alumni');
-		} catch (\Throwable $th) {	
+		} catch (\Throwable $th) {
 			session()->setFlashdata("status_error", true);
 			session()->setFlashdata('error', 'Data santri gagal diaktifkan kembali, <br>' . $th->getMessage());
 			return redirect()->to('dashboard/alumni');
