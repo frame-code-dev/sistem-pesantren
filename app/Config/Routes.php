@@ -80,6 +80,10 @@ $routes->group('dashboard', function ($routes) {
     $routes->get('visi-misi', "VisiMisi::index");
     $routes->post('visi-misi', "VisiMisi::store");
 
+    //laporan tahunan
+    $routes->get('laporan-tahunan', "LaporanTahunan::index");
+    $routes->get('laporan-tahunan-export', "LaporanTahunan::download");
+
     //peraturan
     $routes->get('peraturan', "Peraturan::index");
     $routes->post('peraturan/store', "Peraturan::store");

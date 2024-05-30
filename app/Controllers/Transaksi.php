@@ -218,7 +218,6 @@ class Transaksi extends BaseController
 		$bulan = $this->request->getPost("bulan");
 		$tahun = $this->request->getPost("tahun");
 		$userId = session()->get("user_id");
-		$userId = 1;
 		$validasi = [
 			"santri" => $santriId,
 			"bulan" => $bulan,
