@@ -1,12 +1,17 @@
 <?php
 
+use App\Controllers\WelcomeController;
 use CodeIgniter\Router\RouteCollection;
 
 /**
  * @var RouteCollection $routes
  */
 
-$routes->get('/', 'Auth::login');
+// LANDING PAGE 
+$routes->get('/', [WelcomeController::class,'index']);
+
+
+$routes->get('/login', 'Auth::login');
 // $routes->get('default_controller') = 'auth/login';
 $routes->get('/login', "Auth::login", ['as' => 'login']);
 $routes->post('/login', 'Auth::loginPost', ['as' => 'loginPost']);

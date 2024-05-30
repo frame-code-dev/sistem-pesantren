@@ -43,19 +43,28 @@ class Auth_model extends Model
 
 	public function current_user()
 	{
-		if (!$this->session->has_userdata(self::SESSION_KEY)) {
-			return null;
-		}
 
-		$user_id = $this->session->userdata(self::SESSION_KEY);
+		$session = session();
 
-		$query = $this->db->table($this->_table)->where('id', $user_id)->get();
-		return $query;
+        if (!$session->has(self::SESSION_KEY)) {
+            return null;
+        }
+
+        $user_id = $session->get(self::SESSION_KEY);
+        
+        $db = \Config\Database::connect();
+        $query = $db->table($this->_table)->getWhere(['id' => $user_id]);
+        
+        return $query->getRow();
 	}
 
 	public function logout()
 	{
-		$this->session->unset_userdata(self::SESSION_KEY);
-		return !$this->session->has_userdata(self::SESSION_KEY);
+	  // Memulai session
+	  $session = session();
+        
+	  // Menghapus semua data session
+	  return $session->destroy();
+	  
 	}
 }
