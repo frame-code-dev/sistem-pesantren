@@ -14,7 +14,7 @@ class Peraturan extends BaseController
 		$this->Peraturan = new PeraturanModel();
 
 		if (!session()->get("user_id")) {
-			redirect('/');
+			redirect('/login');
 		}
 	}
 

@@ -15,7 +15,7 @@ class JenisTransaksi extends BaseController
 		$this->validation = \Config\Services::validation();
 
 		if (!session()->get("user_id")) {
-			redirect('/');
+			redirect('/login');
 		}
 	}
 

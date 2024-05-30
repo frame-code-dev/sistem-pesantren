@@ -18,7 +18,7 @@ class Santri extends BaseController
 		// var_dump(session()->get("user_id"));
 		// dd(session()->get("user_id"));
 		if (!session()->get("user_id")) {
-			redirect('/');
+			redirect('/login');
 		}
 	}
 
