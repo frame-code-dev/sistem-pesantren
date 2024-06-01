@@ -7,13 +7,13 @@
         <p class="my-6 text-gray-500 dark:text-gray-400">Yayasan Pondok Pesantren Nurul Imamul Hasan adalah salah satu pondok pesantren yang moderen, dan ber distribusi dalam pendidikan islamiyah.</p>
         <ul class="flex flex-wrap justify-center items-center mb-6 text-white dark:text-white">
             <li>
-                <a href="#" class="me-4 hover:underline md:mr-6 ">Tentang Pesantren</a>
+                <a href="<?=base_url('sejarah')?>" class="me-4 hover:underline md:mr-6 ">Tentang Pesantren</a>
             </li>
             <li>
-                <a href="#" class="me-4 hover:underline md:mr-6 ">Tentang Alumni</a>
+                <a href="<?=base_url('tentang-alumni')?>" class="me-4 hover:underline md:mr-6 ">Tentang Alumni</a>
             </li>
             <li>
-                <a href="#" class="me-4 hover:underline md:mr-6 ">Berita Terkini</a>
+                <a href="<?=base_url('berita')?>" class="me-4 hover:underline md:mr-6 ">Berita Terkini</a>
             </li>
             
         </ul>
