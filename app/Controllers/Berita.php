@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Auth_model;
 use App\Models\BeritaModel;
 use App\Models\KategoriModel;
 
@@ -25,13 +26,14 @@ class Berita extends BaseController
 	public function index()
 	{
 		$data["data"] = $this->berita->getAll();
+		
 		return view("backoffice/berita/index", $data);
 	}
 	public function create()
 	{
 		$data["title"] = "Tambah Berita";
 		$data["current_page"] = "Berita";
-		$data["kategori"] = $this->kategori->getAll();;
+		$data["kategori"] = $this->kategori->getAll();
 
 		return view("backoffice/berita/create", $data);
 	}
@@ -44,12 +46,19 @@ class Berita extends BaseController
 		$kategori = $this->request->getPost("kategori");
 		$gambar = $this->request->getFile("gambar");
 		$keterangan = $this->request->getPost("keterangan");
+		$content = $this->request->getPost("content");
+
+		$id =new Auth_model;
+        $user_id = $id->current_user()->id; 
 
 		$data = [
 			"judul" => $judul,
 			"kategori" => $kategori,
+			"user_id" => $user_id,
+			"slug" => url_title((string)$judul, '-', true),
 			"gambar" => $gambar,
 			"keterangan" => $keterangan,
+			"content" => $content,
 		];
 		if (!$valid) {
 			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
