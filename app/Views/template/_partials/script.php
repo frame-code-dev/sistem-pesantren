@@ -51,6 +51,25 @@
 				errorImage('Hanya boleh memilih file berupa gambar(.jpg, .jpeg, .png, .webp)');
 			}
 		})
+
+		$('#image').on('change', function(event) {
+			const file = event.target.files[0];
+			const imagePreview = $('#imagePreview');
+
+			if (file) {
+				const reader = new FileReader();
+
+				reader.onload = function(e) {
+					imagePreview.attr('src', e.target.result);
+					imagePreview.show();
+				}
+
+				reader.readAsDataURL(file);
+			} else {
+				imagePreview.attr('src', '');
+				imagePreview.hide();
+			}
+		});
 	});
 
 	var rupiahs = document.querySelectorAll('.rupiah');

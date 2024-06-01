@@ -263,6 +263,23 @@ class Transaksi extends BaseController
 			}
 		}
 
+		//kondisi tanggal masuk 
+		$santri = $this->santri->select("month(tanggal_masuk) as bulan,year(tanggal_masuk) as tahun,nama")
+			->where("id", $santriId)
+			->first();
+		if ($santri) {
+			if (
+				$santri["tahun"] > $tahun || ($santri["tahun"] == $tahun && $santri["bulan"] > $bulan)
+			) {
+				$namaSantri = $santri["nama"];
+				session()->setFlashdata("status_error", true);
+				$bulan = Helpers::getMontName($santri["bulan"] - 1);
+				$tahun = $santri["tahun"];
+				session()->setFlashdata('error', "Transaksi bulanan  untuk santri $namaSantri tidak boleh kurang dari  bulan $bulan   $tahun");
+				return redirect()->back()->withInput();
+			}
+		}
+
 		try {
 			$this->db->transBegin();
 			$data = [

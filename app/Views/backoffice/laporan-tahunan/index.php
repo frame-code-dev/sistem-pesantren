@@ -41,7 +41,7 @@ $currentYear = date("Y");
 		</div>
 		<?php if ($filter) : ?>
 			<div class="card bg-white p-5 mt-4 border rounded-md w-full relative overflow-x-auto">
-				<div class="flex justify-between">
+				<div class="flex justify-between mb-2">
 					<p class="mb-3">
 						Tahun : <?= $year ?>
 					</p>

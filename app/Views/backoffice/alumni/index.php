@@ -8,7 +8,7 @@
                     Master Data
                 </p>
                 <h2 class="font-bold tracking-tighter text-2xl text-theme-text">
-                    Data Alumni
+                    Alumni
                 </h2>
             </div>
             <div class="layout lg:flex grid grid-cols-1 lg:mt-0 mt-5 justify-end gap-5">
@@ -17,7 +17,7 @@
                         <svg class="w-3.5 h-3.5 me-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5" />
                         </svg>
-                        Tambah data
+                        Tambah Alumni
                     </button>
                 </div>
             </div>
