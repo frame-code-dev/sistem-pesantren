@@ -24,6 +24,11 @@ class JenisTransaksi extends Seeder
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
+            [
+                'nama'    => 'tabungan santri',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
         ];
 
         // Using Query Builder

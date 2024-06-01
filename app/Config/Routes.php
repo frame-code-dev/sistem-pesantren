@@ -84,6 +84,10 @@ $routes->group('dashboard', function ($routes) {
     $routes->get('laporan-tahunan', "LaporanTahunan::index");
     $routes->get('laporan-tahunan-export', "LaporanTahunan::download");
 
+    //Tabungan santri
+    $routes->get('tabungan-santri', "TabunganSantriController::index");
+    $routes->get('tabungan-santri-export', "TabunganSantriController::download");
+
     //peraturan
     $routes->get('peraturan', "Peraturan::index");
     $routes->post('peraturan/store', "Peraturan::store");
