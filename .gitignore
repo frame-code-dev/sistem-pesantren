@@ -5,6 +5,7 @@
 /storage/*.key
 /vendor
 /writable
+/public/upload
 .env
 .env.backup
 .env.production

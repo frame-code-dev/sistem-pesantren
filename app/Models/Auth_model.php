@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use CodeIgniter\Session\Session;
 
 class Auth_model extends Model
 {

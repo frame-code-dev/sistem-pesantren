@@ -1,5 +1,7 @@
 <?php
 
+use App\Controllers\Berita;
+use App\Controllers\BeritaController;
 use App\Controllers\WelcomeController;
 use CodeIgniter\Router\RouteCollection;
 
@@ -9,6 +11,9 @@ use CodeIgniter\Router\RouteCollection;
 
 // LANDING PAGE 
 $routes->get('/', [WelcomeController::class,'index']);
+// Berita
+$routes->get('/berita', [BeritaController::class,'index']);
+$routes->get('/berita/detail/(:any)', [BeritaController::class,'detail/$1']);
 
 
 $routes->get('/login', 'Auth::login');
