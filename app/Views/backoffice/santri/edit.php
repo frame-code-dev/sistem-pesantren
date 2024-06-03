@@ -44,11 +44,13 @@
             </div>
         </div>
         <div class="card bg-white p-5 mt-4 border rounded-md w-full relative">
-            <form action="<?= base_url('dashboard/santri/update/' . $data->id) ?>" method="POST" class="w-full mx-auto space-y-4" enctype="multipart/form-data">
+            <form action="<?= base_url('dashboard/santri/update/' . $data['id']) ?>" method="POST" class="w-full mx-auto space-y-4" enctype="multipart/form-data">
+                <p class="font-bold">Data Diri : </p>
+                <hr class="border ">
                 <div class="grid grid-cols-4 gap-3">
                     <div class="col-span-2">
                         <label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nis<span class="me-2 text-red-500">*</span></label>
-                        <input type="text" value="<?= set_value("nis", $data->nis) ?>" placeholder="Masukkan Nis" name="nis" id="nis" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" maxlength="10">
+                        <input type="text" value="<?= set_value("nis", $data['nis']) ?>" placeholder="Masukkan Nis" name="nis" id="nis" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" maxlength="10">
                         <div class="text-red-500 text-xs italic font-semibold">
                             <?php if (session("validation.nis")) : ?>
                                 <div class="text-red-500 text-sm">
@@ -59,7 +61,7 @@
                     </div>
                     <div class="col-span-2">
                         <label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nama<span class="me-2 text-red-500">*</span></label>
-                        <input type="text" value="<?= set_value("nama", $data->nama) ?>" placeholder="Masukkan Nama" name="nama" id="nama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        <input type="text" value="<?= set_value("nama", $data['nama']) ?>" placeholder="Masukkan Nama" name="nama" id="nama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         <div class="text-red-500 text-xs italic font-semibold">
                             <?php if (session("validation.nama")) : ?>
                                 <div class="text-red-500 text-sm">
@@ -69,8 +71,52 @@
                         </div>
                     </div>
                     <div class="col-span-2">
+                        <label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nisn<span class="me-2 text-red-500">*</span></label>
+                        <input type="text" value="<?= set_value("nisn", $data['nisn']) ?>" placeholder="Masukkan nisn" name="nisn" id="nisn" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        <div class="text-red-500 text-xs italic font-semibold">
+                            <?php if (session("validation.nisn")) : ?>
+                                <div class="text-red-500 text-sm">
+                                    <?= session("validation.nisn") ?>
+                                </div>
+                            <?php endif ?>
+                        </div>
+                    </div>
+                    <div class="col-span-2">
+                        <label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nik Santri<span class="me-2 text-red-500">*</span></label>
+                        <input type="text" value="<?= set_value("nik_santri", $data['nik_santri']) ?>" placeholder="Masukkan Nik Santri" name="nik_santri" id="nik_santri" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        <div class="text-red-500 text-xs italic font-semibold">
+                            <?php if (session("validation.nik_santri")) : ?>
+                                <div class="text-red-500 text-sm">
+                                    <?= session("validation.nik_santri") ?>
+                                </div>
+                            <?php endif ?>
+                        </div>
+                    </div>
+                    <div class="col-span-2">
+                        <label for="" class="block mb-2 text-sm font-semibold text-gray-900">Tempat Lahir<span class="me-2 text-red-500">*</span></label>
+                        <input type="text" value="<?= set_value("tempat_lahir", $data['tempat_lahir']) ?>" placeholder="Masukkan Tempat Lahir" name="tempat_lahir" id="tempat_lahir" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        <div class="text-red-500 text-xs italic font-semibold">
+                            <?php if (session("validation.tempat_lahir")) : ?>
+                                <div class="text-red-500 text-sm">
+                                    <?= session("validation.tempat_lahir") ?>
+                                </div>
+                            <?php endif ?>
+                        </div>
+                    </div>
+                    <div class="col-span-2">
+                        <label for="" class="block mb-2 text-sm font-semibold text-gray-900">No KK<span class="me-2 text-red-500">*</span></label>
+                        <input type="text" value="<?= set_value("no_kk", $data['no_kk']) ?>" placeholder="Masukkan No KK" name="no_kk" id="no_kk" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        <div class="text-red-500 text-xs italic font-semibold">
+                            <?php if (session("validation.no_kk")) : ?>
+                                <div class="text-red-500 text-sm">
+                                    <?= session("validation.no_kk") ?>
+                                </div>
+                            <?php endif ?>
+                        </div>
+                    </div>
+                    <div class="col-span-2">
                         <label for="telepon" class="block mb-2 text-sm font-semibold text-gray-900">Telepon<span class="me-2 text-red-500">*</span></label>
-                        <input type="text" value="<?= set_value("nama", $data->telepon) ?>" placeholder="Masukkan Telepon" name="telepon" id="telepon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        <input type="text" value="<?= set_value("nama", $data['telepon']) ?>" placeholder="Masukkan Telepon" name="telepon" id="telepon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         <div class="text-red-500 text-xs italic font-semibold">
                             <?php if (session("validation.telepon")) : ?>
                                 <div class="text-red-500 text-sm">
@@ -83,8 +129,8 @@
                         <label for="gender" class="block mb-2 text-sm font-semibold text-gray-900">Jenis Kelamin<span class="me-2 text-red-500">*</span></label>
                         <select id="gender" name="gender" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value=""> == Pilih Gender == </option>
-                            <option <?= $data->gender == 'l' ? 'selected' : '' ?> value="l">Laki Laki</option>
-                            <option <?= $data->gender == 'p' ? 'selected' : '' ?> value="p">Perempuan</option>
+                            <option <?= $data['gender'] == 'l' ? 'selected' : '' ?> value="l">Laki Laki</option>
+                            <option <?= $data['gender'] == 'p' ? 'selected' : '' ?> value="p">Perempuan</option>
                         </select>
                         <div class="text-red-500 text-xs italic font-semibold">
                             <?php if (session("validation.gender")) : ?>
@@ -96,7 +142,7 @@
                     </div>
                     <div class="col-span-2">
                         <label for="tanggal_lahir" class="block mb-2 text-sm font-semibold text-gray-900">Tanggal Lahir<span class="me-2 text-red-500">*</span></label>
-                        <input value="<?= set_value("tanggal_lahir", $data->tanggal_lahir) ?>" type="date" name="tanggal_lahir" id="tanggal_lahir" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        <input value="<?= set_value("tanggal_lahir", $data['tanggal_lahir']) ?>" type="date" name="tanggal_lahir" id="tanggal_lahir" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         <div class="text-red-500 text-xs italic font-semibold">
                             <?php if (session("validation.tanggal_lahir")) : ?>
                                 <div class="text-red-500 text-sm">
@@ -107,7 +153,7 @@
                     </div>
                     <div class="col-span-2">
                         <label for="tanggal_masuk" class="block mb-2 text-sm font-semibold text-gray-900">Tanggal Masuk<span class="me-2 text-red-500">*</span></label>
-                        <input type="date" value="<?= set_value("tanggal_masuk", $data->tanggal_masuk) ?>" name="tanggal_masuk" id="tanggal_masuk" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        <input type="date" value="<?= set_value("tanggal_masuk", $data['tanggal_masuk']) ?>" name="tanggal_masuk" id="tanggal_masuk" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         <div class="text-red-500 text-xs italic font-semibold">
                             <?php if (session("validation.tanggal_masuk")) : ?>
                                 <div class="text-red-500 text-sm">
@@ -118,7 +164,7 @@
                     </div>
                     <div class="col-span-2">
                         <label for="alamat" class="block mb-2 text-sm font-semibold text-gray-900">Alamat<span class="me-2 text-red-500">*</span></label>
-                        <textarea name="alamat" id="alamat" rows="4" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"><?= set_value("alamat", $data->alamat) ?></textarea>
+                        <textarea name="alamat" id="alamat" rows="4" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"><?= set_value("alamat", $data['alamat']) ?></textarea>
                         <div class="text-red-500 text-xs italic font-semibold">
                             <?php if (session("validation.alamat")) : ?>
                                 <div class="text-red-500 text-sm">
@@ -126,6 +172,134 @@
                                 </div>
                             <?php endif ?>
                         </div>
+                    </div>
+                </div>
+                <p class="font-bold">Data Orang Tua : </p>
+                <hr class="border ">
+                <div class="grid grid-cols-4 gap-3">
+                    <div class="col-span-2">
+                        <label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nama Ibu<span class="me-2 text-red-500">*</span></label>
+                        <input type="text" value="<?= set_value("nama_ibu", $data['nama_ibu']) ?>" placeholder="Masukkan Nama Ibu" name="nama_ibu" id="nama_ibu" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" maxlength="10">
+                        <div class="text-red-500 text-xs italic font-semibold">
+                            <?php if (session("validation.nama_ibu")) : ?>
+                                <div class="text-red-500 text-sm">
+                                    <?= session("validation.nama_ibu") ?>
+                                </div>
+                            <?php endif ?>
+                        </div>
+                    </div>
+                    <div class="col-span-2">
+                        <label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nik Ibu<span class="me-2 text-red-500">*</span></label>
+                        <input type="text" value="<?= set_value("nik_ibu", $data['nik_ibu']) ?>" placeholder="Masukkan Nik Ibu" name="nik_ibu" id="nik_ibu" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" maxlength="10">
+                        <div class="text-red-500 text-xs italic font-semibold">
+                            <?php if (session("validation.nik_ibu")) : ?>
+                                <div class="text-red-500 text-sm">
+                                    <?= session("validation.nik_ibu") ?>
+                                </div>
+                            <?php endif ?>
+                        </div>
+                    </div>
+                    <div class="col-span-2">
+                        <label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nama Ayah<span class="me-2 text-red-500">*</span></label>
+                        <input type="text" value="<?= set_value("nama_ayah", $data['nama_ayah']) ?>" placeholder="Masukkan Nama Ayah" name="nama_ayah" id="nama_ayah" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" maxlength="10">
+                        <div class="text-red-500 text-xs italic font-semibold">
+                            <?php if (session("validation.nama_ayah")) : ?>
+                                <div class="text-red-500 text-sm">
+                                    <?= session("validation.nama_ayah") ?>
+                                </div>
+                            <?php endif ?>
+                        </div>
+                    </div>
+                    <div class="col-span-2">
+                        <label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nik Ayah<span class="me-2 text-red-500">*</span></label>
+                        <input type="text" value="<?= set_value("nik_ayah", $data['nik_ayah']) ?>" placeholder="Masukkan Nik Ayah" name="nik_ayah" id="nik_ayah" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" maxlength="10">
+                        <div class="text-red-500 text-xs italic font-semibold">
+                            <?php if (session("validation.nik_ayah")) : ?>
+                                <div class="text-red-500 text-sm">
+                                    <?= session("validation.nik_ayah") ?>
+                                </div>
+                            <?php endif ?>
+                        </div>
+                    </div>
+                </div>
+                <p class="font-bold">File Santri : </p>
+                <hr class="border ">
+                <div class="grid grid-cols-4 gap-3">
+                    <div class="col-span-2">
+                        <?php if ($data['image']) : ?>
+                            <img src="<?= base_url('upload/santri/' . $data['id'] . '/' . $data['image']) ?>" id="image" class="rounded" style="width: 400px; height: 300px;" alt="">
+                        <?php else : ?>
+                            <img src="<?= base_url('default.jpg') ?>" id="image" class="rounded" style="width: 400px; height: 300px;" alt="">
+                        <?php endif ?>
+                        <img src="" id="image" class="rounded" alt="">
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Foto Santri</label>
+
+                        <input accept="image/png, image/jpeg, image/jpg, image/webp" name="image" class="block w-full text-sm text-gray-900 border only-image limit-size-2 border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 image" type="file" data-target="#image">
+                        <?php if (session("validation.image")) : ?>
+                            <div class="text-red-500 text-sm">
+                                <?= session("validation.image") ?>
+                            </div>
+                        <?php endif ?>
+                    </div>
+                    <div class="col-span-2">
+                        <?php if ($data['file_kk']) : ?>
+                            <img src="<?= base_url('upload/santri/'. $data['id'] . '/' . $data['file_kk']) ?>" id="foto_kk" class="rounded" style="width: 400px; height: 300px;" alt="">
+                        <?php else : ?>
+                            <img src="<?= base_url('default.jpg') ?>" id="foto_kk" class="rounded" style="width: 400px; height: 300px;" alt="">
+                        <?php endif ?>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Foto KK</label>
+
+                        <input accept="image/png, image/jpeg, image/jpg, image/webp" name="foto_kk" class="block w-full text-sm text-gray-900 border only-image limit-size-2 border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 image" type="file" data-target="#foto_kk">
+                        <?php if (session("validation.foto_kk")) : ?>
+                            <div class="text-red-500 text-sm">
+                                <?= session("validation.foto_kk") ?>
+                            </div>
+                        <?php endif ?>
+                    </div>
+                    <div class="col-span-2">
+                        <?php if ($data['file_akte']) : ?>
+                            <img src="<?= base_url('upload/santri/' . $data['id'] . '/' . $data['file_akte']) ?>" id="foto_akte" class="rounded" style="width: 400px; height: 300px;" alt="">
+                        <?php else : ?>
+                            <img src="<?= base_url('default.jpg') ?>" id="foto_akte" class="rounded" style="width: 400px; height: 300px;" alt="">
+                        <?php endif ?>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Foto Akte</label>
+
+                        <input accept="image/png, image/jpeg, image/jpg, image/webp" name="foto_akte" class="block w-full text-sm text-gray-900 border only-image limit-size-2 border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 image" type="file" data-target="#foto_akte">
+                        <?php if (session("validation.foto_akte")) : ?>
+                            <div class="text-red-500 text-sm">
+                                <?= session("validation.foto_akte") ?>
+                            </div>
+                        <?php endif ?>
+                    </div>
+                    <div class="col-span-2">
+                        <?php if ($data['file_ijazah']) : ?>
+                            <img src="<?= base_url('upload/santri/' . $data['id'] . '/' . $data['file_ijazah']) ?>" id="foto_ijazah" class="rounded" style="width: 400px; height: 300px;" alt="">
+                        <?php else : ?>
+                            <img src="<?= base_url('default.jpg') ?>" id="foto_ijazah" class="rounded" style="width: 400px; height: 300px;" alt="">
+                        <?php endif ?>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Foto Ijazah</label>
+
+                        <input accept="image/png, image/jpeg, image/jpg, image/webp" name="foto_ijazah" class="block w-full text-sm text-gray-900 border only-image limit-size-2 border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 image" type="file" data-target="#foto_ijazah">
+                        <?php if (session("validation.foto_ijazah")) : ?>
+                            <div class="text-red-500 text-sm">
+                                <?= session("validation.foto_ijazah") ?>
+                            </div>
+                        <?php endif ?>
+                    </div>
+                    <div class="col-span-2">
+                        <?php if ($data['file_skhu']) : ?>
+                            <img src="<?= base_url('upload/santri/' . $data['id'] . '/' . $data['file_skhu']) ?>" id="foto_skhu" class="rounded" style="width: 400px; height: 300px;" alt="">
+                        <?php else : ?>
+                            <img src="<?= base_url('default.jpg') ?>" id="foto_skhu" class="rounded" alt="">
+                        <?php endif ?>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Foto SKHU</label>
+
+                        <input accept="image/png, image/jpeg, image/jpg, image/webp" name="foto_skhu" class="block w-full text-sm text-gray-900 border only-image limit-size-2 border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 image" type="file" data-target="#foto_skhu">
+                        <?php if (session("validation.foto_skhu")) : ?>
+                            <div class="text-red-500 text-sm">
+                                <?= session("validation.foto_skhu") ?>
+                            </div>
+                        <?php endif ?>
                     </div>
                 </div>
                 <div class="flex justify-end align-middle content-center bg-gray-100 p-3 rounded-md">
