@@ -96,7 +96,7 @@ $currentYear = date("Y");
 						<p>Total Syahriah</p>
 					</div>
 					<div class="col-span-1">
-						<p>: <?= Helpers::formatRupiah($bulanan) ?> </p>
+						<p>: <?= Helpers::formatRupiah($tahunan) ?> </p>
 					</div>
 					<div class="col-span-1">
 						<p>Pemasukan Lain</p>
@@ -117,13 +117,13 @@ $currentYear = date("Y");
 						<p>Total Tahun Ini</p>
 					</div>
 					<div class="col-span-1">
-						<p>: <?= Helpers::formatRupiah($bulanan) ?> </p>
+						<p>: <?= Helpers::formatRupiah($totalTahunIni) ?> </p>
 					</div>
 					<div class="col-span-1">
 						<p>Total Tabungan</p>
 					</div>
 					<div class="col-span-1">
-						<p>: <?= Helpers::formatRupiah($pemasukanLain) ?> </p>
+						<p>: <?= Helpers::formatRupiah($totalTabungan) ?> </p>
 					</div>
 
 				</div>

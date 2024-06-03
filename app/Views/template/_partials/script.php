@@ -11,6 +11,44 @@
 <!-- <script src="editor/js/tinymce/tinymce.min.js"></script> -->
 <script src="<?= base_url('editor/js/tinymce/tinymce.min.js') ?>"></script>
 
+
+
+<!-- tab pane tabungan santri -->
+<script>
+	$(".tab  .tab-item").on("click", function() {
+		const classActive = ["bg-blue-600", "rounded-lg", "active", "text-white"];
+		const classNonActive = ["hover:text-gray-900", "hover:bg-gray-100", "dark:hover:bg-gray-800", "dark:hover: text-white"];
+		$idTabContent = $(this).attr("data-tabId");
+		$(".tab-content").addClass("hidden");
+		$($idTabContent).removeClass("hidden");
+		$("")
+
+		$(".tab-item").addClass(classNonActive);
+		$(".tab-item").removeClass(classActive);
+		$(this).addClass(classActive);
+		$(this).removeClass(classNonActive);
+		const titleAdd = $(this).attr("data-modalAddTitle");
+		const titleEdit = $(this).attr("data-modalEditTitle");
+		const kategori = $(this).attr("data-kategori");
+		$("#tabungan-santri-modal .modal-title").text(titleAdd);
+		$("#tabungan-santri-modal-edit .modal-title").text(titleEdit);
+		$("#tabungan-santri-modal [name=kategori]").val(kategori);
+	})
+
+
+	function updateTabunganSantri(url, el) {
+		const tanggal = $(el).attr("data-tanggal");
+		const nominal = $(el).attr("data-nominal");
+		$("#tabungan-santri-modal-edit form").attr("action", url)
+		$("#tabungan-santri-modal-edit [name=nominal]").val(nominal)
+		$("#tabungan-santri-modal-edit [name=tanggal]").val(tanggal)
+	}
+
+	function addTabunganSantri() {
+		$("[name=nominal]").val(nominal)
+		$("[name=tanggal]").val(tanggal)
+	}
+</script>
 <!-- text editor code -->
 <script>
 	tinymce.init({
@@ -100,28 +138,29 @@
 		return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
 	}
 
-	// validasi telepon
-	document.getElementById('telepon').addEventListener('input', function(e) {
-		this.value = this.value.replace(/\D/g, '');
+	if (document.getElementById("telepon")) {
+		// validasi telepon
+		document.getElementById('telepon').addEventListener('input', function(e) {
+			this.value = this.value.replace(/\D/g, '');
 
-		// Limit the length to 13 digits
-		if (this.value.length > 13) {
-			this.value = this.value.slice(0, 13);
-		}
-	});
+			// Limit the length to 13 digits
+			if (this.value.length > 13) {
+				this.value = this.value.slice(0, 13);
+			}
+		});
 
-	document.getElementById('telepon').addEventListener('keydown', function(e) {
-		// Allow control keys such as backspace, delete, arrow keys, etc.
-		const controlKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab', 'Escape'];
-		if (controlKeys.includes(e.key)) {
-			return;
-		}
-
-		// Prevent default action if the key is not a digit or if the length exceeds 13
-		if (!/^\d$/.test(e.key) || this.value.length >= 13) {
-			e.preventDefault();
-		}
-	});
+		document.getElementById('telepon').addEventListener('keydown', function(e) {
+			// Allow control keys such as backspace, delete, arrow keys, etc.
+			const controlKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab', 'Escape'];
+			if (controlKeys.includes(e.key)) {
+				return;
+			}
+			// Prevent default action if the key is not a digit or if the length exceeds 13
+			if (!/^\d$/.test(e.key) || this.value.length >= 13) {
+				e.preventDefault();
+			}
+		});
+	}
 
 	function deleteConfirm(event) {
 		console.log(event);
@@ -225,7 +264,7 @@ $status_success = $session->get('status_success');
 <?php endif ?>
 <script>
 	// Datatable
-	$('#datatable').DataTable({
+	$('#datatable,.datatable').DataTable({
 		"oLanguage": {
 			"sEmptyTable": "Maaf data belum tersedia."
 		},

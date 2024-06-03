@@ -86,7 +86,8 @@ $routes->group('dashboard', function ($routes) {
 
     //Tabungan santri
     $routes->get('tabungan-santri', "TabunganSantriController::index");
-    $routes->get('tabungan-santri-export', "TabunganSantriController::download");
+    $routes->post('add-tabungan-santri', "TabunganSantriController::store");
+    $routes->post('edit-tabungan-santri/(:any)', "TabunganSantriController::update/$1");
 
     //peraturan
     $routes->get('peraturan', "Peraturan::index");

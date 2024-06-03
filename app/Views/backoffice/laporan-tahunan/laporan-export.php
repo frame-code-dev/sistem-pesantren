@@ -63,7 +63,7 @@ if ($filter) : ?>
             <table style="width: 100%;">
                 <tr>
                     <td style="width: 600px;">Total Syahriah</td>
-                    <td>: <?= Helpers::formatRupiah($bulanan) ?> </td>
+                    <td>: <?= Helpers::formatRupiah($tahunan) ?> </td>
                 </tr>
                 <tr>
                     <td style="width: 600px;">Pemasukan Lain</td>
@@ -80,11 +80,11 @@ if ($filter) : ?>
             <table style="width: 100%;">
                 <tr>
                     <td style="width: 600px;">Total Tahun Ini</td>
-                    <td>: <?= Helpers::formatRupiah($bulanan) ?> </td>
+                    <td>: <?= Helpers::formatRupiah($totalTahunIni) ?> </td>
                 </tr>
                 <tr>
                     <td style="width: 600px;">Total Tabungan</td>
-                    <td>: <?= Helpers::formatRupiah($pemasukanLain) ?> </td>
+                    <td>: <?= Helpers::formatRupiah($totalTabungan) ?> </td>
                 </tr>
             </table>
         </div>
