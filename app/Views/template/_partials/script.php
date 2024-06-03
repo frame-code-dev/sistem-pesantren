@@ -70,6 +70,29 @@
 				imagePreview.hide();
 			}
 		});
+		$('.image').on('change', function(event) {
+			const file = event.target.files[0];
+			const target = $(this).data('target');
+			const imagePreview = $(`${target}`);
+
+			if (file) {
+				const reader = new FileReader();
+
+				reader.onload = function(e) {
+					imagePreview.attr('src', e.target.result);
+					imagePreview.css({
+						'width': '400px',
+						'height': '300px'
+					});
+					imagePreview.show();
+				}
+
+				reader.readAsDataURL(file);
+			} else {
+				imagePreview.attr('src', '');
+				imagePreview.hide();
+			}
+		});
 	});
 
 	var rupiahs = document.querySelectorAll('.rupiah');
