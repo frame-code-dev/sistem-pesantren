@@ -34,8 +34,8 @@ class TabunganSantriController extends BaseController
 		if ($santri) {
 
 			$data["filter"] = true;
-			$data["pengeluaran"] = $this->transaksi->getPengeluaran()->getResultArray();
-			$data["pemasukan"] = $this->transaksi->getPemasukan()->getResultArray();
+			$data["pengeluaran"] = $this->transaksi->getPengeluaranById($santri)->getResultArray();
+			$data["pemasukan"] = $this->transaksi->getPemasukanById($santri)->getResultArray();
 		}
 		return view("backoffice/tabungan-santri/index", $data);
 	}
@@ -107,5 +107,29 @@ class TabunganSantriController extends BaseController
 			session()->setFlashdata('error', 'Tabungan santri gagal diubah, <br>' . $e->getMessage());
 			return redirect()->back();
 		}
+	}
+
+
+	public function cetak($idSantri, $idTransaksi, $kategori)
+	{
+		$filename = "$kategori Santri ";
+		$transaksi  = $this->transaksi->where("id", $idTransaksi)->first();
+		$data["tanggal"] = Helpers::formatDate($transaksi["tanggal_bayar"]);
+		$data["nama"] = $this->santri->getById($idSantri)->nama;
+		$data["nominal"] = Helpers::formatRupiah($transaksi["nominal"]);
+		$data["title"] = $filename;
+		// instantiate and use the dompdf class
+		$dompdf = new Dompdf();
+
+		// load HTML content
+		$dompdf->loadHtml(view('backoffice/tabungan-santri/nota', $data));
+
+		// (optional) setup the paper size and orientation
+		$dompdf->setPaper('A4', 'landscape');
+		// render html as PDF
+		$dompdf->render();
+
+		// output the generated pdf
+		$dompdf->stream($filename);
 	}
 }

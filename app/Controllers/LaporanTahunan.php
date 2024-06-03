@@ -91,11 +91,14 @@ class LaporanTahunan extends BaseController
 
 			$pengeluaranTahunIni = $this->transaksi
 				->select("sum(nominal) as nominal")
-				->where("jenis_id", 4)
+				->where("jenis_id <>", 4)
 				->where("kategori", "pengeluaran")
 				->where("year(tanggal_bayar)", $year)
 				->get()->getRowArray();
-			$totalTabungan = $this->db->query('SELECT SUM(nominal)- (SELECT SUM(nominal) FROM transaksi WHERE kategori = "pengeluaran" GROUP BY kategori) as totalTabungan FROM transaksi WHERE jenis_id <> 4 AND kategori = "pemasukan" group BY kategori;')
+
+			$totalTabungan = $this->db->query('SELECT COALESCE(SUM(t1.nominal), 0) - COALESCE((SELECT SUM(t2.nominal) FROM transaksi t2 WHERE t2.kategori = "pengeluaran" AND t2.jenis_id <> 4), 0) AS totalTabungan
+			FROM transaksi t1 WHERE t1.jenis_id <> 4 AND t1.kategori = "pemasukan";
+')
 				->getRow();
 			$data["tahunan"] += $tahunan["total_nominal"];
 			$data["pemasukanLain"] = $pemasukanLain['total_nominal'] ?? 0;
@@ -174,12 +177,15 @@ class LaporanTahunan extends BaseController
 
 		$pengeluaranTahunIni = $this->transaksi
 			->select("sum(nominal) as nominal")
-			->where("jenis_id", 4)
+			->where("jenis_id <>", 4)
 			->where("kategori", "pengeluaran")
 			->where("year(tanggal_bayar)", $year)
 			->get()->getRowArray();
-		$totalTabungan = $this->db->query('SELECT SUM(nominal)- (SELECT SUM(nominal) FROM transaksi WHERE kategori = "pengeluaran" GROUP BY kategori) as totalTabungan FROM transaksi WHERE jenis_id <> 4 AND kategori = "pemasukan" group BY kategori;')
+		$totalTabungan = $this->db->query('SELECT 
+			COALESCE(SUM(t1.nominal), 0) - 
+			COALESCE((SELECT SUM(t2.nominal) FROM transaksi t2 WHERE t2.kategori = "pengeluaran" AND t2.jenis_id <> 4), 0) AS totalTabungan FROM transaksi t1 WHERE t1.jenis_id <> 4 AND t1.kategori = "pemasukan";')
 			->getRow();
+
 		$data["tahunan"] += $tahunan["total_nominal"];
 		$data["pemasukanLain"] = $pemasukanLain['total_nominal'] ?? 0;
 		$data["pengeluaran"] = $pengeluaranTahunIni['nominal'] ?? 0;
@@ -199,17 +205,18 @@ class LaporanTahunan extends BaseController
 		$dompdf->stream($filename);
 	}
 
-	public function indexBulanan(){
+	public function indexBulanan()
+	{
 
 		$month = $this->request->getGet("bulan") ?? (int) date("m");
 		$year = $this->request->getGet("year") ?? date("Y");
 
 		$data["dataBulan"] = $this->transaksi
-		->select("bulan")
-		->groupBy("bulan")
-		->where("tahun", $year)
-		->get()
-		->getResultArray();
+			->select("bulan")
+			->groupBy("bulan")
+			->where("tahun", $year)
+			->get()
+			->getResultArray();
 		$data["dataTahun"] = $this->transaksi->select("tahun")->groupBy("tahun")->get()->getResultArray();
 
 		$data['month'] = $month;
@@ -246,7 +253,7 @@ class LaporanTahunan extends BaseController
 			$pemasukan_lain = $this->transaksi
 				->select("sum(nominal) as total_nominal")
 				->where("jenis_id !=", 3)
-				->where("jenis_id != " , 4)
+				->where("jenis_id != ", 4)
 				->where('month(bulan)', $month)
 				->where('year(bulan)', $year)
 				->groupBy("bulan")
@@ -256,13 +263,13 @@ class LaporanTahunan extends BaseController
 			$pengeluaran = $this->transaksi
 				->select("sum(nominal) as total_nominal")
 				->where('kategori', 'pengeluaran')
-				->where("jenis_id != " , 4)
+				->where("jenis_id != ", 4)
 				->where('MONTH(bulan)', $month)
 				->where('YEAR(bulan)', $year)
 				->groupBy("bulan")
 				->groupBy("tahun")
 				->get()->getResultArray();
-			
+
 			$totalPemasukanLain = $pemasukan_lain["total_nominal"] ?? 0;
 			$totalPengeluaran = $pengeluaran["total_nominal"] ?? 0;
 
@@ -292,7 +299,7 @@ class LaporanTahunan extends BaseController
 			10 => "Oktober",
 			11 => "November",
 			12 => "Desember"
-		];	
+		];
 		$month = $this->request->getGet("bulan") ?? (int) date("m");
 		$year = $this->request->getGet("year") ?? date("Y");
 		$filename = "Laporan Bulan $bulan[$month] Tahun $year";
@@ -307,8 +314,8 @@ class LaporanTahunan extends BaseController
 			->countAllResults();
 
 		$totalSantri = $this->santri->where('status_santri', 'aktif')
-		->orWhere('status_santri', 'alumni')
-		->where("month(tanggal_masuk) <=", $month)
+			->orWhere('status_santri', 'alumni')
+			->where("month(tanggal_masuk) <=", $month)
 			->where("year(tanggal_masuk) <=", $year)
 			->where("month(tanggal_keluar) >=", $month)
 			->where("year(tanggal_keluar) >=", $year)

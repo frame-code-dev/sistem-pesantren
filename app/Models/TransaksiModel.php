@@ -70,6 +70,17 @@ class TransaksiModel extends Model
 			->orderBy("id", "desc")
 			->get();
 	}
+	public function getPengeluaranById($id)
+	{
+		return  $this->select("transaksi.*, jenis_transaksi.nama as jenis, santri.nama as santri, santri.nis as nis")
+			->join("jenis_transaksi", "transaksi.jenis_id = jenis_transaksi.id", "array")
+			->join("santri", "transaksi.santri_id = santri.id", "array")
+			->where("transaksi.jenis_id", 4)
+			->where("transaksi.kategori", "pengeluaran")
+			->where("santri_id", $id)
+			->orderBy("id", "desc")
+			->get();
+	}
 
 	public function getPemasukan()
 	{
@@ -78,6 +89,17 @@ class TransaksiModel extends Model
 			->join("santri", "transaksi.santri_id = santri.id", "array")
 			->where("transaksi.jenis_id", 4)
 			->where("transaksi.kategori", "pemasukan")
+			->orderBy("id", "desc")
+			->get();
+	}
+	public function getPemasukanById($id)
+	{
+		return  $this->select("transaksi.*, jenis_transaksi.nama as jenis, santri.nama as santri, santri.nis as nis")
+			->join("jenis_transaksi", "transaksi.jenis_id = jenis_transaksi.id", "array")
+			->join("santri", "transaksi.santri_id = santri.id", "array")
+			->where("transaksi.jenis_id", 4)
+			->where("transaksi.kategori", "pemasukan")
+			->where("santri_id", $id)
 			->orderBy("id", "desc")
 			->get();
 	}

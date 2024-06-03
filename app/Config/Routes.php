@@ -14,7 +14,7 @@ $routes->get('/logout', "Auth::logout");
 // dashboard 
 $routes->get('/dashboard', "Dashboard::index", ['as' => 'dashboard']);
 
-$routes->group('dashboard', function ($routes) {
+$routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     // user 
     $routes->get('user', "User::index");
     $routes->get('user/create', "User::create");
@@ -83,13 +83,14 @@ $routes->group('dashboard', function ($routes) {
     //laporan bulanan
     $routes->get('laporan-bulanan', "LaporanTahunan::indexBulanan");
     $routes->get('laporan-bulanan-export', "LaporanTahunan::downloadBulanan");
-    
+
     //laporan tahunan
     $routes->get('laporan-tahunan', "LaporanTahunan::index");
     $routes->get('laporan-tahunan-export', "LaporanTahunan::download");
 
     //Tabungan santri
     $routes->get('tabungan-santri', "TabunganSantriController::index");
+    $routes->get('tabungan-santri/(:any)/(:any)/(:any)', "TabunganSantriController::cetak/$1/$2/$3");
     $routes->post('add-tabungan-santri', "TabunganSantriController::store");
     $routes->post('edit-tabungan-santri/(:any)', "TabunganSantriController::update/$1");
 

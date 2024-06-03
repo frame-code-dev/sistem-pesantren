@@ -70,7 +70,8 @@ $this->extend('template/app') ?>
 									<td scope="row" class="px-2 py-2"><?= Helpers::formatRupiah($pln["nominal"]) ?></td>
 									<td scope="row" class="px-2 py-2"><?= Helpers::formatDate($pln["tanggal_bayar"]) ?></td>
 									<td scope="row" class="px-2 py-2">
-										<button data-modal-target="tabungan-santri-modal-edit" data-modal-toggle="tabungan-santri-modal-edit" data-nominal="<?= Helpers::formatRupiah($pln['nominal']) ?>" data-tanggal="<?= date("Y-m-d", strtotime($pln['tanggal_bayar'])) ?>" onclick="updateTabunganSantri('/dashboard/edit-tabungan-santri/<?= $pln['id'] ?>',this)" class=" inline-block px-4 py-3 text-white bg-blue-600 rounded-lg active" aria-current="page">Ubah</button>
+										<button data-modal-target="tabungan-santri-modal-edit" data-modal-toggle="tabungan-santri-modal-edit" data-nominal="<?= Helpers::formatRupiah($pln['nominal']) ?>" data-tanggal="<?= date("Y-m-d", strtotime($pln['tanggal_bayar'])) ?>" onclick="updateTabunganSantri('/dashboard/edit-tabungan-santri/<?= $pln['id'] ?>',this)" class=" inline-block px-4 py-3 text-white bg-green-600 rounded-lg active" aria-current="page">Ubah</button>
+										<a href="<?= base_url("dashboard/tabungan-santri/$santriId/" . $pln['id'] . "/pemasukan") ?>" class=" inline-block px-4 py-3 text-white bg-green-600 rounded-lg active" aria-current="page">Cetak</a>
 									</td>
 								</tr>
 							<?php endforeach; ?>
@@ -99,7 +100,8 @@ $this->extend('template/app') ?>
 									<td scope="row" class="px-2 py-2"><?= Helpers::formatRupiah($pln["nominal"]) ?></td>
 									<td scope="row" class="px-2 py-2"><?= Helpers::formatDate($pln["tanggal_bayar"]) ?></td>
 									<td scope="row" class="px-2 py-2">
-										<button data-modal-target="tabungan-santri-modal-edit" data-modal-toggle="tabungan-santri-modal-edit" data-nominal="<?= Helpers::formatRupiah($pln['nominal']) ?>" data-tanggal="<?= date("Y-m-d", strtotime($pln['tanggal_bayar'])) ?>" onclick="updateTabunganSantri('/dashboard/edit-tabungan-santri/<?= $pln['id'] ?>',this)" class=" inline-block px-4 py-3 text-white bg-blue-600 rounded-lg active" aria-current="page">Ubah</button>
+										<button data-modal-target="tabungan-santri-modal-edit" data-modal-toggle="tabungan-santri-modal-edit" data-nominal="<?= Helpers::formatRupiah($pln['nominal']) ?>" data-tanggal="<?= date("Y-m-d", strtotime($pln['tanggal_bayar'])) ?>" onclick="updateTabunganSantri('/dashboard/edit-tabungan-santri/<?= $pln['id'] ?>',this)" class=" inline-block px-4 py-3 text-white bg-green-600 rounded-lg active" aria-current="page">Ubah</button>
+										<a href="<?= base_url("dashboard/tabungan-santri/$santriId/" . $pln['id'] . "/pengeluaran") ?>" class=" inline-block px-4 py-3 text-white bg-green-600 rounded-lg active" aria-current="page">Cetak</a>
 									</td>
 								</tr>
 							<?php endforeach; ?>
@@ -127,7 +129,7 @@ $this->extend('template/app') ?>
 				<!-- Modal header -->
 				<div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
 					<h3 class="text-xl modal-title font-semibold text-gray-900 dark:text-white">
-						Ubah Pemasukan Santri
+						Tambah Pemasukan Santri
 					</h3>
 					<button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="tabungan-santri-modal">
 						<svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -162,7 +164,7 @@ $this->extend('template/app') ?>
 				<!-- Modal header -->
 				<div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
 					<h3 class="text-xl modal-title font-semibold text-gray-900 dark:text-white">
-						Tambah Pemasukan Santri
+						Ubah Pemasukan Santri
 					</h3>
 					<button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="tabungan-santri-modal-edit">
 						<svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
