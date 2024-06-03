@@ -35,6 +35,9 @@ class Auth_model extends Model
 
 		// bikin session
 		session()->set(self::SESSION_KEY, $user->id);
+		session()->set("username", $user->username);
+		session()->set("name", $user->nama);
+		session()->set("isLogin", true);
 		return $user->id;
 		// $this->session->set_userdata([self::SESSION_KEY => $user->id]);
 

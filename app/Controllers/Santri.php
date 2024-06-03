@@ -15,8 +15,7 @@ class Santri extends BaseController
 	{
 		$this->validation = \Config\Services::validation();
 		$this->santriModel = new Santri_model();
-		// var_dump(session()->get("user_id"));
-		// dd(session()->get("user_id"));
+
 		if (!session()->get("user_id")) {
 			redirect('/');
 		}
