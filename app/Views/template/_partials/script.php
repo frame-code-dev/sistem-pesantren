@@ -49,6 +49,15 @@
 		$("[name=tanggal]").val(tanggal)
 	}
 </script>
+
+
+
+<script>
+	$(".sidebar-menu").on("click", function() {
+		const url = $(this).find("a").attr("href");
+		console.log(url);
+	})
+</script>
 <!-- text editor code -->
 <script>
 	tinymce.init({
