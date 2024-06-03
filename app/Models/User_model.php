@@ -37,6 +37,13 @@ class User_model extends Model
             'role' => 'required',
         ];
     }
+    public function rules_profile()
+    {
+        return [
+            'nama' => 'required',
+            'username' => 'required',
+        ];
+    }
 
     public function getAll()
     {
@@ -46,6 +53,21 @@ class User_model extends Model
     public function getById($id)
     {
         return $this->db->table($this->_table)->where("id", $id)->get()->getRow();
+    }
+
+    public function saveProfile($id, $data)
+    {
+        $nameFile = $data["gambar"]->getRandomName();
+        $data["image"] = $nameFile;
+        $imageFile  = $data["gambar"];
+        unset($data["gambar"]);
+        try {
+            $this->db->table($this->_table)->where("id", $id)->update($data);
+            $this->storeImage($id, $nameFile, $imageFile);
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
 
     public function countData($role)
@@ -68,5 +90,10 @@ class User_model extends Model
     public function deleteData($id)
     {
         return $this->db->table($this->_table)->delete(array("id" => $id));
+    }
+
+    public function storeImage($id, $name, $image)
+    {
+        $image->move("../public/upload/profile/$id/", $name);
     }
 }

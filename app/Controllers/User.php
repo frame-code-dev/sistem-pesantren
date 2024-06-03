@@ -52,6 +52,7 @@ class User extends BaseController
 				"username" => $username,
 				"password" => $hashedPassword,
 				"role" => $role,
+				"gambar" => 'default.jpg',
 			];
 			$this->userModel->saveData($data);
 			session()->setFlashdata("status_success", true);
@@ -65,6 +66,41 @@ class User extends BaseController
 			session()->setFlashdata("status_error", true);
 			session()->setFlashdata('error', 'Data user gagal ditambahkan, <br>' . $e->getMessage());
 			return redirect()->back();
+		}
+	}
+
+	public function profile() {
+		$userId = session()->get("user_id");
+		$data['data'] = $this->userModel->getById($userId);
+		return view('backoffice/user/profile', $data);
+	}
+	public function profilePost() {
+		var_dump('test');
+		die;
+		$valid = $this->validate($this->userModel->rules_profile());
+
+		$nama = $this->request->getPost("nama");
+		$username = $this->request->getPost("username");
+		$gambar = $this->request->getFile("gambar");
+		$userId = session()->get("user_id");
+
+		$data = [
+			"nama" => $nama,
+			"username" => $username,
+			"gambar" => $gambar,
+		];
+		if (!$valid) {
+			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
+		}
+
+		if ($this->userModel->saveProfile($userId, $data)) {
+			session()->setFlashdata("status_success", true);
+			session()->setFlashdata('message', 'Profile berhasil diubah');
+			return redirect()->to('profile');
+		} else {
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'Profile gagal diubah');
+			return redirect()->to('profile');
 		}
 	}
 
@@ -96,6 +132,7 @@ class User extends BaseController
 				"nama" => $nama,
 				"username" => $username,
 				"role" => $role,
+				"image" => "default.jpg",
 			];
 			$this->userModel->updateData($id, $data);
 			session()->setFlashdata("status_success", true);

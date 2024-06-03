@@ -14,7 +14,10 @@ $routes->get('/logout', "Auth::logout");
 // dashboard 
 $routes->get('/dashboard', "Dashboard::index", ['as' => 'dashboard']);
 
-$routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
+$routes->group('dashboard',  ['filter' => 'auth'], function ($routes) {
+    // profile
+    $routes->get('profile', "User::profile");
+    $routes->post('profile-post', "User::profilePost");
     // user 
     $routes->get('user', "User::index");
     $routes->get('user/create', "User::create");
