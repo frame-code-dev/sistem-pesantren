@@ -116,6 +116,14 @@ class Transaksi extends BaseController
 		}
 	}
 
+	public function edit($id){
+		$data["title"] = "Pemasukan";
+		$data["current_page"] = "Pendaftaran";
+		$data["data"] = $this->transaksi->detailTransaksi($id);
+		$data["santri"] = $this->santri->getSantriRegistrasi()->getResultArray();
+		return view("backoffice/pendaftaran/edit", $data);
+	}
+
 	public function pendaftaranUlang()
 	{
 		$data["tittle"] = "Pemasukan";

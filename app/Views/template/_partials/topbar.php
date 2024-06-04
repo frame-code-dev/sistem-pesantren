@@ -26,7 +26,7 @@
 							<?php if ($image) : ?>
 								<img class="w-8 h-8 rounded-full" src="<?= base_url("upload/image/" . $user_id . "/" . $image) ?>" alt="user photo">
 							<?php else : ?>
-								<img class="w-8 h-8 rounded-full" src="<?= base_url('default.jpg') ?>" alt="user photo">
+								<img class="w-8 h-8 rounded-full" src="<?= base_url('user.jpg') ?>" alt="user photo">
 							<?php endif; ?>
 						</button>
 					</div>

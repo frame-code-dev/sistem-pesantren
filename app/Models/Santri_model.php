@@ -277,4 +277,11 @@ class Santri_model extends Model
     public function getAlumni(){
         return $this->where('status_santri', 'alumni')->findAll();
     }
+
+    public function updatedStatus($status){
+        $result = "";
+        if ($status = "alumni") {
+            
+        }
+    }
 }

@@ -90,6 +90,7 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->get('pendaftaran', "Transaksi::index");
     $routes->get('pendaftaran-add', "Transaksi::create");
     $routes->post('pendaftaran-post', "Transaksi::store");
+    $routes->get('pendaftaran/edit/(:any)', "Transaksi::edit/$1");
     
     //pendaftaran ulang
     $routes->get('pendaftaran-ulang', "Transaksi::pendaftaranUlang");
