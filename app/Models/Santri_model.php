@@ -273,4 +273,8 @@ class Santri_model extends Model
     {
         $image->move("../public/upload/santri/$id/", $name);
     }
+
+    public function getAlumni(){
+        return $this->where('status_santri', 'alumni')->findAll();
+    }
 }

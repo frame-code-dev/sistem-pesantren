@@ -39,29 +39,41 @@
                 <hr>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 content-center pt-16 px-4 md:px-0">
-                <div class="w-full md:max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <img class="rounded-t-lg w-full bg-cover" src="https://flowbite.com/docs/images/examples/image-2@2x.jpg">
-                    <div class="p-4">
-                        <div class="mb-3">
-                            <h4 class="font-bold text-gray-900 text-center">Rifjan Jundila</h4>
-                            <hr>
-                        </div>
-                        <div class="flex justify-center gap-4 text-gray-500 text-sm">
-                            <div class="inline-flex items-center">
-                                <div>
-                                    <svg class="w-5 h-5 text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 10h16M8 14h8m-4-7V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z"/>
-                                    </svg>
+                    <?php $no = 1;
+                    foreach ($data as $row) : ?>
+                        <?php
+                        $gender = $row['gender'];
+                        if ($gender == 'l') {
+                            $jenis_kelamin = "Laki-Laki";
+                        } else {
+                            $jenis_kelamin = "Perempuan";
+                        }
+                        ?>
+                        <div class="w-full md:max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                            <img class="rounded-t-lg w-full bg-cover" src="<?=$row['image'] != 'default.jpg' || $row['image'] == null  ? base_url("upload/" . $row["id"] . "/") . $row["image"] : 'https://flowbite.com/docs/images/examples/image-2@2x.jpg'?>">
+                            <div class="p-4">
+                                <div class="mb-3 text-center">
+                                    <h4 class="font-bold text-gray-900 text-center"><?= esc($row['nama']) ?></h4>
+                                    <span class="text-xs text-gray-700 text-center"><?=$jenis_kelamin?></span>
+                                    <hr>
+                                </div>
+                                <div class="flex justify-center gap-4 text-gray-500 text-sm">
+                                    <div class="inline-flex items-center">
+                                        <div>
+                                            <svg class="w-5 h-5 text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 10h16M8 14h8m-4-7V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z"/>
+                                            </svg>
 
+                                        </div>
+                                        <div class="ml-2">
+                                            <span class="text-xs"><?= esc($row['tanggal_lahir'] != null ? $row['tanggal_lahir'] : '-') ?></span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="ml-2">
-                                    <span class="text-xs">20-10-2024</span>
-                                </div>
+                                <p class="text-sm text-gray-600"><?= esc($row['motto'] != null ? $row['motto'] : '-') ?></p>
                             </div>
                         </div>
-                        <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                    </div>
-                </div>
+                    <?php endforeach; ?>
             </div>
         </div>
     </section>
