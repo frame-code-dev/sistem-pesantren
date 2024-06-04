@@ -92,12 +92,15 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->post('pendaftaran-post', "Transaksi::store");
     $routes->get('pendaftaran/edit/(:any)', "Transaksi::edit/$1");
     $routes->post('pendaftaran/update/(:any)', "Transaksi::update/$1");
-    $routes->post('pendaftaran/delete/(:any)', "Transaksi::delete/$1");
+    $routes->get('pendaftaran/delete/(:any)', "Transaksi::delete/$1");
     
     //pendaftaran ulang
     $routes->get('pendaftaran-ulang', "Transaksi::pendaftaranUlang");
     $routes->get('pendaftaran-ulang-add', "Transaksi::pendaftaranUlangCreate");
     $routes->post('pendaftaran-ulang-post', "Transaksi::pendaftaranUlangStore");
+    $routes->get('pendaftaran-ulang/edit/(:any)', "Transaksi::pendaftaranUlangEdit/$1");
+    $routes->post('pendaftaran-ulang/update/(:any)', "Transaksi::pendaftaranUlangUpdate/$1");
+    $routes->get('pendaftaran-ulang/delete/(:any)', "Transaksi::pendaftaranUlangDelete/$1");
     
     //bulanan
     $routes->get('bulanan', "Transaksi::indexBulanan");
