@@ -11,7 +11,7 @@ class BeritaModel extends Model
 	protected $table = "berita_acara";
 	protected $primaryKey = "id";
 	protected $useAutoIncrement = true;
-	protected $allowedFields = ["judul", "keterangan", "kategori_id", "image"];
+	protected $allowedFields = ["judul", "keterangan", "kategori_id", "image","content",'user_id','slug','created_at'];
 
 
 	public function rulesInsert()
@@ -20,6 +20,7 @@ class BeritaModel extends Model
 			'judul' => 'required',
 			'kategori' => 'required',
 			'keterangan' => 'required',
+			'content' => 'required',
 			'gambar' => [
 				'rules' => 'max_size[gambar,2048]|is_image[gambar]|mime_in[gambar,image/jpg,image/jpeg,image/png,image/gif]',
 				'errors' => [
@@ -50,11 +51,40 @@ class BeritaModel extends Model
 	}
 
 
-	public function getAll()
+	public function getAll($limit = 0)
 	{
-		return  $this->select("berita_acara.id,ketegori_berita.nama as kategori , judul,keterangan,image")
+		return  $this->select("berita_acara.id,ketegori_berita.nama as kategori ,users.id as id_user, users.username, judul,keterangan,content,image,slug,berita_acara.created_at")
 			->join("ketegori_berita", "berita_acara.kategori_id = ketegori_berita.id", "array")
+			->join("users", "berita_acara.user_id = users.id", "array")
+			->limit($limit)
 			->orderBy("id", "desc")->findAll();
+	}
+	public function all($limit = 0, $search = null)
+	{
+		$this->builder()
+			->select("berita_acara.id,ketegori_berita.nama as kategori ,users.id as id_user, users.username, judul,keterangan,content,image,slug,berita_acara.created_at")
+			->join("ketegori_berita", "berita_acara.kategori_id = ketegori_berita.id", "array")
+			->join("users", "berita_acara.user_id = users.id", "array")
+			->limit($limit)
+				->orderBy("id", "desc");
+		if ($search != "" || $search != null) {
+			$this->like("berita_acara.judul", $search)
+				->orLike('keterangan', $search)
+				->orLike('ketegori_berita.nama', $search);
+		}
+		return [
+			'berita'  => $this->paginate($limit),
+			'pager' => $this->pager,
+		];
+	}
+
+	public function getBySlug($slug)
+	{
+		return  $this->select("berita_acara.id,ketegori_berita.nama as kategori ,users.id as id_user, users.username, judul,keterangan,content,image,slug,berita_acara.created_at")
+			->join("ketegori_berita", "berita_acara.kategori_id = ketegori_berita.id", "array")
+			->join("users", "berita_acara.user_id = users.id", "array")
+			->where('slug', $slug)
+			->first();
 	}
 	public function getById($id)
 	{

@@ -1,12 +1,22 @@
 <?php
 
+use App\Controllers\Berita;
+use App\Controllers\BeritaController;
+use App\Controllers\WelcomeController;
 use CodeIgniter\Router\RouteCollection;
 
 /**
  * @var RouteCollection $routes
  */
 
-$routes->get('/', 'Auth::login');
+// LANDING PAGE 
+$routes->get('/', [WelcomeController::class,'index']);
+// Berita
+$routes->get('/berita', [BeritaController::class,'index']);
+$routes->get('/berita/detail/(:any)', [BeritaController::class,'detail/$1']);
+
+
+$routes->get('/login', 'Auth::login');
 // $routes->get('default_controller') = 'auth/login';
 $routes->get('/login', "Auth::login", ['as' => 'login']);
 $routes->post('/login', 'Auth::loginPost', ['as' => 'loginPost']);

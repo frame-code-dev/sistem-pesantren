@@ -1,0 +1,32 @@
+{
+  "name": "cms-pesantren",
+  "version": "1.0.0",
+  "description": "CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.\r More information can be found at the [official site](https://codeigniter.com).",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "postcss assets/css/tailwind.css -o public/css/tailwind.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rifjan29/sistem-pesantren.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rifjan29/sistem-pesantren/issues"
+  },
+  "homepage": "https://github.com/rifjan29/sistem-pesantren#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.3"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.19",
+    "flowbite": "^2.3.0",
+    "postcss": "^8.4.38"
+  }
+}
