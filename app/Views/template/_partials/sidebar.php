@@ -2,7 +2,16 @@
 	<div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
 		<div class="flex items-center mb-4">
 			<div>
-				<img src="https://flowbite.com/docs/images/people/profile-picture-1.jpg" class="w-20 h-20 rounded-full" alt="">
+				<?php
+				$session = \Config\Services::session();
+				$user_id = $session->get('user_id');
+				$image = $session->get('image');
+				?>
+				<?php if ($image) : ?>
+					<img src="<?= base_url("upload/image/". $user_id . "/" . $image) ?>" class="w-20 h-20 rounded-full" alt="">
+				<?php else : ?>
+					<img src="<?= base_url('default.jpg') ?>" class="w-20 h-20 rounded-full" alt="">
+				<?php endif; ?>
 			</div>
 			<div class="ms-4">
 				<?php
