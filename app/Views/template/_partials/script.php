@@ -53,9 +53,22 @@
 
 
 <script>
+	//set session menu active
 	$(".sidebar-menu").on("click", function() {
 		const url = $(this).find("a").attr("href");
-		console.log(url);
+		sessionStorage.setItem("sidebar-active", url)
+	})
+
+	//show if have menu active
+	$(".sidebar-menu").each(function() {
+		const classActive = ["bg-gray-200", "dark:bg-gray-700"];
+		const urlActive = sessionStorage.getItem("sidebar-active")
+		const url = $(this).find("a").attr("href");
+		if (urlActive == url) {
+			$(this).find("a").addClass(classActive);
+			$(this).parent().parent().find("ul").addClass("hidden");
+			$(this).parent().removeClass("hidden");
+		}
 	})
 </script>
 <!-- text editor code -->
