@@ -22,9 +22,12 @@ $routes->get('/login', "Auth::login", ['as' => 'login']);
 $routes->post('/login', 'Auth::loginPost', ['as' => 'loginPost']);
 $routes->get('/logout', "Auth::logout");
 // dashboard 
-$routes->get('/dashboard', "Dashboard::index", ['as' => 'dashboard']);
 
-$routes->group('dashboard', function ($routes) {
+$routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
+    $routes->get('/', "Dashboard::index", ['as' => 'dashboard']);
+    //profile
+    $routes->get('profile', "User::profile");
+    $routes->post('profile-post', "User::profilePost");
     // user 
     $routes->get('user', "User::index");
     $routes->get('user/create', "User::create");
@@ -89,6 +92,20 @@ $routes->group('dashboard', function ($routes) {
     //visi-misi
     $routes->get('visi-misi', "VisiMisi::index");
     $routes->post('visi-misi', "VisiMisi::store");
+
+    //laporan bulanan
+    $routes->get('laporan-bulanan', "LaporanTahunan::indexBulanan");
+    $routes->get('laporan-bulanan-export', "LaporanTahunan::downloadBulanan");
+
+    //laporan tahunan
+    $routes->get('laporan-tahunan', "LaporanTahunan::index");
+    $routes->get('laporan-tahunan-export', "LaporanTahunan::download");
+
+    //Tabungan santri
+    $routes->get('tabungan-santri', "TabunganSantriController::index");
+    $routes->get('tabungan-santri/(:any)/(:any)/(:any)', "TabunganSantriController::cetak/$1/$2/$3");
+    $routes->post('add-tabungan-santri', "TabunganSantriController::store");
+    $routes->post('edit-tabungan-santri/(:any)', "TabunganSantriController::update/$1");
 
     //peraturan
     $routes->get('peraturan', "Peraturan::index");

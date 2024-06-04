@@ -71,10 +71,11 @@
 							</div>
 						<?php endif ?>
 					</div>
-					<div class="col-span-2">
+					<div class="col-span-2 ">
+						<img src="" id="imagePreview" class="rounded" alt="">
 						<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Gambar</label>
 
-						<input accept="image/png, image/jpeg, image/jpg, image/webp" required name="gambar" class="block w-full text-sm text-gray-900 border only-image limit-size-2 border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+						<input accept="image/png, image/jpeg, image/jpg, image/webp" required name="gambar" class="block w-full text-sm text-gray-900 border only-image limit-size-2 border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="image" type="file">
 						<?php if (session("validation.gambar")) : ?>
 							<div class="text-red-500 text-sm">
 								<?= session("validation.gambar") ?>
