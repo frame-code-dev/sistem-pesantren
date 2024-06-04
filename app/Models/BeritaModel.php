@@ -64,7 +64,9 @@ class BeritaModel extends Model
 	public function all($limit = 0, $search = null)
 	{
 		$this->builder()
-			->select("berita_acara.id,ketegori_berita.nama as kategori ,users.id as id_user, users.username, judul,keterangan,content,image,slug,berita_acara.created_at")
+			->select("berita_acara.id,ketegori_berita.nama as kategori ,users.id as id_user, users.username, 
+					berita_acara.judul,berita_acara.keterangan,berita_acara.content,berita_acara.image,berita_acara.slug,
+					berita_acara.created_at")
 			->join("ketegori_berita", "berita_acara.kategori_id = ketegori_berita.id", "array")
 			->join("users", "berita_acara.user_id = users.id", "array")
 			->limit($limit)
