@@ -20,7 +20,6 @@ class Helpers
     );
     public static function getMontName($index)
     {
-
         return self::$bulan[$index];
     }
 
@@ -39,6 +38,12 @@ class Helpers
         $month = date("n", strtotime($date));
         $date = date("d", strtotime($date));
         $dateFormat = "$date " . self::$bulan[$month - 1] . " $year";
+        return $dateFormat;
+    }
+
+    public static function formatDates($date)
+    {
+        $dateFormat = date("Y-m-d", strtotime($date));
         return $dateFormat;
     }
 }

@@ -312,4 +312,117 @@ class Transaksi extends BaseController
 			return redirect()->back()->withInput();
 		}
 	}
+
+	public function indexPengeluaran()
+	{
+		$data['data'] = $this->transaksi->getPengeluarans()->getResultArray();
+		return view('backoffice/pengeluaran/index', $data);
+	}
+
+	public function createPengeluaran()
+	{
+		return view('backoffice/pengeluaran/create',);
+	}
+
+	public function storePengeluaran(){
+		$keterangan = $this->request->getPost("keterangan");
+		// var_dump($keterangan);
+		// die();
+		$tanggal_bayar = $this->request->getPost("tanggal_bayar");
+		$nominal = $this->replaceRupiah($this->request->getPost("nominal"));
+		$userId = session()->get("user_id");
+
+		$valid = $this->validateData([
+			"keterangan" => $keterangan,
+			"tanggal_bayar" => $tanggal_bayar,
+			"nominal" => $nominal
+		], $this->transaksi->rulesPengeluaran());
+		if (!$valid) {
+			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
+		}
+
+		try {
+			$data = [
+				"kategori" => "pengeluaran",
+				"nominal" => $nominal,
+				"no_transaksi" => $this->transaksi->generateKode(),
+				"tanggal_bayar" => $tanggal_bayar,
+				"user_id" => $userId,
+				"keterangan" => $keterangan
+			];
+
+			$this->transaksi->storePengeluaran($data);
+
+			session()->setFlashdata("status_success", true);
+			session()->setFlashdata('message', 'Tambah pengeluaran berhasil.');
+			return redirect()->to('dashboard/pengeluaran');
+		} catch (\Throwable $th) {
+			$this->db->transRollback();
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'Tambah pengeluaran gagal, <br>' . $th->getMessage());
+			return redirect()->to('dashboard/pengeluaran');
+		} catch (\Exception $e) {
+			$this->db->transRollback();
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'Tambah pengeluaran gagal, <br>' . $e->getMessage());
+			return redirect()->to('dashboard/pengeluaran');
+		}
+	}
+
+	public function editPengeluaran($id){
+		$data['data'] = $this->transaksi->detailTransaksi($id);
+		return view('backoffice/pengeluaran/edit', $data);
+	}
+
+	public function updatePengeluaran($id)
+	{
+		$keterangan = $this->request->getPost("keterangan");
+		$tanggal_bayar = $this->request->getPost("tanggal_bayar");
+		$nominal = $this->replaceRupiah($this->request->getPost("nominal"));
+		$userId = session()->get("user_id");
+
+		$valid = $this->validateData([
+			"keterangan" => $keterangan,
+			"tanggal_bayar" => $tanggal_bayar,
+			"nominal" => $nominal
+		],
+			$this->transaksi->rulesPengeluaran()
+		);
+		if (!$valid) {
+			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
+		}
+
+		try {
+			$data = [
+				"nominal" => $nominal,
+				"tanggal_bayar" => $tanggal_bayar,
+				"user_id" => $userId,
+				"keterangan" => $keterangan
+			];
+
+			$this->transaksi->updatePendaftaran($id, $data);
+
+			session()->setFlashdata("status_success", true);
+			session()->setFlashdata('message', 'ubah pengeluaran berhasil.');
+			return redirect()->to('dashboard/pengeluaran');
+		} catch (\Throwable $th) {
+			$this->db->transRollback();
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'ubah pengeluaran gagal, <br>' . $th->getMessage());
+			return redirect()->to('dashboard/pengeluaran');
+		} catch (\Exception $e) {
+			$this->db->transRollback();
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'ubah pengeluaran gagal, <br>' . $e->getMessage());
+			return redirect()->to('dashboard/pengeluaran');
+		}
+	}
+
+	public function deletePengeluaran($id)
+	{
+		$this->transaksi->deletePengeluaran($id);
+		session()->setFlashdata("status_success", true);
+		session()->setFlashdata('message', 'Hapus pengeluaran berhasil.');
+		return redirect()->to('dashboard/pengeluaran');
+	}
 }

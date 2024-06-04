@@ -17,6 +17,7 @@ class TransaksiModel extends Model
 		'bulan',
 		'tahun',
 		'user_id',
+		'keterangan',
 		'created_at',
 		'updated_at'
 	];
@@ -25,6 +26,14 @@ class TransaksiModel extends Model
 	{
 		return [
 			'santri' => 'required',
+			'tanggal_bayar' => 'required',
+			'nominal' => 'required',
+		];
+	}
+	public function rulesPengeluaran()
+	{
+		return [
+			'keterangan' => 'required',
 			'tanggal_bayar' => 'required',
 			'nominal' => 'required',
 		];
@@ -112,7 +121,7 @@ class TransaksiModel extends Model
 
 	public function storePengeluaran($data)
 	{
-		return  $this->insert($data);
+		return $this->insert($data);
 	}
 
 	public function detailTransaksi($id)
@@ -131,7 +140,6 @@ class TransaksiModel extends Model
 			->get();
 	}
 
-
 	public function storeBulanan($data)
 	{
 		return  $this->insert($data);
@@ -140,6 +148,23 @@ class TransaksiModel extends Model
 	{
 		return  $this->update($id, $data);
 	}
+
+	public function getPengeluarans()
+	{
+		return  $this->where('kategori', 'pengeluaran')->get();
+	}
+
+	public function updatePendaftaran($id,$data)
+	{
+		return  $this->update($id, $data);
+	}
+
+	public function deletePengeluaran($id)
+	{
+		return $this->delete($id);
+	}
+
+
 	public function generateKode()
 	{
 		$prefix = 'KT';

@@ -85,23 +85,31 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->get('berita/edit/(:any)', "Berita::edit/$1");
     $routes->post('berita/update/(:any)', "Berita::update/$1");
     $routes->get('berita/delete/(:any)', "Berita::delete/$1");
-
+    
     //pendaftaran
     $routes->get('pendaftaran', "Transaksi::index");
     $routes->get('pendaftaran-add', "Transaksi::create");
     $routes->post('pendaftaran-post', "Transaksi::store");
-
+    
     //pendaftaran ulang
     $routes->get('pendaftaran-ulang', "Transaksi::pendaftaranUlang");
     $routes->get('pendaftaran-ulang-add', "Transaksi::pendaftaranUlangCreate");
     $routes->post('pendaftaran-ulang-post', "Transaksi::pendaftaranUlangStore");
-
+    
     //bulanan
     $routes->get('bulanan', "Transaksi::indexBulanan");
     $routes->get('bulanan-add', "Transaksi::createBulanan");
     $routes->post('bulanan-post', "Transaksi::storeBulanan");
     $routes->get('bulananSantri/(:any)/(:any)/(:any)', "Transaksi::cekBulananSantri/$1/$2/$3");
-
+    
+    //pengeluaran
+    $routes->get('pengeluaran', "Transaksi::indexPengeluaran");
+    $routes->get('pengeluaran-add', "Transaksi::createPengeluaran");
+    $routes->post('pengeluaran-post', "Transaksi::storePengeluaran");
+    $routes->get('pengeluaran/edit/(:any)', "Transaksi::editPengeluaran/$1");
+    $routes->get('pengeluaran/update/(:any)', "Transaksi::updatePengeluaran/$1");
+    $routes->get('pengeluaran/delete/(:any)', "Transaksi::deletePengeluaran/$1");
+    
     //visi-misi
     $routes->get('visi-misi', "VisiMisi::index");
     $routes->post('visi-misi', "VisiMisi::store");
