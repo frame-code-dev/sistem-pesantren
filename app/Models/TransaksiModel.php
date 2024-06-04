@@ -30,6 +30,13 @@ class TransaksiModel extends Model
 			'nominal' => 'required',
 		];
 	}
+	public function rulesUpdatePendaftaran()
+	{
+		return [
+			'tanggal_bayar' => 'required',
+			'nominal' => 'required',
+		];
+	}
 	public function rulesPengeluaran()
 	{
 		return [
@@ -165,6 +172,10 @@ class TransaksiModel extends Model
 	public function updatePendaftaran($id,$data)
 	{
 		return  $this->update($id, $data);
+	}
+
+	public function deleteTransaksi($id){
+		return $this->delete($id);
 	}
 
 	public function deletePengeluaran($id)

@@ -2,7 +2,7 @@
 
 use App\Helpers\Helpers;
 
- $this->extend('template/app') ?>
+$this->extend('template/app') ?>
 <?= $this->section('content') ?>
 
 <div class="p-4 mt-14">
@@ -48,23 +48,11 @@ use App\Helpers\Helpers;
 			</div>
 		</div>
 		<div class="card bg-white p-5 mt-4 border rounded-md w-full relative">
-			<form action="<?= base_url('dashboard/pendaftaran-post') ?>" method="POST" class="w-full mx-auto space-y-4" enctype="multipart/form-data">
+			<form action="<?= base_url('dashboard/pendaftaran/update/' . $data->id) ?>" method="POST" class="w-full mx-auto space-y-4" enctype="multipart/form-data">
 				<div class="grid grid-cols-4 gap-3">
 					<div class="col-span-2">
 						<label for="santri" class="block mb-2 text-sm font-semibold text-gray-900">Santri<span class="me-2 text-red-500">*</span></label>
-						<select id="santri" name="santri" class="select2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-							<option disabled hidden selected value=""> == Pilih Santri == </option>
-							<?php foreach ($santri as $row) : ?>
-								<option <?= $row["id"] === $data->santri_id ? "selected" : "" ?> value="<?= $row['id'] ?> "> <?= $row['nama'] ?></option>
-							<?php endforeach; ?>
-						</select>
-						<div class="text-red-500 text-xs italic font-semibold">
-							<?php if (session("validation.santri")) : ?>
-								<div class="text-red-500 text-sm">
-									<?= session("validation.santri") ?>
-								</div>
-							<?php endif ?>
-						</div>
+						<input type="text" name="tanggal_bayar" disabled id="tanggal_bayar" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="<?= $santri ?>">
 					</div>
 					<div class="col-span-2">
 						<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Tanggal Bayar<span class="me-2 text-red-500">*</span></label>
@@ -81,7 +69,7 @@ use App\Helpers\Helpers;
 					</div>
 					<div class="col-span-2">
 						<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nominal<span class="me-2 text-red-500">*</span></label>
-						<input type="text" placeholder="Masukkan nominal pembayaran" name="nominal" id="nominal" class="rupiah bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+						<input type="text" placeholder="Masukkan nominal pembayaran" name="nominal" id="nominal" class="rupiah bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="<?= Helpers::formatRupiah($data->nominal) ?>">
 						<div class="text-red-500 text-xs italic font-semibold">
 							<div class="text-red-500 text-xs italic font-semibold">
 								<?php if (session("validation.nominal")) : ?>

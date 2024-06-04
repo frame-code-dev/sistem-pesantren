@@ -107,7 +107,7 @@ class Santri_model extends Model
     // detail santri by id
     public function getById($id)
     {
-        return  $this->where("id", $id)->first();
+        return  $this->where("id", $id)->get()->getRow();
     }
 
     // detail santri by nis

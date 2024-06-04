@@ -119,9 +119,63 @@ class Transaksi extends BaseController
 	public function edit($id){
 		$data["title"] = "Pemasukan";
 		$data["current_page"] = "Pendaftaran";
+		$user_id =  $this->transaksi->detailTransaksi($id)->user_id;
 		$data["data"] = $this->transaksi->detailTransaksi($id);
-		$data["santri"] = $this->santri->getSantriRegistrasi()->getResultArray();
+		$data["santri"] = $this->santri->getById($user_id)->nama;
 		return view("backoffice/pendaftaran/edit", $data);
+	}
+
+	public function update($id = null)
+	{
+		$nominal = Helpers::replaceRupiah($this->request->getPost("nominal"));	
+		$tanggal_bayar = $this->request->getPost("tanggal_bayar");
+
+		$validation = $this->validateData([
+			"nominal" => $nominal,
+			"tanggal_bayar" => $tanggal_bayar,
+		],
+			$this->transaksi->rulesUpdatePendaftaran()
+		);
+		if (!$validation) {
+			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
+		}
+
+		try {
+			$data = [
+				"nominal" => $nominal,
+				"tanggal_bayar" => $tanggal_bayar,
+			];
+			$this->transaksi->updatePendaftaran($id, $data);
+			session()->setFlashdata("status_success", true);
+			session()->setFlashdata('message', 'Data pendaftaran berhasil diubah.');
+			return redirect()->to('dashboard/pendaftaran');
+		} catch (\Throwable $th) {
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'Data pendaftaran gagal diubah, <br>' . $th->getMessage());
+			return redirect()->back();
+		} catch (\Exception $e) {
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'Data pendaftaran gagal diubah, <br>' . $e->getMessage());
+			return redirect()->back();
+		}
+	}
+
+	public function delete($id = null)
+	{
+		try {
+			$this->transaksi->deleteTransaksi($id);
+			session()->setFlashdata("status_success", true);
+			session()->setFlashdata('message', 'Data pendaftaran berhasil dihapus');
+			return redirect()->to('dashboard/pendaftaran');
+		} catch (\Throwable $th) {
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'Data pendaftaran gagal dihapus, <br>' . $th->getMessage());
+			return redirect()->to('dashboard/pendaftaran');
+		} catch (\Exception $e) {
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'Data pendaftaran gagal dihapus, <br>' . $e->getMessage());
+			return redirect()->to('dashboard/pendaftaran');
+		}
 	}
 
 	public function pendaftaranUlang()
