@@ -113,6 +113,14 @@ class TransaksiModel extends Model
 			->get();
 	}
 
+	public function getTotalTabungan()
+	{
+		return	$this->db->query('SELECT 
+			COALESCE(SUM(t1.nominal), 0) - 
+			COALESCE((SELECT SUM(t2.nominal) FROM transaksi t2 WHERE t2.kategori = "pengeluaran" AND t2.jenis_id <> 4), 0) AS totalTabungan FROM transaksi t1 WHERE t1.jenis_id <> 4 AND t1.kategori = "pemasukan";')
+			->getRow();
+	}
+
 
 	public function storePendaftaran($data)
 	{

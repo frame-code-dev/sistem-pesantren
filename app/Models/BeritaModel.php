@@ -39,6 +39,8 @@ class BeritaModel extends Model
 			'judul' => 'required',
 			'kategori' => 'required',
 			'keterangan' => 'required',
+			'content' => 'required',
+
 			// 'gambar' => [
 			// 	'rules' => 'max_size[gambar,2048]|is_image[gambar]|mime_in[gambar,image/jpg,image/jpeg,image/png,image/gif]',
 			// 	'errors' => [

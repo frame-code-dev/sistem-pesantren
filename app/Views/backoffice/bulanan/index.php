@@ -1,4 +1,8 @@
-<?php $this->extend('template/app') ?>
+<?php
+
+use App\Helpers\Helpers;
+
+$this->extend('template/app') ?>
 
 <?= $this->section('content') ?>
 
@@ -48,7 +52,7 @@
                             <td><?= $d["santri"] ?></td>
                             <td><?= $d["no_transaksi"] ?></td>
                             <td><?= number_format($d["nominal"], 0, ',', '.') ?></td>
-                            <td><?= $d["tanggal_bayar"] ?></td>
+                            <td><?= Helpers::formatDate($d["tanggal_bayar"]) ?></td>
                             <td>
                                 <div class="flex gap-2">
                                     <a class="block text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" href="<?= base_url('dashboard/kategori/edit/' . $d['id']) ?>">

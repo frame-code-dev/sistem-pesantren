@@ -61,15 +61,14 @@ class User_model extends Model
             $nameFile = $data["gambar"]->getRandomName();
             $data["image"] = $nameFile;
             $imageFile  = $data["gambar"];
-            unset($data["gambar"]);
             $this->storeImage($id, $nameFile, $imageFile);
-        } else {
-            $data["image"] = null;
         }
+        unset($data["gambar"]);
         try {
             $this->db->table($this->_table)->where("id", $id)->update($data);
             return true;
         } catch (\Throwable $th) {
+            throw $th;
             return false;
         }
     }

@@ -71,7 +71,7 @@ $this->extend('template/app') ?>
 									<td scope="row" class="px-2 py-2"><?= Helpers::formatDate($pln["tanggal_bayar"]) ?></td>
 									<td scope="row" class="px-2 py-2">
 										<button data-modal-target="tabungan-santri-modal-edit" data-modal-toggle="tabungan-santri-modal-edit" data-nominal="<?= Helpers::formatRupiah($pln['nominal']) ?>" data-tanggal="<?= date("Y-m-d", strtotime($pln['tanggal_bayar'])) ?>" onclick="updateTabunganSantri('/dashboard/edit-tabungan-santri/<?= $pln['id'] ?>',this)" class=" inline-block px-4 py-3 text-white bg-green-600 rounded-lg active" aria-current="page">Ubah</button>
-										<a href="<?= base_url("dashboard/tabungan-santri/$santriId/" . $pln['id'] . "/pemasukan") ?>" class=" inline-block px-4 py-3 text-white bg-green-600 rounded-lg active" aria-current="page">Cetak</a>
+										<a href="<?= base_url("dashboard/tabungan-santri/$santriId/" . $pln['id'] . "/pemasukan") ?>" class=" inline-block px-4 py-3 text-white bg-yellow-400 rounded-lg active" aria-current="page">Cetak</a>
 									</td>
 								</tr>
 							<?php endforeach; ?>
@@ -101,7 +101,7 @@ $this->extend('template/app') ?>
 									<td scope="row" class="px-2 py-2"><?= Helpers::formatDate($pln["tanggal_bayar"]) ?></td>
 									<td scope="row" class="px-2 py-2">
 										<button data-modal-target="tabungan-santri-modal-edit" data-modal-toggle="tabungan-santri-modal-edit" data-nominal="<?= Helpers::formatRupiah($pln['nominal']) ?>" data-tanggal="<?= date("Y-m-d", strtotime($pln['tanggal_bayar'])) ?>" onclick="updateTabunganSantri('/dashboard/edit-tabungan-santri/<?= $pln['id'] ?>',this)" class=" inline-block px-4 py-3 text-white bg-green-600 rounded-lg active" aria-current="page">Ubah</button>
-										<a href="<?= base_url("dashboard/tabungan-santri/$santriId/" . $pln['id'] . "/pengeluaran") ?>" class=" inline-block px-4 py-3 text-white bg-green-600 rounded-lg active" aria-current="page">Cetak</a>
+										<a href="<?= base_url("dashboard/tabungan-santri/$santriId/" . $pln['id'] . "/pengeluaran") ?>" class=" inline-block px-4 py-3 text-white bg-yellow-400 rounded-lg active" aria-current="page">Cetak</a>
 									</td>
 								</tr>
 							<?php endforeach; ?>

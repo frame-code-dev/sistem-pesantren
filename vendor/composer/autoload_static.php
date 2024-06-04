@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitcd4eef66382a1b4ddf38beef766210f4
+class ComposerStaticInit9001b9836b1e120b7824a99c6ee09ba4
 {
     public static $files = array (
         'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
@@ -4383,6 +4383,7 @@ class ComposerStaticInitcd4eef66382a1b4ddf38beef766210f4
         'Symfony\\Component\\Process\\Exception\\LogicException' => __DIR__ . '/..' . '/symfony/process/Exception/LogicException.php',
         'Symfony\\Component\\Process\\Exception\\ProcessFailedException' => __DIR__ . '/..' . '/symfony/process/Exception/ProcessFailedException.php',
         'Symfony\\Component\\Process\\Exception\\ProcessSignaledException' => __DIR__ . '/..' . '/symfony/process/Exception/ProcessSignaledException.php',
+        'Symfony\\Component\\Process\\Exception\\ProcessStartFailedException' => __DIR__ . '/..' . '/symfony/process/Exception/ProcessStartFailedException.php',
         'Symfony\\Component\\Process\\Exception\\ProcessTimedOutException' => __DIR__ . '/..' . '/symfony/process/Exception/ProcessTimedOutException.php',
         'Symfony\\Component\\Process\\Exception\\RunProcessFailedException' => __DIR__ . '/..' . '/symfony/process/Exception/RunProcessFailedException.php',
         'Symfony\\Component\\Process\\Exception\\RuntimeException' => __DIR__ . '/..' . '/symfony/process/Exception/RuntimeException.php',
@@ -4471,10 +4472,10 @@ class ComposerStaticInitcd4eef66382a1b4ddf38beef766210f4
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitcd4eef66382a1b4ddf38beef766210f4::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitcd4eef66382a1b4ddf38beef766210f4::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitcd4eef66382a1b4ddf38beef766210f4::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitcd4eef66382a1b4ddf38beef766210f4::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit9001b9836b1e120b7824a99c6ee09ba4::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit9001b9836b1e120b7824a99c6ee09ba4::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit9001b9836b1e120b7824a99c6ee09ba4::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit9001b9836b1e120b7824a99c6ee09ba4::$classMap;
 
         }, null, ClassLoader::class);
     }
