@@ -132,37 +132,58 @@ class Santri_model extends Model
     public function saveData($data)
     {
         //foto diri
-        $imageFile = $data["foto_diri"];
-        $nameFileFotoDiri = $data['foto_diri']->getRandomName();
-        $data['image'] = $nameFileFotoDiri;
+        if (is_uploaded_file($data["foto_diri"])) {
+            $imageFile = $data["foto_diri"];
+            $nameFileFotoDiri = $data['foto_diri']->getRandomName();
+            $data['image'] = $nameFileFotoDiri;
+        }
         //foto kk
-        $kkFile = $data["foto_kk"];
-        $nameFileFotoKK = $data['foto_kk']->getRandomName();
-        $data['file_kk'] = $nameFileFotoKK;
+        if (is_uploaded_file($data["foto_kk"])) {
+            $kkFile = $data["foto_kk"];
+            $nameFileFotoKK = $data['foto_kk']->getRandomName();
+            $data['file_kk'] = $nameFileFotoKK;
+        }
         //foto akte
-        $akteFile = $data["foto_akte"];
-        $nameFileFotoakte = $data['foto_akte']->getRandomName();
-        $data['file_akte'] = $nameFileFotoakte;
+        if (is_uploaded_file($data["foto_akte"])) {
+            $akteFile = $data["foto_akte"];
+            $nameFileFotoakte = $data['foto_akte']->getRandomName();
+            $data['file_akte'] = $nameFileFotoakte;
+        }
         //foto ijazah
-        $ijazahFile = $data["foto_ijazah"];
-        $nameFileFotoijazah = $data['foto_ijazah']->getRandomName();
-        $data['file_ijazah'] = $nameFileFotoijazah;
-        //foto skhu
-        $skhuFile = $data["foto_skhu"];
-        $nameFileFotoskhu = $data['foto_skhu']->getRandomName();
-        $data['file_skhu'] = $nameFileFotoskhu;
+        if (is_uploaded_file($data["foto_ijazah"])) {
+            $ijazahFile = $data["foto_ijazah"];
+            $nameFileFotoijazah = $data['foto_ijazah']->getRandomName();
+            $data['file_ijazah'] = $nameFileFotoijazah;
+        }
+        // foto skhu
+        if (is_uploaded_file($data["foto_skhu"])) {
+            $skhuFile = $data["foto_skhu"];
+            $nameFileFotoskhu = $data['foto_skhu']->getRandomName();
+            $data['file_skhu'] = $nameFileFotoskhu;
+        }
         // insert
         $id = $this->insert($data);
+
         //foto diri
-        $this->storeImage($id, $nameFileFotoDiri, $imageFile);
+        if (is_uploaded_file($data["foto_diri"])) {
+            $this->storeImage($id, $nameFileFotoDiri, $imageFile);
+        }
         //foto kk
-        $this->storeImage($id, $nameFileFotoKK, $kkFile);
+        if (is_uploaded_file($data["foto_kk"])) {
+            $this->storeImage($id, $nameFileFotoKK, $kkFile);
+        }
         //foto akte
-        $this->storeImage($id, $nameFileFotoakte, $akteFile);
+        if (is_uploaded_file($data["foto_akte"])) {
+            $this->storeImage($id, $nameFileFotoakte, $akteFile);
+        }
         //foto akte
-        $this->storeImage($id, $nameFileFotoijazah, $ijazahFile);
+        if (is_uploaded_file($data["foto_ijazah"])) {
+            $this->storeImage($id, $nameFileFotoijazah, $ijazahFile);
+        }
         //foto skhu
-        $this->storeImage($id, $nameFileFotoskhu, $skhuFile);
+        if (is_uploaded_file($data["foto_skhu"])) {
+            $this->storeImage($id, $nameFileFotoskhu, $skhuFile);
+        }
     }
 
     public function updateData($id, $data)

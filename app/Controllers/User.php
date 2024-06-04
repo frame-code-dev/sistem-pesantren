@@ -75,13 +75,11 @@ class User extends BaseController
 		return view('backoffice/user/profile', $data);
 	}
 	public function profilePost() {
-		var_dump('test');
-		die;
 		$valid = $this->validate($this->userModel->rules_profile());
 
 		$nama = $this->request->getPost("nama");
 		$username = $this->request->getPost("username");
-		$gambar = $this->request->getFile("gambar");
+		$gambar = $this->request->getFile("gambar") ;
 		$userId = session()->get("user_id");
 
 		$data = [
@@ -96,11 +94,11 @@ class User extends BaseController
 		if ($this->userModel->saveProfile($userId, $data)) {
 			session()->setFlashdata("status_success", true);
 			session()->setFlashdata('message', 'Profile berhasil diubah');
-			return redirect()->to('profile');
+			return redirect()->to('dashboard/profile');
 		} else {
 			session()->setFlashdata("status_error", true);
 			session()->setFlashdata('error', 'Profile gagal diubah');
-			return redirect()->to('profile');
+			return redirect()->to('dashboard/profile');
 		}
 	}
 

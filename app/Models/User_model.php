@@ -57,13 +57,17 @@ class User_model extends Model
 
     public function saveProfile($id, $data)
     {
-        $nameFile = $data["gambar"]->getRandomName();
-        $data["image"] = $nameFile;
-        $imageFile  = $data["gambar"];
-        unset($data["gambar"]);
+        if (is_uploaded_file($data["gambar"])) {
+            $nameFile = $data["gambar"]->getRandomName();
+            $data["image"] = $nameFile;
+            $imageFile  = $data["gambar"];
+            unset($data["gambar"]);
+            $this->storeImage($id, $nameFile, $imageFile);
+        } else {
+            $data["image"] = null;
+        }
         try {
             $this->db->table($this->_table)->where("id", $id)->update($data);
-            $this->storeImage($id, $nameFile, $imageFile);
             return true;
         } catch (\Throwable $th) {
             return false;

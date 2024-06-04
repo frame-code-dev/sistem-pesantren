@@ -36,10 +36,14 @@
             </div>
         </div>
         <div class="card bg-white p-5 mt-4 border rounded-md w-full relative">
-            <form action="<?= base_url('profile-post') ?>" method="POST" class="w-full mx-auto space-y-4" enctype="multipart/form-data">
+            <form action="<?= base_url('dashboard/profile-post') ?>" method="POST" class="w-full mx-auto space-y-4" enctype="multipart/form-data">
                 <div class="grid grid-cols-4 gap-3">
                     <div class="col-span-2">
-                        <img src="<?= base_url('default.jpg') ?>" style="width: 400px; height: 300px;" id="gambar" class="rounded mb-3" alt="">
+                        <?php if ($data->image) : ?>
+                            <img src="<?= base_url('upload/profile/'.$data->id.'/' . $data->image) ?>" style="width: 400px; height: 300px;" id="gambar" class="rounded mb-3" alt="">
+                        <?php else : ?>
+                            <img src="<?= base_url('default.png') ?>" style="width: 400px; height: 300px;" id="gambar" class="rounded mb-3" alt="">
+                        <?php endif ?>
                         <input accept="image/png, image/jpeg, image/jpg, image/webp" name="gambar" class="block w-full text-sm text-gray-900 border only-image limit-size-2 border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 image" type="file" data-target="#gambar">
                         <?php if (session("validation.gambar")) : ?>
                             <div class="text-red-500 text-sm">
