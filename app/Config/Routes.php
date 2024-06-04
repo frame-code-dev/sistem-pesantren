@@ -20,6 +20,7 @@ $routes->get('/berita/detail/(:any)', [BeritaController::class,'detail/$1']);
 // Tentang Pondok 
 $routes->get('/sejarah', [TentangPondokController::class,'sejarah']);
 $routes->get('/visi-misi', [TentangPondokController::class,'visiMisi']);
+$routes->get('/peraturan', [TentangPondokController::class,'peraturan']);
 // Tentang Alumni  
 $routes->get('tentang-alumni',[TentangAlumniController::class,'index']);
 // Pendaftaran Online 
