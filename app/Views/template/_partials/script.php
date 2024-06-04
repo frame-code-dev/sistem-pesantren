@@ -94,7 +94,12 @@
 <script>
 	$(document).ready(function() {
 		$('form').on('submit', function(event) {
-			$('#loading-modal').removeClass('hidden');
+			$('#loading-1').css({
+				'z-index': '999',
+			}).removeClass('hidden');
+			$('#loading-2').css({
+				'z-index': '9999',
+			}).removeClass('hidden');
 		});
 
 		$('.select2').select2();
