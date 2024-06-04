@@ -100,7 +100,7 @@ class LaporanTahunan extends BaseController
 			FROM transaksi t1 WHERE t1.jenis_id <> 4 AND t1.kategori = "pemasukan";
 ')
 				->getRow();
-			$data["tahunan"] += $tahunan["total_nominal"];
+			$data["tahunan"] += $tahunan["total_nominal"] ?? 0;
 			$data["pemasukanLain"] = $pemasukanLain['total_nominal'] ?? 0;
 			$data["pengeluaran"] = $pengeluaranTahunIni['nominal'] ?? 0;
 			$data["totalTahunIni"] = ($data["tahunan"] + $data["pemasukanLain"]) - $data["pengeluaran"];
