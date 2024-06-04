@@ -20,9 +20,13 @@ $routes->get('/berita/detail/(:any)', [BeritaController::class,'detail/$1']);
 // Tentang Pondok 
 $routes->get('/sejarah', [TentangPondokController::class,'sejarah']);
 $routes->get('/visi-misi', [TentangPondokController::class,'visiMisi']);
+$routes->get('/peraturan', [TentangPondokController::class,'peraturan']);
 // Tentang Alumni  
 $routes->get('tentang-alumni',[TentangAlumniController::class,'index']);
+// Pendaftaran Online 
 $routes->get('psb',[PSBController::class,'index']);
+$routes->get('psb/create',[PSBController::class,'create']);
+$routes->post('psb/create/store',[PSBController::class,'store']);
 
 
 $routes->get('/login', 'Auth::login');

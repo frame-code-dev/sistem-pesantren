@@ -17,6 +17,6 @@
             </li>
             
         </ul>
-        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2021-2022 <a href="#" class="hover:underline">frame_code.dev™</a>. All Rights Reserved.</span>
+        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://www.instagram.com/frame_code.dev/" class="hover:underline">frame_code.dev™</a>. All Rights Reserved.</span>
     </div>
 </footer>
