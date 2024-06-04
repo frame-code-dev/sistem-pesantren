@@ -22,7 +22,10 @@ $routes->get('/sejarah', [TentangPondokController::class,'sejarah']);
 $routes->get('/visi-misi', [TentangPondokController::class,'visiMisi']);
 // Tentang Alumni  
 $routes->get('tentang-alumni',[TentangAlumniController::class,'index']);
+// Pendaftaran Online 
 $routes->get('psb',[PSBController::class,'index']);
+$routes->get('psb/create',[PSBController::class,'create']);
+$routes->post('psb/create/store',[PSBController::class,'store']);
 
 
 $routes->get('/login', 'Auth::login');
