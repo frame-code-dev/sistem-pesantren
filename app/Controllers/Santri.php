@@ -246,9 +246,11 @@ class Santri extends BaseController
 	{
 		$id_santri = $this->request->getPost("santri");
 		$tanggal_keluar = $this->request->getPost("tanggal_keluar");
+		$motto = $this->request->getPost("motto");
 		$validation = $this->validateData([
 			"santri" => $id_santri,
 			"tanggal_keluar" => $tanggal_keluar,
+			"motto" => $motto
 		], $this->santriModel->rulesAlumni());
 		if (!$validation) {
 			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
@@ -257,6 +259,7 @@ class Santri extends BaseController
 			$data = [
 				"tanggal_keluar" => $tanggal_keluar,
 				"status_santri" => 'alumni',
+				"motto" => $motto,
 				"updated_at" => date("Y-m-d H:i:s"),
 			];
 			$this->santriModel->updateData($id_santri, $data);
@@ -280,6 +283,7 @@ class Santri extends BaseController
 			$data = [
 				"tanggal_keluar" => null,
 				"status_santri" => 'aktif',
+				"motto" => null,
 				"updated_at" => date("Y-m-d H:i:s"),
 			];
 			$this->santriModel->updateData($id, $data);

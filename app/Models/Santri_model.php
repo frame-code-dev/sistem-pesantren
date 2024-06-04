@@ -60,6 +60,7 @@ class Santri_model extends Model
         return [
             'santri' => 'required',
             'tanggal_keluar' => 'required',
+            'motto' => 'required',
         ];
     }
 
