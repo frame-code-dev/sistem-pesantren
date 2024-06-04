@@ -43,9 +43,10 @@ class LaporanTahunan extends BaseController
 			"totalTahunIni" => 0,
 			"totalTabungan" => 0,
 		];
-		$data["dataTahun"] = $this->transaksi->select("tahun")
-			->groupBy("tahun")
-			->get()->getResultArray();
+		$data["dataTahun"] = $this->transaksi->select("year(tanggal_bayar) as tahun")
+			->groupBy("year(tanggal_bayar) ")
+			->get()
+			->getResultArray();
 		if ($year) {
 			$data["filter"] = true;
 
@@ -68,7 +69,6 @@ class LaporanTahunan extends BaseController
 					->get()->getRowArray();
 
 				$totalSudahBayar = $sudahBayar['total_data'] ?? 0;
-				$nominalBulanan = $sudahBayar['total_nominal'] ?? 0;
 				$totalBelumBayar = $totalSantri - $totalSudahBayar;
 
 				$data["sudahMembayar"][] = $totalSudahBayar;
@@ -96,15 +96,12 @@ class LaporanTahunan extends BaseController
 				->where("year(tanggal_bayar)", $year)
 				->get()->getRowArray();
 
-			$totalTabungan = $this->db->query('SELECT COALESCE(SUM(t1.nominal), 0) - COALESCE((SELECT SUM(t2.nominal) FROM transaksi t2 WHERE t2.kategori = "pengeluaran" AND t2.jenis_id <> 4), 0) AS totalTabungan
-			FROM transaksi t1 WHERE t1.jenis_id <> 4 AND t1.kategori = "pemasukan";
-')
-				->getRow();
+			$totalTabungan = $this->transaksi->getTotalTabungan()->totalTabungan ?? 0;
 			$data["tahunan"] += $tahunan["total_nominal"] ?? 0;
 			$data["pemasukanLain"] = $pemasukanLain['total_nominal'] ?? 0;
 			$data["pengeluaran"] = $pengeluaranTahunIni['nominal'] ?? 0;
 			$data["totalTahunIni"] = ($data["tahunan"] + $data["pemasukanLain"]) - $data["pengeluaran"];
-			$data["totalTabungan"] = $totalTabungan->totalTabungan ?? 0;
+			$data["totalTabungan"] = $totalTabungan;
 		}
 		return view("backoffice/laporan-tahunan/index", $data);
 	}
@@ -154,7 +151,6 @@ class LaporanTahunan extends BaseController
 				->get()->getRowArray();
 
 			$totalSudahBayar = $sudahBayar['total_data'] ?? 0;
-			$nominalBulanan = $sudahBayar['total_nominal'] ?? 0;
 			$totalBelumBayar = $totalSantri - $totalSudahBayar;
 
 			$data["sudahMembayar"][] = $totalSudahBayar;
@@ -181,16 +177,13 @@ class LaporanTahunan extends BaseController
 			->where("kategori", "pengeluaran")
 			->where("year(tanggal_bayar)", $year)
 			->get()->getRowArray();
-		$totalTabungan = $this->db->query('SELECT 
-			COALESCE(SUM(t1.nominal), 0) - 
-			COALESCE((SELECT SUM(t2.nominal) FROM transaksi t2 WHERE t2.kategori = "pengeluaran" AND t2.jenis_id <> 4), 0) AS totalTabungan FROM transaksi t1 WHERE t1.jenis_id <> 4 AND t1.kategori = "pemasukan";')
-			->getRow();
+		$totalTabungan = $this->transaksi->getTotalTabungan()->totalTabungan ?? 0;
 
-		$data["tahunan"] += $tahunan["total_nominal"];
+		$data["tahunan"] += $tahunan["total_nominal"] ?? 0;
 		$data["pemasukanLain"] = $pemasukanLain['total_nominal'] ?? 0;
 		$data["pengeluaran"] = $pengeluaranTahunIni['nominal'] ?? 0;
 		$data["totalTahunIni"] = ($data["tahunan"] + $data["pemasukanLain"]) - $data["pengeluaran"];
-		$data["totalTabungan"] = $totalTabungan->totalTabungan ?? 0;
+		$data["totalTabungan"] = $totalTabungan;
 
 		// load HTML content
 		$dompdf->loadHtml(view('backoffice/laporan-tahunan/laporan-export', $data));
@@ -202,14 +195,16 @@ class LaporanTahunan extends BaseController
 		$dompdf->render();
 
 		// output the generated pdf
-		$dompdf->stream($filename);
+		ob_clean();
+		$dompdf->stream($filename, ["Attachment" => true]);
+		exit();
 	}
 
 	public function indexBulanan()
 	{
 
-		$month = $this->request->getGet("bulan") ?? (int) date("m");
-		$year = $this->request->getGet("year") ?? date("Y");
+		$month = $this->request->getGet("bulan") ?? null;
+		$year = $this->request->getGet("year") ?? null;
 
 		$data["dataBulan"] = $this->transaksi
 			->select("bulan")
@@ -248,7 +243,7 @@ class LaporanTahunan extends BaseController
 				->groupBy("bulan")
 				->groupBy("tahun")
 				->get()
-				->getResultArray();
+				->getRowArray();
 
 			$pemasukan_lain = $this->transaksi
 				->select("sum(nominal) as total_nominal")
@@ -258,7 +253,7 @@ class LaporanTahunan extends BaseController
 				->where('year(bulan)', $year)
 				->groupBy("bulan")
 				->groupBy("tahun")
-				->get()->getResultArray();
+				->get()->getRowArray();
 
 			$pengeluaran = $this->transaksi
 				->select("sum(nominal) as total_nominal")
@@ -268,18 +263,18 @@ class LaporanTahunan extends BaseController
 				->where('YEAR(bulan)', $year)
 				->groupBy("bulan")
 				->groupBy("tahun")
-				->get()->getResultArray();
+				->get()->getRowArray();
 
 			$totalPemasukanLain = $pemasukan_lain["total_nominal"] ?? 0;
 			$totalPengeluaran = $pengeluaran["total_nominal"] ?? 0;
-
+			$totalTabungan = $this->transaksi->getTotalTabungan()->totalTabungan ?? 0;
 			$data['sudah_membayar'] = $sudahBayar;
 			$data['belum_membayar'] = $totalSantri - $sudahBayar;
-			$data['syariah'] = $syariah[0]["total_nominal"];
+			$data['syariah'] = $syariah["total_nominal"] ?? 0;
 			$data['pemasukan_lain'] = $totalPemasukanLain;
 			$data['pengeluaran'] = $totalPengeluaran;
-			$data['total'] = ($syariah[0]["total_nominal"] + $totalPemasukanLain) - $totalPengeluaran;
-			$data['total_tabungan'] = 0;
+			$data['total'] = (($syariah["total_nominal"] ?? 0) + $totalPemasukanLain) - $totalPengeluaran;
+			$data['total_tabungan'] = $totalTabungan;
 		}
 		return view("backoffice/laporan-bulanan/index", $data);
 	}
@@ -329,7 +324,7 @@ class LaporanTahunan extends BaseController
 			->groupBy("bulan")
 			->groupBy("tahun")
 			->get()
-			->getResultArray();
+			->getRowArray();
 
 		$pemasukan_lain = $this->transaksi
 			->select("sum(nominal) as total_nominal")
@@ -339,7 +334,7 @@ class LaporanTahunan extends BaseController
 			->where('year(bulan)', $year)
 			->groupBy("bulan")
 			->groupBy("tahun")
-			->get()->getResultArray();
+			->get()->getRowArray();
 
 		$pengeluaran = $this->transaksi
 			->select("sum(nominal) as total_nominal")
@@ -349,20 +344,21 @@ class LaporanTahunan extends BaseController
 			->where('YEAR(bulan)', $year)
 			->groupBy("bulan")
 			->groupBy("tahun")
-			->get()->getResultArray();
+			->get()->getRowArray();
 
 		$totalPemasukanLain = $pemasukan_lain["total_nominal"] ?? 0;
 		$totalPengeluaran = $pengeluaran["total_nominal"] ?? 0;
+		$totalTabungan = $this->transaksi->getTotalTabungan()->totalTabungan ?? 0;
 
 		$data['month'] = $bulan[$month];
 		$data['year'] = $year;
 		$data['sudah_membayar'] = $sudahBayar;
 		$data['belum_membayar'] = $totalSantri - $sudahBayar;
-		$data['syariah'] = $syariah[0]["total_nominal"];
+		$data['syariah'] = $syariah["total_nominal"] ?? 0;
 		$data['pemasukan_lain'] = $totalPemasukanLain;
 		$data['pengeluaran'] = $totalPengeluaran;
-		$data['total'] = ($syariah[0]["total_nominal"] + $totalPemasukanLain) - $totalPengeluaran;
-		$data['total_tabungan'] = 0;
+		$data['total'] = (($syariah["total_nominal"] ?? 0) + $totalPemasukanLain) - $totalPengeluaran;
+		$data['total_tabungan'] = $totalTabungan;
 
 		// load HTML content
 		$dompdf->loadHtml(view('backoffice/laporan-bulanan/laporan-export', $data));
@@ -374,6 +370,8 @@ class LaporanTahunan extends BaseController
 		$dompdf->render();
 
 		// output the generated pdf
-		$dompdf->stream($filename);
+		ob_clean();
+		$dompdf->stream($filename, ["Attachment" => true]);
+		exit();
 	}
 }
