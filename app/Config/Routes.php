@@ -2,6 +2,9 @@
 
 use App\Controllers\Berita;
 use App\Controllers\BeritaController;
+use App\Controllers\PSBController;
+use App\Controllers\TentangAlumniController;
+use App\Controllers\TentangPondokController;
 use App\Controllers\WelcomeController;
 use CodeIgniter\Router\RouteCollection;
 
@@ -14,6 +17,12 @@ $routes->get('/', [WelcomeController::class,'index']);
 // Berita
 $routes->get('/berita', [BeritaController::class,'index']);
 $routes->get('/berita/detail/(:any)', [BeritaController::class,'detail/$1']);
+// Tentang Pondok 
+$routes->get('/sejarah', [TentangPondokController::class,'sejarah']);
+$routes->get('/visi-misi', [TentangPondokController::class,'visiMisi']);
+// Tentang Alumni  
+$routes->get('tentang-alumni',[TentangAlumniController::class,'index']);
+$routes->get('psb',[PSBController::class,'index']);
 
 
 $routes->get('/login', 'Auth::login');

@@ -29,17 +29,32 @@
             <img class="w-full hidden dark:block" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/cta/cta-dashboard-mockup-dark.svg" alt="dashboard image">
             <div class="mt-4 md:mt-0">
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Tentang Pesantren.</h2>
-                <p class="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">Flowbite helps you connect with friends and communities of people who share your interests. Connecting with your friends and family as well as discovering new ones is easy with features like Groups.</p>
-                <a href="#" class="inline-flex items-center text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-green-900">
-                    Get started
+                <p class="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
+                <b>Pondok Pesantren</b> merupakan salah satu lembaga pendidikan Islam tertua di Indonesia yang telah mewujudkan kemampuannya dalam mencetak generasi muslim serta kader-kader ulama dan telah berjasa turut mencerdaskan masyarakat Indonesia. Disamping itu Pondok Pesantren telah menjadi pusat pendidikan yang telah berhasil menanamkan semangat kewiraswastaan, semangat kemandirian dan tidak menggantungkan diri kepada orang lain.
+
+                </p>
+                <a href="<?=base_url('sejarah')?>" class="inline-flex items-center text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-green-900">
+                    Selengkapnya
                     <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                 </a>
             </div>
         </div>
+        <div class="mx-auto max-w-screen-xl mb-5">
+            <div class="grid grid-cols-3 gap-3">
+                <div class="card bg-blue-100 p-5 mt-4 border rounded-md w-full relative overflow-x-auto text-center">
+                    <h5 class="font-bold text-xl">Al Qur’anul Karim</h5>
+                </div>
+                <div class="card bg-green-100 p-5 mt-4 border rounded-md w-full relative overflow-x-auto text-center">
+                    <h5 class="font-bold text-xl">Al Hadits</h5>
+                </div>
+                <div class="card bg-yellow-100 p-5 mt-4 border rounded-md w-full relative overflow-x-auto text-center">
+                    <h5 class="font-bold text-xl">Manhaj Ahlussunah wal Jama’ah</h5>
+                </div>
+            </div>
+        </div>
         <div class="p-5 bg-green-600">
             <div class="mx-auto max-w-screen-xl">
-                <h4 class="text-center font-bold text-2xl text-white">Motto : “Amal Ilmiyah, Ilmu Amaliyah, Akhlaqul Karimah Menggapai Ridho Allah”</h4>
-                <p class="text-center text-sm mt-3 text-white">"Niscaya Allah akan meninggikan orang-orang yang beriman di antaramu dan orang-orang yang diberi ilmu pengetahuan beberapa derajat." (QS. 58 : 11)</p>
+                <h4 class="text-center font-bold text-2xl text-white">"Terdepan dalam mencetak generasi Qur’ani pengembang risalah Islam berkaffah ilmiah dan amaliyah tinggi.”</h4>
             </div>
         </div>
     </section>
@@ -61,7 +76,7 @@
                                 <span class="text-xs"><?= $d['created_at'] ?></span>
                             </div>
                             <div>
-                                <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white hover:text-green-500"><a href=""><?=$d['judul']?>.</a></h2>
+                                <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white hover:text-green-500"><a href="<?=base_url('berita/detail/'.$d['slug'])?>"><?=$d['judul']?>.</a></h2>
                                 <p class="mb-5 font-light text-gray-500 dark:text-gray-400">
                                     <?= $d['keterangan'] ?>
                                 </p>
@@ -73,7 +88,7 @@
                                     <?=$d['username']?>
                                 </span>
                             </div>
-                            <a href=" " class="inline-flex items-center font-medium text-sm text-emerald-600 dark:text-emerald-500 hover:underline">
+                            <a href="<?=base_url('berita/detail/'.$d['slug'])?>" class="inline-flex items-center font-medium text-sm text-emerald-600 dark:text-emerald-500 hover:underline">
                                 Read more
                                 <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                             </a>
