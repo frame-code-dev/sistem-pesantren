@@ -11,7 +11,7 @@ class BeritaModel extends Model
 	protected $table = "berita_acara";
 	protected $primaryKey = "id";
 	protected $useAutoIncrement = true;
-	protected $allowedFields = ["judul", "keterangan", "kategori_id", "image","content",'user_id','slug','created_at'];
+	protected $allowedFields = ["judul", "keterangan", "kategori_id", "image", "user_id", "slug", "content"];
 
 
 	public function rulesInsert()
@@ -66,7 +66,7 @@ class BeritaModel extends Model
 			->join("ketegori_berita", "berita_acara.kategori_id = ketegori_berita.id", "array")
 			->join("users", "berita_acara.user_id = users.id", "array")
 			->limit($limit)
-				->orderBy("id", "desc");
+			->orderBy("id", "desc");
 		if ($search != "" || $search != null) {
 			$this->like("berita_acara.judul", $search)
 				->orLike('keterangan', $search)
@@ -111,7 +111,7 @@ class BeritaModel extends Model
 	public function updateData($id, $data)
 	{
 		$data["kategori_id"] = $data["kategori"];
-		if ($data["gambar"]) {
+		if (is_uploaded_file($data["gambar"])) {
 			$pathDir = "../public/upload/$id/";
 			$pathFile = "../public/upload/$id/" . $this->find($id)["image"];
 			if (file_exists($pathFile)) {
@@ -149,5 +149,17 @@ class BeritaModel extends Model
 	public function storeImage($id, $name, $image)
 	{
 		$image->move("../public/upload/$id/", $name);
+	}
+
+
+	public function generateSlug($title)
+	{
+		$slug = str_replace(" ", "-", $title);
+		$count = $this->where("slug", $slug)->countAllResults();
+		if ($count > 0) {
+			$slug = "$slug-" . ($count + 1);
+			return $this->generateSlug($slug);
+		}
+		return $slug;
 	}
 }

@@ -51,7 +51,43 @@
 </script>
 
 
+<script>
+	$(document).ready(function() {
+		// Set session menu active on click
+		$(".sidebar-menu a").on("click", function() {
+			const url = $(this).attr("href");
+			sessionStorage.setItem("sidebar-active", url);
+		});
 
+		// Get the current URL
+		const route = $(location).attr("href");
+		const classActive = ["bg-gray-200", "dark:bg-gray-700"];
+		let bestMatchElement = null;
+		let bestMatchLength = 0;
+
+		// Find the best match URL
+		$(".sidebar-menu").each(function() {
+			const url = $(this).find("a").attr("href");
+
+			// Check if the current route includes the URL from the sidebar menu
+			if (route.includes(url) && url.length > bestMatchLength) {
+				bestMatchElement = $(this);
+				bestMatchLength = url.length;
+			}
+		});
+
+		// Highlight the best match
+		if (bestMatchElement) {
+			bestMatchElement.find("a").addClass(classActive); // Add active classes
+
+			// Show the current active menu and hide siblings
+			bestMatchElement.parent().removeClass("hidden");
+			bestMatchElement.parent().parent().find("ul").addClass("hidden");
+			bestMatchElement.parent().removeClass("hidden");
+		}
+	});
+</script>
+<!-- 
 <script>
 	//set session menu active
 	$(".sidebar-menu").on("click", function() {
@@ -63,14 +99,15 @@
 	$(".sidebar-menu").each(function() {
 		const classActive = ["bg-gray-200", "dark:bg-gray-700"];
 		const urlActive = sessionStorage.getItem("sidebar-active")
+		const route = $(location).attr("href");
 		const url = $(this).find("a").attr("href");
-		if (urlActive == url) {
+		if (route.includes(url)) {
 			$(this).find("a").addClass(classActive);
 			$(this).parent().parent().find("ul").addClass("hidden");
 			$(this).parent().removeClass("hidden");
 		}
 	})
-</script>
+</script> -->
 <!-- text editor code -->
 <script>
 	tinymce.init({
