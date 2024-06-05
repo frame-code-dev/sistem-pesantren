@@ -49,8 +49,6 @@ class LaporanTahunan extends BaseController
 			->getResultArray();
 		if ($year) {
 			$data["filter"] = true;
-
-
 			for ($i = 1; $i <= 12; $i++) {
 				$totalSantri = $this->santri
 					->where('status_santri', 'aktif')
@@ -168,7 +166,7 @@ class LaporanTahunan extends BaseController
 		$tahunan = $this->transaksi
 			->select("sum(nominal) as total_nominal")
 			->where("jenis_id", 3)
-			->where("year(tanggal_bayar)", $year)
+			->where("tahun", $year)
 			->get()->getRowArray();
 
 		$pengeluaranTahunIni = $this->transaksi
@@ -207,14 +205,14 @@ class LaporanTahunan extends BaseController
 		$year = $this->request->getGet("year") ?? null;
 
 		$data["dataBulan"] = $this->transaksi->select("month(tanggal_bayar) as bulan")
-		->groupBy("month(tanggal_bayar)")
-		->orderBy("month(tanggal_bayar)", "ASC")
-		->get()
-		->getResultArray();
+			->groupBy("month(tanggal_bayar)")
+			->orderBy("month(tanggal_bayar)", "ASC")
+			->get()
+			->getResultArray();
 		$data["dataTahun"] = $this->transaksi->select("year(tanggal_bayar) as tahun")
-		->groupBy("year(tanggal_bayar) ")
-		->get()
-		->getResultArray();
+			->groupBy("year(tanggal_bayar) ")
+			->get()
+			->getResultArray();
 
 		$data['month'] = $month;
 		$data['year'] = $year;
