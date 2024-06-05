@@ -26,7 +26,7 @@ class AddFieldBerita extends Migration
                 "after" => "judul"
             ],
             'content' => [
-                'type'       => 'BINARY',
+                'type'       => 'BLOB',
                 'constraint' => 255,
 
             ],
