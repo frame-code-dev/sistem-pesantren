@@ -307,13 +307,13 @@ class Transaksi extends BaseController
 	{
 		$this->db->transBegin();
 		try {
-			$user_id =  $this->transaksi->detailTransaksi($id)->user_id;
-			$this->db->transCommit();
-			$this->santri->updateStatus($user_id, 'belum_registrasi');
-			$this->db->transCommit();
+			$santriId =  $this->transaksi->detailTransaksi($id)->santri_id;
+
+			$this->santri->updateStatus($santriId, 'belum_registrasi_ulang');
 			$this->transaksi->deleteTransaksi($id);
 			session()->setFlashdata("status_success", true);
 			session()->setFlashdata('message', 'Data pendaftaran ulang berhasil dihapus');
+			$this->db->transCommit();
 			return redirect()->to('dashboard/pendaftaran-ulang');
 		} catch (\Throwable $th) {
 			$this->db->transRollback();
