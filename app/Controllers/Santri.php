@@ -156,7 +156,7 @@ class Santri extends BaseController
 		$foto_akte = $this->request->getFile("foto_akte");
 		$foto_ijazah = $this->request->getFile("foto_ijazah");
 		$foto_skhu = $this->request->getFile("foto_skhu");
-		
+
 		$validation = $this->validateData([
 			"nis" => $nis,
 			"nama" => $nama,

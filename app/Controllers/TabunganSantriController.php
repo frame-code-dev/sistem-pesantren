@@ -115,7 +115,7 @@ class TabunganSantriController extends BaseController
 		$filename = "$kategori Santri ";
 		$transaksi  = $this->transaksi->where("id", $idTransaksi)->first();
 		$data["tanggal"] = Helpers::formatDate($transaksi["tanggal_bayar"]);
-		$data["nama"] = $this->santri->getById($idSantri)["nama"];
+		$data["nama"] = $this->santri->getById($idSantri)->nama;
 		$data["nominal"] = Helpers::formatRupiah($transaksi["nominal"]);
 		$data["title"] = $filename;
 		// instantiate and use the dompdf class

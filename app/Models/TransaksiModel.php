@@ -18,8 +18,8 @@ class TransaksiModel extends Model
 		'tahun',
 		'user_id',
 		'keterangan',
-		'created_at',
-		'updated_at'
+		// 'created_at',
+		// 'updated_at'
 	];
 
 	public function rulesPendaftaran()
@@ -131,6 +131,7 @@ class TransaksiModel extends Model
 
 	public function storePendaftaran($data)
 	{
+
 		return  $this->insert($data);
 	}
 
@@ -159,6 +160,10 @@ class TransaksiModel extends Model
 	{
 		return  $this->insert($data);
 	}
+	public function updateBulanan($data, $id)
+	{
+		return  $this->update($id, $data);
+	}
 	public function updatePengeluaran($data, $id)
 	{
 		return  $this->update($id, $data);
@@ -169,12 +174,13 @@ class TransaksiModel extends Model
 		return  $this->where('kategori', 'pengeluaran')->get();
 	}
 
-	public function updatePendaftaran($id,$data)
+	public function updatePendaftaran($id, $data)
 	{
 		return  $this->update($id, $data);
 	}
 
-	public function deleteTransaksi($id){
+	public function deleteTransaksi($id)
+	{
 		return $this->delete($id);
 	}
 

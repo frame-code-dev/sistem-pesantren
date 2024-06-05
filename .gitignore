@@ -6,6 +6,7 @@
 /vendor
 /writable
 /public/upload
+/app/Config/Database.php
 .env
 .env.backup
 .env.production

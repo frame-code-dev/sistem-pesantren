@@ -29,11 +29,11 @@ class Santri_model extends Model
         'file_skhu',
         'motto',
         'telepon',
-        'tanggal_lahir', 
+        'tanggal_lahir',
         'alamat',
         'status_santri',
-        'tanggal_masuk', 
-        'tanggal_keluar', 
+        'tanggal_masuk',
+        'tanggal_keluar',
         'created_at',
         'updated_at'
     ];
@@ -125,7 +125,7 @@ class Santri_model extends Model
     // update status santri
     public function updateStatus($id, $status)
     {
-        return $this->where('id', $id)->update([
+        return $this->update($id, [
             'status_santri' => $status
         ]);
     }
@@ -192,7 +192,7 @@ class Santri_model extends Model
         // update
         $this->update($id, $data);
         //foto diri
-        if (isset($data["foto_diri"])) {
+        if (is_uploaded_file($data["foto_diri"])) {
             $imageFile = $data["foto_diri"];
             $nameFileFotoDiri = $data['foto_diri']->getRandomName();
             $data['image'] = $nameFileFotoDiri;
@@ -203,7 +203,7 @@ class Santri_model extends Model
             );
         }
         //foto kk
-        if (isset($data["foto_kk"])) {
+        if (is_uploaded_file($data["foto_kk"])) {
             $kkFile = $data["foto_kk"];
             $nameFileFotoKK = $data['foto_kk']->getRandomName();
             $data['file_kk'] = $nameFileFotoKK;
@@ -214,7 +214,7 @@ class Santri_model extends Model
             );
         }
         //foto akte
-        if (isset($data["foto_akte"])) {
+        if (is_uploaded_file($data["foto_akte"])) {
             $akteFile = $data["foto_akte"];
             $nameFileFotoakte = $data['foto_akte']->getRandomName();
             $data['file_akte'] = $nameFileFotoakte;
@@ -224,20 +224,21 @@ class Santri_model extends Model
                 $akteFile
             );
         }
-        
+
         //foto ijazah
-        if (isset($data["foto_ijazah"])) {
+        if (is_uploaded_file($data["foto_ijazah"])) {
             $ijazahFile = $data["foto_ijazah"];
             $nameFileFotoijazah = $data['foto_ijazah']->getRandomName();
             $data['file_ijazah'] = $nameFileFotoijazah;
-            $this->storeImage($id,
+            $this->storeImage(
+                $id,
                 $nameFileFotoijazah,
                 $ijazahFile
             );
         }
 
         // foto skhu
-        if (isset($data["foto_skhu"])) {
+        if (is_uploaded_file($data["foto_skhu"])) {
             $skhuFile = $data["foto_skhu"];
             $nameFileFotoskhu = $data['foto_skhu']->getRandomName();
             $data['file_skhu'] = $nameFileFotoskhu;
@@ -274,14 +275,15 @@ class Santri_model extends Model
         $image->move("../public/upload/santri/$id/", $name);
     }
 
-    public function getAlumni(){
+    public function getAlumni()
+    {
         return $this->where('status_santri', 'alumni')->findAll();
     }
 
-    public function updatedStatus($status){
+    public function updatedStatus($status)
+    {
         $result = "";
         if ($status = "alumni") {
-            
         }
     }
 }

@@ -13,20 +13,20 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 // LANDING PAGE 
-$routes->get('/', [WelcomeController::class,'index']);
+$routes->get('/', [WelcomeController::class, 'index']);
 // Berita
-$routes->get('/berita', [BeritaController::class,'index']);
-$routes->get('/berita/detail/(:any)', [BeritaController::class,'detail/$1']);
+$routes->get('/berita', [BeritaController::class, 'index']);
+$routes->get('/berita/detail/(:any)', [BeritaController::class, 'detail/$1']);
 // Tentang Pondok 
-$routes->get('/sejarah', [TentangPondokController::class,'sejarah']);
-$routes->get('/visi-misi', [TentangPondokController::class,'visiMisi']);
-$routes->get('/peraturan', [TentangPondokController::class,'peraturan']);
+$routes->get('/sejarah', [TentangPondokController::class, 'sejarah']);
+$routes->get('/visi-misi', [TentangPondokController::class, 'visiMisi']);
+$routes->get('/peraturan', [TentangPondokController::class, 'peraturan']);
 // Tentang Alumni  
-$routes->get('tentang-alumni',[TentangAlumniController::class,'index']);
+$routes->get('tentang-alumni', [TentangAlumniController::class, 'index']);
 // Pendaftaran Online 
-$routes->get('psb',[PSBController::class,'index']);
-$routes->get('psb/create',[PSBController::class,'create']);
-$routes->post('psb/create/store',[PSBController::class,'store']);
+$routes->get('psb', [PSBController::class, 'index']);
+$routes->get('psb/create', [PSBController::class, 'create']);
+$routes->post('psb/create/store', [PSBController::class, 'store']);
 
 
 $routes->get('/login', 'Auth::login');
@@ -85,7 +85,7 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->get('berita/edit/(:any)', "Berita::edit/$1");
     $routes->post('berita/update/(:any)', "Berita::update/$1");
     $routes->get('berita/delete/(:any)', "Berita::delete/$1");
-    
+
     //pendaftaran
     $routes->get('pendaftaran', "Transaksi::index");
     $routes->get('pendaftaran-add', "Transaksi::create");
@@ -93,7 +93,7 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->get('pendaftaran/edit/(:any)', "Transaksi::edit/$1");
     $routes->post('pendaftaran/update/(:any)', "Transaksi::update/$1");
     $routes->get('pendaftaran/delete/(:any)', "Transaksi::delete/$1");
-    
+
     //pendaftaran ulang
     $routes->get('pendaftaran-ulang', "Transaksi::pendaftaranUlang");
     $routes->get('pendaftaran-ulang-add', "Transaksi::pendaftaranUlangCreate");
@@ -101,13 +101,15 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->get('pendaftaran-ulang/edit/(:any)', "Transaksi::pendaftaranUlangEdit/$1");
     $routes->post('pendaftaran-ulang/update/(:any)', "Transaksi::pendaftaranUlangUpdate/$1");
     $routes->get('pendaftaran-ulang/delete/(:any)', "Transaksi::pendaftaranUlangDelete/$1");
-    
+
     //bulanan
     $routes->get('bulanan', "Transaksi::indexBulanan");
     $routes->get('bulanan-add', "Transaksi::createBulanan");
     $routes->post('bulanan-post', "Transaksi::storeBulanan");
     $routes->get('bulananSantri/(:any)/(:any)/(:any)', "Transaksi::cekBulananSantri/$1/$2/$3");
-    
+    $routes->get('bulanan/edit/(:any)', "Transaksi::editBulanan/$1");
+    $routes->post('bulanan/update/(:any)', "Transaksi::updateBulanan/$1");
+    $routes->get('bulanan/delete/(:any)', "Transaksi::deleteBulanan/$1");
     //pengeluaran
     $routes->get('pengeluaran', "Transaksi::indexPengeluaran");
     $routes->get('pengeluaran-add', "Transaksi::createPengeluaran");
@@ -115,7 +117,7 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->get('pengeluaran/edit/(:any)', "Transaksi::editPengeluaran/$1");
     $routes->get('pengeluaran/update/(:any)', "Transaksi::updatePengeluaran/$1");
     $routes->get('pengeluaran/delete/(:any)', "Transaksi::deletePengeluaran/$1");
-    
+
     //visi-misi
     $routes->get('visi-misi', "VisiMisi::index");
     $routes->post('visi-misi', "VisiMisi::store");

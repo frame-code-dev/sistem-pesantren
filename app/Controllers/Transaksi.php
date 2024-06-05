@@ -116,7 +116,8 @@ class Transaksi extends BaseController
 		}
 	}
 
-	public function edit($id){
+	public function edit($id)
+	{
 		$data["title"] = "Pemasukan";
 		$data["current_page"] = "Pendaftaran";
 		$user_id =  $this->transaksi->detailTransaksi($id)->user_id;
@@ -127,13 +128,14 @@ class Transaksi extends BaseController
 
 	public function update($id = null)
 	{
-		$nominal = Helpers::replaceRupiah($this->request->getPost("nominal"));	
+		$nominal = Helpers::replaceRupiah($this->request->getPost("nominal"));
 		$tanggal_bayar = $this->request->getPost("tanggal_bayar");
 
-		$validation = $this->validateData([
-			"nominal" => $nominal,
-			"tanggal_bayar" => $tanggal_bayar,
-		],
+		$validation = $this->validateData(
+			[
+				"nominal" => $nominal,
+				"tanggal_bayar" => $tanggal_bayar,
+			],
 			$this->transaksi->rulesUpdatePendaftaran()
 		);
 		if (!$validation) {
@@ -234,24 +236,24 @@ class Transaksi extends BaseController
 			$status_santri = 'aktif';
 
 			$this->santri->updateStatus($santri_id, $status_santri);
-			$this->db->transCommit();
+
 
 			$this->transaksi->storePendaftaran($data);
-			$this->db->transCommit();
 
 			session()->setFlashdata("status_success", true);
 			session()->setFlashdata('message', 'Pendaftaran ulang santri berhasil.');
+			$this->db->transCommit();
 			return redirect()->to('dashboard/pendaftaran-ulang');
 		} catch (\Throwable $th) {
 			$this->db->transRollback();
 			session()->setFlashdata("status_error", true);
 			session()->setFlashdata('error', 'Pendaftaran ulang gagal, <br>' . $th->getMessage());
-			return redirect()->to('dashboard/pendaftaran-ulang');
+			return redirect()->back()->withInput();
 		} catch (\Exception $e) {
 			$this->db->transRollback();
 			session()->setFlashdata("status_error", true);
 			session()->setFlashdata('error', 'Pendaftaran ulang gagal, <br>' . $e->getMessage());
-			return redirect()->to('dashboard/pendaftaran-ulang');
+			return redirect()->back()->withInput();
 		}
 	}
 
@@ -445,6 +447,136 @@ class Transaksi extends BaseController
 		}
 	}
 
+	public function editBulanan($id)
+	{
+		$data["title"] = "Ubah Bulanan";
+		$data["current_page"] = "Bulanan";
+		$data["santri"] = $this->santri->getSantriAktifAlumni()->getResultArray();
+		$data["data"] = $this->transaksi->where("id", $id)->first();
+
+		return view("backoffice/bulanan/edit", $data);
+	}
+	public function updateBulanan($id)
+	{
+		$santriId = $this->transaksi->where("id", $id)->first()["santri_id"];
+		$nominal = $this->replaceRupiah($this->request->getPost("nominal"));
+		$bulan = $this->request->getPost("bulan");
+		$tahun = $this->request->getPost("tahun");
+		$validasi = [
+			"bulan" => $bulan,
+			"tahun" => $tahun,
+			"nominal" => $nominal,
+		];
+		$valid = $this->validateData($validasi, [
+			"bulan" => "required",
+			"tahun" => "required",
+			"nominal" => "required"
+		]);
+		if (!$valid) {
+			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
+		}
+
+
+		//kondisi duplikat data transaksi
+		$santri = $this->transaksi
+			->join("santri", "transaksi.santri_id = santri.id")
+			->where("bulan", $bulan)
+			->where("tahun", $tahun)
+			->where("santri_id", $santriId)
+			->first();
+		if ($santri) {
+			$namaSantri = $santri["nama"];
+			session()->setFlashdata("status_error", true);
+			$bulan = Helpers::getMontName($bulan - 1);
+			session()->setFlashdata('error', "Transaksi bulanan pada bulan $bulan  dan tahun $tahun untuk santri $namaSantri sudah ada");
+			return redirect()->back()->withInput();
+		}
+
+		//kondisi tanggal keluar alumni
+		$santri = $this->santri->select("month(tanggal_keluar) as bulan,year(tanggal_keluar) as tahun,nama")
+			->where("status_santri", "alumni")
+			->where("id", $santriId)
+			->first();
+		if ($santri) {
+			if (
+				$santri["tahun"] < $tahun || ($santri["tahun"] == $tahun && $santri["bulan"] < $bulan)
+			) {
+				$namaSantri = $santri["nama"];
+				session()->setFlashdata("status_error", true);
+				$bulan = Helpers::getMontName($santri["bulan"] - 1);
+				$tahun = $santri["tahun"];
+				session()->setFlashdata('error', "Transaksi bulanan  untuk santri $namaSantri tidak boleh lebih dari  bulan $bulan   $tahun");
+				return redirect()->back()->withInput();
+			}
+		}
+
+		//kondisi tanggal masuk 
+		$santri = $this->santri->select("month(tanggal_masuk) as bulan,year(tanggal_masuk) as tahun,nama")
+			->where("id", $santriId)
+			->first();
+		if ($santri) {
+			if (
+				$santri["tahun"] > $tahun || ($santri["tahun"] == $tahun && $santri["bulan"] > $bulan)
+			) {
+				$namaSantri = $santri["nama"];
+				session()->setFlashdata("status_error", true);
+				$bulan = Helpers::getMontName($santri["bulan"] - 1);
+				$tahun = $santri["tahun"];
+				session()->setFlashdata('error', "Transaksi bulanan  untuk santri $namaSantri tidak boleh kurang dari  bulan $bulan   $tahun");
+				return redirect()->back()->withInput();
+			}
+		}
+
+		try {
+			$this->db->transBegin();
+			$data = [
+				"nominal" => $nominal,
+				"bulan" => $bulan,
+				"tahun" => $tahun,
+			];
+
+			if ($this->transaksi->updateBulanan($data, $id)) {
+				session()->setFlashdata("status_success", true);
+				$this->db->transCommit();
+				session()->setFlashdata('message', 'Transaksi berhasil diubah');
+				return redirect()->to('dashboard/bulanan');
+			} else {
+				session()->setFlashdata("status_error", true);
+				$this->db->transRollback();
+				session()->setFlashdata('error', 'Transaksi gagal diubah');
+				return redirect()->back()->withInput();
+			}
+		} catch (\Throwable $th) {
+			session()->setFlashdata("status_error", true);
+			$this->db->transRollback();
+			session()->setFlashdata('error', 'Transaksi gagal diubah');
+			return redirect()->back()->withInput();
+		}
+	}
+
+
+	public function deleteBulanan($id = null)
+	{
+		$this->db->transBegin();
+		try {
+			$this->db->transCommit();
+			$this->transaksi->deleteTransaksi($id);
+			session()->setFlashdata("status_success", true);
+			session()->setFlashdata('message', 'Pembayaran bulanan berhasil dihapus');
+			return redirect()->back();
+		} catch (\Throwable $th) {
+			$this->db->transRollback();
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'Pembayaran bulanan gagal dihapus, <br>' . $th->getMessage());
+			return redirect()->back();
+		} catch (\Exception $e) {
+			$this->db->transRollback();
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'Pembayaran bulanan gagal dihapus, <br>' . $e->getMessage());
+			return redirect()->back();
+		}
+	}
+
 	public function indexPengeluaran()
 	{
 		$data['data'] = $this->transaksi->getPengeluarans()->getResultArray();
@@ -456,7 +588,8 @@ class Transaksi extends BaseController
 		return view('backoffice/pengeluaran/create',);
 	}
 
-	public function storePengeluaran(){
+	public function storePengeluaran()
+	{
 		$keterangan = $this->request->getPost("keterangan");
 		// var_dump($keterangan);
 		// die();
@@ -501,7 +634,8 @@ class Transaksi extends BaseController
 		}
 	}
 
-	public function editPengeluaran($id){
+	public function editPengeluaran($id)
+	{
 		$data['data'] = $this->transaksi->detailTransaksi($id);
 		return view('backoffice/pengeluaran/edit', $data);
 	}
@@ -513,11 +647,12 @@ class Transaksi extends BaseController
 		$nominal = $this->replaceRupiah($this->request->getPost("nominal"));
 		$userId = session()->get("user_id");
 
-		$valid = $this->validateData([
-			"keterangan" => $keterangan,
-			"tanggal_bayar" => $tanggal_bayar,
-			"nominal" => $nominal
-		],
+		$valid = $this->validateData(
+			[
+				"keterangan" => $keterangan,
+				"tanggal_bayar" => $tanggal_bayar,
+				"nominal" => $nominal
+			],
 			$this->transaksi->rulesPengeluaran()
 		);
 		if (!$valid) {

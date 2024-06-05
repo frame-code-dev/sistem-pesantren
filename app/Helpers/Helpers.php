@@ -25,7 +25,7 @@ class Helpers
 
     public static function formatRupiah($angka)
     {
-        return 'Rp ' . number_format($angka, 0, ',', '.');
+        return 'Rp. ' . number_format($angka, 0, ',', '.');
     }
     public static function replaceRupiah($rupiah)
     {
