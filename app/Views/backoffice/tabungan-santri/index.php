@@ -38,6 +38,13 @@ $this->extend('template/app') ?>
 		</div>
 		<?php if ($filter) : ?>
 			<div class="card bg-white p-5 mt-4 border rounded-md w-full relative overflow-x-auto">
+				<h6 class="block mb-2 text-sm font-semibold text-gray-900">Total Tabungan <?= $namaSantri ?></h6>
+				<h2 class="font-bold tracking-tighter text-lg text-theme-text">
+					<?= Helpers::formatRupiah($totalTabungan) ?>
+				</h2>
+			</div>
+
+			<div class="card bg-white p-5 mt-4 border rounded-md w-full relative overflow-x-auto">
 				<ul class="flex tab flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400">
 					<li class="me-2">
 						<button data-kategori="pemasukan" data-modalAddTitle="Tambah Pemasukan Santri" data-modalEditTitle="Ubah Pemasukan Santri" data-tabId="#pemasukan" class="tab-item inline-block px-4 py-3 text-white bg-blue-600 rounded-lg active" aria-current="page">Pemasukan</button>

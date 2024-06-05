@@ -31,9 +31,10 @@ class TabunganSantriController extends BaseController
 		$data["santriId"] = $santri ?? 0;
 		$data["filter"] = false;
 		$data["santri"] = $this->santri->getSantriAktifAlumni()->getResultArray();
+		$data["totalTabungan"] = $this->transaksi->getTotalTabunganSantri($santri)->totalTabungan ?? 0;
 		if ($santri) {
-
 			$data["filter"] = true;
+			$data["namaSantri"] = $this->santri->where("id", $santri)->get()->getRow()->nama;
 			$data["pengeluaran"] = $this->transaksi->getPengeluaranById($santri)->getResultArray();
 			$data["pemasukan"] = $this->transaksi->getPemasukanById($santri)->getResultArray();
 		}
@@ -81,9 +82,6 @@ class TabunganSantriController extends BaseController
 	{
 		$nominal = Helpers::replaceRupiah($this->request->getPost("nominal"));
 		$tanggal = $this->request->getPost("tanggal");
-		$kategori = $this->request->getPost("kategori");
-		$santriId = $this->request->getPost("santri");
-		$userId = session()->get("user_id");
 		$this->db->transBegin();
 		try {
 			$data = [
