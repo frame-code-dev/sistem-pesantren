@@ -566,12 +566,12 @@ class Transaksi extends BaseController
 			$this->db->transRollback();
 			session()->setFlashdata("status_error", true);
 			session()->setFlashdata('error', 'Tambah pengeluaran gagal, <br>' . $th->getMessage());
-			return redirect()->to('dashboard/pengeluaran');
+			return redirect()->back();
 		} catch (\Exception $e) {
 			$this->db->transRollback();
 			session()->setFlashdata("status_error", true);
 			session()->setFlashdata('error', 'Tambah pengeluaran gagal, <br>' . $e->getMessage());
-			return redirect()->to('dashboard/pengeluaran');
+			return redirect()->back();
 		}
 	}
 
@@ -617,12 +617,12 @@ class Transaksi extends BaseController
 			$this->db->transRollback();
 			session()->setFlashdata("status_error", true);
 			session()->setFlashdata('error', 'ubah pengeluaran gagal, <br>' . $th->getMessage());
-			return redirect()->to('dashboard/pengeluaran');
+			return redirect()->back();
 		} catch (\Exception $e) {
 			$this->db->transRollback();
 			session()->setFlashdata("status_error", true);
 			session()->setFlashdata('error', 'ubah pengeluaran gagal, <br>' . $e->getMessage());
-			return redirect()->to('dashboard/pengeluaran');
+			return redirect()->back();
 		}
 	}
 

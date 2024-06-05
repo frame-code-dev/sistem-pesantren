@@ -112,7 +112,7 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->get('pengeluaran-add', "Transaksi::createPengeluaran");
     $routes->post('pengeluaran-post', "Transaksi::storePengeluaran");
     $routes->get('pengeluaran/edit/(:any)', "Transaksi::editPengeluaran/$1");
-    $routes->get('pengeluaran/update/(:any)', "Transaksi::updatePengeluaran/$1");
+    $routes->post('pengeluaran/update/(:any)', "Transaksi::updatePengeluaran/$1");
     $routes->get('pengeluaran/delete/(:any)', "Transaksi::deletePengeluaran/$1");
 
     //visi-misi
