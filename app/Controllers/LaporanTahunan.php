@@ -86,7 +86,7 @@ class LaporanTahunan extends BaseController
 			$tahunan = $this->transaksi
 				->select("sum(nominal) as total_nominal")
 				->where("jenis_id", 3)
-				->where("year(tanggal_bayar)", $year)
+				->where("tahun", $year)
 				->get()->getRowArray();
 
 			$pengeluaranTahunIni = $this->transaksi
