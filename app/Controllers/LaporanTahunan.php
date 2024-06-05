@@ -206,13 +206,15 @@ class LaporanTahunan extends BaseController
 		$month = $this->request->getGet("bulan") ?? null;
 		$year = $this->request->getGet("year") ?? null;
 
-		$data["dataBulan"] = $this->transaksi
-			->select("bulan")
-			->groupBy("bulan")
-			->where('bulan !=', null)
-			->get()
-			->getResultArray();
-		$data["dataTahun"] = $this->transaksi->select("tahun")->groupBy("tahun")->where('tahun !=', null)->get()->getResultArray();
+		$data["dataBulan"] = $this->transaksi->select("month(tanggal_bayar) as bulan")
+		->groupBy("month(tanggal_bayar)")
+		->orderBy("month(tanggal_bayar)", "ASC")
+		->get()
+		->getResultArray();
+		$data["dataTahun"] = $this->transaksi->select("year(tanggal_bayar) as tahun")
+		->groupBy("year(tanggal_bayar) ")
+		->get()
+		->getResultArray();
 
 		$data['month'] = $month;
 		$data['year'] = $year;
@@ -257,7 +259,7 @@ class LaporanTahunan extends BaseController
 			$pengeluaran = $this->transaksi
 				->select("sum(nominal) as total_nominal")
 				->where('kategori', 'pengeluaran')
-				->where("jenis_id != ", 4)
+				->where("jenis_id != ", null)
 				->where('MONTH(tanggal_bayar)', $month)
 				->where('YEAR(tanggal_bayar)', $year)
 				->groupBy("tanggal_bayar")
@@ -337,7 +339,7 @@ class LaporanTahunan extends BaseController
 		$pengeluaran = $this->transaksi
 			->select("sum(nominal) as total_nominal")
 			->where('kategori', 'pengeluaran')
-			->where("jenis_id != ", 4)
+			->where("jenis_id", null)
 			->where('MONTH(bulan)', $month)
 			->where('YEAR(bulan)', $year)
 			->groupBy("bulan")
