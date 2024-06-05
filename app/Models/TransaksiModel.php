@@ -186,10 +186,7 @@ class TransaksiModel extends Model
 		return  $this->update($id, $data);
 	}
 
-	public function deleteTransaksi($id)
-	{
-		return $this->delete($id);
-	}
+
 
 	public function deletePengeluaran($id)
 	{

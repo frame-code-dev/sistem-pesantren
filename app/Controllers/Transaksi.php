@@ -162,23 +162,7 @@ class Transaksi extends BaseController
 		}
 	}
 
-	public function delete($id = null)
-	{
-		try {
-			$this->transaksi->deleteTransaksi($id);
-			session()->setFlashdata("status_success", true);
-			session()->setFlashdata('message', 'Data pendaftaran berhasil dihapus');
-			return redirect()->to('dashboard/pendaftaran');
-		} catch (\Throwable $th) {
-			session()->setFlashdata("status_error", true);
-			session()->setFlashdata('error', 'Data pendaftaran gagal dihapus, <br>' . $th->getMessage());
-			return redirect()->to('dashboard/pendaftaran');
-		} catch (\Exception $e) {
-			session()->setFlashdata("status_error", true);
-			session()->setFlashdata('error', 'Data pendaftaran gagal dihapus, <br>' . $e->getMessage());
-			return redirect()->to('dashboard/pendaftaran');
-		}
-	}
+
 
 	public function pendaftaranUlang()
 	{
@@ -303,30 +287,7 @@ class Transaksi extends BaseController
 		}
 	}
 
-	public function pendaftaranUlangDelete($id = null)
-	{
-		$this->db->transBegin();
-		try {
-			$santriId =  $this->transaksi->detailTransaksi($id)->santri_id;
 
-			$this->santri->updateStatus($santriId, 'belum_registrasi_ulang');
-			$this->transaksi->deleteTransaksi($id);
-			session()->setFlashdata("status_success", true);
-			session()->setFlashdata('message', 'Data pendaftaran ulang berhasil dihapus');
-			$this->db->transCommit();
-			return redirect()->to('dashboard/pendaftaran-ulang');
-		} catch (\Throwable $th) {
-			$this->db->transRollback();
-			session()->setFlashdata("status_error", true);
-			session()->setFlashdata('error', 'Data pendaftaran ulang gagal dihapus, <br>' . $th->getMessage());
-			return redirect()->to('dashboard/pendaftaran-ulang');
-		} catch (\Exception $e) {
-			$this->db->transRollback();
-			session()->setFlashdata("status_error", true);
-			session()->setFlashdata('error', 'Data pendaftaran ulang gagal dihapus, <br>' . $e->getMessage());
-			return redirect()->to('dashboard/pendaftaran-ulang');
-		}
-	}
 
 
 	//method transaksi bulanan
@@ -555,27 +516,7 @@ class Transaksi extends BaseController
 	}
 
 
-	public function deleteBulanan($id = null)
-	{
-		$this->db->transBegin();
-		try {
-			$this->db->transCommit();
-			$this->transaksi->deleteTransaksi($id);
-			session()->setFlashdata("status_success", true);
-			session()->setFlashdata('message', 'Pembayaran bulanan berhasil dihapus');
-			return redirect()->back();
-		} catch (\Throwable $th) {
-			$this->db->transRollback();
-			session()->setFlashdata("status_error", true);
-			session()->setFlashdata('error', 'Pembayaran bulanan gagal dihapus, <br>' . $th->getMessage());
-			return redirect()->back();
-		} catch (\Exception $e) {
-			$this->db->transRollback();
-			session()->setFlashdata("status_error", true);
-			session()->setFlashdata('error', 'Pembayaran bulanan gagal dihapus, <br>' . $e->getMessage());
-			return redirect()->back();
-		}
-	}
+
 
 	public function indexPengeluaran()
 	{

@@ -92,7 +92,6 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->post('pendaftaran-post', "Transaksi::store");
     $routes->get('pendaftaran/edit/(:any)', "Transaksi::edit/$1");
     $routes->post('pendaftaran/update/(:any)', "Transaksi::update/$1");
-    $routes->get('pendaftaran/delete/(:any)', "Transaksi::delete/$1");
 
     //pendaftaran ulang
     $routes->get('pendaftaran-ulang', "Transaksi::pendaftaranUlang");
@@ -100,7 +99,6 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->post('pendaftaran-ulang-post', "Transaksi::pendaftaranUlangStore");
     $routes->get('pendaftaran-ulang/edit/(:any)', "Transaksi::pendaftaranUlangEdit/$1");
     $routes->post('pendaftaran-ulang/update/(:any)', "Transaksi::pendaftaranUlangUpdate/$1");
-    $routes->get('pendaftaran-ulang/delete/(:any)', "Transaksi::pendaftaranUlangDelete/$1");
 
     //bulanan
     $routes->get('bulanan', "Transaksi::indexBulanan");
@@ -109,7 +107,6 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->get('bulananSantri/(:any)/(:any)/(:any)', "Transaksi::cekBulananSantri/$1/$2/$3");
     $routes->get('bulanan/edit/(:any)', "Transaksi::editBulanan/$1");
     $routes->post('bulanan/update/(:any)', "Transaksi::updateBulanan/$1");
-    $routes->get('bulanan/delete/(:any)', "Transaksi::deleteBulanan/$1");
     //pengeluaran
     $routes->get('pengeluaran', "Transaksi::indexPengeluaran");
     $routes->get('pengeluaran-add', "Transaksi::createPengeluaran");
