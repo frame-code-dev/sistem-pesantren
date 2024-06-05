@@ -8,7 +8,7 @@ $this->extend('template/app') ?>
 $currentMonth = date('n');
 $currentYear = date("Y");
 
-$months = [
+$namaBulan = [
 	1 => "Januari",
 	2 => "Februari",
 	3 => "Maret",
@@ -48,7 +48,7 @@ $selectedMonth = $month['bulan'] ?? $currentMonth;
 					<select id="bulan" name="bulan" class="select2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 						<option disabled hidden selected value=""> == Pilih Bulan == </option>
 						<?php foreach ($dataBulan as $bulan) : ?>
-							<option <?= $bulan["bulan"] == ($month ?? $currentMonth)  ? "selected" : "" ?> value="<?= $bulan["bulan"]  ?>"><?= $bulan["bulan"] ?></option>
+							<option <?= $bulan["bulan"] == ($month ?? $currentMonth)  ? "selected" : "" ?> value="<?= $bulan["bulan"]  ?>"><?= Helpers::getMontName($bulan["bulan"] - 1) ?></option>
 						<?php endforeach; ?>
 					</select>
 					<div class="text-red-500 text-xs italic font-semibold">
@@ -75,7 +75,7 @@ $selectedMonth = $month['bulan'] ?? $currentMonth;
 			<div class="card bg-white p-5 mt-4 border rounded-md w-full relative overflow-x-auto">
 				<div class="flex justify-between mb-2">
 					<p class="mb-3">
-						Bulan : <?= $months[$month] ?>
+						Bulan : <?= $namaBulan[$month] ?>
 					</p>
 					<p class="mb-3">
 						Tahun : <?= $year ?>

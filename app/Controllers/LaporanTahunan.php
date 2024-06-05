@@ -209,10 +209,10 @@ class LaporanTahunan extends BaseController
 		$data["dataBulan"] = $this->transaksi
 			->select("bulan")
 			->groupBy("bulan")
-			->where("tahun", $year)
+			->where('bulan !=', null)
 			->get()
 			->getResultArray();
-		$data["dataTahun"] = $this->transaksi->select("tahun")->groupBy("tahun")->get()->getResultArray();
+		$data["dataTahun"] = $this->transaksi->select("tahun")->groupBy("tahun")->where('tahun !=', null)->get()->getResultArray();
 
 		$data['month'] = $month;
 		$data['year'] = $year;
@@ -249,20 +249,18 @@ class LaporanTahunan extends BaseController
 				->select("sum(nominal) as total_nominal")
 				->where("jenis_id !=", 3)
 				->where("jenis_id != ", 4)
-				->where('month(bulan)', $month)
-				->where('year(bulan)', $year)
-				->groupBy("bulan")
-				->groupBy("tahun")
+				->where('month(tanggal_bayar)', $month)
+				->where('year(tanggal_bayar)', $year)
+				->groupBy("tanggal_bayar")
 				->get()->getRowArray();
 
 			$pengeluaran = $this->transaksi
 				->select("sum(nominal) as total_nominal")
 				->where('kategori', 'pengeluaran')
 				->where("jenis_id != ", 4)
-				->where('MONTH(bulan)', $month)
-				->where('YEAR(bulan)', $year)
-				->groupBy("bulan")
-				->groupBy("tahun")
+				->where('MONTH(tanggal_bayar)', $month)
+				->where('YEAR(tanggal_bayar)', $year)
+				->groupBy("tanggal_bayar")
 				->get()->getRowArray();
 
 			$totalPemasukanLain = $pemasukan_lain["total_nominal"] ?? 0;
