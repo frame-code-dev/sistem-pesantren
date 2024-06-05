@@ -50,7 +50,7 @@
             <?php foreach ($berita['berita'] as $d) : ?>
                 <div class="w-full md:max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <a href="<?=base_url('berita/detail/'.$d['slug'])?>">
-                        <img class="rounded-t-lg w-full bg-cover" src="<?=$d['image'] != null ? base_url("upload/" . $d["id"] . "/") . $d["image"] : 'https://flowbite.com/docs/images/examples/image-2@2x.jpg' ?>" alt="<?$item->title?>" />
+                        <img class="rounded-t-lg w-full bg-cover" src="<?=$d['image'] != null ? base_url("upload/" . $d["id"] . "/") . $d["image"] : 'https://flowbite.com/docs/images/examples/image-2@2x.jpg' ?>" alt="<?=$d['judul']?>" />
                     </a>
                     <div class="p-5">
                         <div class="flex justify-between items-center mb-5 text-gray-500 border-b-2 p-3">
