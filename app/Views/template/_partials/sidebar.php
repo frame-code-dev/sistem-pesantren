@@ -7,11 +7,7 @@
 				$user_id = $session->get('user_id');
 				$image = $session->get('image');
 				?>
-				<?php if ($image) : ?>
-					<img src="<?= base_url("upload/image/". $user_id . "/" . $image) ?>" class="w-20 h-20 rounded-full" alt="">
-				<?php else : ?>
 					<img src="<?= base_url('user.jpg') ?>" class="w-20 h-20 rounded-full" alt="">
-				<?php endif; ?>
 			</div>
 			<div class="ms-4">
 				<?php

@@ -23,11 +23,7 @@
 							$user_id = $session->get('user_id');
 							$image = $session->get('image');
 							?>
-							<?php if ($image) : ?>
-								<img class="w-8 h-8 rounded-full" src="<?= base_url("upload/image/" . $user_id . "/" . $image) ?>" alt="user photo">
-							<?php else : ?>
 								<img class="w-8 h-8 rounded-full" src="<?= base_url('user.jpg') ?>" alt="user photo">
-							<?php endif; ?>
 						</button>
 					</div>
 					<div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">

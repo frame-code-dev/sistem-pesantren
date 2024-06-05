@@ -47,10 +47,8 @@ $selectedMonth = $month['bulan'] ?? $currentMonth;
 					<label for="year" class="block mb-2 text-sm font-semibold text-gray-900">Filter Laporan Bulanan<span class="me-2 text-red-500">*</span></label>
 					<select id="bulan" name="bulan" class="select2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 						<option disabled hidden selected value=""> == Pilih Bulan == </option>
-						<?php foreach ($months as $i => $namaBulan) : ?>
-							<option value="<?= $i ?>" <?= $i == set_value("bulan", $selectedMonth) ? "selected" : "" ?>>
-								<?= $namaBulan ?>
-							</option>
+						<?php foreach ($dataBulan as $bulan) : ?>
+							<option <?= $bulan["bulan"] == ($month ?? $currentMonth)  ? "selected" : "" ?> value="<?= $bulan["bulan"]  ?>"><?= $bulan["bulan"] ?></option>
 						<?php endforeach; ?>
 					</select>
 					<div class="text-red-500 text-xs italic font-semibold">
