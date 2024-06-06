@@ -9,8 +9,8 @@ if ($filter) : ?>
 
         <hr style="border-top: 1px solid black;">
         <div style="width: 100%; text-align: center;">
-            <h1 style="max-width: 600px; margin: 0 auto;">Laporan Tahunan Keuangan Pondok pesantren 'inayatullah</h1>
-            <p style="text-align: center;">Jalan Monjali - Yogyakarta</p>
+            <h1 style="max-width: 600px; margin: 0 auto;">Laporan Tahunan Keuangan YPP. Nurul Imamul Hasan</h1>
+            <p style="text-align: center;">JL. Tegal Wangkal, RT. 05, RW. 01, Kampung KrajanDesa Dawuhan, Suboh, Krajan, Suboh, Situbondo, Kabupaten Situbondo, Jawa Timur 68354, Situbondo 68354</p>
         </div>
         <hr style="border-top: 1px solid black;">
         <div style="margin-top: 24px; margin-bottom: 8px;">
