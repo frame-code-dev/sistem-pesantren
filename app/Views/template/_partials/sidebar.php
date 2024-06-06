@@ -165,7 +165,7 @@
 								<path fill-rule="evenodd" d="M5 14a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1Zm5 0a1 1 0 0 1 1-1h5a1 1 0 1 1 0 2h-5a1 1 0 0 1-1-1Z" clip-rule="evenodd" />
 							</svg>
 		
-							<span class="ms-3 text-sm">Pengeluaran</span>
+							<span class="ms-3 text-sm">Pengeluaran Pesantren</span>
 						</a>
 					</li>
 					<hr>

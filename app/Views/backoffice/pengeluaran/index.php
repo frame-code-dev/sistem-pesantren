@@ -10,7 +10,7 @@
                     Pengeluaran
                 </p>
                 <h2 class="font-bold tracking-tighter text-2xl text-theme-text">
-                    Pengeluaran
+                    Pengeluaran pesantren
                 </h2>
             </div>
             <div class="layout lg:flex grid grid-cols-1 lg:mt-0 mt-5 justify-end gap-5">
