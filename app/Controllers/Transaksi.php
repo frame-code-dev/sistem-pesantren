@@ -91,10 +91,15 @@ class Transaksi extends BaseController
 				"tanggal_bayar" => $tanggal_bayar,
 				"user_id" => $userId,
 			];
-
 			$status_santri = 'belum_registrasi_ulang';
 
-			$this->santri->updateStatus($santri_id, $status_santri);
+			$dataSantri = [
+				"status" => $status_santri,
+				"tanggal_masuk" => $tanggal_bayar,
+				"updated_at" => date("Y-m-d H:i:s"),
+			];
+
+			$this->santri->updateDatas($santri_id, $dataSantri);
 			$this->db->transCommit();
 
 			$this->transaksi->storePendaftaran($data);
