@@ -127,11 +127,26 @@ class TransaksiModel extends Model
 			COALESCE((SELECT SUM(t2.nominal) FROM transaksi t2 WHERE t2.kategori = "pengeluaran" AND t2.jenis_id is null), 0) AS totalTabungan FROM transaksi t1 WHERE t1.jenis_id <> 4 AND t1.kategori = "pemasukan";')
 			->getRow();
 	}
-	public function getTotalTabunganSantri($id)
+	public function getTotalTabunganIgnore($idPengeluaran)
 	{
 		return	$this->db->query("SELECT 
 			COALESCE(SUM(t1.nominal), 0) - 
-			COALESCE((SELECT SUM(t2.nominal) FROM transaksi t2 WHERE t2.kategori = 'pengeluaran' AND t2.jenis_id = 4), 0) AS totalTabungan FROM transaksi t1 WHERE santri_id = $id AND t1.jenis_id = 4 AND t1.kategori = 'pemasukan'")
+			COALESCE((SELECT SUM(t2.nominal) FROM transaksi t2 WHERE t2.kategori = 'pengeluaran' AND t2.jenis_id is null  AND id <> $idPengeluaran), 0) AS totalTabungan FROM transaksi t1 WHERE t1.jenis_id <> 4 AND t1.kategori = 'pemasukan';")
+			->getRow();
+	}
+	public function getTotalTabunganSantri($idSantri)
+	{
+		return	$this->db->query("SELECT 
+			COALESCE(SUM(t1.nominal), 0) - 
+			COALESCE((SELECT SUM(t2.nominal) FROM transaksi t2 WHERE t2.kategori = 'pengeluaran' AND t2.jenis_id = 4), 0) AS totalTabungan FROM transaksi t1 WHERE santri_id = $idSantri AND t1.jenis_id = 4 AND t1.kategori = 'pemasukan'")
+			->getRow();
+	}
+	//
+	public function getTotalTabunganSantriIgnore($idSantri, $idPengeluaran)
+	{
+		return	$this->db->query("SELECT 
+			COALESCE(SUM(t1.nominal), 0) - 
+			COALESCE((SELECT SUM(t2.nominal) FROM transaksi t2 WHERE t2.kategori = 'pengeluaran' AND t2.jenis_id = 4 AND id <> $idPengeluaran), 0) AS totalTabungan FROM transaksi t1 WHERE santri_id = $idSantri AND t1.jenis_id = 4 AND t1.kategori = 'pemasukan'")
 			->getRow();
 	}
 
@@ -159,7 +174,7 @@ class TransaksiModel extends Model
 			->join("santri", "transaksi.santri_id = santri.id", "array")
 			->where("transaksi.jenis_id", 3)
 			->where("transaksi.kategori", "pemasukan")
-			->orderBy("tanggal_bayar", "desc")
+			->orderBy("id", "desc")
 			->get();
 	}
 
@@ -178,7 +193,9 @@ class TransaksiModel extends Model
 
 	public function getPengeluarans()
 	{
-		return  $this->where('kategori', 'pengeluaran')->get();
+		return  $this->where('kategori', 'pengeluaran')
+			->orderBy("id", "desc")
+			->get();
 	}
 
 	public function updatePendaftaran($id, $data)

@@ -67,36 +67,52 @@ class Santri_model extends Model
     // semua santri
     public function getAll()
     {
-        return  $this->findAll();
+        return  $this
+            ->findAll();
     }
 
     //santri yg belum melakukan registrasi
     public function getSantriRegistrasi()
     {
-        return  $this->where('status_santri', 'belum_registrasi')->get();
+        return  $this
+            ->where('status_santri', 'belum_registrasi')
+            ->orderBy("id", "desc")
+            ->get();
     }
 
     // santri yg blum registrasi ulang
     public function getSantriRegistrasiUlang()
     {
-        return  $this->where('status_santri', 'belum_registrasi_ulang')->get();
+        return  $this
+            ->where('status_santri', 'belum_registrasi_ulang')
+            ->orderBy("id", "desc")
+            ->get();
     }
 
     // semua santri kecuali alumni
     public function getSantriAktif()
     {
-        return  $this->where('status_santri', 'aktif')->orWhere('status_santri', 'belum_registrasi')->orWhere('status_santri', 'belum_registrasi_ulang')->get();
+        return  $this->where('status_santri', 'aktif')
+            ->orWhere('status_santri', 'belum_registrasi')
+            ->orWhere('status_santri', 'belum_registrasi_ulang')
+            ->orderBy("id", "desc")
+            ->get();
     }
     // semua santri aktiv dan alumni
     public function getSantriAktifAlumni()
     {
-        return  $this->where('status_santri', 'aktif')->orWhere('status_santri', 'alumni')->get();
+        return  $this->where('status_santri', 'aktif')
+            ->orWhere('status_santri', 'alumni')
+            ->orderBy("id", "desc")
+            ->get();
     }
 
     // santri alumni
     public function getSantriAlumni()
     {
-        return  $this->where('status_santri', 'alumni')->get();
+        return  $this->where('status_santri', 'alumni')
+            ->orderBy("id", "desc")
+            ->get();
     }
 
     public function countSantri($status)

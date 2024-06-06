@@ -537,7 +537,12 @@ class Transaksi extends BaseController
 		$tanggal_bayar = $this->request->getPost("tanggal_bayar");
 		$nominal = $this->replaceRupiah($this->request->getPost("nominal"));
 		$userId = session()->get("user_id");
-
+		$totalTabungan = $this->transaksi->getTotalTabungan()->totalTabungan ?? 0;
+		if ($totalTabungan < $nominal) {
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', "Pengeluaran pesantren tidak boleh lebih dari " . Helpers::formatRupiah($totalTabungan));
+			return redirect()->back();
+		}
 		$valid = $this->validateData([
 			"keterangan" => $keterangan,
 			"tanggal_bayar" => $tanggal_bayar,
@@ -598,6 +603,13 @@ class Transaksi extends BaseController
 		);
 		if (!$valid) {
 			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
+		}
+
+		$totalTabungan = $this->transaksi->getTotalTabunganIgnore($id)->totalTabungan ?? 0;
+		if ($totalTabungan < $nominal) {
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', "Pengeluaran pesantren tidak boleh lebih dari " . Helpers::formatRupiah($totalTabungan));
+			return redirect()->back();
 		}
 
 		try {
