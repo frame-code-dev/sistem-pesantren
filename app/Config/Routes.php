@@ -36,7 +36,7 @@ $routes->post('/login', 'Auth::loginPost', ['as' => 'loginPost']);
 $routes->get('/logout', "Auth::logout");
 // dashboard 
 
-$routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
+$routes->group('dashboard', ['filter' => "auth"], function ($routes) {
     $routes->get('/', "Dashboard::index", ['as' => 'dashboard']);
     //profile
     $routes->get('profile', "User::profile");
@@ -49,18 +49,7 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->post('user/update/(:any)', "User::update/$1");
     $routes->get('user/delete/(:any)', "User::delete/$1");
 
-    // santri 
-    $routes->get('santri', "Santri::index");
-    $routes->get('santri/create', "Santri::create");
-    $routes->post('santri/store', "Santri::store");
-    $routes->get('santri/edit/(:any)', "Santri::edit/$1");
-    $routes->post('santri/update/(:any)', "Santri::update/$1");
-    $routes->get('santri/delete/(:any)', "Santri::delete/$1");
 
-    // alumni
-    $routes->get('alumni', "Santri::alumni");
-    $routes->post('alumni/add', "Santri::addAlumni");
-    $routes->get('alumni/update/(:any)', "Santri::updateAktif/$1");
 
     // kategori
     $routes->get('kategori', "Kategori::index");
@@ -86,52 +75,72 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->post('berita/update/(:any)', "Berita::update/$1");
     $routes->get('berita/delete/(:any)', "Berita::delete/$1");
 
-    //pendaftaran
-    $routes->get('pendaftaran', "Transaksi::index");
-    $routes->get('pendaftaran-add', "Transaksi::create");
-    $routes->post('pendaftaran-post', "Transaksi::store");
-    $routes->get('pendaftaran/edit/(:any)', "Transaksi::edit/$1");
-    $routes->post('pendaftaran/update/(:any)', "Transaksi::update/$1");
 
-    //pendaftaran ulang
-    $routes->get('pendaftaran-ulang', "Transaksi::pendaftaranUlang");
-    $routes->get('pendaftaran-ulang-add', "Transaksi::pendaftaranUlangCreate");
-    $routes->post('pendaftaran-ulang-post', "Transaksi::pendaftaranUlangStore");
-    $routes->get('pendaftaran-ulang/edit/(:any)', "Transaksi::pendaftaranUlangEdit/$1");
-    $routes->post('pendaftaran-ulang/update/(:any)', "Transaksi::pendaftaranUlangUpdate/$1");
+    $routes->group('/', ['filter' => "roleAkses:admin_santri,super_admin"], function ($routes) {
+        // santri 
+        $routes->get('santri', "Santri::index");
+        $routes->get('santri/create', "Santri::create");
+        $routes->post('santri/store', "Santri::store");
+        $routes->get('santri/edit/(:any)', "Santri::edit/$1");
+        $routes->post('santri/update/(:any)', "Santri::update/$1");
+        $routes->get('santri/delete/(:any)', "Santri::delete/$1");
 
-    //bulanan
-    $routes->get('bulanan', "Transaksi::indexBulanan");
-    $routes->get('bulanan-add', "Transaksi::createBulanan");
-    $routes->post('bulanan-post', "Transaksi::storeBulanan");
-    $routes->get('bulananSantri/(:any)/(:any)/(:any)', "Transaksi::cekBulananSantri/$1/$2/$3");
-    $routes->get('bulanan/edit/(:any)', "Transaksi::editBulanan/$1");
-    $routes->post('bulanan/update/(:any)', "Transaksi::updateBulanan/$1");
-    //pengeluaran
-    $routes->get('pengeluaran', "Transaksi::indexPengeluaran");
-    $routes->get('pengeluaran-add', "Transaksi::createPengeluaran");
-    $routes->post('pengeluaran-post', "Transaksi::storePengeluaran");
-    $routes->get('pengeluaran/edit/(:any)', "Transaksi::editPengeluaran/$1");
-    $routes->post('pengeluaran/update/(:any)', "Transaksi::updatePengeluaran/$1");
-    $routes->get('pengeluaran/delete/(:any)', "Transaksi::deletePengeluaran/$1");
+        // alumni
+        $routes->get('alumni', "Santri::alumni");
+        $routes->post('alumni/add', "Santri::addAlumni");
+        $routes->get('alumni/update/(:any)', "Santri::updateAktif/$1");
+
+        //pendaftaran
+        $routes->get('pendaftaran', "Transaksi::index");
+        $routes->get('pendaftaran-add', "Transaksi::create");
+        $routes->post('pendaftaran-post', "Transaksi::store");
+        $routes->get('pendaftaran/edit/(:any)', "Transaksi::edit/$1");
+        $routes->post('pendaftaran/update/(:any)', "Transaksi::update/$1");
+
+        //pendaftaran ulang
+        $routes->get('pendaftaran-ulang', "Transaksi::pendaftaranUlang");
+        $routes->get('pendaftaran-ulang-add', "Transaksi::pendaftaranUlangCreate");
+        $routes->post('pendaftaran-ulang-post', "Transaksi::pendaftaranUlangStore");
+        $routes->get('pendaftaran-ulang/edit/(:any)', "Transaksi::pendaftaranUlangEdit/$1");
+        $routes->post('pendaftaran-ulang/update/(:any)', "Transaksi::pendaftaranUlangUpdate/$1");
+    });
+
 
     //visi-misi
     $routes->get('visi-misi', "VisiMisi::index");
     $routes->post('visi-misi', "VisiMisi::store");
 
-    //laporan bulanan
-    $routes->get('laporan-bulanan', "LaporanTahunan::indexBulanan");
-    $routes->get('laporan-bulanan-export', "LaporanTahunan::downloadBulanan");
+    $routes->group('/', ['filter' => "roleAkses:admin_keuangan,super_admin"], function ($routes) {
+        //pengeluaran
+        $routes->get('pengeluaran', "Transaksi::indexPengeluaran");
+        $routes->get('pengeluaran-add', "Transaksi::createPengeluaran");
+        $routes->post('pengeluaran-post', "Transaksi::storePengeluaran");
+        $routes->get('pengeluaran/edit/(:any)', "Transaksi::editPengeluaran/$1");
+        $routes->post('pengeluaran/update/(:any)', "Transaksi::updatePengeluaran/$1");
+        $routes->get('pengeluaran/delete/(:any)', "Transaksi::deletePengeluaran/$1");
 
-    //laporan tahunan
-    $routes->get('laporan-tahunan', "LaporanTahunan::index");
-    $routes->get('laporan-tahunan-export', "LaporanTahunan::download");
+        //bulanan
+        $routes->get('bulanan', "Transaksi::indexBulanan");
+        $routes->get('bulanan-add', "Transaksi::createBulanan");
+        $routes->post('bulanan-post', "Transaksi::storeBulanan");
+        $routes->get('bulananSantri/(:any)/(:any)/(:any)', "Transaksi::cekBulananSantri/$1/$2/$3");
+        $routes->get('bulanan/edit/(:any)', "Transaksi::editBulanan/$1");
+        $routes->post('bulanan/update/(:any)', "Transaksi::updateBulanan/$1");
 
-    //Tabungan santri
-    $routes->get('tabungan-santri', "TabunganSantriController::index");
-    $routes->get('tabungan-santri/(:any)/(:any)/(:any)', "TabunganSantriController::cetak/$1/$2/$3");
-    $routes->post('add-tabungan-santri', "TabunganSantriController::store");
-    $routes->post('edit-tabungan-santri/(:any)', "TabunganSantriController::update/$1");
+        //laporan bulanan
+        $routes->get('laporan-bulanan', "LaporanTahunan::indexBulanan");
+        $routes->get('laporan-bulanan-export', "LaporanTahunan::downloadBulanan");
+
+        //laporan tahunan
+        $routes->get('laporan-tahunan', "LaporanTahunan::index");
+        $routes->get('laporan-tahunan-export', "LaporanTahunan::download");
+
+        //Tabungan santri
+        $routes->get('tabungan-santri', "TabunganSantriController::index");
+        $routes->get('tabungan-santri/(:any)/(:any)/(:any)', "TabunganSantriController::cetak/$1/$2/$3");
+        $routes->post('add-tabungan-santri', "TabunganSantriController::store");
+        $routes->post('edit-tabungan-santri/(:any)', "TabunganSantriController::update/$1");
+    });
 
     //peraturan
     $routes->get('peraturan', "Peraturan::index");
