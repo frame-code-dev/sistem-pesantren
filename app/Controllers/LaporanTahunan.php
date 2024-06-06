@@ -256,11 +256,10 @@ class LaporanTahunan extends BaseController
 
 			$pengeluaran = $this->transaksi
 				->select("sum(nominal) as total_nominal")
-				->where('kategori', 'pengeluaran')
-				->where("jenis_id != ", null)
+				->where("jenis_id ", null)
+				->where("kategori", "pengeluaran")
 				->where('MONTH(tanggal_bayar)', $month)
-				->where('YEAR(tanggal_bayar)', $year)
-				->groupBy("tanggal_bayar")
+				->where("year(tanggal_bayar)", $year)
 				->get()->getRowArray();
 
 			$totalPemasukanLain = $pemasukan_lain["total_nominal"] ?? 0;
@@ -333,15 +332,13 @@ class LaporanTahunan extends BaseController
 			->groupBy("bulan")
 			->groupBy("tahun")
 			->get()->getRowArray();
-
+			
 		$pengeluaran = $this->transaksi
 			->select("sum(nominal) as total_nominal")
-			->where('kategori', 'pengeluaran')
-			->where("jenis_id", null)
-			->where('MONTH(bulan)', $month)
-			->where('YEAR(bulan)', $year)
-			->groupBy("bulan")
-			->groupBy("tahun")
+			->where("jenis_id ", null)
+			->where("kategori", "pengeluaran")
+			->where('MONTH(tanggal_bayar)', $month)
+			->where("year(tanggal_bayar)", $year)
 			->get()->getRowArray();
 
 		$totalPemasukanLain = $pemasukan_lain["total_nominal"] ?? 0;

@@ -38,6 +38,7 @@ class Auth_model extends Model
 		session()->set(self::SESSION_KEY, $user->id);
 		session()->set("username", $user->username);
 		session()->set("name", $user->nama);
+		session()->set("role", $user->role);
 		session()->set("image", $user->image);
 		session()->set("isLogin", true);
 		return $user->id;

@@ -121,13 +121,11 @@ class Santri_model extends Model
     {
         return  $this->where('id !=', $id)->where("nis", $nis)->first();
     }
-
+    
     // update status santri
-    public function updateStatus($id, $status)
+    public function updateDatas($id, $data)
     {
-        return $this->update($id, [
-            'status_santri' => $status
-        ]);
+        return $this->update($id, $data);
     }
 
     public function saveData($data)
