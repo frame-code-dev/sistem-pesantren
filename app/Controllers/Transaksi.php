@@ -93,7 +93,7 @@ class Transaksi extends BaseController
 			$status_santri = 'belum_registrasi_ulang';
 
 			$dataSantri = [
-				"status" => $status_santri,
+				"status_santri" => $status_santri,
 				"tanggal_masuk" => $tanggal_bayar,
 				"updated_at" => date("Y-m-d H:i:s"),
 			];
@@ -124,7 +124,7 @@ class Transaksi extends BaseController
 	{
 		$data["title"] = "Pemasukan";
 		$data["current_page"] = "Pendaftaran";
-		$user_id =  $this->transaksi->detailTransaksi($id)->user_id;
+		$user_id =  $this->transaksi->detailTransaksi($id)->santri_id;
 		$data["data"] = $this->transaksi->detailTransaksi($id);
 		$data["santri"] = $this->santri->getById($user_id)->nama;
 		return view("backoffice/pendaftaran/edit", $data);
