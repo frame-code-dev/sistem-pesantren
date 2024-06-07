@@ -171,13 +171,13 @@ class BeritaModel extends Model
 	}
 
 
-	public function generateSlug($title)
+	public function generateSlug($title, $ignoreId = null)
 	{
 		$slug = str_replace(" ", "-", $title);
-		$count = $this->where("slug", $slug)->countAllResults();
+		$count = $this->where("slug", $slug)->where("id <>", $ignoreId)->countAllResults();
 		if ($count > 0) {
 			$slug = "$slug-" . ($count + 1);
-			return $this->generateSlug($slug);
+			return $this->generateSlug($slug, $ignoreId);
 		}
 		return $slug;
 	}

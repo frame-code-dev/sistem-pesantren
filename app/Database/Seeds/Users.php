@@ -12,10 +12,9 @@ class Users extends Seeder
             [
                 'nama'    => 'super admin',
                 'username'   => 'super_admin@gmail.com',
-                // 'password'   => hash('password', 'secret'),
                 'password'   => password_hash('password', PASSWORD_BCRYPT),
                 'role'   => 'super_admin',
-                'image' => null,
+                // 'image' => null,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],

@@ -69,7 +69,6 @@ class Transaksi extends BaseController
 		$nominal = $this->replaceRupiah($this->request->getPost("nominal"));
 
 		$userId = session()->get("user_id");
-		$userId = 1;
 
 		$valid = $this->validateData([
 			"santri" => $santri_id,

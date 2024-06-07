@@ -96,7 +96,7 @@ class Berita extends BaseController
 			"gambar" => $gambar,
 			"keterangan" => $keterangan,
 			"user_id" => session()->get("user_id"),
-			"slug" => $this->berita->generateSlug($judul),
+			"slug" => $this->berita->generateSlug($judul, $id),
 			"content" => $content
 		];
 
