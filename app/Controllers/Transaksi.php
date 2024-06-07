@@ -64,10 +64,12 @@ class Transaksi extends BaseController
 	public function store()
 	{
 		$santri_id = $this->request->getPost("santri");
+
+		// var_dump($santri_id);
+		// die();
+
 		$tanggal_bayar = $this->request->getPost("tanggal_bayar");
-
 		$nominal = $this->replaceRupiah($this->request->getPost("nominal"));
-
 		$userId = session()->get("user_id");
 
 		$valid = $this->validateData([
@@ -167,7 +169,6 @@ class Transaksi extends BaseController
 	}
 
 
-
 	public function pendaftaranUlang()
 	{
 		$data["tittle"] = "Pemasukan";
@@ -175,6 +176,7 @@ class Transaksi extends BaseController
 		$data["data"] = $this->transaksi->getPendaftaranUlang()->getResultArray();
 		return view("backoffice/pendaftaran-ulang/index", $data);
 	}
+
 	public function pendaftaranUlangCreate()
 	{
 		$status_santri = 'belum_registrasi_ulang';
@@ -195,23 +197,22 @@ class Transaksi extends BaseController
 	{
 		$santri_id = $this->request->getPost("santri");
 		$tanggal_bayar = $this->request->getPost("tanggal_bayar");
-
 		$nominal = $this->replaceRupiah($this->request->getPost("nominal"));
 
 		$userId = session()->get("user_id");
-		$userId = 1;
 
 		$valid = $this->validateData([
 			"santri" => $santri_id,
 			"tanggal_bayar" => $tanggal_bayar,
 			"nominal" => $nominal
 		], $this->transaksi->rulesPendaftaran());
+
 		if (!$valid) {
 			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
 		}
 
-		$this->db->transBegin();
 		try {
+			$this->db->transBegin();
 			$data = [
 				"kategori" => "pemasukan",
 				"santri_id" => $santri_id,
@@ -221,16 +222,15 @@ class Transaksi extends BaseController
 				"tanggal_bayar" => $tanggal_bayar,
 				"user_id" => $userId,
 			];
+			
 			$status_santri = 'aktif';
-
 
 			$dataSantri = [
 				"status_santri" => $status_santri,
 				"updated_at" => date("Y-m-d H:i:s"),
 			];
-
+			
 			$this->santri->updateDatas($santri_id, $dataSantri);
-			$this->db->transCommit();
 
 			$this->transaksi->storePendaftaran($data);
 			$this->db->transCommit();
@@ -530,7 +530,7 @@ class Transaksi extends BaseController
 
 	public function indexPengeluaran()
 	{
-		$data['data'] = $this->transaksi->getPengeluarans()->getResultArray();
+		$data['data'] = $this->transaksi->getPengeluaranPesantren()->getResultArray();
 		return view('backoffice/pengeluaran/index', $data);
 	}
 

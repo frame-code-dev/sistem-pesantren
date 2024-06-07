@@ -198,6 +198,13 @@ class TransaksiModel extends Model
 			->get();
 	}
 
+	public function getPengeluaranPesantren() {
+		return  $this->where('kategori', 'pengeluaran')
+		->where('jenis_id !=', 4)
+		->orderBy("id", "desc")
+		->get();
+	}
+
 	public function updatePendaftaran($id, $data)
 	{
 		return  $this->update($id, $data);

@@ -3,6 +3,7 @@
 
 <title>Sistem Pesantren</title>
 
+<link rel="shortcut icon" href="<?= base_url("logo.jpg") ?>" type="image/x-icon">
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
