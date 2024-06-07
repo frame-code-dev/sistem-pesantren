@@ -67,36 +67,52 @@ class Santri_model extends Model
     // semua santri
     public function getAll()
     {
-        return  $this->findAll();
+        return  $this
+            ->findAll();
     }
 
     //santri yg belum melakukan registrasi
     public function getSantriRegistrasi()
     {
-        return  $this->where('status_santri', 'belum_registrasi')->get();
+        return  $this
+            ->where('status_santri', 'belum_registrasi')
+            ->orderBy("id", "desc")
+            ->get();
     }
 
     // santri yg blum registrasi ulang
     public function getSantriRegistrasiUlang()
     {
-        return  $this->where('status_santri', 'belum_registrasi_ulang')->get();
+        return  $this
+            ->where('status_santri', 'belum_registrasi_ulang')
+            ->orderBy("id", "desc")
+            ->get();
     }
 
     // semua santri kecuali alumni
     public function getSantriAktif()
     {
-        return  $this->where('status_santri', 'aktif')->orWhere('status_santri', 'belum_registrasi')->orWhere('status_santri', 'belum_registrasi_ulang')->get();
+        return  $this->where('status_santri', 'aktif')
+            ->orWhere('status_santri', 'belum_registrasi')
+            ->orWhere('status_santri', 'belum_registrasi_ulang')
+            ->orderBy("id", "desc")
+            ->get();
     }
     // semua santri aktiv dan alumni
     public function getSantriAktifAlumni()
     {
-        return  $this->where('status_santri', 'aktif')->orWhere('status_santri', 'alumni')->get();
+        return  $this->where('status_santri', 'aktif')
+            ->orWhere('status_santri', 'alumni')
+            ->orderBy("id", "desc")
+            ->get();
     }
 
     // santri alumni
     public function getSantriAlumni()
     {
-        return  $this->where('status_santri', 'alumni')->get();
+        return  $this->where('status_santri', 'alumni')
+            ->orderBy("id", "desc")
+            ->get();
     }
 
     public function countSantri($status)
@@ -121,7 +137,7 @@ class Santri_model extends Model
     {
         return  $this->where('id !=', $id)->where("nis", $nis)->first();
     }
-    
+
     // update status santri
     public function updateDatas($id, $data)
     {
@@ -190,7 +206,7 @@ class Santri_model extends Model
         // update
         $this->update($id, $data);
         //foto diri
-        if (is_uploaded_file($data["foto_diri"])) {
+        if (isset($data["foto_diri"]) &&  is_uploaded_file($data["foto_diri"])) {
             $imageFile = $data["foto_diri"];
             $nameFileFotoDiri = $data['foto_diri']->getRandomName();
             $data['image'] = $nameFileFotoDiri;
@@ -201,7 +217,7 @@ class Santri_model extends Model
             );
         }
         //foto kk
-        if (is_uploaded_file($data["foto_kk"])) {
+        if (isset($data["foto_kk"]) && is_uploaded_file($data["foto_kk"])) {
             $kkFile = $data["foto_kk"];
             $nameFileFotoKK = $data['foto_kk']->getRandomName();
             $data['file_kk'] = $nameFileFotoKK;
@@ -212,7 +228,7 @@ class Santri_model extends Model
             );
         }
         //foto akte
-        if (is_uploaded_file($data["foto_akte"])) {
+        if (isset($data["foto_akte"]) &&  is_uploaded_file($data["foto_akte"])) {
             $akteFile = $data["foto_akte"];
             $nameFileFotoakte = $data['foto_akte']->getRandomName();
             $data['file_akte'] = $nameFileFotoakte;
@@ -224,7 +240,7 @@ class Santri_model extends Model
         }
 
         //foto ijazah
-        if (is_uploaded_file($data["foto_ijazah"])) {
+        if (isset($data["foto_ijazah"]) && is_uploaded_file($data["foto_ijazah"])) {
             $ijazahFile = $data["foto_ijazah"];
             $nameFileFotoijazah = $data['foto_ijazah']->getRandomName();
             $data['file_ijazah'] = $nameFileFotoijazah;
@@ -236,7 +252,7 @@ class Santri_model extends Model
         }
 
         // foto skhu
-        if (is_uploaded_file($data["foto_skhu"])) {
+        if (isset($data["foto_skhu"]) && is_uploaded_file($data["foto_skhu"])) {
             $skhuFile = $data["foto_skhu"];
             $nameFileFotoskhu = $data['foto_skhu']->getRandomName();
             $data['file_skhu'] = $nameFileFotoskhu;
@@ -250,13 +266,13 @@ class Santri_model extends Model
 
     public function deleteData($id)
     {
-        $pathDir = "../public/upload/$id/";
+        $pathDir = "../public/upload/santri/$id/";
         $image = "../public/upload/santri/$id/" . $this->find($id)["image"];
         $file_kk = "../public/upload/santri/$id/" . $this->find($id)["file_kk"];
         $file_akte = "../public/upload/santri/$id/" . $this->find($id)["file_akte"];
         $file_ijazah = "../public/upload/santri/$id/" . $this->find($id)["file_ijazah"];
         $file_skhu = "../public/upload/santri/$id/" . $this->find($id)["file_skhu"];
-        if (file_exists($image, $file_kk, $file_akte, $file_ijazah, $file_skhu)) {
+        if (file_exists($image) && file_exists($file_kk) && file_exists($file_akte) && file_exists($file_ijazah) && file_exists($file_skhu)) {
             unlink($image);
             unlink($file_kk);
             unlink($file_akte);

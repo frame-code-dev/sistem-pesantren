@@ -13,13 +13,13 @@ class BeritaController extends BaseController
         $berita = new BeritaModel();
         $search = $this->request->getGet('search');
         $param['berita'] = $berita->all(10, $search);
-        return view('frontend/berita/index',$param);
+        return view('frontend/berita/index', $param);
     }
 
     public function detail($slug)
     {
         $berita = new BeritaModel();
         $param['detail'] = $berita->getBySlug($slug);
-        return view('frontend/berita/detail',$param);
+        return view('frontend/berita/detail', $param);
     }
 }

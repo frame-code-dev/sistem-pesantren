@@ -69,7 +69,6 @@ class Transaksi extends BaseController
 		$nominal = $this->replaceRupiah($this->request->getPost("nominal"));
 
 		$userId = session()->get("user_id");
-		$userId = 1;
 
 		$valid = $this->validateData([
 			"santri" => $santri_id,
@@ -94,7 +93,7 @@ class Transaksi extends BaseController
 			$status_santri = 'belum_registrasi_ulang';
 
 			$dataSantri = [
-				"status" => $status_santri,
+				"status_santri" => $status_santri,
 				"tanggal_masuk" => $tanggal_bayar,
 				"updated_at" => date("Y-m-d H:i:s"),
 			];
@@ -125,7 +124,7 @@ class Transaksi extends BaseController
 	{
 		$data["title"] = "Pemasukan";
 		$data["current_page"] = "Pendaftaran";
-		$user_id =  $this->transaksi->detailTransaksi($id)->user_id;
+		$user_id =  $this->transaksi->detailTransaksi($id)->santri_id;
 		$data["data"] = $this->transaksi->detailTransaksi($id);
 		$data["santri"] = $this->santri->getById($user_id)->nama;
 		return view("backoffice/pendaftaran/edit", $data);
@@ -542,7 +541,12 @@ class Transaksi extends BaseController
 		$tanggal_bayar = $this->request->getPost("tanggal_bayar");
 		$nominal = $this->replaceRupiah($this->request->getPost("nominal"));
 		$userId = session()->get("user_id");
-
+		$totalTabungan = $this->transaksi->getTotalTabungan()->totalTabungan ?? 0;
+		if ($totalTabungan < $nominal) {
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', "Pengeluaran pesantren tidak boleh lebih dari " . Helpers::formatRupiah($totalTabungan));
+			return redirect()->back();
+		}
 		$valid = $this->validateData([
 			"keterangan" => $keterangan,
 			"tanggal_bayar" => $tanggal_bayar,
@@ -603,6 +607,13 @@ class Transaksi extends BaseController
 		);
 		if (!$valid) {
 			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
+		}
+
+		$totalTabungan = $this->transaksi->getTotalTabunganIgnore($id)->totalTabungan ?? 0;
+		if ($totalTabungan < $nominal) {
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', "Pengeluaran pesantren tidak boleh lebih dari " . Helpers::formatRupiah($totalTabungan));
+			return redirect()->back();
 		}
 
 		try {

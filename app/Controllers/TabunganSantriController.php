@@ -50,6 +50,12 @@ class TabunganSantriController extends BaseController
 		$santriId = $this->request->getPost("santri");
 		$userId = session()->get("user_id");
 		$this->db->transBegin();
+		$totalTabungan = $this->transaksi->getTotalTabunganSantri($santriId)->totalTabungan ?? 0;
+		if ($totalTabungan < $nominal  && $kategori == "pengeluaran") {
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', "Pengeluaran santri tidak boleh lebih dari " . Helpers::formatRupiah($totalTabungan));
+			return redirect()->back();
+		}
 		try {
 			$data = [
 				"kategori" => $kategori,
@@ -69,12 +75,12 @@ class TabunganSantriController extends BaseController
 		} catch (\Throwable $th) {
 			$this->db->transRollback();
 			session()->setFlashdata("status_error", true);
-			session()->setFlashdata('error', 'Tabungan santri gagal ditambahkan, <br>' . $th->getMessage());
+			session()->setFlashdata('error', 'Tabungan santri gagal ditambahkan, <br>');
 			return redirect()->back();
 		} catch (\Exception $e) {
 			$this->db->transRollback();
 			session()->setFlashdata("status_error", true);
-			session()->setFlashdata('error', 'Tabungan santri gagal ditambahkan, <br>' . $e->getMessage());
+			session()->setFlashdata('error', 'Tabungan santri gagal ditambahkan, <br>');
 			return redirect()->back();
 		}
 	}
@@ -83,6 +89,15 @@ class TabunganSantriController extends BaseController
 		$nominal = Helpers::replaceRupiah($this->request->getPost("nominal"));
 		$tanggal = $this->request->getPost("tanggal");
 		$this->db->transBegin();
+		$tabunganSantri = $this->transaksi->where("id", $id)->get()->getRow();
+
+		$totalTabungan = $this->transaksi->getTotalTabunganSantriIgnore($tabunganSantri->santri_id, $id)->totalTabungan ?? 0;
+		$kategori = $tabunganSantri->kategori;
+		if ($totalTabungan < $nominal  && $kategori == "pengeluaran") {
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', "Pengeluaran santri tidak boleh lebih dari " . Helpers::formatRupiah($totalTabungan));
+			return redirect()->back();
+		}
 		try {
 			$data = [
 				"nominal" => $nominal,
@@ -97,12 +112,12 @@ class TabunganSantriController extends BaseController
 		} catch (\Throwable $th) {
 			$this->db->transRollback();
 			session()->setFlashdata("status_error", true);
-			session()->setFlashdata('error', 'Tabungan santri gagal diubah, <br>' . $th->getMessage());
+			session()->setFlashdata('error', 'Tabungan santri gagal diubah, <br>');
 			return redirect()->back();
 		} catch (\Exception $e) {
 			$this->db->transRollback();
 			session()->setFlashdata("status_error", true);
-			session()->setFlashdata('error', 'Tabungan santri gagal diubah, <br>' . $e->getMessage());
+			session()->setFlashdata('error', 'Tabungan santri gagal diubah, <br>');
 			return redirect()->back();
 		}
 	}

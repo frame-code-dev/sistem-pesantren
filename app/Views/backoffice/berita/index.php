@@ -46,8 +46,8 @@
 						<tr>
 							<td scope="row"><?= $i++ ?></td>
 							<td><img src="<?= base_url("upload/" . $d["id"] . "/") . $d["image"] ?>" class="rounded-md w-24" alt=""></td>
-							<td><?= $d["judul"] ?></td>
-							<td><?= substr($d["keterangan"], 0, 100) ?></td>
+							<td style="max-width: 40px;word-wrap: break-word;white-space: normal;"><?= substr($d["judul"], 0, 100) ?></td>
+							<td style="max-width: 40px;word-wrap: break-word;white-space: normal;"><?= substr($d["keterangan"], 0, 100) ?></td>
 							<td><?= $d["kategori"] ?></td>
 							<td>
 								<div class="flex gap-2">
