@@ -223,14 +223,20 @@ class Transaksi extends BaseController
 			];
 			$status_santri = 'aktif';
 
-			$this->santri->updateStatus($santri_id, $status_santri);
 
+			$dataSantri = [
+				"status_santri" => $status_santri,
+				"updated_at" => date("Y-m-d H:i:s"),
+			];
+
+			$this->santri->updateDatas($santri_id, $dataSantri);
+			$this->db->transCommit();
 
 			$this->transaksi->storePendaftaran($data);
+			$this->db->transCommit();
 
 			session()->setFlashdata("status_success", true);
 			session()->setFlashdata('message', 'Pendaftaran ulang santri berhasil.');
-			$this->db->transCommit();
 			return redirect()->to('dashboard/pendaftaran-ulang');
 		} catch (\Throwable $th) {
 			$this->db->transRollback();
