@@ -49,8 +49,9 @@
                             $jenis_kelamin = "Perempuan";
                         }
                         ?>
+
                         <div class="w-full md:max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                            <img class="rounded-t-lg w-full bg-cover" src="<?=$row['image'] != 'default.jpg' || $row['image'] == null  ? base_url("upload/" . $row["id"] . "/") . $row["image"] : 'https://flowbite.com/docs/images/examples/image-2@2x.jpg'?>">
+                            <img class="rounded-t-lg w-full bg-cover" src="<?=$row['image'] != 'default.jpg' || $row['image'] == null  ? base_url("upload/santri/" . $row["id"] . "/") . $row["image"] : 'https://flowbite.com/docs/images/examples/image-2@2x.jpg'?>">
                             <div class="p-4">
                                 <div class="mb-3 text-center">
                                     <h4 class="font-bold text-gray-900 text-center"><?= esc($row['nama']) ?></h4>

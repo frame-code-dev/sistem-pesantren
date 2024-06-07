@@ -14,6 +14,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -96,5 +98,53 @@
         });
     });
 </script>
+
+<?php
+$session = \Config\Services::session();
+$status_error = $session->get('status_error');
+$status_success = $session->get('status_success');
+?>
+<?php if ($status_success) : ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'success',
+                title: <?= json_encode($session->getFlashdata('message')) ?>
+            })
+        });
+    </script>
+<?php endif; ?>
+<?php if ($status_error) : ?>
+    <script>
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'error',
+            title: '<?= $session->getFlashdata('error') ?>'
+        })
+    </script>
+<?php endif ?>
 
 </html>
