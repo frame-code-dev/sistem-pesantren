@@ -208,10 +208,18 @@
 	var aktif_alumni = {
           series: [{
           name: 'Santri Aktif',
-          data: [31, 40, 28, 51, 42, 109, 100]
+          data:[
+			<?php foreach ($santri_aktif['data_aktif'] as $key => $value) { ?>
+				<?= $value ?>,
+			<?php } ?>
+		  ]
         }, {
           name: 'Alumni',
-          data: [11, 32, 45, 32, 34, 52, 41]
+          data: [
+			<?php foreach ($santri_aktif['data_alumni'] as $key => $value) { ?>
+				<?= $value ?>,
+			<?php } ?>
+		  ]
         }],
           chart: {
           height: 350,
@@ -225,7 +233,11 @@
         },
         xaxis: {
           type: 'datetime',
-          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+          categories: [
+			<?php foreach ($santri_aktif['categories'] as $key => $value) { ?>
+				"<?= $value ?>",
+			<?php } ?>
+		  ]
         },
         tooltip: {
           x: {

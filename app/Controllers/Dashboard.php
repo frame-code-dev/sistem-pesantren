@@ -17,6 +17,7 @@ class Dashboard extends BaseController
 		$param['total_santri'] = $santri->countData('aktif');
 		$param['total_alumni'] = $santri->countData('aktif');
 		$param['total_berita'] = $berita->countData('aktif');
+		$param['santri_aktif'] = $santri->getSantriAktifChart();
 		return view('dashboard',$param);
 	}
 
