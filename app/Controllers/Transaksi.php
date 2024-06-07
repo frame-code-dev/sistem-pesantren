@@ -530,7 +530,7 @@ class Transaksi extends BaseController
 
 	public function indexPengeluaran()
 	{
-		$data['data'] = $this->transaksi->getPengeluarans()->getResultArray();
+		$data['data'] = $this->transaksi->getPengeluaranPesantren()->getResultArray();
 		return view('backoffice/pengeluaran/index', $data);
 	}
 
