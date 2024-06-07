@@ -284,4 +284,13 @@ class Santri_model extends Model
         if ($status = "alumni") {
         }
     }
+
+    public function countData($status) {
+        $query = $this;
+        if ($status = "aktif") {
+            return $query->where('status_santri', 'aktif')->countAllResults();
+        }else{
+            return $query->where('status_santri', 'alumni')->countAllResults();
+        }
+    }
 }

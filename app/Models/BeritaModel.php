@@ -181,4 +181,8 @@ class BeritaModel extends Model
 		}
 		return $slug;
 	}
+
+	public function countData() {
+		return $this->countAllResults();
+	}
 }
