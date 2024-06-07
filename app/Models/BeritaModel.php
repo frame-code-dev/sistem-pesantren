@@ -134,9 +134,13 @@ class BeritaModel extends Model
 			$pathDir = "../public/upload/$id/";
 			$pathFile = "../public/upload/$id/" . $this->find($id)["image"];
 			if (file_exists($pathFile)) {
-				unlink($pathDir . "index.html");
+				
 				unlink($pathFile);
+				if (file_exists($pathDir . "index.html")) {
+					unlink($pathDir . "index.html");
+				}
 				rmdir($pathDir);
+
 			}
 			$nameFile = $data["gambar"]->getRandomName();
 			$data["image"] = $nameFile;
