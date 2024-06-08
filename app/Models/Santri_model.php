@@ -301,11 +301,12 @@ class Santri_model extends Model
         }
     }
 
-    public function countData($status) {
+    public function countData($status)
+    {
         $query = $this;
         if ($status = "aktif") {
             return $query->where('status_santri', 'aktif')->countAllResults();
-        }else{
+        } else {
             return $query->where('status_santri', 'alumni')->countAllResults();
         }
     }
@@ -313,43 +314,43 @@ class Santri_model extends Model
     public function getSantriAktifChart()
     {
         $data = $this->select("YEAR(created_at) as year, MONTH(created_at) as month, COUNT(*) as count, status_santri")
-                ->orWhere('status_santri', 'belum_registrasi')
-                ->orWhere('status_santri', 'belum_registrasi_ulang')
-                ->groupBy('year, month')
-                ->orderBy('year', 'desc')
-                ->orderBy('month', 'desc')
-                ->get()
-                ->getResult();
+            ->orWhere('status_santri', 'belum_registrasi')
+            ->orWhere('status_santri', 'belum_registrasi_ulang')
+            ->groupBy('year, month')
+            ->orderBy('year', 'desc')
+            ->orderBy('month', 'desc')
+            ->get()
+            ->getResult();
 
-            $categories = [];
-            $seriesDataAktif = [];
-            $seriesDataAlumni = [];
-            $result_data_aktif = [];
-            $result_data_alumni = [];
-            foreach ($data as $entry) {
-                $year = $entry->year;
-                $month = $entry->month;
-                $count_aktif = 0;
-                $count_alumni = 0;
-                if ($entry->status_santri == 'aktif') {
-                    $count_aktif = $entry->count;
-                }elseif ($entry->status_santri == 'alumni') {
-                    $count_alumni = $entry->count;
-                }
-                // Create a date string for the first day of the month
-                $dateString = sprintf('%04d-%02d-01T00:00:00.000Z', $year, $month);
-                $categories[] = $dateString;
-                $seriesDataAktif[] = $count_aktif;
-                $seriesDataAlumni[] = $count_alumni;
-                $result_data_aktif[] = (int)$count_aktif;
-                $result_data_alumni[] = (int)$count_alumni;
+        $categories = [];
+        $seriesDataAktif = [];
+        $seriesDataAlumni = [];
+        $result_data_aktif = [];
+        $result_data_alumni = [];
+        foreach ($data as $entry) {
+            $year = $entry->year;
+            $month = $entry->month;
+            $count_aktif = 0;
+            $count_alumni = 0;
+            if ($entry->status_santri == 'aktif') {
+                $count_aktif = $entry->count;
+            } elseif ($entry->status_santri == 'alumni') {
+                $count_alumni = $entry->count;
             }
+            // Create a date string for the first day of the month
+            $dateString = sprintf('%04d-%02d-01T00:00:00.000Z', $year, $month);
+            $categories[] = $dateString;
+            $seriesDataAktif[] = $count_aktif;
+            $seriesDataAlumni[] = $count_alumni;
+            $result_data_aktif[] = (int)$count_aktif;
+            $result_data_alumni[] = (int)$count_alumni;
+        }
         $result = [
             'categories' => $categories,
             'data_aktif' => $result_data_aktif,
             'data_alumni' => $result_data_alumni,
             'data' => $data,
         ];
-         return $result;
+        return $result;
     }
 }

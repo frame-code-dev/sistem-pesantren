@@ -222,14 +222,14 @@ class Transaksi extends BaseController
 				"tanggal_bayar" => $tanggal_bayar,
 				"user_id" => $userId,
 			];
-			
+
 			$status_santri = 'aktif';
 
 			$dataSantri = [
 				"status_santri" => $status_santri,
 				"updated_at" => date("Y-m-d H:i:s"),
 			];
-			
+
 			$this->santri->updateDatas($santri_id, $dataSantri);
 
 			$this->transaksi->storePendaftaran($data);
@@ -563,6 +563,8 @@ class Transaksi extends BaseController
 		}
 
 		try {
+			$this->db->transBegin();
+
 			$data = [
 				"kategori" => "pengeluaran",
 				"nominal" => $nominal,
@@ -571,11 +573,11 @@ class Transaksi extends BaseController
 				"user_id" => $userId,
 				"keterangan" => $keterangan
 			];
-
 			$this->transaksi->storePengeluaran($data);
 
 			session()->setFlashdata("status_success", true);
 			session()->setFlashdata('message', 'Tambah pengeluaran berhasil.');
+			$this->db->transCommit();
 			return redirect()->to('dashboard/pengeluaran');
 		} catch (\Throwable $th) {
 			$this->db->transRollback();

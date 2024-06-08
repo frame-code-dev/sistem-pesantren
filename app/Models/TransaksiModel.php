@@ -138,7 +138,7 @@ class TransaksiModel extends Model
 	{
 		return	$this->db->query("SELECT 
 			COALESCE(SUM(t1.nominal), 0) - 
-			COALESCE((SELECT SUM(t2.nominal) FROM transaksi t2 WHERE t2.kategori = 'pengeluaran' AND t2.jenis_id = 4), 0) AS totalTabungan FROM transaksi t1 WHERE santri_id = $idSantri AND t1.jenis_id = 4 AND t1.kategori = 'pemasukan'")
+			COALESCE((SELECT SUM(t2.nominal) FROM transaksi t2 WHERE t2.kategori = 'pengeluaran' AND t2.jenis_id = 4 AND santri_id = $idSantri), 0) AS totalTabungan FROM transaksi t1 WHERE santri_id = $idSantri AND t1.jenis_id = 4 AND t1.kategori = 'pemasukan'")
 			->getRow();
 	}
 	//
@@ -198,11 +198,12 @@ class TransaksiModel extends Model
 			->get();
 	}
 
-	public function getPengeluaranPesantren() {
+	public function getPengeluaranPesantren()
+	{
 		return  $this->where('kategori', 'pengeluaran')
-		->where('jenis_id !=', 4)
-		->orderBy("id", "desc")
-		->get();
+			->where('jenis_id ', null)
+			->orderBy("id", "desc")
+			->get();
 	}
 
 	public function updatePendaftaran($id, $data)
