@@ -310,19 +310,37 @@ class Santri_model extends Model
 
     public function countData($status)
     {
-        $query = $this;
         if ($status = "aktif") {
-            return $query->where('status_santri', 'aktif')->countAllResults();
+            return $this->where('status_santri', 'aktif')->countAllResults();
         } else {
-            return $query->where('status_santri', 'alumni')->countAllResults();
+            return $this->where('status_santri', 'alumni')->countAllResults();
         }
+    }
+
+    public function getGenderSantriChart(){
+        $data = $this->select("gender, COUNT(*) as count")->groupBy('gender')->get()->getResult();
+
+        $result = [
+            'laki-laki' => 0,
+            'perempuan' => 0
+        ];
+
+        foreach ($data as $row) {
+            if ($row->gender == 'l') {
+                $result['laki-laki'] = $row->count;
+            } elseif ($row->gender == 'p') {
+                $result['perempuan'] = $row->count;
+            }
+        }
+
+        return $result;
     }
 
     public function getSantriAktifChart()
     {
         $data = $this->select("YEAR(created_at) as year, MONTH(created_at) as month, COUNT(*) as count, status_santri")
-            ->orWhere('status_santri', 'belum_registrasi')
-            ->orWhere('status_santri', 'belum_registrasi_ulang')
+            ->orWhere('status_santri', 'aktif')
+            ->orWhere('status_santri', 'alumni')
             ->groupBy('year, month, status_santri')
             ->orderBy('year', 'desc')
             ->orderBy('month', 'desc')
