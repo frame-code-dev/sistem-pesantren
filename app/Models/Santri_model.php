@@ -98,6 +98,13 @@ class Santri_model extends Model
             ->orderBy("id", "desc")
             ->get();
     }
+
+    public function getOnlySantriAktif()
+    {
+        return  $this->where('status_santri', 'aktif')
+            ->orderBy("id", "desc")
+            ->get();
+    }
     // semua santri aktiv dan alumni
     public function getSantriAktifAlumni()
     {
@@ -316,7 +323,7 @@ class Santri_model extends Model
         $data = $this->select("YEAR(created_at) as year, MONTH(created_at) as month, COUNT(*) as count, status_santri")
             ->orWhere('status_santri', 'belum_registrasi')
             ->orWhere('status_santri', 'belum_registrasi_ulang')
-            ->groupBy('year, month')
+            ->groupBy('year, month, status_santri')
             ->orderBy('year', 'desc')
             ->orderBy('month', 'desc')
             ->get()

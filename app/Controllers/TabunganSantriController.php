@@ -30,7 +30,7 @@ class TabunganSantriController extends BaseController
 		$santri = $this->request->getGet("santri");
 		$data["santriId"] = $santri ?? 0;
 		$data["filter"] = false;
-		$data["santri"] = $this->santri->getSantriAktifAlumni()->getResultArray();
+		$data["santri"] = $this->santri->getOnlySantriAktif()->getResultArray();
 		if ($santri) {
 			$data["totalTabungan"] = $this->transaksi->getTotalTabunganSantri($santri)->totalTabungan ?? 0;
 			$data["filter"] = true;
