@@ -55,10 +55,10 @@ class LaporanTahunan extends BaseController
 					->where('status_santri', 'aktif')
 					->orWhere('status_santri', 'alumni')
 					->groupEnd() // End grouping for OR conditions
-					->where("MONTH(tanggal_masuk)", $i)
-					->where("YEAR(tanggal_masuk)", $year)
-					->where("MONTH(tanggal_keluar)", $i)
-					->where("YEAR(tanggal_keluar)", $year)
+					->where("MONTH(tanggal_masuk)<=", $i)
+					->where("YEAR(tanggal_masuk)<=", $year)
+					->where("MONTH(tanggal_keluar)>=", $i)
+					->where("YEAR(tanggal_keluar)>=", $year)
 					->countAllResults();
 
 
