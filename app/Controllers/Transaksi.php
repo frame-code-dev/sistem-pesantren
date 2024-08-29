@@ -454,6 +454,7 @@ class Transaksi extends BaseController
 			->where("bulan", $bulan)
 			->where("tahun", $tahun)
 			->where("santri_id", $santriId)
+			->where("transaksi.id !=", $id)
 			->first();
 		if ($santri) {
 			$namaSantri = $santri["nama"];

@@ -28,7 +28,6 @@ $routes->get('psb', [PSBController::class, 'index']);
 $routes->get('psb/create', [PSBController::class, 'create']);
 $routes->post('psb/create/store', [PSBController::class, 'store']);
 
-
 $routes->get('/login', 'Auth::login');
 // $routes->get('default_controller') = 'auth/login';
 $routes->get('/login', "Auth::login", ['as' => 'login']);

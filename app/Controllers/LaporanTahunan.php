@@ -53,10 +53,10 @@ class LaporanTahunan extends BaseController
 				$totalSantri = $this->santri
 					->where('status_santri', 'aktif')
 					->orWhere('status_santri', 'alumni')
-					->where("month(tanggal_masuk) <=", $i)
-					->where("year(tanggal_masuk) <=", $year)
-					->where("month(tanggal_keluar) >=", $i)
-					->where("year(tanggal_keluar) >=", $year)
+					->where("month(tanggal_masuk) >=", $i)
+					->where("year(tanggal_masuk) >=", $year)
+					->where("month(tanggal_keluar) <=", $i)
+					->where("year(tanggal_keluar) <=", $year)
 					->countAllResults();
 
 				$sudahBayar = $this->transaksi
