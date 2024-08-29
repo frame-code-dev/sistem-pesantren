@@ -75,12 +75,9 @@
 									<label for="remember" class="text-gray-500 dark:text-gray-300">Ingat saya</label>
 								</div>
 							</div>
-							<a href="#" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">Lupa kata sandi?</a>
+							
 						</div>
 						<button type="submit" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Masuk</button>
-						<p class="text-sm font-light text-gray-500 dark:text-gray-400">
-							Tidak memiliki akun? <a href="#" class="font-medium text-blue-600 hover:underline dark:text-blue-500">Daftar</a>
-						</p>
 					</form>
 				</div>
 			</div>
