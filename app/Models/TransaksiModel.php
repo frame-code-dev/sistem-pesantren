@@ -66,6 +66,131 @@ class TransaksiModel extends Model
 			->get();
 	}
 
+	public function getTotalPendaftaran()
+	{
+		$currentYear = date('Y'); // Get the current year
+		return  $this->selectSum("nominal")
+			->where("year(transaksi.tanggal_bayar)", $currentYear)
+			->where("transaksi.jenis_id", 1)
+			->where("transaksi.kategori", "pemasukan")
+			->groupBy("jenis_id")
+			->get()
+			->getRow();
+	}
+
+	public function getTotalPendaftaranUlang()
+	{
+		$currentYear = date('Y'); // Get the current year
+		return  $this->selectSum("nominal")
+			->where("year(transaksi.tanggal_bayar)", $currentYear)
+			->where("transaksi.jenis_id", 2)
+			->where("transaksi.kategori", "pemasukan")
+			->groupBy("jenis_id")
+			->get()
+			->getRow();
+	}
+	public function getTotalPengeluaran()
+	{
+		$currentYear = date('Y'); // Get the current year
+		return  $this->selectSum("nominal")
+			->where("year(transaksi.tanggal_bayar)", $currentYear)
+			->where("transaksi.jenis_id", 4)
+			->where("transaksi.kategori", "pengeluaran")
+			->groupBy("jenis_id")
+			->get()
+			->getRow();
+	}
+
+	public function getChartPendaftaran()
+	{
+		$currentYear = date('Y'); // Get the current year
+
+		// Initialize an array for all 12 months with zero totals
+		$months1 = array_fill(1, 12, 0);
+		$months2 = array_fill(1, 12, 0);
+
+		// For jenis_id = 1
+		$totalPendaftaran = $this->select("MONTH(transaksi.tanggal_bayar) as month, sum(nominal) as total")
+			->where("transaksi.jenis_id", 1)
+			->where("transaksi.kategori", "pemasukan")
+			->where("year(transaksi.tanggal_bayar)", $currentYear)
+			->groupBy("month")
+			->orderBy("month", "asc")
+			->get()
+			->getResultArray();
+
+		// Fill the months array with actual totals
+		foreach ($totalPendaftaran as $row) {
+			$months1[$row['month']] = $row['total'];
+		}
+
+		// For jenis_id = 2
+		$totalPendaftaranUlang = $this->select("MONTH(transaksi.tanggal_bayar) as month, sum(nominal) as total")
+			->where("transaksi.jenis_id", 2)
+			->where("transaksi.kategori", "pemasukan")
+			->where("year(transaksi.tanggal_bayar)", $currentYear)
+			->groupBy("month")
+			->orderBy("month", "asc")
+			->get()
+			->getResultArray();
+
+		foreach ($totalPendaftaranUlang as $row) {
+			$months2[$row['month']] = $row['total'];
+		}
+
+		$results = [
+			'pendaftaran' => $months1,
+			'pendaftaranUlang' => $months2,
+		];
+
+		return $results;
+	}
+	public function getChartPemasukanPengeluaran()
+	{
+		$currentYear = date('Y'); // Get the current year
+
+		// Initialize an array for all 12 months with zero totals
+		$months1 = array_fill(1, 12, 0);
+		$months2 = array_fill(1, 12, 0);
+
+		// For jenis_id = 1
+		$totalPemasukan = $this->select("MONTH(transaksi.tanggal_bayar) as month, sum(nominal) as total")
+			->whereIn("transaksi.jenis_id", [1, 2])
+			->where("transaksi.kategori", "pemasukan")
+			->where("year(transaksi.tanggal_bayar)", $currentYear)
+			->groupBy("month(transaksi.tanggal_bayar)")
+			->orderBy("month(transaksi.tanggal_bayar)", "asc")
+			->get()
+			->getResultArray();
+
+		// Fill the months array with actual totals
+		foreach ($totalPemasukan as $row) {
+			$months1[$row['month']] = $row['total'];
+		}
+
+		// For jenis_id = 2
+		$totalPengeluaran = $this->select("MONTH(transaksi.tanggal_bayar) as month, sum(nominal) as total")
+			->where("transaksi.jenis_id", null)
+			->where("transaksi.kategori", "pengeluaran")
+			->where("year(transaksi.tanggal_bayar)", $currentYear)
+			->groupBy("month(transaksi.tanggal_bayar)")
+			->orderBy("month(transaksi.tanggal_bayar)", "asc")
+			->get()
+			->getResultArray();
+
+		foreach ($totalPengeluaran as $row) {
+			$months2[$row['month']] = $row['total'];
+		}
+
+		$results = [
+			'pemasukan' => $months1,
+			'pengeluaran' => $months2,
+		];
+
+		return $results;
+	}
+
+
 	public function getPendaftaranUlang()
 	{
 		return  $this->select("transaksi.*, jenis_transaksi.nama as jenis, santri.nama as santri, santri.nis as nis")

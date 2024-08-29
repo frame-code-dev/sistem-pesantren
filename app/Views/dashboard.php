@@ -1,4 +1,8 @@
-<?php $this->extend('template/app') ?>
+<?php
+
+use App\Helpers\Helpers;
+
+$this->extend('template/app') ?>
 
 <?= $this->section('content') ?>
 <div class="p-4 mt-14">
@@ -116,7 +120,7 @@
 					</div>
 					<div class="mt-3">
 						<h2 class="text-theme-text text-3xl font-bold tracking-tighter">
-
+							<?= Helpers::formatRupiah($total_pendaftaran->nominal) ?>
 						</h2>
 						<p class="text-gray-500 text-sm tracking-tighter">
 							Total Pendaftaran
@@ -138,6 +142,7 @@
 					</div>
 					<div class="mt-3">
 						<h2 class="text-theme-text text-3xl font-bold tracking-tighter">
+							<?= Helpers::formatRupiah($total_pendaftaran_ulang->nominal) ?>
 
 						</h2>
 						<p class="text-gray-500 text-sm tracking-tighter">
@@ -160,7 +165,7 @@
 					</div>
 					<div class="mt-3">
 						<h2 class="text-theme-text text-3xl font-bold tracking-tighter">
-
+							<?= Helpers::formatRupiah($total_pengeluaran->nominal) ?>
 						</h2>
 						<p class="text-gray-500 text-sm tracking-tighter">
 							Total Pengeluaran Pesantren
@@ -283,10 +288,10 @@
 	var pendaftaran = {
 		series: [{
 			name: 'Pendaftaran',
-			data: [31, 40, 28, 51, 42, 109, 100]
+			data: <?= json_encode(array_values($getChartPendaftaran["pendaftaran"])) ?>
 		}, {
 			name: 'Pendaftaran Ulang',
-			data: [11, 32, 45, 32, 34, 52, 41]
+			data: <?= json_encode(array_values($getChartPendaftaran["pendaftaranUlang"])) ?>
 		}],
 		chart: {
 			height: 350,
@@ -298,10 +303,10 @@
 		stroke: {
 			curve: 'smooth'
 		},
-		xaxis: {
-			type: 'datetime',
-			categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-		},
+		// xaxis: {
+		// 	type: 'datetime',
+		// 	categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+		// },
 		tooltip: {
 			x: {
 				format: 'dd/MM/yy HH:mm'
@@ -315,11 +320,11 @@
 	var pemasukan = {
 		series: [{
 				name: 'Pemasukan',
-				data: [31, 40, 28, 51, 42, 109, 100]
+				data: <?= json_encode(array_values($getChartPemasukanPengeluaran["pemasukan"])) ?>
 			},
 			{
 				name: 'Pengeluaran',
-				data: [11, 32, 45, 32, 34, 52, 41]
+				data: <?= json_encode(array_values($getChartPemasukanPengeluaran["pengeluaran"])) ?>
 			}
 		],
 		chart: {
@@ -334,10 +339,10 @@
 		stroke: {
 			curve: 'smooth'
 		},
-		xaxis: {
-			type: 'datetime',
-			categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-		},
+		// xaxis: {
+		// 	type: 'datetime',
+		// 	categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+		// },
 		tooltip: {
 			x: {
 				format: 'dd/MM/yy HH:mm'
