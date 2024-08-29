@@ -262,7 +262,8 @@
 			showCancelButton: true,
 			cancelButtonText: 'Batal',
 			confirmButtonText: 'Hapus',
-			confirmButtonColor: 'red'
+			confirmButtonColor: 'red',
+			cancelButtonColor: 'gray'
 		}).then(dialog => {
 			if (dialog.isConfirmed) {
 				window.location.assign(event);
