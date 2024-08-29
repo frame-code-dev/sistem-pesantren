@@ -55,11 +55,17 @@ class LaporanTahunan extends BaseController
 					->where('status_santri', 'aktif')
 					->orWhere('status_santri', 'alumni')
 					->groupEnd() // End grouping for OR conditions
-					->where("MONTH(tanggal_masuk)<=", $i)
-					->where("YEAR(tanggal_masuk)<=", $year)
-					->where("MONTH(tanggal_keluar)>=", $i)
-					->where("YEAR(tanggal_keluar)>=", $year)
+					->where("MONTH(tanggal_masuk) <=", $i)
+					->where("YEAR(tanggal_masuk) <=", $year)
+					->groupStart() // Start grouping for tanggal_keluar conditions
+					->groupStart() // Nested grouping for OR condition
+					->where("MONTH(tanggal_keluar) >=", $i)
+					->where("YEAR(tanggal_keluar) >=", $year)
+					->groupEnd()
+					->orWhere("tanggal_keluar", NULL)
+					->groupEnd()
 					->countAllResults();
+
 
 
 				$sudahBayar = $this->transaksi
@@ -140,11 +146,17 @@ class LaporanTahunan extends BaseController
 				->where('status_santri', 'aktif')
 				->orWhere('status_santri', 'alumni')
 				->groupEnd() // End grouping for OR conditions
-				->where("MONTH(tanggal_masuk)<=", $i)
-				->where("YEAR(tanggal_masuk)<=", $year)
-				->where("MONTH(tanggal_keluar)>=", $i)
-				->where("YEAR(tanggal_keluar)>=", $year)
+				->where("MONTH(tanggal_masuk) <=", $i)
+				->where("YEAR(tanggal_masuk) <=", $year)
+				->groupStart() // Start grouping for tanggal_keluar conditions
+				->groupStart() // Nested grouping for OR condition
+				->where("MONTH(tanggal_keluar) >=", $i)
+				->where("YEAR(tanggal_keluar) >=", $year)
+				->groupEnd()
+				->orWhere("tanggal_keluar", NULL)
+				->groupEnd()
 				->countAllResults();
+
 
 			$sudahBayar = $this->transaksi
 				->select("count(*) as total_data, sum(nominal) as total_nominal")
