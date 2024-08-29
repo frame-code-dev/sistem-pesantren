@@ -51,13 +51,16 @@ class LaporanTahunan extends BaseController
 			$data["filter"] = true;
 			for ($i = 1; $i <= 12; $i++) {
 				$totalSantri = $this->santri
+					->groupStart() // Start grouping for OR conditions
 					->where('status_santri', 'aktif')
 					->orWhere('status_santri', 'alumni')
-					->where("month(tanggal_masuk) <=", $i)
-					->where("year(tanggal_masuk) <=", $year)
-					->where("month(tanggal_keluar) >=", $i)
-					->where("year(tanggal_keluar) >=", $year)
+					->groupEnd() // End grouping for OR conditions
+					->where("MONTH(tanggal_masuk)", $i)
+					->where("YEAR(tanggal_masuk)", $year)
+					->where("MONTH(tanggal_keluar)", $i)
+					->where("YEAR(tanggal_keluar)", $year)
 					->countAllResults();
+
 
 				$sudahBayar = $this->transaksi
 					->select("count(*) as total_data, sum(nominal) as total_nominal")
@@ -65,9 +68,9 @@ class LaporanTahunan extends BaseController
 					->where("bulan", $i)
 					->where("tahun", $year)
 					->get()->getRowArray();
-
 				$totalSudahBayar = $sudahBayar['total_data'] ?? 0;
 				$totalBelumBayar = $totalSantri - $totalSudahBayar;
+
 
 				$data["sudahMembayar"][] = $totalSudahBayar;
 				$data["belumMembayar"][] = $totalBelumBayar;
@@ -133,12 +136,14 @@ class LaporanTahunan extends BaseController
 
 		for ($i = 1; $i <= 12; $i++) {
 			$totalSantri = $this->santri
+				->groupStart() // Start grouping for OR conditions
 				->where('status_santri', 'aktif')
 				->orWhere('status_santri', 'alumni')
-				->where("month(tanggal_masuk) <=", $i)
-				->where("year(tanggal_masuk) <=", $year)
-				->where("month(tanggal_keluar) >=", $i)
-				->where("year(tanggal_keluar) >=", $year)
+				->groupEnd() // End grouping for OR conditions
+				->where("MONTH(tanggal_masuk)", $i)
+				->where("YEAR(tanggal_masuk)", $year)
+				->where("MONTH(tanggal_keluar)", $i)
+				->where("YEAR(tanggal_keluar)", $year)
 				->countAllResults();
 
 			$sudahBayar = $this->transaksi
@@ -332,7 +337,7 @@ class LaporanTahunan extends BaseController
 			->groupBy("bulan")
 			->groupBy("tahun")
 			->get()->getRowArray();
-			
+
 		$pengeluaran = $this->transaksi
 			->select("sum(nominal) as total_nominal")
 			->where("jenis_id ", null)
