@@ -134,10 +134,39 @@ $selectedMonth = $month['bulan'] ?? $currentMonth;
 					</div>
 
 				</div>
-			</div>
+				<hr class="border ">
+				<h1 class="mt-4 mb-2">Daftar Santri</h1>
+				<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+					<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+						<tr>
+							<th scope="col" class="p-4 w-10">No</th>
+							<th scope="col" class="p-4 w-auto">Nama</th>
+							<th class=" p-2">Bulan <?= $namaBulan[$month] ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php $no  = 1; ?>
+						<?php foreach ($santri as $s) : ?>
+							<tr>
+								<td align="middle"><?= $no ?></td>
+								<td><?= $s["nama"] ?></td>
+								<?php if ($s["sudahBayar"]) : ?>
+									<td> ✅ </td>
+								<?php else : ?>
+									<td> ❌ </td>
+								<?php endif; ?>
 
-		<?php endif; ?>
-	</section>
+							</tr>
+							<?php $no++; ?>
+
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+			</div>
+</div>
+
+<?php endif; ?>
+</section>
 </div>
 
 

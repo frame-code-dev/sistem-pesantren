@@ -3,6 +3,7 @@
 use App\Helpers\Helpers;
 
 if ($filter) : ?>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <div style="background-color: white; width: 100%; overflow-x: auto;">
         <p style="text-align: right; width: 100%;"><?= date("d/m/Y") ?></p>
@@ -88,6 +89,43 @@ if ($filter) : ?>
                 </tr>
             </table>
         </div>
+        <hr style="border-top: 1px solid black;">
+        <h1 style="margin-top: 1rem; margin-bottom:.5rem">Daftar Santri</h1>
+        <table border="1" cellspacing="0" cellpadding="4" style="width: 100%; font-size: 14px; color: #333; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th rowspan="2" scope="col" class="p-4 w-10">No</th>
+                    <th rowspan="2" scope="col" class="p-4 w-60">Nama</th>
+                    <th colspan="12" scope="col" class="p-4" align="middle">Bulan</th>
+                </tr>
+                <tr>
+                    <?php for ($i = 1; $i <= 12; $i++) : ?>
+                        <th class="w-10 p-2" style="width:50px"><?= $i ?></th>
+                    <?php endfor; ?>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $no  = 1; ?>
+                <?php foreach ($santri as $s) : ?>
+                    <tr>
+                        <td><?= $no ?></td>
+                        <td><?= $s["nama"] ?></td>
+                        <?php foreach ($s["data"] as $data) : ?>
+                            <?php if ($data == 1 || $data === true) : ?>
+                                <td align="middle" style="text-align: center;"> V </td>
+                            <?php elseif ($data == 0 || $data === false) : ?>
+                                <td align="middle" style="text-align: center;"> X </td>
+                            <?php else : ?>
+                                <td align="middle" style="text-align: center;"> </td>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+
+                    </tr>
+                    <?php $no++; ?>
+
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
 
 <?php endif; ?>

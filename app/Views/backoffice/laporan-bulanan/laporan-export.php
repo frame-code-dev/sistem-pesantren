@@ -9,7 +9,7 @@ if ($filter) : ?>
 
         <hr style="border-top: 1px solid black;">
         <div style="width: 100%; text-align: center;">
-            <h1 style="max-width: 600px; margin: 0 auto;">Laporan Tahunan Keuangan YPP. Nurul Imamul Hasan</h1>
+            <h1 style="max-width: 600px; margin: 0 auto;">Laporan Bulanan Keuangan YPP. Nurul Imamul Hasan</h1>
             <p style="text-align: center;">JL. Tegal Wangkal, RT. 05, RW. 01, Kampung KrajanDesa Dawuhan, Suboh, Krajan, Suboh, Situbondo, Kabupaten Situbondo, Jawa Timur 68354, Situbondo 68354</p>
         </div>
         <hr style="border-top: 1px solid black;">
@@ -68,6 +68,38 @@ if ($filter) : ?>
                 </tr>
             </table>
         </div>
+        <hr style="border-top: 1px solid black;">
+        <br>
+        <br>
+        <br>
+        <br>
+        <h1 style="margin-top: 1rem; margin-bottom:.5rem">Daftar Santri</h1>
+        <table border="1" cellspacing="0" cellpadding="4" style="width: 100%; font-size: 14px; color: #333; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th scope="col" class="p-4 w-10">No</th>
+                    <th scope="col" class="p-4 w-auto">Nama</th>
+                    <th class=" p-2">Bulan <?= $month ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $no  = 1; ?>
+                <?php foreach ($santri as $s) : ?>
+                    <tr>
+                        <td align="middle" style="text-align: center;"><?= $no ?></td>
+                        <td><?= $s["nama"] ?></td>
+                        <?php if ($s["sudahBayar"]) : ?>
+                            <td style="text-align: center;"> V </td>
+                        <?php else : ?>
+                            <td style="text-align: center;"> X </td>
+                        <?php endif; ?>
+
+                    </tr>
+                    <?php $no++; ?>
+
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
 
 <?php endif; ?>

@@ -127,8 +127,44 @@ $currentYear = date("Y");
 					</div>
 
 				</div>
-			</div>
+				<hr class="border ">
+				<h1 class="mt-4 mb-2">Daftar Santri</h1>
+				<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+					<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+						<tr>
+							<th rowspan="2" scope="col" class="p-4 w-10">No</th>
+							<th rowspan="2" scope="col" class="p-4 w-60">Nama</th>
+							<th colspan="12" scope="col" class="p-4" align="middle">Bulan</th>
+						</tr>
+						<tr>
+							<?php for ($i = 1; $i <= 12; $i++) : ?>
+								<th class="w-10 p-2"><?= $i ?></th>
+							<?php endfor; ?>
+						</tr>
+					</thead>
+					<tbody>
+						<?php $no  = 1; ?>
+						<?php foreach ($santri as $s) : ?>
+							<tr>
+								<td><?= $no ?></td>
+								<td><?= $s["nama"] ?></td>
+								<?php foreach ($s["data"] as $data) : ?>
+									<?php if ($data == 1 || $data === true) : ?>
+										<td> ✅ </td>
+									<?php elseif ($data == 0 || $data === false) : ?>
+										<td> ❌ </td>
+									<?php else : ?>
+										<td> </td>
+									<?php endif; ?>
+								<?php endforeach; ?>
 
+							</tr>
+							<?php $no++; ?>
+
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+			</div>
 		<?php endif; ?>
 	</section>
 </div>

@@ -49,8 +49,9 @@ class LaporanTahunan extends BaseController
 			->getResultArray();
 		if ($year) {
 			$data["filter"] = true;
+			$data["santri"] = [];
 			for ($i = 1; $i <= 12; $i++) {
-				$totalSantri = $this->santri
+				$dataSantri = $this->santri
 					->groupStart() // Start grouping for OR conditions
 					->where('status_santri', 'aktif')
 					->orWhere('status_santri', 'alumni')
@@ -64,9 +65,26 @@ class LaporanTahunan extends BaseController
 					->groupEnd()
 					->orWhere("tanggal_keluar", NULL)
 					->groupEnd()
-					->countAllResults();
+					->orderBy("nama", "asc")
+					->get()->getResultArray();
+				$totalSantri = count($dataSantri);
 
-
+				foreach ($dataSantri as $santri) {
+					$santriId = $santri["id"];
+					$nama = $santri["nama"];
+					$cek =
+						$this->transaksi
+						->where("santri_id", $santriId)
+						->where("jenis_id", 3)
+						->where("bulan", $i)
+						->where("tahun", $year)
+						->countAllResults();
+					if (!isset($data["santri"][$santriId]["data"])) {
+						$data["santri"][$santriId]["data"] = array_fill(1, 12, -1);
+					}
+					$data["santri"][$santriId]["nama"] = $nama;
+					$data["santri"][$santriId]["data"][$i] = $cek;
+				}
 
 				$sudahBayar = $this->transaksi
 					->select("count(*) as total_data, sum(nominal) as total_nominal")
@@ -83,6 +101,10 @@ class LaporanTahunan extends BaseController
 				$data["totalSudahMembayar"] += $totalSudahBayar;
 				$data["totalBelumMembayar"] += $totalBelumBayar;
 			}
+
+			usort($data["santri"], function ($a, $b) {
+				return strcasecmp($a['nama'], $b['nama']);
+			});
 
 			$pemasukanLain = $this->transaksi
 				->select("sum(nominal) as total_nominal")
@@ -140,8 +162,9 @@ class LaporanTahunan extends BaseController
 			->groupBy("tahun")
 			->get()->getResultArray();
 
+		$data["santri"] = [];
 		for ($i = 1; $i <= 12; $i++) {
-			$totalSantri = $this->santri
+			$dataSantri = $this->santri
 				->groupStart() // Start grouping for OR conditions
 				->where('status_santri', 'aktif')
 				->orWhere('status_santri', 'alumni')
@@ -155,8 +178,26 @@ class LaporanTahunan extends BaseController
 				->groupEnd()
 				->orWhere("tanggal_keluar", NULL)
 				->groupEnd()
-				->countAllResults();
+				->orderBy("nama", "asc")
+				->get()->getResultArray();
+			$totalSantri = count($dataSantri);
 
+			foreach ($dataSantri as $santri) {
+				$santriId = $santri["id"];
+				$nama = $santri["nama"];
+				$cek =
+					$this->transaksi
+					->where("santri_id", $santriId)
+					->where("jenis_id", 3)
+					->where("bulan", $i)
+					->where("tahun", $year)
+					->countAllResults();
+				if (!isset($data["santri"][$santriId]["data"])) {
+					$data["santri"][$santriId]["data"] = array_fill(1, 12, -1);
+				}
+				$data["santri"][$santriId]["nama"] = $nama;
+				$data["santri"][$santriId]["data"][$i] = $cek;
+			}
 
 			$sudahBayar = $this->transaksi
 				->select("count(*) as total_data, sum(nominal) as total_nominal")
@@ -164,15 +205,19 @@ class LaporanTahunan extends BaseController
 				->where("bulan", $i)
 				->where("tahun", $year)
 				->get()->getRowArray();
-
 			$totalSudahBayar = $sudahBayar['total_data'] ?? 0;
 			$totalBelumBayar = $totalSantri - $totalSudahBayar;
+
 
 			$data["sudahMembayar"][] = $totalSudahBayar;
 			$data["belumMembayar"][] = $totalBelumBayar;
 			$data["totalSudahMembayar"] += $totalSudahBayar;
 			$data["totalBelumMembayar"] += $totalBelumBayar;
 		}
+
+		usort($data["santri"], function ($a, $b) {
+			return strcasecmp($a['nama'], $b['nama']);
+		});
 
 		$pemasukanLain = $this->transaksi
 			->select("sum(nominal) as total_nominal")
@@ -192,8 +237,8 @@ class LaporanTahunan extends BaseController
 			->where("kategori", "pengeluaran")
 			->where("year(tanggal_bayar)", $year)
 			->get()->getRowArray();
-		$totalTabungan = $this->transaksi->getTotalTabungan()->totalTabungan ?? 0;
 
+		$totalTabungan = $this->transaksi->getTotalTabungan()->totalTabungan ?? 0;
 		$data["tahunan"] += $tahunan["total_nominal"] ?? 0;
 		$data["pemasukanLain"] = $pemasukanLain['total_nominal'] ?? 0;
 		$data["pengeluaran"] = $pengeluaranTahunIni['nominal'] ?? 0;
@@ -244,13 +289,14 @@ class LaporanTahunan extends BaseController
 				->where("tahun", $year)
 				->countAllResults();
 
-			$totalSantri = $this->santri->where('status_santri', 'aktif')
+			$dataSantri = $this->santri->where('status_santri', 'aktif')
 				->orWhere('status_santri', 'alumni')
 				->where("month(tanggal_masuk) <=", $month)
 				->where("year(tanggal_masuk) <=", $year)
 				->where("month(tanggal_keluar) >=", $month)
 				->where("year(tanggal_keluar) >=", $year)
-				->countAllResults();
+				->get()->getResultArray();
+			$totalSantri = count($dataSantri);
 
 			$syariah = $this->transaksi
 				->select("SUM(nominal) as total_nominal")
@@ -278,6 +324,23 @@ class LaporanTahunan extends BaseController
 				->where('MONTH(tanggal_bayar)', $month)
 				->where("year(tanggal_bayar)", $year)
 				->get()->getRowArray();
+
+			foreach ($dataSantri as $santri) {
+				$santriId = $santri["id"];
+				$nama = $santri["nama"];
+				$cek =
+					$this->transaksi
+					->where("santri_id", $santriId)
+					->where("jenis_id", 3)
+					->where("bulan", $month)
+					->where("tahun", $year)
+					->countAllResults();
+				$data["santri"][$santriId]["nama"] = $nama;
+				$data["santri"][$santriId]["sudahBayar"] = $cek;
+			}
+			usort($data["santri"], function ($a, $b) {
+				return strcasecmp($a['nama'], $b['nama']);
+			});
 
 			$totalPemasukanLain = $pemasukan_lain["total_nominal"] ?? 0;
 			$totalPengeluaran = $pengeluaran["total_nominal"] ?? 0;
@@ -322,13 +385,14 @@ class LaporanTahunan extends BaseController
 			->where("tahun", $year)
 			->countAllResults();
 
-		$totalSantri = $this->santri->where('status_santri', 'aktif')
+		$dataSantri = $this->santri->where('status_santri', 'aktif')
 			->orWhere('status_santri', 'alumni')
 			->where("month(tanggal_masuk) <=", $month)
 			->where("year(tanggal_masuk) <=", $year)
 			->where("month(tanggal_keluar) >=", $month)
 			->where("year(tanggal_keluar) >=", $year)
-			->countAllResults();
+			->get()->getResultArray();
+		$totalSantri = count($dataSantri);
 
 		$syariah = $this->transaksi
 			->select("SUM(nominal) as total_nominal")
@@ -344,10 +408,9 @@ class LaporanTahunan extends BaseController
 			->select("sum(nominal) as total_nominal")
 			->where("jenis_id !=", 3)
 			->where("jenis_id != ", 4)
-			->where('month(bulan)', $month)
-			->where('year(bulan)', $year)
-			->groupBy("bulan")
-			->groupBy("tahun")
+			->where('month(tanggal_bayar)', $month)
+			->where('year(tanggal_bayar)', $year)
+			->groupBy("tanggal_bayar")
 			->get()->getRowArray();
 
 		$pengeluaran = $this->transaksi
@@ -358,6 +421,22 @@ class LaporanTahunan extends BaseController
 			->where("year(tanggal_bayar)", $year)
 			->get()->getRowArray();
 
+		foreach ($dataSantri as $santri) {
+			$santriId = $santri["id"];
+			$nama = $santri["nama"];
+			$cek =
+				$this->transaksi
+				->where("santri_id", $santriId)
+				->where("jenis_id", 3)
+				->where("bulan", $month)
+				->where("tahun", $year)
+				->countAllResults();
+			$data["santri"][$santriId]["nama"] = $nama;
+			$data["santri"][$santriId]["sudahBayar"] = $cek;
+		}
+		usort($data["santri"], function ($a, $b) {
+			return strcasecmp($a['nama'], $b['nama']);
+		});
 		$totalPemasukanLain = $pemasukan_lain["total_nominal"] ?? 0;
 		$totalPengeluaran = $pengeluaran["total_nominal"] ?? 0;
 		$totalTabungan = $this->transaksi->getTotalTabungan()->totalTabungan ?? 0;
