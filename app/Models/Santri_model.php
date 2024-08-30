@@ -111,7 +111,7 @@ class Santri_model extends Model
     {
         if (is_array($fields)) $fields = join(",", $fields);
         $query =   $this->select($fields)
-            ->orderBy("id", "desc");
+            ->orderBy("nama", "asc");
         foreach ($conditions as $key => $value) {
             if (!empty($value) && $value != "*") {
                 if (str_contains($key, "tanggal")) $query->where("YEAR($key)", $value);
