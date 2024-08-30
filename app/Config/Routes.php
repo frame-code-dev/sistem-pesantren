@@ -4,6 +4,7 @@ use App\Controllers\Berita;
 use App\Controllers\BeritaController;
 use App\Controllers\PSBController;
 use App\Controllers\TentangAlumniController;
+use App\Controllers\ExportController;
 use App\Controllers\TentangPondokController;
 use App\Controllers\WelcomeController;
 use CodeIgniter\Router\RouteCollection;
@@ -83,6 +84,7 @@ $routes->group('dashboard', ['filter' => "auth"], function ($routes) {
         $routes->get('santri/edit/(:any)', "Santri::edit/$1");
         $routes->post('santri/update/(:any)', "Santri::update/$1");
         $routes->get('santri/delete/(:any)', "Santri::delete/$1");
+        $routes->get('santri/exportSantri', [ExportController::class, "exportSantri"]);
 
         // alumni
         $routes->get('alumni', "Santri::alumni");

@@ -99,6 +99,28 @@ class Santri_model extends Model
             ->get();
     }
 
+    public function getTahunSantri($statusSantri = ["aktif"], $tipeTanggal = "tanggal_masuk")
+    {
+        return  $this->select("YEAR($tipeTanggal) as year")->whereIn('status_santri', $statusSantri)
+            ->orderBy("YEAR($tipeTanggal)", "desc")
+            ->groupBy("YEAR($tipeTanggal)")
+            ->get()->getResultArray();
+    }
+
+    public function getSantriExport($fields = "*", $conditions)
+    {
+        if (is_array($fields)) $fields = join(",", $fields);
+        $query =   $this->select($fields)
+            ->orderBy("id", "desc");
+        foreach ($conditions as $key => $value) {
+            if (!empty($value) && $value != "*") {
+                if (str_contains($key, "tanggal")) $query->where("YEAR($key)", $value);
+                else $query->where("$key", $value);
+            }
+        }
+        return $query->get()->getResultArray();
+    }
+
     public function getOnlySantriAktif()
     {
         return  $this->where('status_santri', 'aktif')
@@ -317,7 +339,8 @@ class Santri_model extends Model
         }
     }
 
-    public function getGenderSantriChart(){
+    public function getGenderSantriChart()
+    {
         $data = $this->select("gender, COUNT(*) as count")->groupBy('gender')->get()->getResult();
 
         $result = [

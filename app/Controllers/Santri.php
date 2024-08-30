@@ -25,6 +25,7 @@ class Santri extends BaseController
 	{
 		$santri = $this->santriModel->getSantriAktif();
 		$data['santri'] = $santri->getResultArray();
+		$data["tahun_santri"] = $this->santriModel->getTahunSantri(["aktif", "belum_registrasi", "belum_registrasi_ulang"]);
 		return view("backoffice/santri/index", $data);
 	}
 	public function create()
@@ -239,6 +240,7 @@ class Santri extends BaseController
 		$santri = $this->santriModel->getSantriAktif();
 		$data['alumni'] = $alumni->getResultArray();
 		$data['santri'] = $santri->getResultArray();
+		$data["tahun_santri"] = $this->santriModel->getTahunSantri(["alumni"], "tanggal_keluar");
 		return view("backoffice/alumni/index", $data);
 	}
 

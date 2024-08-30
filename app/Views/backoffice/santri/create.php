@@ -50,7 +50,7 @@
                 <div class="grid grid-cols-4 gap-3">
                     <div class="col-span-2">
                         <label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nis<span class="me-2 text-red-500">*</span></label>
-                        <input type="text" value="<?= set_value("nis") ?>" placeholder="Masukkan Nis" name="nis" id="nis" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" maxlength="10">
+                        <input type="text" max="12" value="<?= set_value("nis") ?>" placeholder="Masukkan Nis" name="nis" id="nis" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" maxlength="10">
                         <div class="text-red-500 text-xs italic font-semibold">
                             <?php if (session("validation.nis")) : ?>
                                 <div class="text-red-500 text-sm">
@@ -72,7 +72,7 @@
                     </div>
                     <div class="col-span-2">
                         <label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nisn<span class="me-2 text-red-500">*</span></label>
-                        <input type="text" value="<?= set_value("nisn") ?>" placeholder="Masukkan nisn" name="nisn" id="nisn" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        <input type="text" max="10" value="<?= set_value("nisn") ?>" placeholder="Masukkan nisn" name="nisn" id="nisn" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         <div class="text-red-500 text-xs italic font-semibold">
                             <?php if (session("validation.nisn")) : ?>
                                 <div class="text-red-500 text-sm">
@@ -83,7 +83,7 @@
                     </div>
                     <div class="col-span-2">
                         <label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nik Santri<span class="me-2 text-red-500">*</span></label>
-                        <input type="text" value="<?= set_value("nik_santri") ?>" placeholder="Masukkan Nik Santri" name="nik_santri" id="nik_santri" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        <input type="text" max="16" value="<?= set_value("nik_santri") ?>" placeholder="Masukkan Nik Santri" name="nik_santri" id="nik_santri" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         <div class="text-red-500 text-xs italic font-semibold">
                             <?php if (session("validation.nik_santri")) : ?>
                                 <div class="text-red-500 text-sm">
@@ -105,7 +105,7 @@
                     </div>
                     <div class="col-span-2">
                         <label for="" class="block mb-2 text-sm font-semibold text-gray-900">No KK<span class="me-2 text-red-500">*</span></label>
-                        <input type="text" value="<?= set_value("no_kk") ?>" placeholder="Masukkan No KK" name="no_kk" id="no_kk" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        <input type="text" max="16" value="<?= set_value("no_kk") ?>" placeholder="Masukkan No KK" name="no_kk" id="no_kk" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         <div class="text-red-500 text-xs italic font-semibold">
                             <?php if (session("validation.no_kk")) : ?>
                                 <div class="text-red-500 text-sm">
@@ -116,7 +116,7 @@
                     </div>
                     <div class="col-span-2">
                         <label for="telepon" class="block mb-2 text-sm font-semibold text-gray-900">Telepon<span class="me-2 text-red-500">*</span></label>
-                        <input type="text" value="<?= set_value("telepon") ?>" placeholder="Masukkan Telepon" name="telepon" id="telepon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        <input type="text" max="13" value="<?= set_value("telepon") ?>" placeholder="Masukkan Telepon" name="telepon" id="telepon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         <div class="text-red-500 text-xs italic font-semibold">
                             <?php if (session("validation.telepon")) : ?>
                                 <div class="text-red-500 text-sm">
@@ -190,7 +190,7 @@
                     </div>
                     <div class="col-span-2">
                         <label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nik Ibu<span class="me-2 text-red-500">*</span></label>
-                        <input type="text" value="<?= set_value("nik_ibu") ?>" placeholder="Masukkan Nik Ibu" name="nik_ibu" id="nik_ibu" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" maxlength="10">
+                        <input type="text" max="16" value="<?= set_value("nik_ibu") ?>" placeholder="Masukkan Nik Ibu" name="nik_ibu" id="nik_ibu" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" maxlength="10">
                         <div class="text-red-500 text-xs italic font-semibold">
                             <?php if (session("validation.nik_ibu")) : ?>
                                 <div class="text-red-500 text-sm">
@@ -212,7 +212,7 @@
                     </div>
                     <div class="col-span-2">
                         <label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nik Ayah<span class="me-2 text-red-500">*</span></label>
-                        <input type="text" value="<?= set_value("nik_ayah") ?>" placeholder="Masukkan Nik Ayah" name="nik_ayah" id="nik_ayah" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" maxlength="10">
+                        <input type="text" max="16" value="<?= set_value("nik_ayah") ?>" placeholder="Masukkan Nik Ayah" name="nik_ayah" id="nik_ayah" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" maxlength="10">
                         <div class="text-red-500 text-xs italic font-semibold">
                             <?php if (session("validation.nik_ayah")) : ?>
                                 <div class="text-red-500 text-sm">

@@ -14,6 +14,10 @@
 
 <!-- tab pane tabungan santri -->
 <script>
+	$(document).ready(function() {
+		$(".overlay").hide();
+		$(".loading-container").hide();
+	})
 	$(".tab  .tab-item").on("click", function() {
 		const classActive = ["bg-blue-600", "rounded-lg", "active", "text-white"];
 		const classNonActive = ["hover:text-gray-900", "hover:bg-gray-100", "dark:hover:bg-gray-800", "dark:hover: text-white"];

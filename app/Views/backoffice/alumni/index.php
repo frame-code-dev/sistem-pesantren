@@ -23,6 +23,27 @@
             </div>
         </div>
 
+        <div class="card bg-white border p-4 rounded-md mt-3">
+            <div class="card-body  gap-2">
+                <h1 class="mb-2 text-lg font-medium">Export santri</h1>
+                <form action="/dashboard/santri/exportSantri" class="flex gap-2 items-end" method="get">
+                    <div class="w-full">
+                        <label class="mb-[1px] text-sm inline-block">Tahun Keluar</label>
+                        <select name="tanggal_keluar" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <!-- <option value="" selected>Pilih tahun masuk</option> -->
+                            <option value="*">Semua</option>
+                            <?php foreach ($tahun_santri as $tahun) : ?>
+                                <option value="<?= $tahun["year"] ?>"><?= $tahun["year"] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <input type="hidden" name="status_santri" value="alumni" id="">
+
+                    <button style="text-wrap: nowrap;" class="text-white  bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Export excel</button>
+                </form>
+            </div>
+        </div>
         <div class="card bg-white p-5 mt-4 border rounded-md w-full relative overflow-x-auto">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" id="datatable">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -97,7 +118,7 @@
                     <div class="grid grid-cols-4 gap-3">
                         <div class="col-span-2">
                             <label for="santri" class="block mb-2 text-sm font-semibold text-gray-900">Santri<span class="me-2 text-red-500">*</span></label>
-                            <select id="santri" name="santri" class="select2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <select id="santri" style="width: 100% !important;" name="santri" class="select2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option disabled hidden selected value=""> == Pilih Santri == </option>
                                 <?php foreach ($santri as $row) : ?>
                                     <option value="<?= set_value("santri", $row['id']) ?>"> <?= $row['nama'] ?></option>
