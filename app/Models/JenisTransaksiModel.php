@@ -22,8 +22,17 @@ class JenisTransaksiModel extends Model
 
 	public function getAll()
 	{
-		return  $this->orderBy("id", "desc")->findAll();
+		return  $this->findAll();
 	}
+	
+	public function getJenisPemasukanLainnya(){
+		return  $this->where("id", 5)
+					->orWhere("id", 6)
+					->orWhere("id", 7)
+					->orderBy("id", "desc")
+					->get();
+	}
+
 	public function getById($id)
 	{
 		return  $this->where("id", $id)->first();

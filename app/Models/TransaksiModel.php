@@ -45,6 +45,24 @@ class TransaksiModel extends Model
 			'nominal' => 'required',
 		];
 	}
+
+	public function storeSumbangan(){
+		return [
+			'jenis_id' => 'required',
+			'keterangan' => 'required',
+			'tanggal_bayar' => 'required',
+			'nominal' => 'required',
+		];
+	}
+	public function storeAnotherSumbangan(){
+		return [
+			'jenis_id' => 'required',
+			'santri_id' => 'required',
+			'tanggal_bayar' => 'required',
+			'nominal' => 'required',
+		];
+	}
+
 	public function rulesBulanan()
 	{
 		return [
@@ -57,7 +75,7 @@ class TransaksiModel extends Model
 
 	public function getPendaftaran()
 	{
-		return  $this->select("transaksi.*, jenis_transaksi.nama as jenis, santri.nama as santri, santri.nis as nis")
+		return  $this->select("transaksi.*, jenis_transaksi.nama as jenis, santri.nama as santri, santri.nis	 as nis")
 			->join("jenis_transaksi", "transaksi.jenis_id = jenis_transaksi.id", "array")
 			->join("santri", "transaksi.santri_id = santri.id", "array")
 			->where("transaksi.jenis_id", 1)
@@ -343,14 +361,48 @@ class TransaksiModel extends Model
 		return $this->delete($id);
 	}
 
+	public function getPemasukanLainnya(){
+
+		return $this->select("transaksi.*, jenis_transaksi.nama as jenis, santri.nama as santri")
+		->join("jenis_transaksi", "transaksi.jenis_id = jenis_transaksi.id", "left") 
+		->join("santri", "transaksi.santri_id = santri.id", "left") 
+		->where("transaksi.kategori", "pemasukan")
+		->where("transaksi.jenis_id", 5)
+		->orWhere("transaksi.jenis_id", 6)
+		->orWhere("transaksi.jenis_id", 7)
+		->get();
+	}
+	public function getPemasukanLainnyaById($id){
+
+		return $this->select("transaksi.*, jenis_transaksi.nama as jenis, santri.nama as santri")
+		->join("jenis_transaksi", "transaksi.jenis_id = jenis_transaksi.id", "left") 
+		->join("santri", "transaksi.santri_id = santri.id", "left") 
+		->where("transaksi.kategori", "pemasukan")
+		->where('transaksi.id', $id)
+		->where("transaksi.jenis_id", 5)
+		->orWhere("transaksi.jenis_id", 6)
+		->orWhere("transaksi.jenis_id", 7)
+		->first();
+	}
+
 
 	public function generateKode()
 	{
 		$prefix = 'KT';
 		$date = date('dmy');
 		$kode = $prefix . $date;
-		$countData = $this->like("no_transaksi", "%$kode%")->countAllResults();
-		$counter = sprintf('%03d', $countData + 1);
+
+		$lastTransaction = $this->like('no_transaksi', "$kode", 'after')
+		->orderBy('no_transaksi', 'DESC')
+		->first();
+
+		if ($lastTransaction) {
+			$lastNumber = (int)substr($lastTransaction['no_transaksi'], -3);
+			$counter = sprintf('%03d', $lastNumber + 1);
+		} else {
+			$counter = '001';
+		}
+
 		return $prefix . $date . $counter;
 	}
 }

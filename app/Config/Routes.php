@@ -141,6 +141,14 @@ $routes->group('dashboard', ['filter' => "auth"], function ($routes) {
         $routes->get('tabungan-santri/(:any)/(:any)/(:any)', "TabunganSantriController::cetak/$1/$2/$3");
         $routes->post('add-tabungan-santri', "TabunganSantriController::store");
         $routes->post('edit-tabungan-santri/(:any)', "TabunganSantriController::update/$1");
+
+        // Pemasukan lainnya
+        $routes->get('pemasukan-lainnya', "Transaksi::indexPemasukanLainnya");
+        $routes->get('add-pemasukan-lainnya', "Transaksi::addPemasukanLainnya");
+        $routes->post('add-pemasukan-lainnya-post', "Transaksi::postPemasukanLainnya");
+        $routes->get('pemasukan-lainnya/edit/(:any)', "Transaksi::editPemasukanLainnya/$1");
+        $routes->post('pemasukan-lainnya/update/(:any)', "Transaksi::updatePemasukanLainnya/$1");
+        $routes->get('pemasukan-lainnya/delete/(:any)', "Transaksi::deletePemasukanLainnya/$1");
     });
 
     //peraturan

@@ -5,17 +5,21 @@ namespace App\Controllers;
 use App\Helpers\Helpers;
 use App\Models\Santri_model;
 use App\Models\TransaksiModel;
+use App\Models\JenisTransaksiModel;
+use DateTime;
 
 class Transaksi extends BaseController
 {
 	protected $helpers = ['form'];
 	protected $transaksi;
+	protected $jenis_transaksi;
 	protected $santri;
 	protected $validation;
 	protected $db;
 	public function __construct()
 	{
 		$this->transaksi = new TransaksiModel();
+		$this->jenis_transaksi = new JenisTransaksiModel();
 		$this->santri = new Santri_model();
 		$this->validation = \Config\Services::validation();
 		$this->db = \Config\Database::connect();
@@ -255,9 +259,9 @@ class Transaksi extends BaseController
 	{
 		$data["title"] = "Pemasukan";
 		$data["current_page"] = "Pendaftaran Ulang";
-		$user_id =  $this->transaksi->detailTransaksi($id)->user_id;
+		$santri_id =  $this->transaksi->detailTransaksi($id)->santri_id;
 		$data["data"] = $this->transaksi->detailTransaksi($id);
-		$data["santri"] = $this->santri->getById($user_id)->nama;
+		$data["santri"] = $this->santri->getById($santri_id)->nama;
 		return view("backoffice/pendaftaran-ulang/edit", $data);
 	}
 
@@ -526,9 +530,6 @@ class Transaksi extends BaseController
 		}
 	}
 
-
-
-
 	public function indexPengeluaran()
 	{
 		$data['data'] = $this->transaksi->getPengeluaranPesantren()->getResultArray();
@@ -657,5 +658,150 @@ class Transaksi extends BaseController
 		session()->setFlashdata("status_success", true);
 		session()->setFlashdata('message', 'Hapus pengeluaran berhasil.');
 		return redirect()->to('dashboard/pengeluaran');
+	}
+	// pemasukan lainnya
+	public function indexPemasukanLainnya(){
+		$data['data'] = $this->transaksi->getPemasukanLainnya()->getResultArray();	
+		return view('backoffice/pemasukan-lainnya/index', $data);
+	}
+	public function addPemasukanLainnya(){
+		$data['data_jenis'] = $this->jenis_transaksi->getJenisPemasukanLainnya()->getResultArray();
+		$data['data_santri'] = $this->santri->getOnlySantriAktif()->getResultArray();
+		return view('backoffice/pemasukan-lainnya/create', $data);
+	}
+
+	public function postPemasukanLainnya(){
+		$keterangan = $this->request->getPost("keterangan");
+		$santri_id = $this->request->getPost("santri_id");
+		$tanggal_bayar = $this->request->getPost("tanggal_bayar");
+		$nominal = $this->replaceRupiah($this->request->getPost("nominal"));
+		$jenis = $this->request->getPost("jenis");
+		$userId = session()->get("user_id");
+
+		if ($jenis == 7) {
+			$valid = $this->validateData([
+				"jenis_id" => $jenis,
+				"keterangan" => $keterangan,
+				"tanggal_bayar" => $tanggal_bayar,
+				"nominal" => $nominal
+			], $this->transaksi->storeSumbangan());
+		} else{
+			$valid = $this->validateData([
+				"jenis_id" => $jenis,
+				"santri_id" => $santri_id,
+				"tanggal_bayar" => $tanggal_bayar,
+				"nominal" => $nominal
+			], $this->transaksi->storeAnotherSumbangan());
+		}
+		if (!$valid) {
+			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
+		}
+
+		try {
+			$this->db->transBegin();
+
+			$data = [
+				"kategori" => "pemasukan",
+				"nominal" => $nominal,
+				"no_transaksi" => $this->transaksi->generateKode(),
+				"tanggal_bayar" => $tanggal_bayar,
+				"user_id" => $userId,
+				"jenis_id" => $jenis,
+				"santri_id" => $santri_id ?? null,
+				"keterangan" => $keterangan ?? null
+			];
+			$this->transaksi->storePengeluaran($data);
+
+			session()->setFlashdata("status_success", true);
+			session()->setFlashdata('message', 'Tambah pemasukan lainnya berhasil.');
+			$this->db->transCommit();
+			return redirect()->to('dashboard/pemasukan-lainnya');
+		} catch (\Throwable $th) {
+			$this->db->transRollback();
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'Tambah pemasukan-lainnya gagal, <br>' . $th->getMessage());
+			return redirect()->back();
+		} catch (\Exception $e) {
+			$this->db->transRollback();
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'Tambah pemasukan-lainnya gagal, <br>' . $e->getMessage());
+			return redirect()->back();
+		}
+	}
+
+	public function editPemasukanLainnya($id)
+	{
+		$data['data_jenis'] = $this->jenis_transaksi->getJenisPemasukanLainnya()->getResultArray();
+		$data['data_santri'] = $this->santri->getOnlySantriAktif()->getResultArray();
+		$data['data'] = $this->transaksi->getPemasukanLainnyaById($id);
+		return view('backoffice/pemasukan-lainnya/edit', $data);
+	}
+
+	public function updatePemasukanLainnya($id)
+	{
+		$keterangan = $this->request->getPost("keterangan");
+		$santri_id = $this->request->getPost("santri_id");
+		$tanggal_bayar = $this->request->getPost("tanggal_bayar");
+		$nominal = $this->replaceRupiah($this->request->getPost("nominal"));
+		$jenis = $this->request->getPost("jenis");
+		$userId = session()->get("user_id");
+
+		if ($jenis == 7) {
+			$valid = $this->validateData([
+				"jenis_id" => $jenis,
+				"keterangan" => $keterangan,
+				"tanggal_bayar" => $tanggal_bayar,
+				"nominal" => $nominal
+			], $this->transaksi->storeSumbangan());
+		} else {
+			$valid = $this->validateData([
+				"jenis_id" => $jenis,
+				"santri_id" => $santri_id,
+				"tanggal_bayar" => $tanggal_bayar,
+				"nominal" => $nominal
+			], $this->transaksi->storeAnotherSumbangan());
+		}
+		if (!$valid) {
+			return redirect()->back()->withInput()->with("validation", $this->validator->getErrors());
+		}
+
+		$this->db->transBegin();
+		try {
+
+			$data = [
+				"kategori" => "pemasukan",
+				"nominal" => $nominal,
+				"no_transaksi" => $this->transaksi->generateKode(),
+				"tanggal_bayar" => $tanggal_bayar,
+				"user_id" => $userId,
+				"jenis_id" => $jenis,
+				"santri_id" => $santri_id ?? null,
+				"keterangan" => $keterangan ?? null
+			];
+
+			$this->transaksi->updateBulanan($id, $data);
+
+			session()->setFlashdata("status_success", true);
+			session()->setFlashdata('message', 'Edit pemasukan lainnya berhasil.');
+			$this->db->transCommit();
+			return redirect()->to('dashboard/pemasukan-lainnya');
+		} catch (\Throwable $th) {
+			$this->db->transRollback();
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'Edit pemasukan-lainnya gagal, <br>' . $th->getMessage());
+			return redirect()->back();
+		} catch (\Exception $e) {
+			$this->db->transRollback();
+			session()->setFlashdata("status_error", true);
+			session()->setFlashdata('error', 'Edit pemasukan-lainnya gagal, <br>' . $e->getMessage());
+			return redirect()->back();
+		}
+	}
+	public function deletePemasukanLainnya($id)
+	{
+		$this->transaksi->deletePengeluaran($id);
+		session()->setFlashdata("status_success", true);
+		session()->setFlashdata('message', 'Hapus pemasukan lainnya berhasil.');
+		return redirect()->to('dashboard/pemasukan-lainnya');
 	}
 }
