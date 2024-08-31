@@ -329,6 +329,11 @@ class TransaksiModel extends Model
 	{
 		return  $this->update($id, $data);
 	}
+	public function updatePemasukanLainnya($id, $data)
+	{
+	
+		return  $this->update($id, $data);
+	}
 	public function updatePengeluaran($data, $id)
 	{
 		return  $this->update($id, $data);

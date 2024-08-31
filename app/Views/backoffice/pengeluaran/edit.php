@@ -2,7 +2,7 @@
 
 use App\Helpers\Helpers;
 
- $this->extend('template/app') ?>
+$this->extend('template/app') ?>
 <?= $this->section('content') ?>
 
 <div class="p-4 mt-14">
@@ -49,6 +49,12 @@ use App\Helpers\Helpers;
 		</div>
 		<div class="card bg-white p-5 mt-4 border rounded-md w-full relative">
 			<form action="<?= base_url('dashboard/pengeluaran/update/' . $data->id) ?>" method="POST" class="w-full mx-auto space-y-4" enctype="multipart/form-data">
+				<div class="grid">
+					<div class="col-span-4">
+						<p>Jumlah uang yang bisa dikeluarakan</p>
+						<h3 class="font-bold tracking-tighter text-2xl text-theme-text"><?= Helpers::formatRupiah($totalTabungan) ?></h3>
+					</div>
+				</div>
 				<div class="grid grid-cols-4 gap-3">
 					<div class="col-span-2">
 						<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Tanggal<span class="me-2 text-red-500">*</span></label>

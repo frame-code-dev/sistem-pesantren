@@ -45,7 +45,7 @@
                             <td scope="row"><?= $i++ ?></td>
                             <td><?= $d["no_transaksi"] ?></td>
                             <td><?= number_format($d["nominal"], 0, ',', '.') ?></td>
-                            <td><?= $d["tanggal_bayar"] ?></td>
+                            <td><?= date("j F Y", strtotime($d["tanggal_bayar"])) ?></td>
                             <td><?= $d["keterangan"] ?></td>
                             <td>
                                 <div class="flex gap-2">

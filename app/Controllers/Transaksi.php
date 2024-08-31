@@ -538,7 +538,8 @@ class Transaksi extends BaseController
 
 	public function createPengeluaran()
 	{
-		return view('backoffice/pengeluaran/create',);
+		$data['totalTabungan'] = $this->transaksi->getTotalTabungan()->totalTabungan ?? 0;
+		return view('backoffice/pengeluaran/create', $data);
 	}
 
 	public function storePengeluaran()
@@ -596,6 +597,7 @@ class Transaksi extends BaseController
 
 	public function editPengeluaran($id)
 	{
+		$data['totalTabungan'] = $this->transaksi->getTotalTabungan()->totalTabungan ?? 0;
 		$data['data'] = $this->transaksi->detailTransaksi($id);
 		return view('backoffice/pengeluaran/edit', $data);
 	}
@@ -767,19 +769,19 @@ class Transaksi extends BaseController
 
 		$this->db->transBegin();
 		try {
-
 			$data = [
 				"kategori" => "pemasukan",
 				"nominal" => $nominal,
 				"no_transaksi" => $this->transaksi->generateKode(),
 				"tanggal_bayar" => $tanggal_bayar,
-				"user_id" => $userId,
-				"jenis_id" => $jenis,
+				"user_id" => (int) $userId,
+				"jenis_id" => (int) $jenis,
 				"santri_id" => $santri_id ?? null,
 				"keterangan" => $keterangan ?? null
 			];
+			
 
-			$this->transaksi->updateBulanan($id, $data);
+			$this->transaksi->updatePemasukanLainnya($id, $data);
 
 			session()->setFlashdata("status_success", true);
 			session()->setFlashdata('message', 'Edit pemasukan lainnya berhasil.');
