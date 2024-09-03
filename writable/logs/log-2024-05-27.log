@@ -1,0 +1,71 @@
+CRITICAL - 2024-05-27 14:49:37 --> TypeError: CodeIgniter\Database\BaseBuilder::where(): Argument #3 ($escape) must be of type ?bool, string given, called in D:\MY PROJECT\sistem-pesantren\system\Model.php on line 919
+[Method: GET, Route: dashboard/pendaftaran/]
+in SYSTEMPATH\Database\BaseBuilder.php on line 699.
+ 1 SYSTEMPATH\Model.php(919): CodeIgniter\Database\BaseBuilder->where('no_transaksi', 'like', '%KT270524%')
+ 2 APPPATH\Models\TransaksiModel.php(33): CodeIgniter\Model->__call('where', [...])
+ 3 APPPATH\Controllers\Transaksi.php(30): App\Models\TransaksiModel->generateKode()
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Transaksi->index()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Transaksi))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')
+CRITICAL - 2024-05-27 14:50:41 --> BadMethodCallException: Call to undefined method App\Models\TransaksiModel::count
+[Method: GET, Route: dashboard/pendaftaran/]
+in SYSTEMPATH\Model.php on line 921.
+ 1 APPPATH\Models\TransaksiModel.php(33): CodeIgniter\Model->__call('count', [])
+ 2 APPPATH\Controllers\Transaksi.php(30): App\Models\TransaksiModel->generateKode()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Transaksi->index()
+ 4 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Transaksi))
+ 5 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')
+CRITICAL - 2024-05-27 14:51:54 --> BadMethodCallException: Call to undefined method App\Models\TransaksiModel::count
+[Method: GET, Route: dashboard/pendaftaran/]
+in SYSTEMPATH\Model.php on line 921.
+ 1 APPPATH\Models\TransaksiModel.php(33): CodeIgniter\Model->__call('count', [])
+ 2 APPPATH\Controllers\Transaksi.php(30): App\Models\TransaksiModel->generateKode()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Transaksi->index()
+ 4 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Transaksi))
+ 5 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')
+CRITICAL - 2024-05-27 14:53:15 --> TypeError: Unsupported operand types: CodeIgniter\Database\MySQLi\Result + int
+[Method: GET, Route: dashboard/pendaftaran/]
+in APPPATH\Models\TransaksiModel.php on line 34.
+ 1 APPPATH\Controllers\Transaksi.php(30): App\Models\TransaksiModel->generateKode()
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Transaksi->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Transaksi))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')
+CRITICAL - 2024-05-27 14:54:00 --> BadMethodCallException: Call to undefined method App\Models\TransaksiModel::count
+[Method: GET, Route: dashboard/pendaftaran/]
+in SYSTEMPATH\Model.php on line 921.
+ 1 APPPATH\Models\TransaksiModel.php(33): CodeIgniter\Model->__call('count', [])
+ 2 APPPATH\Controllers\Transaksi.php(30): App\Models\TransaksiModel->generateKode()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Transaksi->index()
+ 4 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Transaksi))
+ 5 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')
+CRITICAL - 2024-05-27 14:55:05 --> Error: Call to undefined method CodeIgniter\Database\MySQLi\Result::count()
+[Method: GET, Route: dashboard/pendaftaran/]
+in APPPATH\Models\TransaksiModel.php on line 33.
+ 1 APPPATH\Controllers\Transaksi.php(30): App\Models\TransaksiModel->generateKode()
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Transaksi->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Transaksi))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(49): require_once('D:\\MY PROJECT\\sistem-pesantren\\public\\index.php')

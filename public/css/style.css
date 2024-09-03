@@ -1,0 +1,57 @@
+body,html{
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 14px;
+    font-style: normal;
+}
+.pagination {
+    margin: 0;
+    padding: 0;
+    text-align: center
+  }
+.pagination li {
+    display: inline
+}
+.pagination li a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px 15px;
+    color: #000;
+    border: 1px solid #ddd;
+}
+
+/* Active and Hoverable.Pagination */
+.pagination li a {
+    border-radius: 5px;
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s
+    
+}
+.pagination li.active a {
+    background-color: #4caf50;
+    padding: 10px 15px;
+    color: #fff
+}
+.pagination li a:hover:not(.active) {
+    background-color: #ddd;
+} 
+.scroll-container {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.scrolling-text {
+    display: inline-block;
+    white-space: nowrap;
+    animation: scroll-left 15s linear infinite;
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-200%);
+    }
+}
